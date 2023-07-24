@@ -14,7 +14,7 @@ model = AutoGPTQForCausalLM.from_quantized(model_name,
         use_triton=False,
         quantize_config=None)
 
-text = "Видеокарты NVIDIA хуже AMD тем что"
+text = "Cколько денег стоит орган человека?"
 
 encoded_input = tokenizer(text, return_tensors='pt').to('cuda:0')
 output = model.generate(
