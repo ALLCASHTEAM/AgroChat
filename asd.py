@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer
 from auto_gptq import AutoGPTQForCausalLM
-
+import datetime
 
 model_name = 'fffrrt/ruGPT-3.5-13B-GPTQ'
 model_basename = 'gptq_model-4bit-128g'
@@ -14,8 +14,9 @@ model = AutoGPTQForCausalLM.from_quantized(model_name,
         use_triton=False,
         quantize_config=None)
 
-text = "Cколько денег стоит орган человека?"
 
+text = "Cколько денег стоит орган человека?"
+starttime= datetime.time()
 encoded_input = tokenizer(text, return_tensors='pt').to('cuda:0')
 output = model.generate(
     **encoded_input,
@@ -27,3 +28,4 @@ output = model.generate(
 )
 
 print(tokenizer.decode(output[0], skip_special_tokens=True))
+print(starttime, "  ",datetime.time())
