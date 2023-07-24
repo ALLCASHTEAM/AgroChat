@@ -15,8 +15,8 @@ model = AutoGPTQForCausalLM.from_quantized(model_name,
         quantize_config=None)
 
 
-text = "Cколько денег стоит орган человека?"
-starttime= datetime.time()
+text = "Анальный секс полезен для"
+starttime= datetime.datetime.now().time()
 encoded_input = tokenizer(text, return_tensors='pt').to('cuda:0')
 output = model.generate(
     **encoded_input,
@@ -28,4 +28,4 @@ output = model.generate(
 )
 
 print(tokenizer.decode(output[0], skip_special_tokens=True))
-print(starttime, "  ",datetime.time())
+print(starttime, "  ",datetime.datetime.now().time())
