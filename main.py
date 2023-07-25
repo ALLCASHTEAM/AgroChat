@@ -19,7 +19,7 @@ with app.app_context():
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return render_template("index.html")
+    return render_template("main_page.html")
 
 
 @app.route('/about')
