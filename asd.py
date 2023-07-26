@@ -25,7 +25,7 @@ input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
 # Генерируем ответы от модели
 with torch.no_grad():
-    output = model.generate(input_ids, max_length=200, num_beams=4, pad_token_id=tokenizer.eos_token_id)
+    output = model.generate(input_ids=input_ids, max_length=200, num_beams=4, pad_token_id=tokenizer.eos_token_id)
 
 # Декодируем токены в текстовый ответ
 answer = tokenizer.decode(output[0], skip_special_tokens=True)
