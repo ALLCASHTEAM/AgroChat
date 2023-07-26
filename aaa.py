@@ -1,6 +1,9 @@
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, PreTrainedTokenizerFast
 from auto_gptq import AutoGPTQForCausalLM
 import datetime
+
+# Задаем составные названия
+composite_names = ["Биостим Свекл", "Другое Составное Название"]
 
 model_name = 'fffrrt/ruGPT-3.5-13B-GPTQ'
 model_basename = 'gptq_model-4bit-128g'
@@ -10,7 +13,7 @@ model = AutoGPTQForCausalLM.from_quantized(model_name, model_basename=model_base
 def get_answer(question, context):
     prompt = f"Вопрос: {question} Контекст: {context} Ответ:"
     encoded_input = tokenizer(prompt, return_tensors='pt', padding=True).to('cuda:0')
-    output = model.generate(**encoded_input, num_beams=4, max_new_tokens=40, no_repeat_ngram_size=2, do_sample=False, temperature= 0.1) ##изначально 4, 160, 2
+    output = model.generate(**encoded_input, num_beams=4, max_new_tokens=40, no_repeat_ngram_size=2, do_sample=False, temperature= 0.2) ##изначально 4, 160, 2
     answer = tokenizer.decode(output[0], skip_special_tokens=True).replace(prompt, "").strip()
     return answer
 
