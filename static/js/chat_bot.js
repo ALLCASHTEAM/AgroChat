@@ -15,6 +15,10 @@ var sendForm = document.querySelector('#chatform'),
     unkwnCommReaction = "I didn't quite get that.",
     chatbotButton = document.querySelector(".submit-button")
 
+
+function scrollToBottom() {
+  chatList.scrollTop = chatList.scrollHeight;
+}
 sendForm.onkeydown = function(e){
   if(e.keyCode == 13){
     e.preventDefault();
@@ -38,9 +42,9 @@ sendForm.addEventListener('submit', function(e) {
 
   //Empty textarea fix
   if(input.length > 0) {
-    createBubble(input)
+    createBubble(input);
   }
-}) //end of eventlistener
+}); //end of eventlistener
 
 var createBubble = function(input) {
   //create input bubble
@@ -51,11 +55,15 @@ var createBubble = function(input) {
   chatBubble.innerHTML = input;
 
   //adds chatBubble to chatlist
-  chatList.appendChild(chatBubble)
 
+  scrollToBottom();
+  chatList.appendChild(chatBubble);
   checkInput(input);
+  scrollToBottom();
 }
 
+
+// Эту функцию надо будет писать с нуля и я хз как ибо в js я не ебу
 var checkInput = function(input) {
   hasCorrectInput = false;
   isReaction = false;
@@ -93,7 +101,7 @@ var checkInput = function(input) {
 }
 
 // debugger;
-
+//и эту скорее всего с нуля, но я так же не ебу как
 function botResponse(textVal) {
   //sets previous input to that what was called
   // previousInput = input;
@@ -102,16 +110,8 @@ function botResponse(textVal) {
   var userBubble = document.createElement('li');
   userBubble.classList.add('bot__output');
 
-  if(isReaction == true){
-    if (typeof reactionInput[textVal] === "function") {
-    //adds input of textarea to chatbubble list item
-      userBubble.innerHTML = reactionInput[textVal]();
-    } else {
-      userBubble.innerHTML = reactionInput[textVal];
-    }
-  }
 
-  if(isReaction == false){
+
     //Is the command a function?
     if (typeof possibleInput[textVal] === "function") {
       // console.log(possibleInput[textVal] +" is a function");
@@ -120,7 +120,7 @@ function botResponse(textVal) {
     } else {
       userBubble.innerHTML = possibleInput[textVal];
     }
-  }
+
   //add list item to chatlist
   chatList.appendChild(userBubble) //adds chatBubble to chatlist
 
@@ -210,22 +210,3 @@ function commandReset(e){
 }
 
 
-
-var reactionInput = {
-  "best work" : function(){
-    //Redirects you to a different page after 3 secs
-    responseText("On this GitHub page you'll find everything about Navvy");
-    responseText("<a href='https://github.com/meesrutten/chatbot'>Navvy on GitHub</a>")
-    animationCounter = 1;
-    return
-  },
-  "about" : function(){
-    responseText("Things I want to learn or do:");
-    responseText("Get great at CSS & JS animation");
-    responseText("Create 3D browser experiences");
-    responseText("Learn Three.js and WebGL");
-    responseText("Combine Motion Design with Front-End");
-    animationCounter = 1;
-    return
-    }
-}
