@@ -217,8 +217,8 @@ body {
   justify-content: center !important;
   display: inline-block;
   height: 100%;
-  width: 80%;
-  max-width: 35em;
+  width: 100% !important;
+  max-width: 75em;
   margin: 0 auto;
   padding-top: 1em;
 
@@ -242,10 +242,10 @@ body {
 textarea[name="chatbox"] {
   resize: none;
   border: 2px solid #27ae60;
-  width: 70%;
+  width: 75%;
   background-color: transparent;
   color: #fff;
-  max-width: 30em;
+  max-width: 3100em;
   height: 3em;
   margin: 0;
   padding: 0.75em;
