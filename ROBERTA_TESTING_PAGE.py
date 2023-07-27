@@ -21,9 +21,9 @@ print("20 Строка сработала")
 tokens = tokenizer.convert_ids_to_tokens(tokenized['input_ids'])
 
 # Общая длина каждого блока
-max_chunk_length = 8192
+max_chunk_length = 2048
 # Длина наложения
-overlapped_length = 480
+overlapped_length = 30
 
 # Длина вопроса в токенах
 answer_tokens_length = tokenized.token_type_ids.count(0)
