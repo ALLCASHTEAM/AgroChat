@@ -3,6 +3,7 @@ import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 
+
 tokenizer = AutoTokenizer.from_pretrained("timpal0l/mdeberta-v3-base-squad2")
 
 model = AutoModelForQuestionAnswering.from_pretrained("timpal0l/mdeberta-v3-base-squad2")
@@ -108,7 +109,7 @@ else:
       'attention_mask': torch.tensor(new_attention_mask)
   }
 
-  outputs = model(**new_tokenized, do_sample=False, temperature=0.2)
+  outputs = model(**new_tokenized, temperature=0.2)
 
   # Позиции в 2D списке токенов начала и конца наиболее вероятного ответа
   # позиции одним числом
