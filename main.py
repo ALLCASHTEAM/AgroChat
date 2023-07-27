@@ -18,8 +18,14 @@ with app.app_context():
 
 
 @app.route('/', methods=['GET','POST'])
-def index():
-    return render_template("main_page.html")
+@app.route('/chatbot', methods=['GET','POST'])
+def chatbot():
+    return render_template("chatbot.html")
+
+
+@app.route('/photobot', methods=['GET','POST'])
+def photobot():
+    return render_template("photobot.html")
 
 
 @app.route('/about')
