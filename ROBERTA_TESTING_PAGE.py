@@ -109,7 +109,7 @@ else:
       'attention_mask': torch.tensor(new_attention_mask)
   }
 
-  outputs = model(**new_tokenized, temperature=0.2)
+  outputs = model(**new_tokenized)
 
   # Позиции в 2D списке токенов начала и конца наиболее вероятного ответа
   # позиции одним числом
