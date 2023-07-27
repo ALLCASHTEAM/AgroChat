@@ -17,11 +17,11 @@ tokenized = tokenizer.encode_plus(
    question, text,
    add_special_tokens=False
 )
-
+print("20 Строка сработала")
 tokens = tokenizer.convert_ids_to_tokens(tokenized['input_ids'])
 
 # Общая длина каждого блока
-max_chunk_length = 512
+max_chunk_length = 8096
 # Длина наложения
 overlapped_length = 30
 
@@ -41,7 +41,7 @@ context_input_ids = tokenized.input_ids[answer_tokens_length:]
 first = context_input_ids[:first_context_chunk_length]
 # Основной текст остальных блоков
 others = context_input_ids[first_context_chunk_length:]
-
+print("44 Строка сработала")
 # Если есть блоки кроме первого
 # тогда обрабатываются все блоки
 if len(others) > 0:
@@ -57,7 +57,7 @@ if len(others) > 0:
 
   # Упаковка блоков
   new_context_input_ids = np.reshape(others, new_size)
-
+  print("60 Строка сработала")
   # Вычисление наложения
   overlappeds = new_context_input_ids[:, -overlapped_length:]
   # Добавление в наложения частей из первого блока
@@ -75,6 +75,7 @@ if len(others) > 0:
     [answer_input_ids] * new_context_input_ids.shape[0],
     new_context_input_ids
   ]
+  print("78 Строка сработала")
 # иначе обрабатывается только первый
 else:
   # Кол-во нулевых токенов, для выравнивания блока по длине
@@ -83,10 +84,10 @@ else:
   new_input_ids = np.array(
     [answer_input_ids + first + [0] * padding_length]
   )
-
+  print("87 Строка сработала")
   # Кол-во блоков
   count_chunks = new_input_ids.shape[0]
-
+  print("90Строка сработала")
   # Маска, разделяющая вопрос и текст
   new_token_type_ids = [
                            # вопрос блока
@@ -94,7 +95,7 @@ else:
                            # текст блока
                            + [1] * (max_chunk_length - answer_tokens_length)
                        ] * count_chunks
-
+  print("98 Строка сработала")
   # Маска "внимания" модели на все токены, кроме нулевых в последнем блоке
   new_attention_mask = (
       # во всех блоках, кроме последнего, "внимание" на все слова
@@ -109,9 +110,9 @@ else:
       'token_type_ids': torch.tensor(new_token_type_ids),
       'attention_mask': torch.tensor(new_attention_mask)
   }
-
+  print("113 Строка сработала")
   outputs = model(**new_tokenized)
-
+  print("115Строка сработала")
   # Позиции в 2D списке токенов начала и конца наиболее вероятного ответа
   # позиции одним числом
   start_index = torch.argmax(outputs.start_logits)
@@ -132,7 +133,7 @@ else:
           - (answer_tokens_length + overlapped_length)
           * (end_index // max_chunk_length)
   )
-
+  print("136 Строка сработала")
   # Составление ответа
   # если есть символ начала слова '▁', то он заменяется на пробел
   answer = ''.join([t.replace('▁', ' ') for t in tokens[start_index:end_index + 1]])
