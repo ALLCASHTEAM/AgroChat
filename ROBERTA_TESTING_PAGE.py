@@ -12,7 +12,6 @@ text = "Название товара: Биостим Свекл; Тип Био�
 
 question = input('Введите вопрос: ')
 
-print(question)
 
 tokenized = tokenizer.encode_plus(
    question, text,
