@@ -133,9 +133,7 @@ else:
 
   # Составление ответа
   # если есть символ начала слова '▁', то он заменяется на пробел
-  answer = ''.join(
-      [t.repace('▁', ' ') for t in tokens[start_index:end_index + 1]]
-  )
+  answer = ''.join([t.replace('▁', ' ') for t in tokens[start_index:end_index + 1]])
 
   print('Вопрос:', question)
   print('Ответ:', answer)
