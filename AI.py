@@ -1,36 +1,35 @@
-import sagemaker
-import boto3
-from sagemaker.huggingface import HuggingFace
+import torch
+import numpy as np
+from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 
-try:
-    role = sagemaker.get_execution_role()
-except ValueError:
-    iam = boto3.client('iam')
-    role = iam.get_role(RoleName='sagemaker_execution_role')['Role']['Arn']
+# Используем токенизатор и модель
+tokenizer = AutoTokenizer.from_pretrained("timpal0l/mdeberta-v3-base-squad2")
+model = AutoModelForQuestionAnswering.from_pretrained("timpal0l/mdeberta-v3-base-squad2")
 
-hyperparameters = {
-    'model_name_or_path': 'cointegrated/rut5-base-multitask',
-    'output_dir': '/opt/ml/model'
-    # add your remaining hyperparameters
-    # more info here https://github.com/huggingface/transformers/tree/v4.26.0/examples/pytorch/question-answering
-}
+# Задаем текст с товарами, разделенными символом ';'
+text = """Название товара: Биостим Свекл; Тип Биостим Свекл: аминокислоты, полисахариды, макро- и микроэлементы; Биостим Свекл - это Жидкое аминокислотное удобрение-биостимулятор для листовых подкормок сахарной свеклы; Достоинства Биостим Свекл перед другими удобрениями: Удобрение-биостимулятор с микроэлементами для сахарной, столовой свеклы Стимулирует обмен веществ в растениях, Поддерживает баланс питательных веществ в период вегетации, Защищает от воздействия абиотических стрессов, Восстанавливает продуктивность культур после действия стресс-факторов, Повышает устойчивость растений к болезням, Улучшает количественные и качественные параметры урожая;
+Название товара: Биостим Стар;Тип Биостим Стар: аминокислоты, полисахариды, макро- и микроэлементы; Биостим Стар - это Жидкое аминокислотное удобрение-биостимулятор для предпосевной обработки семян и посадочного материала, а также для корневых подкормок рассады; Достоинства Биостим Стар: Активатор энергии и стимулятор прорастания семянБолее ранние и дружные всходыУскоренное формирование корневой системыУлучшение приживаемости рассады и минимизация послепересадочных стрессов;
+Название товара: Биостим Кукуруз;Тип Биостим Кукуруз: аминокислоты, полисахариды, макро- и микроэлементы; Биостим Кукуруз это - Жидкое аминокислотное удобрение-биостимулятор для листовых подкормок кукурузы; Достоинства Биостим Кукуруз: Удобрение-биостимулятор с микроэлементами, разработанное специально для кукурузы на зерно и силос, Стимулирует обмен веществ в растениях, Поддерживает баланс питательных веществ в период вегетации, Защищает от воздействия абиотических стрессов, Восстанавливает продуктивность культур после действия стресс-факторов, Повышает устойчивость растений к болезнямУлучшает количественные и качественные параметры урожая;
+Название товара: Биостим Рос; Тип Биостим Рос: аминокислоты, полисахариды, макро- и микроэлементы; Биостим Рос - это Жидкое аминокислотное удобрение-биостимулятор для листовых подкормок сельскохозяйственных культур в начале вегетации; Достоинства Биостим Рос: Стимулирует вегетативный рост в начале весенней вегетации, Активирует ростовые процессы в условиях затяжной весны и других неблагоприятных погодных условиях, Восстанавливает ослабленные, поврежденные посевы после перезимовки, Защищает от воздействия абиотических стресс-факторов (возвратных заморозков весной, засухи и т.д.),Является активатором фотосинтеза Подходит для всех культур в начале весенней вегетации;"""
 
-# git configuration to download our fine-tuning script
-git_config = {'repo': 'https://github.com/huggingface/transformers.git', 'branch': 'v4.26.0'}
+# Ввод вопроса пользователем
+question = input('Введите вопрос: ')
 
-# creates Hugging Face estimator
-huggingface_estimator = HuggingFace(
-    entry_point='run_qa.py',
-    source_dir='./examples/pytorch/question-answering',
-    instance_type='ml.p3.2xlarge',
-    instance_count=1,
-    role=role,
-    git_config=git_config,
-    transformers_version='4.26.0',
-    pytorch_version='1.13.1',
-    py_version='py39',
-    hyperparameters=hyperparameters
-)
+# Токенизируем вопрос и текст товаров
+tokenized = tokenizer.encode_plus(question, text, add_special_tokens=False)
 
-# starting the train job
-huggingface_estimator.fit()
+# Получаем токены
+tokens = tokenizer.convert_ids_to_tokens(tokenized['input_ids'])
+
+# Запускаем модель для получения ответа
+outputs = model(**tokenized)
+
+# Получаем позиции начала и конца ответа в токенах
+start_index = torch.argmax(outputs.start_logits)
+end_index = torch.argmax(outputs.end_logits)
+
+# Получаем итоговый ответ из токенов
+answer = ''.join([t.replace('▁', ' ') for t in tokens[start_index:end_index + 1]])
+
+print('Вопрос:', question)
+print('Ответ:', answer)
