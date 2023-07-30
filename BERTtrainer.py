@@ -1,3 +1,9 @@
+'''
+Код для дообучения берты которая понимает русский язык
+надеюсь этот скрипт нам не понадобится
+но бля, хуй знает что случится
+'''
+
 from transformers import BertTokenizer, BertForQuestionAnswering, BertConfig
 from transformers import AdamW
 import torch

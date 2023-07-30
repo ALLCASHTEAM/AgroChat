@@ -1,3 +1,9 @@
+'''
+Роут сайта и его страниц
+Пока на питоне нихуя не обрабатывается
+ибо для этого нужны рабочие Модели ИИ
+'''
+
 from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash

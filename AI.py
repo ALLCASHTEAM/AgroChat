@@ -1,3 +1,7 @@
+'''
+Модель берты которая по контексту должна отвечать
+но так как контекст очень хуевый, нам нечего делать кроме как обосраться
+'''
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
