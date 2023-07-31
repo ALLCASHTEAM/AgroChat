@@ -41,7 +41,7 @@ def get_mkl_enabled_flag():
 
             from tensorflow.python.util import _pywrap_util_port
             onednn_enabled = int(os.environ.get('TF_ENABLE_ONEDNN_OPTS', '1'))
-            os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '1')
+            os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
 
         else:
             from tensorflow.python.util import _pywrap_util_port
