@@ -2,7 +2,7 @@
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
-model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B",  max_split_size_mb= 11000)
+model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
 model.half()
 model.to('cuda:0')
 
@@ -16,7 +16,7 @@ def IdentProd(text):
     encoded_input = tokenizer(promt, return_tensors='pt', add_special_tokens=False).to('cuda:0')
     output = model.generate(
         **encoded_input,
-        num_beams=1,
+        num_beams=2,
         do_sample=True,
         max_new_tokens=60
         )
