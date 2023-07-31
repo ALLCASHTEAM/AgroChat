@@ -21,7 +21,7 @@ def IdentProd(text):
         content = file.read()
 
     promt = "Представим что ты агроном-продавецконсультант, вот так выглядит твой каталог: "+content+"а покупатель спрашивает это: "+text+" "#cюда еще добавлять диалог этот, например из 20 сообщений предидущих и тогда заебися будет пахнуть наша пися
-    encoded_input = tokenizer(promt, return_tensors='pt').to('cuda:0', batch_size=1)
+    encoded_input = tokenizer(promt, return_tensors='pt').to('cuda:0')
     output = model.generate(
             **encoded_input,
             num_beams=4,
