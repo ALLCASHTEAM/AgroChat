@@ -22,7 +22,7 @@ output = model.generate(
     num_beams=8,
     max_new_tokens=200,
     no_repeat_ngram_size=2,
-    # num_return_sequences=5,
+    num_return_sequences=5,
     do_sample=True
 )
 
