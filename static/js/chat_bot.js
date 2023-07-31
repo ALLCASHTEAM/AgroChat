@@ -85,3 +85,10 @@ function animateBotOutput() {
     // Прокручиваем чат вниз, чтобы видеть последние сообщения
     chatList.scrollTop = chatList.scrollHeight;
   });
+var sendForm = document.querySelector('#chatform'),
+    textInput = document.querySelector('.chatbox'),
+    chatList = document.querySelector('.chatlist'),
+    animationCounter = 1,
+    animationBubbleDelay = 600;
+
+
