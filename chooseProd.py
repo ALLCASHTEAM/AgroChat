@@ -3,7 +3,8 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import torch
 
 os.environ['PYTORCH_CUDA_ALLOC_CONF'] = '0'
-torch.cuda.set_caching_allocator(torch.cuda.CachingAllocator(allocator_type="default"))
+torch.cuda.set_memory_allocated(torch.cuda.memory_allocated())
+torch.cuda.set_memory_cached(torch.cuda.memory_cached())
 
 tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
 model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
