@@ -1,28 +1,29 @@
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from transformers import AutoTokenizer
+from auto_gptq import AutoGPTQForCausalLM
 
 
-model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
-tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
-model.half()
-model.to('cuda:0')
+model_name = 'fffrrt/ruGPT-3.5-13B-GPTQ'
+model_basename = 'gptq_model-4bit-128g'
 
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoGPTQForCausalLM.from_quantized(model_name,
+        model_basename = model_basename,
+        use_safetensors=True,
+        trust_remote_code=True,
+        device="cuda:0",
+        use_triton=False,
+        quantize_config=None)
 
-def IdentProd(text):
-    file_path = './boosters.txt'
+text = "Чтобы подружиться с осьминогом, нужно: \n1."
 
-    with open(file_path, 'r') as file:
-        content = file.read()
+encoded_input = tokenizer(text, return_tensors='pt').to('cuda:0')
+output = model.generate(
+    **encoded_input,
+    num_beams=8,
+    max_new_tokens=200,
+    no_repeat_ngram_size=2,
+    # num_return_sequences=5,
+    do_sample=True
+)
 
-    promt = "Представим что ты агроном-продавецконсультант, вот так выглядит твой каталог: " + content + "а покупатель спрашивает это: " + text + " "  # cюда еще добавлять диалог этот, например из 20 сообщений предидущих и тогда заебися будет пахнуть наша пися
-    encoded_input = tokenizer(promt, return_tensors='pt', add_special_tokens=False).to('cuda:0')
-    output = model.generate(
-        **encoded_input,
-        num_beams=2,
-        do_sample=True,
-        max_new_tokens=60
-    )
-
-    print(tokenizer.decode(output[0], skip_special_tokens=True))
-
-
-IdentProd("Чем мне удобрить кукурузу")
+print(tokenizer.decode(output[0], skip_special_tokens=True))
