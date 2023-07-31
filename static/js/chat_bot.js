@@ -62,7 +62,8 @@ function animateBotOutput() {
   animationCounter++;
   chatList.lastElementChild.style.animationPlayState = "running";
 }
-  document.getElementById("chatform").addEventListener("submit", function (event) {
+
+document.getElementById("chatform").addEventListener("submit", function (event) {
     event.preventDefault();
     const chatbox = document.getElementById("textInput");
     const message = chatbox.value.trim();
@@ -79,6 +80,10 @@ function animateBotOutput() {
       imageItem.classList.add("userInput");
       imageItem.src = URL.createObjectURL(file);
       chatList.appendChild(imageItem);
+      fileInput.value = "";
+    // Сбрасываем текст на кнопке прикрепления
+    const attachButton = document.querySelector('.attach-button');
+    attachButton.textContent = 'Attach Image';
       //change label to filename and after send delete it from loader
     }
 
