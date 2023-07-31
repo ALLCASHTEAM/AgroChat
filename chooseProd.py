@@ -50,7 +50,7 @@ def IdentProd(text):
     output = model.generate(
             **encoded_input,
             num_beams=4,
-            max_new_tokens=160,
+            max_new_tokens=1600,
             no_repeat_ngram_size=2,
             # num_return_sequences=5,
             # do_sample=True
