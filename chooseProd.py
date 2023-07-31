@@ -35,4 +35,4 @@ def IdentProd(text):
 
     print(tokenizer.decode(output[0], skip_special_tokens=True))
 
-IdentProd("Чем мне удобрить свеклу?")
+IdentProd("Чем мне удобрить свеклу")
