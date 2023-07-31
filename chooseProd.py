@@ -1,8 +1,9 @@
 import os
+os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
 import tensorflow as tf
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
-os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
+
 
 tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
 model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
