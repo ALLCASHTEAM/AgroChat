@@ -30,7 +30,7 @@ def IdentProd(text):
         **encoded_input,
         num_beams=4,
         do_sample=True,
-        max_new_tokens=100
+        max_new_tokens=60
         )
 
     print(tokenizer.decode(output[0], skip_special_tokens=True))
