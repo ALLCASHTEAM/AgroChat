@@ -2,7 +2,7 @@ from transformers import AutoTokenizer
 from auto_gptq import AutoGPTQForCausalLM
 
 model_name = 'fffrrt/ruGPT-3.5-13B-GPTQ'
-model_basename = 'fffrrt/ruGPT-3.5-13B-GPTQ'
+model_basename = 'fffrrt/gptq_model-4bit-128g'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
 model = AutoGPTQForCausalLM.from_quantized(model_name,
