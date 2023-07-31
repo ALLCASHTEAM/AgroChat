@@ -19,7 +19,7 @@ def IdentProd(text):
     encoded_input = tokenizer(promt, return_tensors='pt', add_special_tokens=False).to('cuda')
     output = model.generate(
         **encoded_input,
-        num_beams=2,
+        num_beams=1,
         do_sample=True,
         max_new_tokens=60
     )
