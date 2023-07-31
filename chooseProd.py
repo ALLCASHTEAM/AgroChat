@@ -10,7 +10,7 @@ model = AutoGPTQForCausalLM.from_quantized(model_name,
         model_basename = model_basename,
         use_safetensors=True,
         trust_remote_code=True,
-        device="cuda:0",
+        device="cpu",
         use_triton=False,
         quantize_config=None)
 
