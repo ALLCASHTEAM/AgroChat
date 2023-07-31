@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 tokenizerr = AutoTokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
 model = AutoModelForCausalLM.from_pretrained("ai-forever/ruGPT-3.5-13B")
-
+model.to('cuda:0')
 
 def IdentProd(text):
     file_path = './boosters.txt'
