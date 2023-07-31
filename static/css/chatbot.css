@@ -220,7 +220,7 @@ body {
   display: inline-block;
   height: 100%;
   width: 100% !important;
-  max-width: 75em;
+  max-width: 90em;
   margin: 0 auto;
   padding-top: 1em;
 
@@ -243,7 +243,7 @@ body {
 textarea[name="chatbox"] {
   resize: none;
   border: 2px solid #27ae60;
-  width: 75%;
+  width: 60%;
   background-color: transparent;
   color: #fff;
   max-width: 3100em;
@@ -251,7 +251,6 @@ textarea[name="chatbox"] {
   margin: 0;
   padding: 0.75em;
   float: left;
-  border-radius: 8px 0px 0px 8px;
   font-family: inherit;
   font-size: 1em;
 }
@@ -276,31 +275,27 @@ input[type="submit"] {
   -webkit-appearance: none;
   appearance: none;
   border: 0;
-
-  width: 25%;
+  width: 15%;
   height: 3em;
   margin: 0;
-
   background-color: #27ae60;
   color: #fff;
   border: 2px solid #27ae60;
   border-left: 0;
   border-radius: 0 8px 8px 0;
-
   font-family: inherit;
   font-size: 1em;
-
   transition: 200ms all ease-in;
-
 }
 input[type="submit"].hover {
-  background-color: #27ae60;
-  border-color: #27ae60;
+  background-color: #218c5a;
+  border-color: #218c5a;
   color: #fff;
   }
 .submit-button:hover{
-  background-color: mediumspringgreen;
-
+  background-color: #218c5a;
+  border-color: #218c5a;
+  color: #fff;
 }
 
 .input__nested-list {
@@ -340,14 +335,13 @@ input[type="submit"].hover {
   align-items: center;
   justify-content: space-between;
   height: 90px;
-  background-color: #363636;
+  background-color: #808080;
   padding: 0 20px;
   color: #fff;
+  border-bottom: 2px solid #4d4d4d  ;
 }
 
-.logo {
-  /* Укажите размеры и стили логотипа */
-}
+
 
 .tabs {
   display: flex;
@@ -370,4 +364,34 @@ input[type="submit"].hover {
   color: white;
   border: 1px solid whitesmoke;
   border-radius: 5px;
+}
+
+.send_img{
+
+}
+input[type="file"] {
+  display: none;
+}
+
+.attach-button {
+  width: 15%;
+  height: 3em;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #27ae60;
+  color: #fff;
+  border: 2px solid #27ae60;
+  border-radius: 5px 0 0 5px;
+  border-right: 0;
+  transition: 200ms all ease-in;
+}
+
+.attach-button:hover {
+  background-color: #218c5a;
+  border-color: #218c5a;
+}
+
+
+.chatbox-submit-container {
+  display: flex;
 }

@@ -5,9 +5,11 @@ Working prototype on meesrutten.me :) -->
 </head>
 <link rel="stylesheet" href="static/css/chatbot.css">
 <header class="header">
-  <div class="logo">
-    <!-- Ваш логотип здесь -->
-  </div>
+    <div class="logo-container">
+      <div class="logo">
+        <img src="/static/img/agr (2).svg" width="80" height="80" alt="image description">
+      </div>
+    </div>
   <nav class="tabs">
     <a href="/chatbot" class="tab">Chat-Bot</a>
     <a href="/photobot" class="tab-active">Photo-Bot</a>
@@ -29,8 +31,13 @@ Working prototype on meesrutten.me :) -->
       </div>
       <div class="chatbox-area">
         <form action="" id="chatform">
-            <textarea placeholder="Talk to me!" class="chatbox" id = "textInput" name="chatbox" resize: none minlength="2"></textarea>
+
+          <div class="chatbox-submit-container">
+            <label for="upload" class="attach-button">Attach Image</label>
+            <input type="file" class="send_img" id="upload" accept="image/*"/>
+            <textarea placeholder="Talk to me!" class="chatbox" id="textInput" name="chatbox" resize: none minlength="2"></textarea>
             <input class="submit-button" type="submit" value="send">
+          </div>
         </form>
       </div>
     </div>
