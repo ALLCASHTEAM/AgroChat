@@ -1,18 +1,9 @@
-from transformers import AutoTokenizer
-from auto_gptq import AutoGPTQForCausalLM
 
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
-model_name = 'fffrrt/ruGPT-3.5-13B-GPTQ'
-model_basename = 'gptq_model-4bit-128g'
+tokenizerr = AutoTokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
+model = AutoModelForCausalLM.from_pretrained("ai-forever/ruGPT-3.5-13B")
 
-tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=True)
-model = AutoGPTQForCausalLM.from_quantized(model_name,
-        model_basename = model_basename,
-        use_safetensors=True,
-        trust_remote_code=True,
-        device="cuda:0",
-        use_triton=False,
-        quantize_config=None)
 
 def IdentProd(text):
     file_path = './boosters.txt'
@@ -46,7 +37,8 @@ def IdentProd(text):
     print(content)
 
     promt = "Представим что ты агроном-продавецконсультант, вот так выглядит твой каталог: "+content+"а покупатель спрашивает это: "+text+" "#cюда еще добавлять диалог этот, например из 20 сообщений предидущих и тогда заебися будет пахнуть наша пися
-    encoded_input = tokenizer(promt, return_tensors='pt', max_length=8096).to('cuda:0')
+    tokenizer = tokenizerr(promt, return_tensors='pt', add_special_tokens=False).to('cuda:0')
+    encoded_input = tokenizerr(promt, return_tensors='pt', max_length=8096).to('cuda:0')
     output = model.generate(
             **encoded_input,
             num_beams=4,
