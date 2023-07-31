@@ -81,9 +81,10 @@ function animateBotOutput() {
     if (file) {
       // Показываем изображение, создавая элемент <img> и добавляя его в чат
       const imageItem = document.createElement("img");
-      imageItem.classList.add("bot__outputImage");
+      imageItem.classList.add("userInput");
       imageItem.src = URL.createObjectURL(file);
       chatList.appendChild(imageItem);
+      //change label to filename and after send delete it from loader
     }
 
     // Прокручиваем чат вниз, чтобы видеть последние сообщения
