@@ -1,8 +1,7 @@
 import os
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
-import torch
 
-os.environ['PYTORCH_CUDA_ALLOC_CONF'] = '0'
+os.environ['TF_ENABLE_ONEDNN_OPTS=0'] = '0'
 
 tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
 model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
