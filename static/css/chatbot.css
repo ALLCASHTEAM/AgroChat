@@ -109,7 +109,7 @@ body {
   .userInput, .bot__output {
     padding: 0.85em;
     margin: 0.5em;
-    max-width: 75%;
+    max-width: 70%;
     text-align: right;/*Этого говна вообще не было*/
 
     background-color: #fff;
@@ -188,7 +188,7 @@ body {
     display: block;
   }
   .bot__outputImage {
-    max-width: 16em;
+    max-width: 15%;
     height: 12em;
   }
 
@@ -215,6 +215,7 @@ body {
 }
 
 #chatform {
+  align-items: center;
   display: flex;
   justify-content: center !important;
   display: inline-block;
@@ -231,6 +232,7 @@ body {
 
 
 .chatbox-area {
+  align-items: center;
   margin: 0 auto;
   position: relative;
   text-align: center;
@@ -374,7 +376,8 @@ input[type="file"] {
 }
 
 .attach-button {
-  width: 15%;
+  margin-left:6%;
+  width: 13%;
   height: 3em;
   cursor: pointer;
   padding: 10px;
@@ -383,8 +386,74 @@ input[type="file"] {
   border: 2px solid #27ae60;
   border-radius: 5px 0 0 5px;
   border-right: 0;
+  position: relative; /* Необходимо для позиционирования псевдоэлементов */
   transition: 200ms all ease-in;
+  white-space: nowrap; /* Запрет переноса текста на новую строку */
+  overflow: hidden; /* Обрезать текст, если не помещается */
+  text-overflow: ellipsis; /* Добавить многоточие, если текст обрезан */
 }
+
+.attach-button::before {
+  content: "\00D7"; /* Знак "крестик" (Unicode) */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 12px;
+  color: #fff;
+  opacity: 0; /* Крестик скрыт изначально */
+}
+
+/* Показываем крестик при наведении на кнопку */
+.attach-button:hover::before {
+  opacity: 1;
+}
+
+/* Стиль для псевдоэлемента ::after (текст "Delete") */
+.attach-button::after {
+  content: "Delete";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0; /* Текст "Delete" скрыт изначально */
+  pointer-events: none; /* Предотвращаем перехват событий на этом элементе */
+}
+
+/* Показываем текст "Delete" при наведении на кнопку */
+.attach-button:hover::after {
+  opacity: 1;
+}
+
+/* Стиль для псевдоэлемента ::after при наведении на кнопку */
+.attach-button:hover::after {
+  background-color: darkorange; /* Красный фон */
+}
+
+.attach-button:empty::before,
+.attach-button:empty::after {
+  display: none;
+}
+
+.attach-button.file-loaded::after {
+  content: "Change";
+  /* Остальные стили для псевдоэлемента ::after оставляем без изменений */
+}
+
+/* Удаляем стили для ::after, если файл не загружен */
+.attach-button:not(.file-loaded)::after {
+  content: none;
+}
+
+/* Стиль для псевдоэлемента ::after (текст "Delete") */
+
+
 
 .attach-button:hover {
   background-color: #218c5a;
@@ -393,5 +462,6 @@ input[type="file"] {
 
 
 .chatbox-submit-container {
+  align-items: center;
   display: flex;
 }

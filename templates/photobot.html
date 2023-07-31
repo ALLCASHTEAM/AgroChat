@@ -31,7 +31,6 @@ Working prototype on meesrutten.me :) -->
       </div>
       <div class="chatbox-area">
         <form action="" id="chatform">
-
           <div class="chatbox-submit-container">
             <label for="upload" class="attach-button">Attach Image</label>
             <input type="file" class="send_img" id="upload" accept="image/*"/>
@@ -44,3 +43,20 @@ Working prototype on meesrutten.me :) -->
 
 </main>
 <script src="/static/js/chat_bot.js"></script>
+<script>
+  const fileInput = document.getElementById('upload');
+  const attachButton = document.querySelector('.attach-button');
+
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      attachButton.textContent = file.name;
+      attachButton.classList.add('file-loaded'); // Добавляем класс, чтобы указать, что файл загружен
+    } else {
+      attachButton.textContent = 'Attach Image';
+      attachButton.classList.remove('file-loaded'); // Удаляем класс, если файл не загружен
+    }
+  });
+</script>
+
+
