@@ -51,9 +51,12 @@ Working prototype on meesrutten.me :) -->
     const file = event.target.files[0];
     if (file) {
       attachButton.textContent = file.name;
+      attachButton.classList.add('file-loaded'); // Добавляем класс, чтобы указать, что файл загружен
     } else {
       attachButton.textContent = 'Attach Image';
+      attachButton.classList.remove('file-loaded'); // Удаляем класс, если файл не загружен
     }
   });
 </script>
+
 
