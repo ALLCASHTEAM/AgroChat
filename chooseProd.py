@@ -1,11 +1,9 @@
-import os
-os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 
 model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
 tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
-# model.half()
+model.half()
 model.to('cuda:0')
 
 
