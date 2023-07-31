@@ -34,6 +34,7 @@ def get_mkl_enabled_flag():
     mkl_enabled = False
     major_version = int(tf.__version__.split(".")[0])
     minor_version = int(tf.__version__.split(".")[1])
+    os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
     if major_version >= 2:
         if minor_version < 5:
             from tensorflow.python import _pywrap_util_port
@@ -41,7 +42,7 @@ def get_mkl_enabled_flag():
 
             from tensorflow.python.util import _pywrap_util_port
             onednn_enabled = int(os.environ.get('TF_ENABLE_ONEDNN_OPTS', '1'))
-            os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
+            
 
         else:
             from tensorflow.python.util import _pywrap_util_port
