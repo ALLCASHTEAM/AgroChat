@@ -68,12 +68,7 @@ function animateBotOutput() {
     const message = chatbox.value.trim();
     chatbox.value = "";
 
-    // Создаем элемент <li> для сообщения и добавляем его в <ul> для отображения в чате
-    const chatList = document.getElementById("chatlist");
-    const messageItem = document.createElement("li");
-    messageItem.classList.add("userInput");
-    messageItem.textContent = message;
-    chatList.appendChild(messageItem);
+
 
     // Обработка загруженного изображения, если оно есть
     const fileInput = document.getElementById("upload");
