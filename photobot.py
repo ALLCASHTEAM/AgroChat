@@ -1,5 +1,8 @@
 from transformers import AutoTokenizer
 from auto_gptq import AutoGPTQForCausalLM
+import os
+
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = '0'
 
 model_name = 'fffrrt/ruGPT-3.5-13B-GPTQ'
 model_basename = 'fffrrt/gptq_model-4bit-128g'
