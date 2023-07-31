@@ -28,6 +28,7 @@ def IdentProd(text):
     encoded_input = tokenizerr(promt, return_tensors='pt').to('cuda:0')
     output = model.generate(
         **encoded_input,
+        max_split_size_mb=11264,
         num_beams=4,
         do_sample=True,
         max_new_tokens=60
