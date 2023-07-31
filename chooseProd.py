@@ -2,7 +2,7 @@
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 tokenizer = GPT2Tokenizer.from_pretrained("ai-forever/ruGPT-3.5-13B")
-model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B")
+model = GPT2LMHeadModel.from_pretrained("ai-forever/ruGPT-3.5-13B",  max_split_size_mb= 11000)
 model.half()
 model.to('cuda:0')
 
