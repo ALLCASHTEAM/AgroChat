@@ -23,11 +23,11 @@ def IdentProd(text):
     print(content)
 
     promt = "Представим что ты агроном-продавецконсультант, вот так выглядит твой каталог: "+content+"а покупатель спрашивает это: "+text+" "#cюда еще добавлять диалог этот, например из 20 сообщений предидущих и тогда заебися будет пахнуть наша пися
-    encoded_input = tokenizer("кто такой путин?", return_tensors='pt').to('cuda:0')
+    encoded_input = tokenizer(promt, return_tensors='pt').to('cuda:0')
     output = model.generate(
             **encoded_input,
             num_beams=4,
-            max_new_tokens=60,
+            max_new_tokens=560,
             no_repeat_ngram_size=2,
             # num_return_sequences=5,
             # do_sample=True
