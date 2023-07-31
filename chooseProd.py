@@ -48,7 +48,7 @@ def get_mkl_enabled_flag():
         mkl_enabled = _pywrap_util_port.IsMklEnabled() or (onednn_enabled == 1)
     else:
         mkl_enabled = tf.pywrap_tensorflow.IsMklEnabled()
-    return mkl_enabled
+    return mkl_enabled, onednn_enabled
 
 
 print("We are using Tensorflow version", tf.__version__)
