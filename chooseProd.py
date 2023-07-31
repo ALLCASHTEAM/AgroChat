@@ -1,5 +1,6 @@
 import os
 os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 
