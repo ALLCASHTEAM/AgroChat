@@ -43,3 +43,17 @@ Working prototype on meesrutten.me :) -->
 
 </main>
 <script src="/static/js/chat_bot.js"></script>
+<script>
+  const fileInput = document.getElementById('upload');
+  const attachButton = document.querySelector('.attach-button');
+
+  fileInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      attachButton.textContent = file.name;
+    } else {
+      attachButton.textContent = 'Attach Image';
+    }
+  });
+</script>
+

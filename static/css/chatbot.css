@@ -387,6 +387,9 @@ input[type="file"] {
   border-radius: 5px 0 0 5px;
   border-right: 0;
   transition: 200ms all ease-in;
+  white-space: nowrap; /* Запрет переноса текста на новую строку */
+  overflow: hidden; /* Обрезать текст, если не помещается */
+  text-overflow: ellipsis; /* Добавить многоточие, если текст обрезан */
 }
 
 .attach-button:hover {
