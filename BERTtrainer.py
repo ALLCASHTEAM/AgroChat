@@ -3,7 +3,7 @@ from datasets import load_dataset
 from transformers.data.data_collator import default_data_collator
 
 # Загрузите датасет XQuAD
-dataset = load_dataset("xquad", split="validation")
+dataset = load_dataset("xquad", "xquad.ru")
 
 # Отфильтруйте примеры для русского языка (ru)
 dataset = dataset.filter(lambda example: example["language"] == "ru")
