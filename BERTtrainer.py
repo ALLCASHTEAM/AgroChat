@@ -5,6 +5,8 @@ from transformers.data.data_collator import default_data_collator
 # Загрузите датасет XQuAD для русского языка
 dataset = load_dataset('xquad', 'xquad.ru', split='validation')
 
+print("Number of examples in the dataset:", len(dataset))
+
 model_name_ru = "timpal0l/mdeberta-v3-base-squad2"
 
 # Загрузите токенизатор и конфигурацию модели
@@ -15,8 +17,8 @@ model = AutoModelForQuestionAnswering.from_pretrained(model_name_ru)
 data_collator = default_data_collator
 training_args = TrainingArguments(
     output_dir="./models",  # Укажите путь к сохранению модели и результатов
-    num_train_epochs=3,          # Количество эпох для обучения (можете увеличить для лучших результатов)
-    per_device_train_batch_size=8,
+    num_train_epochs=5,          # Количество эпох для обучения (можете увеличить для лучших результатов)
+    per_device_train_batch_size=1,
     save_steps=1000,             # Сохранять модель каждые 1000 шагов обучения
     save_total_limit=2,          # Ограничьте количество сохраненных моделей
     evaluation_strategy="steps", # Оценивать результаты каждые 1000 шагов обучения
