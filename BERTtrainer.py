@@ -1,16 +1,15 @@
-from transformers import AutoModelForQuestionAnswering, AutoTokenizer, AutoConfig, Trainer, TrainingArguments
+from transformers import AutoModelForQuestionAnswering, AutoTokenizer, Trainer, TrainingArguments
 from datasets import load_dataset
 from transformers.data.data_collator import default_data_collator
 
-# Загрузите датасет XQuAD для русского языка
-dataset = load_dataset("xtreme", "xquad", split="validation", language="ru")
+# Загрузите датасет XQuAD для русского языка из Zaid/xquad_ru
+dataset = load_dataset("zaid", "xquad_ru", split="validation")
 
 model_name_ru = "timpal0l/mdeberta-v3-base-squad2"
 
 # Загрузите токенизатор и конфигурацию модели
 tokenizer = AutoTokenizer.from_pretrained(model_name_ru)
-config = AutoConfig.from_pretrained(model_name_ru)
-model = AutoModelForQuestionAnswering.from_pretrained(model_name_ru, config=config)
+model = AutoModelForQuestionAnswering.from_pretrained(model_name_ru)
 
 # Определите функцию для обработки данных и конфигурацию обучения
 data_collator = default_data_collator
