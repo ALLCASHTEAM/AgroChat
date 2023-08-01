@@ -8,14 +8,15 @@
     <title>Document</title>
 </head>
 <body>
-<label for="myCheckbox"><input type="checkbox" id="myCheckbox"></label>
+<form method="post" action="/about"><input type="checkbox" id="checkbox" name="checkbox"></form>
+
 
 
  <script>
         // При загрузке страницы проверяем, есть ли у нас сохраненное значение в Local Storage
         window.onload = function() {
-            var checkbox = document.getElementById('myCheckbox');
-            var savedValue = localStorage.getItem('myCheckboxValue');
+            var checkbox = document.getElementById('checkbox');
+            var savedValue = localStorage.getItem('checkboxValue');
 
             if (savedValue === 'true') {
                 checkbox.checked = true;
@@ -25,9 +26,9 @@
         };
 
         // Сохраняем состояние checkbox в Local Storage при изменении значения
-        var checkbox = document.getElementById('myCheckbox');
+        var checkbox = document.getElementById('checkbox');
         checkbox.addEventListener('change', function() {
-            localStorage.setItem('myCheckboxValue', this.checked);
+            localStorage.setItem('checkboxValue', this.checked);
         });
     </script>
 </body>

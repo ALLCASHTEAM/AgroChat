@@ -34,9 +34,15 @@ def photobot():
     return render_template("photobot.html")
 
 
-@app.route('/about')
+@app.route('/about', methods=['GET','POST'])
 def about():
+    if request.method == 'POST':
+        checkbox_value = request.form.get('checkbox') == 'on'
+        print(checkbox_value)
+        if checkbox_value:
+            return redirect(url_for('/photobot'))
     return render_template("about.html")
+
 
 if __name__=="__main__":
     app.run(debug=True)
