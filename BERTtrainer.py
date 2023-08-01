@@ -7,7 +7,7 @@ model = AutoModelForQuestionAnswering.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Загрузим датасет
-datasets = load_dataset("sberquad")
+datasets = load_dataset("juletxara/xquad_xtreme")
 #
 # # Функция для предобработки данных
 # def prepare_train_features(examples):
