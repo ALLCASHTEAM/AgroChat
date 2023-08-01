@@ -46,7 +46,7 @@ tokenized_datasets = datasets.map(prepare_train_features, batched=True, remove_c
 
 # Устанавливаем аргументы обучения
 training_args = TrainingArguments(
-    output_dir=".",
+    output_dir="mnt/data/training",
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,
     learning_rate=2e-5,
