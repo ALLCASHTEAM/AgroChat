@@ -23,6 +23,13 @@
             } else if (savedValue === 'false') {
                 checkbox.checked = false;
             }
+
+
+            if (document.getElementById("checkbox").checked) {
+                // Если чекбокс отмечен, перенаправляем пользователя на следующую страницу
+                window.location.href = "/AgroChat/templates/photobot.html";
+            }
+
         };
 
         // Сохраняем состояние checkbox в Local Storage при изменении значения
@@ -30,6 +37,8 @@
         checkbox.addEventListener('change', function() {
             localStorage.setItem('checkboxValue', this.checked);
         });
+
+
     </script>
 </body>
 </html>
