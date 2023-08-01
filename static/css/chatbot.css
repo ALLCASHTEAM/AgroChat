@@ -257,13 +257,6 @@ textarea[name="chatbox"] {
   font-family: inherit;
   font-size: 1em;
 }
-chatbox:focus{
-
-
-}
-focus {
-
-  }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color: #fff;
