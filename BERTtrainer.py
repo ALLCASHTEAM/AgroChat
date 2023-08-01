@@ -2,11 +2,8 @@ from transformers import AutoModelForQuestionAnswering, AutoTokenizer, Trainer, 
 from datasets import load_dataset
 from transformers.data.data_collator import default_data_collator
 
-# Загрузите датасет XQuAD
-dataset = load_dataset("xquad", "xquad.ru")
-
-# Отфильтруйте примеры для русского языка (ru)
-dataset = dataset.filter(lambda example: example["language"] == "ru")
+# Загрузите датасет XQuAD для русского языка
+dataset = load_dataset('xquad', 'xquad.ru', split='validation')
 
 model_name_ru = "timpal0l/mdeberta-v3-base-squad2"
 
