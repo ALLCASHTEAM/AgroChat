@@ -3,7 +3,7 @@ from datasets import load_dataset
 import torch
 
 # Загрузите датасет XQuAD.ru для обучения
-dataset = load_dataset('xtreme', 'XQuAD.ru', split="train")
+dataset = load_dataset('xtreme', 'XQuAD.ru', split="validation")
 
 print("Number of examples in the dataset:", len(dataset))
 
