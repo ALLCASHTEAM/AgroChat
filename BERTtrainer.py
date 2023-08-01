@@ -39,7 +39,7 @@ def prepare_train_features(examples):
     return encodings
 
 # Применяем предобработку данных
-tokenized_datasets = datasets.map(prepare_train_features, batched=True, remove_columns=datasets["train"].column_names)
+tokenized_datasets = datasets.map(prepare_train_features, batched=True, remove_columns=datasets["translate_train"].column_names)
 
 # Создаем функцию для вычисления потерь
 
@@ -58,8 +58,8 @@ training_args = TrainingArguments(
 trainer = Trainer(
     model=model,
     args=training_args,
-    train_dataset=tokenized_datasets["train"],
-    eval_dataset=tokenized_datasets["validation"],
+    train_dataset=tokenized_datasets["translate_train"],
+    eval_dataset=tokenized_datasets["translate_test"],
     data_collator=default_data_collator,
 
 )
