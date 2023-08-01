@@ -51,7 +51,7 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=8,
     learning_rate=2e-5,
     num_train_epochs=10,
-    logging_steps=10
+    logging_steps=1000
 )
 
 # Создаем тренер
