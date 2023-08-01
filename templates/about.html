@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<label for="myCheckbox"><input type="checkbox" id="myCheckbox"></label>
+
+
+ <script>
+        // При загрузке страницы проверяем, есть ли у нас сохраненное значение в Local Storage
+        window.onload = function() {
+            var checkbox = document.getElementById('myCheckbox');
+            var savedValue = localStorage.getItem('myCheckboxValue');
+
+            if (savedValue === 'true') {
+                checkbox.checked = true;
+            } else if (savedValue === 'false') {
+                checkbox.checked = false;
+            }
+        };
+
+        // Сохраняем состояние checkbox в Local Storage при изменении значения
+        var checkbox = document.getElementById('myCheckbox');
+        checkbox.addEventListener('change', function() {
+            localStorage.setItem('myCheckboxValue', this.checked);
+        });
+    </script>
+</body>
+</html>
