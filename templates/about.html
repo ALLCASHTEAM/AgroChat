@@ -25,12 +25,16 @@
             }
 
 
-            if (checkbox.checked) {
-                // Если чекбокс отмечен, перенаправляем пользователя на следующую страницу
-                window.location.href = "/AgroChat/templates/photobot.html";
-            }
+
 
         };
+
+        document.getElementById("checkbox").addEventListener("change", function() {
+            if (this.checked) {
+                // Если чекбокс отмечен, перенаправляем пользователя на следующую страницу
+                window.location.href = "/next_page";
+            }
+        });
 
         // Сохраняем состояние checkbox в Local Storage при изменении значения
         var checkbox = document.getElementById('checkbox');
