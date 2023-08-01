@@ -1,11 +1,9 @@
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer, AutoConfig, Trainer, TrainingArguments
-from transformers.data.data_collator import DataCollatorWithPadding
-import torch
+from datasets import load_dataset
+from transformers.data.data_collator import default_data_collator
 
-# Загрузите свои данные для дообучения здесь
-# Вам нужно представить данные в формате, который подходит для модели вопрос-ответ
-# Пожалуйста, замените 'train_dataset' на свои данные
-train_dataset = "xtreme/parquet/XQuAD.ru/validation"
+# Загрузите датасет XQuAD для русского языка
+dataset = load_dataset("xtreme", "xquad", split="validation", language="ru")
 
 model_name_ru = "timpal0l/mdeberta-v3-base-squad2"
 
@@ -15,7 +13,7 @@ config = AutoConfig.from_pretrained(model_name_ru)
 model = AutoModelForQuestionAnswering.from_pretrained(model_name_ru, config=config)
 
 # Определите функцию для обработки данных и конфигурацию обучения
-data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+data_collator = default_data_collator
 training_args = TrainingArguments(
     output_dir="./models",  # Укажите путь к сохранению модели и результатов
     num_train_epochs=5,          # Количество эпох для обучения (можете увеличить для лучших результатов)
@@ -31,7 +29,7 @@ trainer = Trainer(
     model=model,
     args=training_args,
     data_collator=data_collator,
-    train_dataset=train_dataset,
+    train_dataset=dataset,       # Используйте загруженный датасет
     tokenizer=tokenizer,
 )
 
