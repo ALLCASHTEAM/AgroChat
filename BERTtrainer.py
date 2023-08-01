@@ -3,7 +3,7 @@ from datasets import load_dataset
 from transformers.data.data_collator import default_data_collator
 
 # Загрузите датасет XQuAD для русского языка
-dataset = load_dataset('xquad', 'xquad.ru',split="validation")
+dataset = load_dataset('xtreme', 'XQuAD.ru',split="validation")
 
 print("Number of examples in the dataset:", len(dataset))
 
