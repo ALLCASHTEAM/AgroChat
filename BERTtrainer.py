@@ -1,56 +1,42 @@
-'''
-Код для дообучения берты которая понимает русский язык
-надеюсь этот скрипт нам не понадобится
-но бля, хуй знает что случится
-'''
-
-from transformers import BertTokenizer, BertForQuestionAnswering, BertConfig
-from transformers import AdamW
+from transformers import AutoModelForQuestionAnswering, AutoTokenizer, AutoConfig, Trainer, TrainingArguments
+from transformers.data.data_collator import DataCollatorWithPadding
 import torch
-import json
 
-# Загрузка токенизатора и предварительно обученной модели для русского языка
-tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased")
-model = BertForQuestionAnswering.from_pretrained("bert-base-multilingual-cased")
+# Загрузите свои данные для дообучения здесь
+# Вам нужно представить данные в формате, который подходит для модели вопрос-ответ
+# Пожалуйста, замените 'train_dataset' на свои данные
+train_dataset = "xtreme/parquet/XQuAD.ru/validation"
 
-# Заморозка всех параметров модели, чтобы сохранить предварительно обученные веса
-for param in model.parameters():
-    param.requires_grad = False
+model_name_ru = "timpal0l/mdeberta-v3-base-squad2"
 
-# Загрузка датасета из JSON файла
-with open("your_dataset.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
+# Загрузите токенизатор и конфигурацию модели
+tokenizer = AutoTokenizer.from_pretrained(model_name_ru)
+config = AutoConfig.from_pretrained(model_name_ru)
+model = AutoModelForQuestionAnswering.from_pretrained(model_name_ru, config=config)
 
-#количество эпох
-num_epochs = 5
+# Определите функцию для обработки данных и конфигурацию обучения
+data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+training_args = TrainingArguments(
+    output_dir="./models",  # Укажите путь к сохранению модели и результатов
+    num_train_epochs=5,          # Количество эпох для обучения (можете увеличить для лучших результатов)
+    per_device_train_batch_size=8,
+    save_steps=1000,             # Сохранять модель каждые 1000 шагов обучения
+    save_total_limit=2,          # Ограничьте количество сохраненных моделей
+    evaluation_strategy="steps", # Оценивать результаты каждые 1000 шагов обучения
+    eval_steps=1000,             # Частота оценивания
+)
 
-# Процесс дообучения модели
-model.train()
-optimizer = AdamW(model.parameters(), lr=1e-5)
+# Создайте объект Trainer для обучения модели
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    data_collator=data_collator,
+    train_dataset=train_dataset,
+    tokenizer=tokenizer,
+)
 
-for epoch in range(num_epochs):
-    total_loss = 0.0
-    for example in data:
-        # Загрузка текста из файла
-        with open(example["text_file"], "r", encoding="utf-8") as f:
-            context = f.read()
+# Запустите обучение
+trainer.train()
 
-        # Форматирование данных для вопросно-ответного форматирования
-        inputs = tokenizer.encode_plus(example["question"], context, return_tensors="pt", add_special_tokens=True, max_length=512, pad_to_max_length=True)
-        start_positions = tokenizer.encode(example["answer"], add_special_tokens=False)[0]
-        end_positions = tokenizer.encode(example["answer"], add_special_tokens=False)[-1]
-
-        inputs.update({'start_positions': torch.tensor([start_positions]), 'end_positions': torch.tensor([end_positions])})
-
-        outputs = model(**inputs)
-        loss = outputs.loss
-        total_loss += loss.item()
-        loss.backward()
-        optimizer.step()
-        optimizer.zero_grad()
-
-    avg_loss = total_loss / len(data)
-    print(f"Epoch {epoch + 1}/{num_epochs}, Average Loss: {avg_loss}")
-
-# Сохранение дообученной модели
-model.save_pretrained("path_to_save_model")
+# Сохраните дообученную модель
+trainer.save_model("./fine_tuned_model")
