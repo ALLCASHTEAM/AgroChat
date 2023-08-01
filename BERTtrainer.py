@@ -1,6 +1,7 @@
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer, TrainingArguments, Trainer, default_data_collator
 from datasets import load_dataset
-
+import evaluate
+import numpy as np
 model_name = "timpal0l/mdeberta-v3-base-squad2"
 
 # Загрузим модель и токенизатор
@@ -14,7 +15,7 @@ datasets = load_dataset("Zaid/xquad_ru")
 def prepare_train_features(examples):
     # Токенизация вопросов и контекстов
     encodings = tokenizer(
-        examples["question"], examples["context"], truncation=True, padding="max_length", max_length=384, return_offsets_mapping=True
+        examples["question"], examples["context"], truncation=True, padding="max_length", max_length=963, return_offsets_mapping=True
     )
     # Списки для начальных и конечных позиций ответов
     start_positions = []
@@ -43,18 +44,21 @@ def prepare_train_features(examples):
 tokenized_datasets = datasets.map(prepare_train_features, batched=True, remove_columns=datasets["train"].column_names)
 
 # Создаем функцию для вычисления потерь
-def compute_loss(model, inputs, return_outputs=False):
-    outputs = model(**inputs)
-    loss = outputs.loss
-    return (loss, outputs) if return_outputs else loss
+metric = evaluate.load("accuracy")
+
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    predictions = np.argmax(logits, axis=-1)
+    return metric.compute(predictions=predictions, references=labels)
 
 # Устанавливаем аргументы обучения
 training_args = TrainingArguments(
     output_dir=".",
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
+    per_device_train_batch_size=64,
+    per_device_eval_batch_size=64,
     learning_rate=2e-5,
     num_train_epochs=3,
+    logging_steps=1
 )
 
 # Создаем тренер
@@ -63,7 +67,8 @@ trainer = Trainer(
     args=training_args,
     train_dataset=tokenized_datasets["train"],
     eval_dataset=tokenized_datasets["validation"],
-    data_collator=default_data_collator,  # Here we pass the loss computation function
+    data_collator=default_data_collator,
+    compute_metrics=compute_metrics
 )
 
 # Запускаем обучение
