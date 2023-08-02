@@ -71,7 +71,6 @@
     window.onload = function () {
         var checkbox = document.getElementById('checkbox');
         var savedValue = localStorage.getItem('checkboxValue');
-
         if (savedValue === 'true') {
             window.location.href = "/photobot"; // Перенаправляем на основную страницу
         } else if (savedValue === 'false') {
