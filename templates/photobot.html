@@ -43,3 +43,12 @@
 </main>
 <script src="/static/js/chat_bot.js"></script>
 </html>
+<script>
+    // Проверяем, принято ли пользовательское соглашение
+    var savedValue = localStorage.getItem('checkboxValue');
+
+    if (savedValue !== 'true') {
+        // Если соглашение не принято, перенаправляем пользователя на страницу принятия соглашения
+        window.location.href = "/about";
+    }
+</script>
