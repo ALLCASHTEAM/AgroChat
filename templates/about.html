@@ -5,44 +5,85 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>User Agreement</title>
+    <style>
+        body {
+            background-color: #363636;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .user-agreement {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+
+        .continue-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<form method="post" action="/about"><input type="checkbox" id="checkbox" name="checkbox"></form>
+<div class="user-agreement">
+    <h2>Перед использованием сайта необходимо прочесть и принять пользовательское соглашение.</h2>
+    <div class="checkbox-container">
+        <input type="checkbox" id="checkbox" name="checkbox">
+        <label for="checkbox">Я прочел пользовательское соглашение и принимаю его условия</label>
+    </div>
+    <button class="continue-button" onclick="checkAgreement()">Продолжить</button>
+</div>
 
-
-
- <script>
-        // При загрузке страницы проверяем, есть ли у нас сохраненное значение в Local Storage
-        window.onload = function() {
-            var checkbox = document.getElementById('checkbox');
-            var savedValue = localStorage.getItem('checkboxValue');
-
-            if (savedValue === 'true') {
-                window.location.href = "/photobot";
-            } else if (savedValue === 'false') {
-                checkbox.checked = false;
-            }
-
-
-
-
-        };
-
-        document.getElementById("checkbox").addEventListener("change", function() {
-            if (this.checked) {
-                // Если чекбокс отмечен, перенаправляем пользователя на следующую страницу
-                window.location.href = "/next_page";
-            }
-        });
-
-        // Сохраняем состояние checkbox в Local Storage при изменении значения
+<script>
+    function checkAgreement() {
         var checkbox = document.getElementById('checkbox');
-        checkbox.addEventListener('change', function() {
-            localStorage.setItem('checkboxValue', this.checked);
-        });
+        var savedValue = localStorage.getItem('checkboxValue');
 
+        if (checkbox.checked || savedValue === 'true') {
+            localStorage.setItem('checkboxValue', 'true'); // Сохраняем, что пользователь принял соглашение
+            window.location.href = "/photobot"; // Перенаправляем на основную страницу
+        } else {
+            alert("Пожалуйста, прочтите и примите пользовательское соглашение.");
+        }
+    }
 
-    </script>
+    // При загрузке страницы проверяем, есть ли у нас сохраненное значение в Local Storage
+    window.onload = function () {
+        var checkbox = document.getElementById('checkbox');
+        var savedValue = localStorage.getItem('checkboxValue');
+
+        if (savedValue === 'true') {
+            window.location.href = "/photobot"; // Перенаправляем на основную страницу
+        } else if (savedValue === 'false') {
+            checkbox.checked = false;
+        }
+    };
+
+    // Сохраняем состояние checkbox в Local Storage при изменении значения
+    var checkbox = document.getElementById('checkbox');
+    checkbox.addEventListener('change', function () {
+        localStorage.setItem('checkboxValue', this.checked);
+    });
+</script>
 </body>
 </html>

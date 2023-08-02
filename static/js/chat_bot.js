@@ -34,12 +34,12 @@ sendForm.addEventListener('submit', function(e) {
   // Обработка загруженного изображения, если оно есть
   const file = fileInput.files[0];
   if (input.length > 0 && file) {
-    alert("You can't send both text and an image. Please choose only one.");
+    alert("Вы не можете прикрепить изображение вместе с текстом.");
     // Удаляем файл из поля для выбора
     fileInput.value = "";
     // Возвращаем поле для ввода к доступному состоянию
     textInput.disabled = false;
-    attachButton.textContent = 'Attach Image';
+    attachButton.textContent = 'Прикрепить изображение';
     return;
   } else if (input.length > 0) {
     // Обрабатываем текстовое сообщение
@@ -48,7 +48,7 @@ sendForm.addEventListener('submit', function(e) {
     // Обрабатываем изображение
     processImage(file);
   } else {
-    alert("Please enter a message or choose an image.");
+    alert("Пожалуйста выберети изображение или напишите текст.");
   }
 });
 
@@ -88,7 +88,7 @@ function processImage(file) {
   chatList.appendChild(imageItem);
   fileInput.value = "";
   // Сбрасываем текст на кнопке прикрепления
-  attachButton.textContent = 'Attach Image';
+  attachButton.textContent = 'Прикрепить изображение';
 
   // Возвращаем поле для ввода к кликабельному состоянию после небольшой задержки
   setTimeout(function() {
@@ -103,7 +103,7 @@ fileInput.addEventListener('change', (event) => {
     // Делаем поле для ввода некликабельным
     textInput.disabled = true;
   } else {
-    attachButton.textContent = 'Attach Image';
+    attachButton.textContent = 'Прикрепить изображение';
     // Возвращаем поле для ввода к кликабельному состоянию
     textInput.disabled = false;
   }

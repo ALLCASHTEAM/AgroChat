@@ -28,11 +28,11 @@ with app.app_context():
 def chatbot():
     return render_template("chatbot.html")
 
-@app.route('/', methods=['GET','POST'])
 @app.route('/photobot', methods=['GET','POST'])
 def photobot():
     return render_template("photobot.html")
 
+@app.route('/', methods=['GET','POST'])
 
 @app.route('/about', methods=['GET','POST'])
 def about():
