@@ -1,5 +1,6 @@
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer, TrainingArguments, Trainer, default_data_collator
 from datasets import load_dataset
+import torch
 model_name = "timpal0l/mdeberta-v3-base-squad2"
 
 # Загрузим модель и токенизатор
@@ -47,11 +48,15 @@ tokenized_datasets = datasets.map(prepare_train_features, batched=True, remove_c
 # Устанавливаем аргументы обучения
 training_args = TrainingArguments(
     output_dir="/mnt/data/training",
+    overwrite_output_dir=True,
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,
-    learning_rate=2e-5,
-    num_train_epochs=10,
-    logging_steps=1000
+    gradient_accumulation_steps=16,
+    warmup_steps=100,
+    num_train_epochs=3,
+    logging_steps=1000,
+
+
 )
 
 # Создаем тренер
@@ -59,8 +64,8 @@ trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_datasets["translate_train"],
-    eval_dataset=tokenized_datasets["translate_test"],
     data_collator=default_data_collator,
+    optimizers = (torch.optim.AdamW(model.parameters(),lr=1e-5),None),
 
 )
 
