@@ -24,4 +24,4 @@ def read_db(table, where_statement=None):
 
 if __name__ == "__main__":
     write_db('marked_txt', 'Гомо', 'dsa')
-    read_db("marked_txt")
+    read_db("marked_txt", where_statement="id = 2")
