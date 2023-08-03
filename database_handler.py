@@ -22,5 +22,6 @@ def read_db(table, where_statement=None):
     print(result)
     con.close()
 
-write_db('marked_txt', 'Гомо', 'dsa')
-read_db("marked_txt")
+if __name__ == "__main__":
+    write_db('marked_txt', 'Гомо', 'dsa')
+    read_db("marked_txt")
