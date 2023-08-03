@@ -4,12 +4,12 @@ from auto_gptq import AutoGPTQForCausalLM
 model = AutoGPTQForCausalLM.from_pretrained('Gaivoronsky/ruGPT-3.5-13B-8bit', device="cuda:0", use_triton=False)
 tokenizer = AutoTokenizer.from_pretrained('Gaivoronsky/ruGPT-3.5-13B-8bit')
 
-request = "Человек: Чем удобрять кукурузу Помощник:"
+request = "Привет"
 encoded_input = tokenizer(request, return_tensors='pt', \
                           add_special_tokens=False).to('cuda')
 output = model.generate(
     **encoded_input,
-    num_beams=2,
+    num_beams=4,
     do_sample=True,
     max_new_tokens=100
 )
