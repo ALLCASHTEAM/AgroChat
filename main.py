@@ -24,10 +24,6 @@ with app.app_context():
 
 
 
-@app.route('/chatbot', methods=['GET','POST'])
-def chatbot():
-    return render_template("chatbot.html")
-
 @app.route('/photobot', methods=['GET','POST'])
 def photobot():
     return render_template("photobot.html")
