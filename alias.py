@@ -70,3 +70,9 @@ trainer = Trainer(
 
 # Запускаем обучение
 trainer.train()
+
+# Добавьте print-инструкции для отслеживания обучения
+for epoch in range(training_args.num_train_epochs):
+    print(f"Epoch {epoch + 1}/{training_args.num_train_epochs}")
+    for step, batch in enumerate(tokenized_dataset):
+        print(f"Step {step}/{len(tokenized_dataset)}")
