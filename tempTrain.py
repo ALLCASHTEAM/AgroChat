@@ -35,6 +35,8 @@ for text, label in data:
 input_ids = torch.cat(input_ids, dim=0)
 attention_masks = torch.cat(attention_masks, dim=0)
 labels = torch.tensor(labels)
+dataset = TensorDataset(input_ids, attention_masks, labels)
+
 
 # Создаем датасет и загрузчик данных
 dataset = TensorDataset(input_ids, attention_masks, labels)
