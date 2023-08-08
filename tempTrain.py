@@ -1,7 +1,7 @@
 from deeppavlov import train_model
 
 # Путь к JSON-файлу с конфигурациями
-config_path = 'path/to/cfg.json'
+config_path = './cfg.json'
 
 # Загрузка и обучение модели с использованием конфигураций из JSON-файла
 model = train_model(config_path)
