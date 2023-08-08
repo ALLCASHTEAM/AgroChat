@@ -6,7 +6,7 @@ tokenizer = BertTokenizer.from_pretrained('DeepPavlov/rubert-base-cased')
 
 # Загружаем данные
 data = []
-with open('qaByGPTWithOutDots.txt.txt', 'r') as f:
+with open('qaByGPTWithOutDots.txt', 'r') as f:
   for line in f:
     text, label = line.split(' - ')
     data.append((text, label))
