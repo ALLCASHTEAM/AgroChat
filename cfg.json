@@ -1,4 +1,12 @@
 {
+  "dataset_reader": {
+    "class_name": "my_dataset_reader_class",
+    "data_path": "path/to/your/text/file.txt"
+  },
+  "train": {
+    "batch_size": 8,
+    "epochs": 5
+  },
   "architectures": [
     "BertModel"
   ],
