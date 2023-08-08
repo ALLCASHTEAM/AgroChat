@@ -10,7 +10,7 @@ data = []
 with open('qaByGPTWithOutDots.txt', 'r', encoding='utf-8') as f:
     for line in f:
         text, label = line.strip().split(' - ')
-        data.append((text, int(label)))  # Преобразуем текстовую метку в числовую
+        data.append((text, label))  # Преобразуем текстовую метку в числовую
 
 # Преобразуем данные в формат, понятный модели
 input_ids = []
