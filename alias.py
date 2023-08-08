@@ -3,7 +3,7 @@ from datasets import Dataset
 import torch
 
 model_name = "timpal0l/mdeberta-v3-base-squad2"
-data_file = "qaByGPTWithOutDots.txt"
+data_file = "qaByGPTWithOutDots.txt"  # Имя файла
 
 # Загрузим модель и токенизатор
 model = AutoModelForQuestionAnswering.from_pretrained(model_name)
@@ -16,11 +16,17 @@ with open(data_file, "r", encoding="utf-8") as f:
 # Создание датасета
 qa_data = {"question": [], "context": []}
 for line in lines:
-    question, context = line.strip().split(" - ")
-    qa_data["question"].append(question)
-    qa_data["context"].append(context)
+    line = line.strip()  # Убираем символы перевода строки
+    if " - " in line:
+        question, context = line.split(" - ")
+        qa_data["question"].append(question)
+        qa_data["context"].append(context)
+    else:
+        print(f"Ошибка в строке: {line}")
 
 dataset = Dataset.from_dict(qa_data)
+
+# ... (Остальной код остается без изменений)
 
 # Функция для предобработки данных
 def prepare_train_features(examples):
