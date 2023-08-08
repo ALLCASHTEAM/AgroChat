@@ -4,7 +4,7 @@ from deeppavlov import configs, train_model
 data_path = 'qaByGPTWithOutDots.txt'
 
 # Загрузка конфигурации модели DeepPavlov/rubert-case-based
-config = configs.classifiers.rubert.rubert_case_based
+config = configs.classifiers.rusentiment.rusentiment_bert
 
 # Изменение параметров конфигурации
 config['dataset_reader']['data_path'] = data_path
