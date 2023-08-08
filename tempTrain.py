@@ -10,26 +10,23 @@ data = []
 with open('qaByGPTWithOutDots.txt', 'r', encoding='utf-8') as f:
     for line in f:
         text, label = line.strip().split(' - ')
-        data.append((text, label))  # Преобразуем текстовую метку в числовую
+        data.append((text, label))
 
 # Преобразуем данные в формат, понятный модели
 input_ids = []
 attention_masks = []
-labels = []
 
 for text, label in data:
     encoded_inputs = tokenizer(text, padding='max_length', truncation=True, return_tensors='pt', max_length=128)
     input_ids.append(encoded_inputs['input_ids'])
     attention_masks.append(encoded_inputs['attention_mask'])
-    labels.append(label)
 
 # Преобразуем списки в тензоры
 input_ids = torch.cat(input_ids, dim=0)
 attention_masks = torch.cat(attention_masks, dim=0)
-#labels = torch.tensor(labels)  #хз нужно ли оно нам
 
 # Создаем датасет и загрузчик данных
-dataset = TensorDataset(input_ids, attention_masks, labels)
+dataset = TensorDataset(input_ids, attention_masks)  # Убрали 'labels'
 loader = DataLoader(dataset, batch_size=16, shuffle=True)
 
 # Создаем модель
@@ -45,9 +42,10 @@ for epoch in range(10):
     total_loss = 0
     for batch in loader:
         optimizer.zero_grad()
-        input_ids, attention_mask, label = batch
-        outputs = model(input_ids, attention_mask=attention_mask, labels=label)
-        loss = outputs.loss
+        input_ids, attention_mask = batch  # Убрали 'label'
+        outputs = model(input_ids, attention_mask=attention_mask)
+        logits = outputs.logits
+        loss = criterion(logits, label)  # Замените 'label' на вашу переменную с метками классов
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
