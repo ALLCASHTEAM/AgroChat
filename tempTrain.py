@@ -16,6 +16,7 @@ with open('qaByGPTWithOutDots.txt', 'r', encoding='utf-8') as f:
 input_ids = []
 attention_masks = []
 labels = []
+
 for text, label in data:
     encoded_inputs = tokenizer(text, padding='max_length', truncation=True, return_tensors='pt', max_length=128)
     input_ids.append(encoded_inputs['input_ids'])
@@ -25,7 +26,7 @@ for text, label in data:
 # Преобразуем списки в тензоры
 input_ids = torch.cat(input_ids, dim=0)
 attention_masks = torch.cat(attention_masks, dim=0)
-labels = torch.tensor(labels)
+#labels = torch.tensor(labels)  #хз нужно ли оно нам
 
 # Создаем датасет и загрузчик данных
 dataset = TensorDataset(input_ids, attention_masks, labels)
