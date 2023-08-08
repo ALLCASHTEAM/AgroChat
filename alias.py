@@ -16,7 +16,7 @@ with open(data_file, "r", encoding="utf-8") as f:
 # Создание датасета
 qa_data = {"question": [], "context": []}
 for line in lines:
-    line = line.strip()  # Убираем символы перевода строки
+    line = line.strip()  # Убираем символ перевода строки
     if " - " in line:
         question, context = line.split(" - ")
         qa_data["question"].append(question)
@@ -25,8 +25,6 @@ for line in lines:
         print(f"Ошибка в строке: {line}")
 
 dataset = Dataset.from_dict(qa_data)
-
-# ... (Остальной код остается без изменений)
 
 # Функция для предобработки данных
 def prepare_train_features(examples):
