@@ -1,22 +1,16 @@
 from deeppavlov import configs, train_model
 
 # Путь к вашему текстовому файлу
-data_path = '/qaByGPTWithOutDots.txt'
+data_path = 'qaByGPTWithOutDots.txt'
 
-# Конфигурационный файл для обучения модели
+# Загрузка конфигурации модели DeepPavlov/rubert-case-based
 config = configs.classifiers.rubert.rubert_case_based
 
-# Задайте параметры для обучения
+# Изменение параметров конфигурации
 config['dataset_reader']['data_path'] = data_path
 config['metadata']['variables']['DATA_PATH'] = data_path
-config['train']['batch_size'] = 8  # Размер пакета данных
-config['train']['epochs'] = 5  # Количество эпох обучения
-
-# Конфигурационный файл для обучения модели
-config = configs.classifiers.rubert.rubert_case_based
-
-# Установите желаемое имя модели в параметре "chainer" внутри "metadata"
-config['metadata']['chainer'] = 'my_custom_model_name'
+config['train']['batch_size'] = 8
+config['train']['epochs'] = 5
 
 # Загрузка и обучение модели
 model = train_model(config)
