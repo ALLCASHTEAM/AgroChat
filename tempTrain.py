@@ -34,7 +34,7 @@ for text, label in data:
 # Преобразуем списки в тензоры
 input_ids = torch.cat(input_ids, dim=0)
 attention_masks = torch.cat(attention_masks, dim=0)
-labels = torch.tensor(labels)
+labels = torch.tensor(labels, dtype=torch.long)
 dataset = TensorDataset(input_ids, attention_masks, labels)
 
 
