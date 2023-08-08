@@ -2,7 +2,7 @@ import torch
 from transformers import BertForSequenceClassification, BertTokenizer
 
 # Загружаем токенизатор
-tokenizer = BertTokenizer.from_pretrained('rubert-base-cased')
+tokenizer = BertTokenizer.from_pretrained('DeepPavlov/rubert-base-cased')
 
 # Загружаем данные
 data = []
@@ -22,7 +22,7 @@ for text, label in data:
   labels.append(label)
 
 # Создаем модель
-model = BertForSequenceClassification.from_pretrained('rubert-base-cased')
+model = BertForSequenceClassification.from_pretrained('DeepPavlov/rubert-base-cased')
 
 # Обучаем модель
 model.fit(input_ids, attention_masks, labels, epochs=10)
