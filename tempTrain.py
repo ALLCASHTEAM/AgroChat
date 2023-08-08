@@ -12,6 +12,10 @@ with open('qaByGPTWithOutDots.txt', 'r', encoding='utf-8') as f:
         text, label = line.strip().split(' - ')
         data.append((text, label))
 
+unique_labels = set(label for _, label in data)
+num_unique_labels = len(unique_labels)
+print(f"Number of unique labels: {num_unique_labels}")
+
 # Создаем словарь для преобразования текстовых меток в числовой формат
 label_map = {label: i for i, (_, label) in enumerate(data)}
 num_classes = len(label_map)
