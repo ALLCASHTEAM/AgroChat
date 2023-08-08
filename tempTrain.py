@@ -25,7 +25,7 @@ for text, label in data:
 model = BertForSequenceClassification.from_pretrained('DeepPavlov/rubert-base-cased')
 
 # Обучаем модель
-model.fit(input_ids, attention_masks, labels, epochs=10)
+model.train(input_ids, attention_masks, labels, epochs=10)
 
 # Сохраняем модель
 model.save_pretrained('model')
