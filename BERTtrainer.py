@@ -54,7 +54,7 @@ training_args = TrainingArguments(
     gradient_accumulation_steps=16,
     warmup_steps=100,
     num_train_epochs=3,
-    logging_steps=1000,
+    logging_steps=10,
 
 
 )
