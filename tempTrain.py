@@ -42,6 +42,7 @@ dataset = TensorDataset(input_ids, attention_masks, labels)
 dataset = TensorDataset(input_ids, attention_masks, labels)
 loader = DataLoader(dataset, batch_size=16, shuffle=True)
 
+num_classes = 181
 # Создаем модель
 model = BertForSequenceClassification.from_pretrained('DeepPavlov/rubert-base-cased', num_labels=num_classes)
 
