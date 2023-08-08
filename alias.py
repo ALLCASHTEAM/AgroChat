@@ -65,14 +65,8 @@ trainer = Trainer(
     train_dataset=tokenized_dataset,
     data_collator=default_data_collator,
     optimizers=(torch.optim.AdamW(model.parameters(), lr=1e-5), None),
-    logger=logger,  # Передаем логгер тренеру
 )
 
 # Запускаем обучение
 trainer.train()
 
-# Добавьте print-инструкции для отслеживания обучения
-for epoch in range(training_args.num_train_epochs):
-    print(f"Epoch {epoch + 1}/{training_args.num_train_epochs}")
-    for step, batch in enumerate(tokenized_dataset):
-        print(f"Step {step}/{len(tokenized_dataset)}")
