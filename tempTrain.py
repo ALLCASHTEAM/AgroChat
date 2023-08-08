@@ -1,22 +1,16 @@
-from deeppavlov import configs, train_model
+from deeppavlov import train_model
 
 # Путь к вашему текстовому файлу
 data_path = 'qaByGPTWithOutDots.txt'
 
-# Загрузка конфигурации модели DeepPavlov/rubert-case-based
-config = configs.classifiers.rusentiment.rusentiment_bert
+# Путь к JSON-файлу с конфигурациями
+config_path = 'cfg.json'
 
-# Изменение параметров конфигурации
-config['dataset_reader']['data_path'] = data_path
-config['metadata']['variables']['DATA_PATH'] = data_path
-config['train']['batch_size'] = 8
-config['train']['epochs'] = 5
-
-# Загрузка и обучение модели
-model = train_model(config)
+# Загрузка и обучение модели с использованием конфигураций из JSON-файла
+model = train_model(config_path, data_path=data_path)
 
 # Обучение с выводом логов каждые 0.1 эпохи
-for epoch in range(1, config['train']['epochs'] + 1):
+for epoch in range(1, model.config['train']['epochs'] + 1):
     model.fit()
     if epoch % 0.1 == 0:
         metrics = model.evaluate()
