@@ -1,74 +1,31 @@
-from transformers import AutoModelForQuestionAnswering, AutoTokenizer, TrainingArguments, Trainer, default_data_collator
-from datasets import load_dataset
 import torch
-model_name = "DeepPavlov/rubert-case-based"
+from transformers import BertForSequenceClassification, BertTokenizer
 
-# Загрузим модель и токенизатор
-model = AutoModelForQuestionAnswering.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+# Загружаем токенизатор
+tokenizer = BertTokenizer.from_pretrained('rubert-base-cased')
 
-# Загрузим датасет
-datasets = "qaByGPTWithOutDots.txt"  # Имя файла
+# Загружаем данные
+data = []
+with open('qaByGPTWithOutDots.txt.txt', 'r') as f:
+  for line in f:
+    text, label = line.split(' - ')
+    data.append((text, label))
 
-# Функция для предобработки данных
-def prepare_train_features(examples):
-    # Токенизация вопросов и контекстов
-    encodings = tokenizer(
-        examples["question"], examples["context"], truncation=True, padding="max_length", max_length=383, return_offsets_mapping=True
-    )
-    # Списки для начальных и конечных позиций ответов
-    start_positions = []
-    end_positions = []
-    for i in range(len(examples["answers"])):
-        # Получим позиции начала и конца ответа
-        tmp = examples["answers"][i]
-        # Получаем позиции начала и конца ответа
-        start_pos = encodings.char_to_token(i, tmp['answer_start'][0])
-        end_pos = encodings.char_to_token(i, tmp['answer_start'][0] + len(tmp['text']))
-        # Если позиция None, это означает, что она была обрезана при токенизации контекста,
-        # поэтому мы присваиваем позицию последнему токену контекста.
-        if start_pos is None:
-            start_positions.append(len(encodings['input_ids'][i]) - 1)
-        else:
-            start_positions.append(start_pos)
-        if end_pos is None:
-            end_positions.append(len(encodings['input_ids'][i]) - 1)
-        else:
-            end_positions.append(end_pos)
-    # Обновляем кодировки для добавления позиций начала и конца
-    encodings.update({'start_positions': start_positions, 'end_positions': end_positions})
-    return encodings
+# Преобразуем данные в формат, понятный модели
+input_ids = []
+attention_masks = []
+labels = []
+for text, label in data:
+  encoded_inputs = tokenizer(text, return_tensors='pt')
+  input_ids.append(encoded_inputs['input_ids'])
+  attention_masks.append(encoded_inputs['attention_mask'])
+  labels.append(label)
 
-# Применяем предобработку данных
-tokenized_datasets = datasets.map(prepare_train_features, batched=True, remove_columns=datasets["translate_train"].column_names)
+# Создаем модель
+model = BertForSequenceClassification.from_pretrained('rubert-base-cased')
 
-# Создаем функцию для вычисления потерь
+# Обучаем модель
+model.fit(input_ids, attention_masks, labels, epochs=10)
 
-
-# Устанавливаем аргументы обучения
-training_args = TrainingArguments(
-    output_dir="/mnt/data/training",
-    overwrite_output_dir=True,
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
-    gradient_accumulation_steps=16,
-    warmup_steps=100,
-    num_train_epochs=3,
-    logging_steps=10,
-
-
-)
-
-# Создаем тренер
-trainer = Trainer(
-    model=model,
-    args=training_args,
-    train_dataset=tokenized_datasets["translate_train"],
-    data_collator=default_data_collator,
-    optimizers = (torch.optim.AdamW(model.parameters(),lr=1e-5),None),
-
-)
-
-# Запускаем обучение
-trainer.train()
-
+# Сохраняем модель
+model.save_pretrained('model')
