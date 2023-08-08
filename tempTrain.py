@@ -1,9 +1,9 @@
 import torch
-from transformers import BertForSequenceClassification, BertTokenizer
+from transformers import BertForSequenceClassification, BertTokenizer, AutoTokenizer
 from torch.utils.data import DataLoader, TensorDataset
 
 # Загружаем токенизатор
-tokenizer = BertTokenizer.from_pretrained('DeepPavlov/rubert-base-cased')
+tokenizer = AutoTokenizer.from_pretrained('DeepPavlov/rubert-base-cased')
 
 # Загружаем данные
 data = []
