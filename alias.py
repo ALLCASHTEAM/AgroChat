@@ -1,7 +1,11 @@
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer, TrainingArguments, Trainer, default_data_collator
 from datasets import Dataset
 import torch
+import logging
 
+# Добавляем логирование
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 model_name = "timpal0l/mdeberta-v3-base-squad2"
 data_file = "qaByGPTWithOutDots.txt"  # Имя файла
 
@@ -23,6 +27,8 @@ for line in lines:
         qa_data["context"].append(context)
     else:
         print(f"Ошибка в строке: {line}")
+        qa_data["question"].append("")
+        qa_data["context"].append("")
 
 dataset = Dataset.from_dict(qa_data)
 
@@ -59,6 +65,7 @@ trainer = Trainer(
     train_dataset=tokenized_dataset,
     data_collator=default_data_collator,
     optimizers=(torch.optim.AdamW(model.parameters(), lr=1e-5), None),
+    logger=logger,  # Передаем логгер тренеру
 )
 
 # Запускаем обучение
