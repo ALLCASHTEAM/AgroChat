@@ -26,6 +26,7 @@ with app.app_context():
 
 @app.route('/photobot', methods=['GET','POST'])
 def photobot():
+
     return render_template("photobot.html")
 
 @app.route('/', methods=['GET','POST'])
@@ -39,6 +40,17 @@ def about():
             return redirect(url_for('/photobot'))
     return render_template("about.html")
 
+@app.route('/get_user_text', methods=['POST'])
+def get_user_text():
+    if request.method == 'POST':
+        print(request.form)
+        print(request.form.get('user_text'))
+        return ('', 204)
+@app.route('/handler_click', methods=['POST'])
+def handler_click():
+    user_text = request.form['user_text']
+    print('КЛИКА КЛИКА ПЕСАААААААААААДО:', user_text)
+    return redirect('/photobot')
 
 if __name__=="__main__":
     app.run(debug=True)

@@ -10,8 +10,9 @@ function scrollToBottom() {
   chatList.scrollTop = chatList.scrollHeight;
 }
 
+
 sendForm.onkeydown = function(e) {
-  if (e.keyCode == 13) {
+  if (e.keyCode === 13) {
     e.preventDefault();
 
     // No mix ups with upper and lowercases
@@ -19,6 +20,7 @@ sendForm.onkeydown = function(e) {
 
     // Empty textarea fix
     if (input.length > 0) {
+      get_user_text();
       createBubble(input);
     }
   }
@@ -40,16 +42,19 @@ sendForm.addEventListener('submit', function(e) {
     // Возвращаем поле для ввода к доступному состоянию
     textInput.disabled = false;
     attachButton.textContent = 'Прикрепить изображение';
-    return;
+
+
   } else if (input.length > 0) {
     // Обрабатываем текстовое сообщение
     createBubble(input);
+
   } else if (file) {
     // Обрабатываем изображение
     processImage(file);
   } else {
     alert("Пожалуйста выберети изображение или напишите текст.");
   }
+
 });
 
 var createBubble = function(input) {
@@ -59,6 +64,7 @@ var createBubble = function(input) {
 
   // Add input of textarea to chatbubble list item
   chatBubble.innerHTML = input;
+  console.log(input) // TUT
 
   // Add chatBubble to chatlist
   chatList.appendChild(chatBubble);
