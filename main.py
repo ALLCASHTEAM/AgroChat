@@ -51,7 +51,7 @@ def get_user_text():
 def get_bot_text():
     if request.method == 'POST':
         print(request.form.get('bot_text'))
-
+        return ('', 204)
 
 @app.route('/handler_click', methods=['POST'])
 def handler_click():

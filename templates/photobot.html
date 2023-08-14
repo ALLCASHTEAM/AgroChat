@@ -60,7 +60,7 @@
   $.ajax({
     type: "POST",
     url: "{{url_for('get_bot_text')}}",
-    data: {"bot_text":textInput.value.toLowerCase()}
+    data: {"bot_text": $(".bot__output").last().text()}
 
   })
 }

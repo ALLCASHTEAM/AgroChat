@@ -74,6 +74,7 @@ var createBubble = function(input) {
 
     createBubble_bot(input)
     animateBotOutput();
+    get_bot_text();
   }
 }
 
