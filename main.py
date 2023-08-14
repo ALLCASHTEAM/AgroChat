@@ -46,6 +46,13 @@ def get_user_text():
         print(request.form)
         print(request.form.get('user_text'))
         return ('', 204)
+
+@app.route('/get_bot_text', methods=['POST'])
+def get_bot_text():
+    if request.method == 'POST':
+        print(request.form.get('bot_text'))
+
+
 @app.route('/handler_click', methods=['POST'])
 def handler_click():
     user_text = request.form['user_text']

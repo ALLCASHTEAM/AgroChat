@@ -55,6 +55,15 @@
 
   })
 }
+
+  function get_bot_text() {
+  $.ajax({
+    type: "POST",
+    url: "{{url_for('get_bot_text')}}",
+    data: {"bot_text":textInput.value.toLowerCase()}
+
+  })
+}
   sendForm.onkeydown = function(e) {
   if (e.keyCode === 13) {
     e.preventDefault();
@@ -77,5 +86,8 @@
         // Если соглашение не принято, перенаправляем пользователя на страницу принятия соглашения
         window.location.href = "/about";
     }
+
+
+
 
 </script>

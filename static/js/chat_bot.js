@@ -70,6 +70,29 @@ var createBubble = function(input) {
   chatList.appendChild(chatBubble);
   scrollToBottom();
   clearInput();
+  if (input =="бла"){
+
+    createBubble_bot(input)
+    animateBotOutput();
+  }
+}
+
+var createBubble_bot = function(input) {
+  if(input=="бла"){
+      // Create input bubble
+    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble');
+
+    // Add input of textarea to chatbubble list item
+    chatBubble_bot.innerHTML = "Иди нахуй";
+
+    // Add chatBubble to chatlist
+    chatList.appendChild(chatBubble_bot);
+    scrollToBottom();
+    clearInput();
+
+  }
+
 }
 
 function clearInput() {
