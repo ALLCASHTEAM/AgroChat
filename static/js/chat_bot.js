@@ -4,12 +4,11 @@ var sendForm = document.querySelector('#chatform');
     fileInput = document.getElementById("upload");
     animationCounter = 1;
     animationBubbleDelay = 600;
+    botAnimationDelay = 600;
     attachButton = document.querySelector('.attach-button');
-
 function scrollToBottom() {
   chatList.scrollTop = chatList.scrollHeight;
 }
-
 
 sendForm.onkeydown = function(e) {
   if (e.keyCode === 13) {
@@ -22,6 +21,7 @@ sendForm.onkeydown = function(e) {
     if (input.length > 0) {
       get_user_text();
       createBubble(input);
+      send_bot_answer();
     }
   }
 };
@@ -42,19 +42,15 @@ sendForm.addEventListener('submit', function(e) {
     // Возвращаем поле для ввода к доступному состоянию
     textInput.disabled = false;
     attachButton.textContent = 'Прикрепить изображение';
-
-
   } else if (input.length > 0) {
     // Обрабатываем текстовое сообщение
     createBubble(input);
-
   } else if (file) {
     // Обрабатываем изображение
     processImage(file);
   } else {
     alert("Пожалуйста выберети изображение или напишите текст.");
   }
-
 });
 
 var createBubble = function(input) {
@@ -64,37 +60,36 @@ var createBubble = function(input) {
 
   // Add input of textarea to chatbubble list item
   chatBubble.innerHTML = input;
-  console.log(input) // TUT
+  chatBubble.addEventListener('animationend', function() {
+    chatBubble.classList.remove('animateBubble'); // Удаляем класс анимации
+  });
 
   // Add chatBubble to chatlist
   chatList.appendChild(chatBubble);
+
   scrollToBottom();
   clearInput();
-  if (input =="бла"){
 
-    createBubble_bot(input)
-    animateBotOutput();
-    get_bot_text();
-  }
-}
+  createBubble_bot(input);
+  animateBotOutput();
+  get_bot_text();
+};
 
 var createBubble_bot = function(input) {
-  if(input=="бла"){
-      // Create input bubble
-    var chatBubble_bot = document.createElement('li');
-    chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble');
+  // Create input bubble
+  var chatBubble_bot = document.createElement('li');
+  chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble');
 
-    // Add input of textarea to chatbubble list item
-    chatBubble_bot.innerHTML = "Иди нахуй";
+  // Add input of textarea to chatbubble list item
+  chatBubble_bot.innerHTML = window.GlobalVar;
 
-    // Add chatBubble to chatlist
-    chatList.appendChild(chatBubble_bot);
-    scrollToBottom();
-    clearInput();
 
-  }
+  // Add chatBubble to chatlist
+  chatList.appendChild(chatBubble_bot);
 
-}
+  scrollToBottom();
+  clearInput();
+};
 
 function clearInput() {
   // Clear the text from the input field after sending
@@ -105,8 +100,7 @@ function clearInput() {
 
 // Change to SCSS loop
 function animateBotOutput() {
-  chatList.lastElementChild.style.animationDelay = (animationCounter * animationBubbleDelay) + "ms";
-  animationCounter++;
+  chatList.lastElementChild.style.animationDelay = (animationBubbleDelay) + "ms";
   chatList.lastElementChild.style.animationPlayState = "running";
 }
 

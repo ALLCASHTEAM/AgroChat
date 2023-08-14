@@ -3,7 +3,7 @@
 Пока на питоне нихуя не обрабатывается
 ибо для этого нужны рабочие Модели ИИ
 '''
-
+import random
 from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -52,6 +52,12 @@ def get_bot_text():
     if request.method == 'POST':
         print(request.form.get('bot_text'))
         return ('', 204)
+
+@app.route('/send_bot_answer', methods=['GET'])
+def send_bot_answer():
+    if request.method == 'GET':
+        data = f"{random.randrange(1,1000)}"
+        return data
 
 @app.route('/handler_click', methods=['POST'])
 def handler_click():
