@@ -1,30 +1,13 @@
-import os
+file_path = 'C:/Users/User/Documents/GitHub/AgroChat/rofls/Азорро, КС.txt'  # Путь к вашему файлу
 
-# Укажите путь к папке, содержащей текстовые файлы
-folder_path = 'AgroChat/rofls'
+with open(file_path, 'r', encoding='utf-8') as file:
+    lines = file.readlines()
 
-
-def remove_quotes_and_commas(text):
-    # Убрать кавычки и запятые из текста
-    text = text.replace('"', '').replace(',', '')
-    return text
-
-
-def process_files_in_folder(folder_path):
-    for filename in os.listdir(folder_path):
-        if filename.endswith('.txt'):
-            file_path = os.path.join(folder_path, filename)
-            with open(file_path, 'r') as file:
-                content = file.read()
-
-            processed_content = remove_quotes_and_commas(content)
-
-            # Перезаписать файл с обработанным содержимым
-            with open(file_path, 'w') as file:
-                file.write(processed_content)
-
-            print(f'Файл {filename} обработан.')
-
-
-# Вызвать функцию для обработки файлов в указанной папке
-process_files_in_folder(folder_path)
+# Применяем замены и обработку для каждой строки
+for i in range(len(lines)):
+    if 'Вопрос:' in lines[i] or 'Ответ:' in lines[i]:
+        lines[i] = lines[i].replace('Вопрос:', '{"question":"H:').replace('\nОтвет:', '\\nB: <extra_id_0>","answer":"<extra_id_0>').replace('"', '/"')
+    else:
+        lines.pop(i)
+with open(file_path, 'w', encoding='utf-8') as file:
+    file.writelines(lines)
