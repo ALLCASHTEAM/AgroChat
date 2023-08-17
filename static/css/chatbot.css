@@ -229,7 +229,7 @@ body {
   height: 10%;
 }
 
-textarea[name="chatbox"] {
+textarea[class="chatbox"] {
   resize: none;
   border: 1px solid #27ae60;
   border-radius: 0;
@@ -257,7 +257,7 @@ textarea[name="chatbox"] {
    opacity:  1;
 }
 
-input[type="submit"] {
+button[type="submit"] {
   -webkit-appearance: none;
   appearance: none;
   border: 0;
