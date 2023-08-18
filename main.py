@@ -56,6 +56,7 @@ def get_bot_text():
 @app.route('/send_bot_answer', methods=['GET'])
 def send_bot_answer():
     if request.method == 'GET':
+
         data = f"{random.randrange(1,1000)}"
         return data
 
