@@ -1,16 +1,19 @@
-import json
+import os
 
-input_file = 'seeds.txt'
-output_file = 'dataset2.jsonl'
+folder_path = "rofls"
+files_without_question = []
+fileses=0
+# Перебираем все файлы в папке
+for filename in os.listdir(folder_path):
+    if filename.endswith(".txt"):  # Предполагаем, что это текстовые файлы
+        file_path = os.path.join(folder_path, filename)
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read()
+            if "Вопрос:" not in content:
+                fileses=fileses + 1
+                files_without_question.append(filename)
 
-with open(input_file, 'r', encoding="utf8") as f:
-    lines = f.readlines()
-
-
-with open(output_file, 'w', encoding="utf8") as f:
-    for line in lines:
-        # Заменяем одинарные кавычки на двойные
-        line = line.replace("'", '"')
-        f.write(line)
-
-print('Замена завершена.')
+print("Файлы без строки 'Вопрос:' в содержимом:")
+for filename in files_without_question:
+    print(filename)
+print(fileses)
