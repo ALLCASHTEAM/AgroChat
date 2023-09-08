@@ -3,20 +3,19 @@ import os
 import nltk
 from nltk.stem import SnowballStemmer
 
-text = "Что такое биосостим кукуруз?"  # Замените на запрос пользователя
-
-# Инициализация стеммера (русский язык)
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('sentiwordnet')
+# Инициализация стеммера (русский язык) ПРИ ПЕРВОМ ЗАПУСКЕ НА МАШИНЕ, ВЫТАЩИТЬ ИЗ КОММЕНТА
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
+#nltk.download('averaged_perceptron_tagger')
+#nltk.download('sentiwordnet')
 stemmer = SnowballStemmer("russian")
 
 def product_identification(text):
     query = take_question.Process_query(text)  # Обработка запроса
 
     prods = []
+    rel_prods = []
 
     # Определение названий всех товаров по названиям файлов в папке rofls
     now_dir = os.path.dirname(os.path.abspath(__file__))
@@ -26,6 +25,7 @@ def product_identification(text):
 
     # Добавление всех названий в массив
     for prod in prods_names:
+        rel_prods.append(prod.replace(".txt", ""))
         prods.append(prod.replace(".txt", "").replace(",", "").replace("+", "").replace("-", ""))
 
     # Сплит запроса на отдельные слова и выполнение стемминга
@@ -48,14 +48,24 @@ def product_identification(text):
             best_product = product
 
     # Вывод результатов поиска
-    print("################################ ОПРЕДЕЛЕНИЕ ТОВАРА О КОТОРОМ ИДЁТ РЕЧЬ #################################\n")
+    print("\nscript: ident_prod.py\n################################ ОПРЕДЕЛЕНИЕ ТОВАРА О КОТОРОМ ИДЁТ РЕЧЬ #################################\n","\nЗапрос на входе: ",query)
     if best_product:
-        print(best_product)
+        pass
+        #print("Товар называется: ",best_product, "\n Название файла: ", rel_prods[indx])
     else:
-        best_product = "None"
-        print("No match found.")
+        best_product = "profile_facts"
+        #print("No match found.")
+
+    # Ищем индекс элемента в массиве
+    indx = prods.index(best_product)
+
+    # Выводим индекс
+    if(best_product == "profile_facts"):
+        print("Товар называется: ", best_product, "\nНазвание файла: ", rel_prods[indx])
+    else:
+        print("Товар называется: ", best_product, "\nНазвание файла: ", rel_prods[indx])
+
     print("\n################################ КОНЕЦ ОПРЕДЕЛЕНИЕ ТОВАРА #################################")
+    return rel_prods[indx]
 
-    return best_product
-
-product_identification(text)
+#product_identification(text)#тк этот скрипт сам не должен запускаться это оставлю в комменте, потом удалим
