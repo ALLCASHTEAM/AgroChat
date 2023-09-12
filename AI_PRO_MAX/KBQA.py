@@ -31,7 +31,7 @@ def find_best_matches(user_query, sentence_model):
     return matches
 
 if __name__ == "__main__":
-    user_query = "Для чего используется биостим кукуруз?"
+    user_query = "Как применять биостим кукуруз?"
     sentence_model = initialize_sentence_model()
     matches = find_best_matches(user_query, sentence_model)
     best_result = str(matches[0])
@@ -43,9 +43,9 @@ if __name__ == "__main__":
           best_result.split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
           best_result.split("tensor(")[1].split(")")[0])
 
+    print("\nТоп 4 варианта по скор: ")
     for i in range (1, 5):
-        print("Топ 4 варианта по скор: ")
-        print("Подобран похожий вопрос: ", matches[i].split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ",
-              matches[i].split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
-              matches[i].split("tensor(")[1].split(")")[0])
+        print("Топ ", i, ": ", str(matches[i]).split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ",
+              str(matches[i]).split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
+              str(matches[i]).split("tensor(")[1].split(")")[0])
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
