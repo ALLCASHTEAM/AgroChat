@@ -34,13 +34,11 @@ if __name__ == "__main__":
     user_query = "Для чего используется биостим кукуруз?"
     sentence_model = initialize_sentence_model()
     matches = find_best_matches(user_query, sentence_model)
-
+    best_result = str(matches[0])
+    print(best_result)
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
     print("Вопрос пользователя: ", user_query)
 
-    for i, (match, similarity_score, original_index) in enumerate(matches, 1):
-        print(f"Исходный номер строки: {original_index + 1}")
-        print(f"Строка {i}: {match.strip()}")
-        print(f"Скор совпадения: {similarity_score:.2f}\n")
+    print("Подобран похожий вопрос: ", best_result.split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ", best_result.split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ", best_result.split("tensor(")[1].split(")")[0])
 
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
