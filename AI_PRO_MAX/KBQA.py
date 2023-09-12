@@ -39,6 +39,13 @@ if __name__ == "__main__":
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
     print("Вопрос пользователя: ", user_query)
 
-    print("Подобран похожий вопрос: ", best_result.split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ", best_result.split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ", best_result.split("tensor(")[1].split(")")[0])
+    print("Подобран похожий вопрос: ", best_result.split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ",
+          best_result.split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
+          best_result.split("tensor(")[1].split(")")[0])
 
+    for i in range (1, 5):
+        print("Топ 4 варианта по скор: ")
+        print("Подобран похожий вопрос: ", matches[i].split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ",
+              matches[i].split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
+              matches[i].split("tensor(")[1].split(")")[0])
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
