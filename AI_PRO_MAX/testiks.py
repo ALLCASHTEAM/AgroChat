@@ -1,54 +1,33 @@
-import ident_prod
+from transformers import AutoTokenizer, AutoModel
 from sentence_transformers import SentenceTransformer, util
-import torch
-import os
 
-def initialize_sentence_model():
-    model_name = "Den4ikAI/sbert_large_mt_ru_retriever"
-    sentence_model = SentenceTransformer(model_name)
-    return sentence_model
+# Загрузка русскоязычной модели Sentence Transformers
+model_name = "paraphrase-MiniLM-L6-v2"
+model = SentenceTransformer(model_name)
 
-def find_best_matches(user_query, sentence_model):
-    # Открытие определенный базы знаний
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(script_dir)
-    ident_file = ident_prod.product_identification(user_query)
-    file_path = os.path.join(project_root, "rofls", f"{ident_file}.txt")
+# Две русскоязычные строки для сравнения
+text1 = "Как пользоваться биостим кукуруз?"
+print("Вопрос: ",text1, "\n Варианты: ")
+# Получение эмбеддингов для первой строки
+embeddings1 = model.encode(text1, convert_to_tensor=True)
 
-    with open(file_path, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
+matches = []
 
-    # Разделяем каждую строку на две части(вопрос и ответ)
-    line_parts = [line.strip().split('|', 1) for line in lines]
-    document_texts = [part[0] for part in line_parts]  # Текст до "|"
+with open("C://Users//Ирина//Documents//GitHub//AgroChat//rofls//Биостим Кукуруза.txt", 'r', encoding='utf-8') as file:
+    lines = file.readlines()
+    for line in lines:
+        part = line.strip().split("|")[0]
+        embeddings2 = model.encode(part, convert_to_tensor=True)
+        # Вычисление косинусного расстояния между эмбеддингами
+        cosine_score = util.pytorch_cos_sim(embeddings1, embeddings2)
+        #print(str(part), "имеет схожесть ", str(cosine_score).replace("tensor([[","").replace("]])",""))
+        match = str(part) +  str(cosine_score).replace("tensor([["," ").replace("]])","")
+        matches.append(match)
 
-    query_embedding = sentence_model.encode(user_query)
-    # Кодируем только текст до "|" для строк из базы знаний
-    document_embeddings = sentence_model.encode(document_texts)
-    print(document_texts[0], "    ", document_embeddings[0])
-    similarities = util.pytorch_cos_sim(query_embedding, document_embeddings)[0]
+result_arr = sorted(matches, key=lambda line: float(line.split()[-1]), reverse=True)
 
-    # Создаем список совпадений и их оценок вместе с полными строками и исходными индексами строк
-    matches = [(lines[i], similarities[i], i) for i in range(len(lines))]
-    print("Den4ikAI/sbert_large_mt_ru_retriever""Den4ikAI/sbert_large_mtDen4ikAI", lines[1], similarities[1],
-          "/sbert_large_mt_ru_retrieverru_retriever""Den4ikAI/sbert_large_mt_ru_retriever")
-
-    # Сортируем список совпадений по оценкам в убывающем порядке
-    matches.sort(key=lambda x: x[1], reverse=True)
-
-    return matches
-
-if __name__ == "__main__":
-    user_query = "Как работает биостим кукуруз?"
-    sentence_model = initialize_sentence_model()
-    matches = find_best_matches(user_query, sentence_model)
-
-    print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
-    print("Вопрос пользователя: ", user_query)
-
-    for i, (match, similarity_score, original_index) in enumerate(matches, 1):
-        print(f"Исходный номер строки: {original_index + 1}")
-        print(f"Строка {i}: {match.strip()}")
-        print(f"Скор совпадения: {similarity_score:.2f}\n")
-
-    print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
+result_arr = result_arr[:5]
+# Выводим отсортированные строки
+#print(result_arr)
+for i in range(5):
+    print(result_arr[i])
