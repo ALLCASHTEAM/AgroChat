@@ -1,15 +1,20 @@
 # Попробуем выполнить код снова
 import nltk
+import spacy
 from gensim.models import FastText
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.tokenize import word_tokenize
 import numpy as np
 
 
-# Примеры текстов (в реальности, этот датасет должен быть больше и разнообразнее)
-def cosine_similarity1(texts):
-    processed_texts = [[word.lower() for word in word_tokenize(text, language="russian")] for text in texts]
+def word_tokenize1(texts):
+    return [[word.lower() for word in word_tokenize(text, language="russian")] for text in
+            texts]
 
+
+# Примеры текстов (в реальности, этот датасет должен быть больше и разнообразнее)
+def cosine_similarity1(texts, name):
+    processed_texts = word_tokenize1(texts)
     # Обучение FastText модели
     model = FastText(sentences=processed_texts, vector_size=100, window=5, min_count=1, workers=4)
 
@@ -28,4 +33,5 @@ def cosine_similarity1(texts):
 
     # Пример использования функции для извлечения ключевых слов
     extracted_keywords = {text: extract_keywords_fasttext(text, model) for text in texts}
-    return extracted_keywords[texts[0]][:2]
+    name.append('?')
+    return [x for x in extracted_keywords[texts[0]] if x not in name]
