@@ -1,13 +1,17 @@
 import string
 import nltk
-
+import iterpritator
 
 def Process_query(text):
     #
     print("\nscript: take_question.py\n################################# ОБРАБОТКА ЗАПРОСА #################################\n")
     print("Запрос на входе: ",text,"\n")
 
-    upd_text = text.translate(str.maketrans('', '', string.punctuation)).lower()
+    dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n" + text
+
+    question = iterpritator.interpritator_with_history(dialog)
+
+    upd_text = question.lower()
 
     print("Обработанный запрос: ", upd_text, "\n")
 
