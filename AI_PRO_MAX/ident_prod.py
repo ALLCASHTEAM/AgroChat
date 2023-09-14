@@ -12,8 +12,8 @@ from nltk.stem import SnowballStemmer
 stemmer = SnowballStemmer("russian")
 
 def product_identification(text):
-    query = take_question.Process_query(text)  # Обработка запроса
-
+    temp_query = take_question.Process_query(text)  # Обработка запроса
+    query = temp_query.replace("<extra_id_0>", "").replace("</s>","").replace("?","")
     prods = []
     rel_prods = []
 
@@ -26,7 +26,7 @@ def product_identification(text):
     # Добавление всех названий в массив
     for prod in prods_names:
         rel_prods.append(prod.replace(".txt", ""))
-        prods.append(prod.replace(".txt", "").replace(",", "").replace("+", "").replace("-", ""))
+        prods.append(prod.replace(".txt", "").replace(",", "").replace("+", "").replace("-", "").lower())
 
     # Сплит запроса на отдельные слова и выполнение стемминга
     query_words = [stemmer.stem(word) for word in query.split()]
