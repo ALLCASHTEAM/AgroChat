@@ -6,9 +6,46 @@ var sendForm = document.querySelector('#chatform');
     animationBubbleDelay = 600;
     botAnimationDelay = 600;
     attachButton = document.querySelector('.attach-button');
+
+function loadChatHistoryFromStorage() {
+  const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+  const existingMessages = new Set(); // Создаем множество для хранения уникальных сообщений
+
+  chatHistory.forEach(function (messageObject) {
+    if (!existingMessages.has(messageObject.message)) { // Проверяем, не было ли уже такого сообщения
+      existingMessages.add(messageObject.message); // Добавляем сообщение в множество
+      if (messageObject.type === 'user') {
+        createBubble(messageObject.message, false); // Пользовательское сообщение без анимации
+      } else if (messageObject.type === 'bot') {
+        createBubble_bot(messageObject.message, false); // Сообщение бота без анимации
+      }
+    }
+  });
+}
+window.addEventListener('load', function () {
+  loadChatHistoryFromStorage();
+});
+function addToChatHistory(message, type) {
+
+  // Получаем текущую историю сообщений (если она есть)
+  const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+
+  const messageExists = chatHistory.some(item => item.type === type && item.message === message);
+
+  if (!messageExists) {
+    // Если сообщения нет в истории, добавляем его
+    chatHistory.push({ type: type, message: message });
+
+    // Сохраняем обновленную историю в LocalStorage
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+  }
+ }
+
 function scrollToBottom() {
   chatList.scrollTop = chatList.scrollHeight;
 }
+
+
 
 sendForm.onkeydown = function(e) {
   if (e.keyCode === 13) {
@@ -69,6 +106,7 @@ var createBubble = function(input) {
 
   scrollToBottom();
   clearInput();
+  addToChatHistory(input, 'user');
 
   createBubble_bot(input);
   animateBotOutput();
@@ -87,6 +125,8 @@ var createBubble_bot = function(input) {
   // Add chatBubble to chatlist
   chatList.appendChild(chatBubble_bot);
 
+  addToChatHistory(input, 'bot');
+
   scrollToBottom();
   clearInput();
 };
@@ -104,6 +144,12 @@ function animateBotOutput() {
   chatList.lastElementChild.style.animationPlayState = "running";
 }
 
+function saveImageToLocalStorage(imageData) {
+  const imageHistory = JSON.parse(localStorage.getItem('imageHistory')) || [];
+  imageHistory.push(imageData);
+  localStorage.setItem('imageHistory', JSON.stringify(imageHistory));
+}
+
 function processImage(file) {
   // Показываем изображение, создавая элемент <img> и добавляя его в чат
   const imageItem = document.createElement("img");
@@ -114,11 +160,30 @@ function processImage(file) {
   // Сбрасываем текст на кнопке прикрепления
   attachButton.textContent = 'Прикрепить изображение';
 
+  saveImageToLocalStorage(imageItem.src);
+
   // Возвращаем поле для ввода к кликабельному состоянию после небольшой задержки
   setTimeout(function() {
     textInput.disabled = false;
   }, 100);
+
 }
+
+function loadImageHistoryFromStorage() {
+  const imageHistory = JSON.parse(localStorage.getItem('imageHistory')) || [];
+
+  imageHistory.forEach(function (imageSrc) {
+    const imageItem = document.createElement("img");
+    imageItem.classList.add("userInput");
+    imageItem.src = imageSrc;
+    chatList.appendChild(imageItem);
+  });
+}
+
+// Вызовите функцию загрузки истории изображений при загрузке страницы
+window.addEventListener('load', function () {
+  loadImageHistoryFromStorage();
+});
 
 fileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
@@ -132,3 +197,37 @@ fileInput.addEventListener('change', (event) => {
     textInput.disabled = false;
   }
 });
+
+  function get_user_text() {
+  $.ajax({
+    type: "POST",
+    url: "{{url_for('get_user_text')}}",
+    data: {"user_text":textInput.value.toLowerCase()}
+
+  })
+}
+
+  function get_bot_text() {
+  $.ajax({
+    type: "POST",
+    url: "{{url_for('get_bot_text')}}",
+    data: {"bot_text": $(".bot__output").last().text()}
+
+  })
+}
+
+function send_bot_answer() {
+    $.ajax({
+      type: "GET",
+      url: "{{url_for('send_bot_answer')}}",
+      success: function(response) {
+        console.log(response);
+        window.GlobalVar = response;
+      },
+      error: function (error){
+        console.log("Error sending... :(")
+      }
+    })
+}
+
+

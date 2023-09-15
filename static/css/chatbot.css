@@ -136,9 +136,9 @@ body {
     width: auto;
     word-wrap: break-word;
     animation-name: animateBubble;
-    animation-duration: 400ms;
+    animation-duration: 200ms;
     animation-iteration-count: 1;
-    animation-play-state: paused;
+    animation-play-state: running;
     animation-fill-mode: forwards;
 
   }
