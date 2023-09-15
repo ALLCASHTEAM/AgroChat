@@ -47,64 +47,83 @@
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/chat_bot.js"></script>
 <script>
-  function get_user_text() {
-  $.ajax({
-    type: "POST",
-    url: "{{url_for('get_user_text')}}",
-    data: {"user_text":textInput.value.toLowerCase()}
+  // Проверяем, была ли страница обновлена
+  var pageRefreshed = localStorage.getItem('pageRefreshed');
 
-  })
-}
+  // Если страница не была обновлена, устанавливаем флаг в true и обновляем страницу
+  if (!pageRefreshed) {
+    localStorage.setItem('pageRefreshed', 'true');
+    location.reload();
+  } else {
+    // Если страница уже была обновлена, удаляем флаг обновления страницы
+    localStorage.removeItem('pageRefreshed');
 
-  function get_bot_text() {
-  $.ajax({
-    type: "POST",
-    url: "{{url_for('get_bot_text')}}",
-    data: {"bot_text": $(".bot__output").last().text()}
+    // Проверяем, был ли отправлен запрос ботом
+    var botMessageSent = localStorage.getItem('botMessageSent');
 
-  })
-}
-
-function send_bot_answer() {
-    $.ajax({
-      type: "GET",
-      url: "{{url_for('send_bot_answer')}}",
-      success: function(response) {
-        console.log(response);
-        window.GlobalVar = response;
-      },
-      error: function (error){
-        console.log("Error sending... :(")
-      }
-    })
-}
-
-  sendForm.onkeydown = function(e) {
-  if (e.keyCode === 13) {
-    e.preventDefault();
-
-    // No mix ups with upper and lowercases
-    var input = textInput.value.toLowerCase();
-
-    // Empty textarea fix
-    if (input.length > 0) {
-      get_user_text();
-      createBubble(input);
-      send_bot_answer();
-
+    // Если запрос был отправлен ботом, устанавливаем флаг в false
+    if (botMessageSent === 'true') {
+      localStorage.setItem('botMessageSent', 'false');
     }
   }
-};
 
-    // Проверяем, принято ли пользовательское соглашение
-    var savedValue = localStorage.getItem('checkboxValue');
+  function get_user_text() {
+    $.ajax({
+      type: "POST",
+      url: "{{url_for('get_user_text')}}",
+      data: {"user_text":textInput.value.toLowerCase()}
+    })
+  }
 
-    if (savedValue !== 'true') {
-        // Если соглашение не принято, перенаправляем пользователя на страницу принятия соглашения
-        window.location.href = "/about";
+  function get_bot_text() {
+    $.ajax({
+      type: "POST",
+      url: "{{url_for('get_bot_text')}}",
+      data: {"bot_text": $(".bot__output").last().text()}
+    })
+  }
+
+  function send_bot_answer() {
+    // Проверяем, был ли уже отправлен запрос ботом
+    if (localStorage.getItem('botMessageSent') !== 'true') {
+      $.ajax({
+        type: "GET",
+        url: "{{url_for('send_bot_answer')}}",
+        success: function(response) {
+          console.log(response);
+          window.GlobalVar = response;
+        },
+        error: function (error){
+          console.log("Error sending... :(")
+        }
+      });
+
+      // Устанавливаем флаг, что запрос был отправлен ботом
+      localStorage.setItem('botMessageSent', 'true');
     }
+  }
 
+  sendForm.onkeydown = function(e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
 
+      // No mix ups with upper and lowercases
+      var input = textInput.value.toLowerCase();
 
+      // Empty textarea fix
+      if (input.length > 0) {
+        get_user_text();
+        createBubble(input);
+        send_bot_answer();
+      }
+    }
+  };
 
+  // Проверяем, принято ли пользовательское соглашение
+  var savedValue = localStorage.getItem('checkboxValue');
+
+  if (savedValue !== 'true') {
+    // Если соглашение не принято, перенаправляем пользователя на страницу принятия соглашения
+    window.location.href = "/about";
+  }
 </script>
