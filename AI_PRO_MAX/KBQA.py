@@ -38,7 +38,7 @@ def KBQA_search(user_query, file_name):
     sentence_model = initialize_sentence_model()
     matches = find_best_matches(user_query, sentence_model, file_name)
     answer = ""
-    best_result = str(matches[0])
+    best_result = str(matches[0]).replace("('", "").split("?")[0]
     #############################################################
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
@@ -48,22 +48,23 @@ def KBQA_search(user_query, file_name):
             # Проверяем, содержит ли строка первую половину
             if best_result in line:
                 # Если да, выводим эту строку
-                answer = line.replace(best_result, "").replace("|", "")
+                answer = line.split("|")[1]
     ###############################################################
-    print(best_result)
+    print(answer)
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
     print("Вопрос пользователя: ", user_query)
 
-    print("Подобран похожий вопрос: ", best_result.split(',')[0].strip().replace("('", ""), 'Score:',
+    #print("Подобран похожий вопрос: ", best_result.split(',')[0].strip().replace("('", ""), 'Score:',
           # best_result.split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
-          best_result.split(", tensor(")[1].split(")")[0])
+          #best_result.split(", tensor(")[1].split(")")[0])
 
-    print("\nТоп 4 варианта по скор: ")
-    for i in range(1, len(matches)):
-        if i > 4:
-            break
+    #print("\nТоп 4 варианта по скор: ")
+    #for i in range(1, len(matches)):
+        #if i > 4:
+         #   break
         # print("Топ ", i, ": ", str(matches[i]).split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ",
         #       str(matches[i]).split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
         #       str(matches[i]).split("tensor(")[1].split(")")[0])
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
     return (answer)
+
