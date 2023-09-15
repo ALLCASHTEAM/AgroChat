@@ -43,6 +43,8 @@ def about():
 @app.route('/get_user_text', methods=['POST'])
 def get_user_text():
     if request.method == 'POST':
+        user_query = request.form.get('user_text')
+        print("#####################\n", user_query, "\n##########################################")
         print(request.form)
         print(request.form.get('user_text'))
         return ('', 205)
