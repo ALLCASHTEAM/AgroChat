@@ -37,8 +37,19 @@ if __name__ == "__main__":
 def KBQA_search(user_query, file_name):
     sentence_model = initialize_sentence_model()
     matches = find_best_matches(user_query, sentence_model, file_name)
-
+    answer = ""
     best_result = str(matches[0])
+    #############################################################
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    file_path = os.path.join(project_root, "rofls", f"{file_name}.txt")
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for line in file:
+            # Проверяем, содержит ли строка первую половину
+            if best_result in line:
+                # Если да, выводим эту строку
+                answer = line
+    ###############################################################
     print(best_result)
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
     print("Вопрос пользователя: ", user_query)
@@ -55,3 +66,4 @@ def KBQA_search(user_query, file_name):
         #       str(matches[i]).split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
         #       str(matches[i]).split("tensor(")[1].split(")")[0])
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
+    return (answer)

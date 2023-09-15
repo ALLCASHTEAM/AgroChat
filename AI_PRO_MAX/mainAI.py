@@ -1,4 +1,4 @@
-import ident_prod, iterpritator, KBQA, take_question
+from AI_PRO_MAX import ident_prod, iterpritator, KBQA, take_question
 
 dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n"
 question = "как его использовать?"
@@ -11,8 +11,8 @@ def AI_COMPIL(dialog, question):
 
     print("\n\n\nУ нас есть: \n", processed_question)
     print(file_name)
-    matches_array = KBQA.KBQA_search(processed_question, file_name)
+    match= KBQA.KBQA_search(processed_question, file_name)
 
-    print("@#!!@#@!#@!##!@#!@",matches_array)
-    answer = matches_array[0]
+    print("@#!!@#@!#@!##!@#!@",match)
+    answer = match
     return(answer)
