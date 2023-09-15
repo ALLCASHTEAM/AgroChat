@@ -12,11 +12,10 @@ def initialize_sentence_model():
     return sentence_model
 
 
-def find_best_matches(user_query, sentence_model):
+def find_best_matches(user_query, sentence_model,file_name):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    ident_file = ident_prod.product_identification(user_query)
-    file_path = os.path.join(project_root, "rofls", f"{ident_file}.txt")
+    file_path = os.path.join(project_root, "rofls", f"{file_name}.txt")
 
     with open(file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
@@ -24,7 +23,7 @@ def find_best_matches(user_query, sentence_model):
     similarities = util.pytorch_cos_sim(sentence_model.encode(user_query), sentence_model.encode(lines))[0]
 
     # Создаем список совпадений и их оценок вместе с исходными индексами строк
-    searcher = Search_script.Search(upgrade_kbqa.cosine_similarity1([user_query], ident_file.lower().split(' ')))
+    searcher = Search_script.Search(upgrade_kbqa.cosine_similarity1([user_query], file_name.lower().split(' ')))
     matches = [(lines[i], similarities[i], i) for i in range(len(lines)) if searcher.search(upgrade_kbqa.word_tokenize1(lines[i].lower().split(" ")))]
 
     # Сортируем список совпадений по оценкам в убывающем порядке
@@ -33,10 +32,9 @@ def find_best_matches(user_query, sentence_model):
     return matches
 
 
-if __name__ == "__main__":
-    user_query = "Преимущество биостим кукуруза?"
+def KBQA_search(user_query, file_name):
     sentence_model = initialize_sentence_model()
-    matches = find_best_matches(user_query, sentence_model)
+    matches = find_best_matches(user_query, sentence_model, file_name)
 
     best_result = str(matches[0])
     print(best_result)

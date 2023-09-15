@@ -11,6 +11,6 @@ file_name = ident_prod.product_identification(processed_question)
 
 print("\n\n\nУ нас есть: \n", processed_question)
 print(file_name)
-matches_array = KBQA.KBQA_search(processed_question,file_name)
+matches_array = KBQA.KBQA_search(processed_question, file_name)
 
 print("@#!!@#@!#@!##!@#!@",matches_array)
