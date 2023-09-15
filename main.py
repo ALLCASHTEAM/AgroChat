@@ -7,6 +7,22 @@ import random
 from flask import Flask, render_template, url_for, redirect, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+import sys
+import os
+######lameshit######
+# Получите текущий каталог (папку) вашего скрипта
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Создайте путь к папке AI_PRO_MAX, предполагая, что она находится в текущем каталоге
+ai_pro_max_dir = os.path.join(current_dir, 'AI_PRO_MAX')
+
+# Добавьте этот путь в sys.path
+sys.path.append(ai_pro_max_dir)
+
+# Импортируйте функцию из скрипта AI_PRO_MAX
+from AI_PRO_MAX import mainAI
+###################
+
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -45,8 +61,9 @@ def get_user_text():
     if request.method == 'POST':
         user_query = request.form.get('user_text')
         print("#####################\n", user_query, "\n##########################################")
-        print(request.form)
-        print(request.form.get('user_text'))
+        dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n"
+        result = mainAI.AI_COMPIL(dialog,user_query)
+        print("#####################\n", result, "\n##########################################")
         return ('', 205)
 
 @app.route('/get_bot_text', methods=['POST'])
