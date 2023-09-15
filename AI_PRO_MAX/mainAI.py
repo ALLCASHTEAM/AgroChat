@@ -11,8 +11,8 @@ def AI_COMPIL(dialog, question):
 
     print("\n\n\nУ нас есть: \n", processed_question)
     print(file_name)
-    match= KBQA.KBQA_search(processed_question, file_name)
+    answer = KBQA.KBQA_search(processed_question, file_name)
 
-    print("@#!!@#@!#@!##!@#!@",match)
-    answer = match
+
+
     return(answer)

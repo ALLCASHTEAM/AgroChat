@@ -48,7 +48,7 @@ def KBQA_search(user_query, file_name):
             # Проверяем, содержит ли строка первую половину
             if best_result in line:
                 # Если да, выводим эту строку
-                answer = line
+                answer = line.replace(best_result, "").replace("|", "")
     ###############################################################
     print(best_result)
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
