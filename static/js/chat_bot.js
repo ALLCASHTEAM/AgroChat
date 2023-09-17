@@ -51,6 +51,7 @@
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       makeBubbles();
+
       scrollToBottom();
     }
     if (event.key === "Enter" && event.shiftKey){
@@ -115,8 +116,8 @@
     chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble', "id-" + (botBubbleCounter + 1));
     chatBubble_bot.innerHTML = text;
     chatList.appendChild(chatBubble_bot);
-
     return botBubbleCounter + 1
+
   }
 
   // edit user bubble
@@ -158,11 +159,11 @@
 
     // if text is smaller than 2 symbols and there is no image throw alert
     if (text.trim() <= 2 && !loadImage()){
-      alert("Текст должен содержать больше 1 символа");
+      alert("Текст должен содержать больше 2 символов");
       return
     }
     if (loadImage() && text.trim() > 0){
-      alert("Либо текст либо картинка");
+      alert("Пожалуйста, либо отправьте текст, либо картинку");
       document.getElementsByClassName("send_img")[0].value = "";
       document.getElementsByClassName("chatbox")[0].value = "";
       return
@@ -182,6 +183,7 @@
           saveToLocal("user", text, imageHash["imageName"]);
           document.getElementsByClassName("send_img")[0].value = "";
           document.getElementsByClassName("attach-button")[0].textContent = "Прикрепить изображение";
+          document.getElementById('submitButton').disabled = true;
 
         }catch(error){
           console.log(error);
@@ -196,6 +198,8 @@
 
     // remove text from textbox
     document.querySelector('.chatbox').value = "";
+    document.getElementById('submitButton').disabled = true;
+
 
     var botBubbleId = makeBotBubble("");
     scrollToBottom();
@@ -215,6 +219,7 @@
       // fill the bot bubble and scroll to bottom
       document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
+      document.getElementById('submitButton').disabled = false;
       saveToLocal("bot", resp["text"], resp["image"]);
 
     }).catch((error) => {
