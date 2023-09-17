@@ -1,233 +1,257 @@
-var sendForm = document.querySelector('#chatform');
-    textInput = document.querySelector('.chatbox');
-    chatList = document.querySelector('.chatlist');
-    fileInput = document.getElementById("upload");
-    animationCounter = 1;
-    animationBubbleDelay = 600;
-    botAnimationDelay = 600;
-    attachButton = document.querySelector('.attach-button');
 
-function loadChatHistoryFromStorage() {
-  const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-  const existingMessages = new Set(); // Создаем множество для хранения уникальных сообщений
 
-  chatHistory.forEach(function (messageObject) {
-    if (!existingMessages.has(messageObject.message)) { // Проверяем, не было ли уже такого сообщения
-      existingMessages.add(messageObject.message); // Добавляем сообщение в множество
-      if (messageObject.type === 'user') {
-        createBubble(messageObject.message, false); // Пользовательское сообщение без анимации
-      } else if (messageObject.type === 'bot') {
-        createBubble_bot(messageObject.message, false); // Сообщение бота без анимации
+// ONLOAD AND EVENT TRIGGERS
+
+  // handle onload actions
+  window.addEventListener("load", (e) =>{
+
+  // check if there's something in localStorage and load it into chat
+    if (loadFromLocal("user").length > 0){
+      userStory = loadFromLocal("user").split(";").slice(1);
+      botStory = loadFromLocal("bot").split(";").slice(1);
+
+      for (let i = 0; i < userStory.length && i < botStory.length; i++){
+        userData = userStory[i];
+        botData = botStory[i];
+
+        //check if there is image
+        if (userData.split("\\image").length == 2){
+          userDataText = userData.split("\\")[0].split(":").slice(-1);
+          userImageText = userData.split("\\")[1].split(":").slice(-1);
+          makeUserBubble(userDataText, userImageText);
+        }else{
+          makeUserBubble(userData.split(":").slice(-1));
+        }
+        makeBotBubble(botData.split(":").slice(-1));
       }
+      scrollToBottom();
+    }
+
+  });
+  const fileInput = document.querySelector('.send_img');
+  const chatList = document.querySelector('.chatlist');
+  document.getElementsByClassName("send_img")[0].addEventListener("input", (()=>{
+    console.log(document.getElementsByClassName("send_img")[0]);
+    document.getElementsByClassName("attach-button")[0].textContent = fileInput.files[0].name;
+  }));
+// MISC
+
+  // scroll to bottom
+  function scrollToBottom() {
+    var chatList = document.querySelector('.chatlist');
+    chatList.scrollTop = chatList.scrollHeight;
+  }
+
+// INPUTS
+
+  // handle input shortcuts
+  const textInput = document.getElementById("textInput");
+
+  textInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      makeBubbles();
+      scrollToBottom();
+    }
+    if (event.key === "Enter" && event.shiftKey){
+      event.preventDefault();
+      const start = this.selectionStart;
+      const end = this.selectionEnd;
+      this.value = this.value.substring(0, start) + "\n" + this.value.substring(end);
+      this.selectionStart = this.selectionEnd = start + 1;
     }
   });
-}
-window.addEventListener('load', function () {
-  loadChatHistoryFromStorage();
-});
-function addToChatHistory(message, type) {
 
-  // Получаем текущую историю сообщений (если она есть)
-  const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-
-  const messageExists = chatHistory.some(item => item.type === type && item.message === message);
-
-  if (!messageExists) {
-    // Если сообщения нет в истории, добавляем его
-    chatHistory.push({ type: type, message: message });
-
-    // Сохраняем обновленную историю в LocalStorage
-    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-  }
- }
-
-function scrollToBottom() {
-  chatList.scrollTop = chatList.scrollHeight;
-}
-
-
-
-sendForm.onkeydown = function(e) {
-  if (e.keyCode === 13) {
-    e.preventDefault();
-
-    // No mix ups with upper and lowercases
-    var input = textInput.value.toLowerCase();
-
-    // Empty textarea fix
-    if (input.length > 0) {
-      get_user_text();
-      createBubble(input);
-      send_bot_answer();
+  // handle image input
+  function loadImage(){
+    if (document.getElementsByClassName("send_img")[0].files[0]){
+      var imageObj = document.getElementsByClassName("send_img")[0];
+      document.getElementsByClassName("attach-button").textContent = imageObj.name;
+      return imageObj.files[0]
+    }
+    else{
+      return null
     }
   }
-};
 
-sendForm.addEventListener('submit', function(e) {
-  // So form doesn't submit page (no page refresh)
-  e.preventDefault();
+// CHAT BUBBLES
 
-  // No mix ups with upper and lowercases
-  var input = textInput.value.toLowerCase();
+  // make user bubble
+  function makeUserBubble(text, image=null){
+    var chatBubble = document.createElement('li');
+    var chatBubbleCounter = document.getElementsByClassName("userInput").length;
+    chatBubble.classList.add('userInput', 'id-' + (chatBubbleCounter + 1));
 
-  // Обработка загруженного изображения, если оно есть
-  const file = fileInput.files[0];
-  if (input.length > 0 && file) {
-    alert("Вы не можете прикрепить изображение вместе с текстом.");
-    // Удаляем файл из поля для выбора
-    fileInput.value = "";
-    // Возвращаем поле для ввода к доступному состоянию
-    textInput.disabled = false;
-    attachButton.textContent = 'Прикрепить изображение';
-  } else if (input.length > 0) {
-    // Обрабатываем текстовое сообщение
-    createBubble(input);
-  } else if (file) {
-    // Обрабатываем изображение
-    processImage(file);
-  } else {
-    alert("Пожалуйста выберети изображение или напишите текст.");
+    // Create a container for image and text
+    var container = document.createElement('div');
+    // Append the image if there is one
+    if (image) {
+      var imageDiv = document.createElement('img');
+      imageDiv.src = "/static/user_images/" + image;
+      // Set the image width to 100%
+      imageDiv.style.width = '300px';
+      container.appendChild(imageDiv);
+    }
+
+
+    // Append the text
+    var textDiv = document.createElement('div');
+    textDiv.textContent = text;
+    container.appendChild(textDiv);
+
+    // Append the container to the chat bubble
+    chatBubble.appendChild(container);
+
+    // Append the chat bubble to the chat list (assuming you have a chatList defined)
+    chatList.appendChild(chatBubble);
+
+    return chatBubbleCounter + 1
   }
-});
 
-var createBubble = function(input) {
-  // Create input bubble
-  var chatBubble = document.createElement('li');
-  chatBubble.classList.add('userInput');
+  // make bot bubble with unique class
+  function makeBotBubble(text, image=null){
+    var botBubbleCounter = document.getElementsByClassName("bot__output").length;
+    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble', "id-" + (botBubbleCounter + 1));
+    chatBubble_bot.innerHTML = text;
+    chatList.appendChild(chatBubble_bot);
 
-  // Add input of textarea to chatbubble list item
-  chatBubble.innerHTML = input;
-  chatBubble.addEventListener('animationend', function() {
-    chatBubble.classList.remove('animateBubble'); // Удаляем класс анимации
-  });
-
-  // Add chatBubble to chatlist
-  chatList.appendChild(chatBubble);
-
-  scrollToBottom();
-  clearInput();
-  addToChatHistory(input, 'user');
-
-  createBubble_bot(input);
-  animateBotOutput();
-  get_bot_text();
-};
-
-var createBubble_bot = function(input) {
-  // Create input bubble
-  var chatBubble_bot = document.createElement('li');
-  chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble');
-
-  // Add input of textarea to chatbubble list item
-  chatBubble_bot.innerHTML = window.GlobalVar;
-
-
-  // Add chatBubble to chatlist
-  chatList.appendChild(chatBubble_bot);
-
-  addToChatHistory(input, 'bot');
-
-  scrollToBottom();
-  clearInput();
-};
-
-function clearInput() {
-  // Clear the text from the input field after sending
-  textInput.value = "";
-  // Focus back on the input field
-  textInput.focus();
-}
-
-// Change to SCSS loop
-function animateBotOutput() {
-  chatList.lastElementChild.style.animationDelay = (animationBubbleDelay) + "ms";
-  chatList.lastElementChild.style.animationPlayState = "running";
-}
-
-function saveImageToLocalStorage(imageData) {
-  const imageHistory = JSON.parse(localStorage.getItem('imageHistory')) || [];
-  imageHistory.push(imageData);
-  localStorage.setItem('imageHistory', JSON.stringify(imageHistory));
-}
-
-function processImage(file) {
-  // Показываем изображение, создавая элемент <img> и добавляя его в чат
-  const imageItem = document.createElement("img");
-  imageItem.classList.add("userInput");
-  imageItem.src = URL.createObjectURL(file);
-  chatList.appendChild(imageItem);
-  fileInput.value = "";
-  // Сбрасываем текст на кнопке прикрепления
-  attachButton.textContent = 'Прикрепить изображение';
-
-  saveImageToLocalStorage(imageItem.src);
-
-  // Возвращаем поле для ввода к кликабельному состоянию после небольшой задержки
-  setTimeout(function() {
-    textInput.disabled = false;
-  }, 100);
-
-}
-
-function loadImageHistoryFromStorage() {
-  const imageHistory = JSON.parse(localStorage.getItem('imageHistory')) || [];
-
-  imageHistory.forEach(function (imageSrc) {
-    const imageItem = document.createElement("img");
-    imageItem.classList.add("userInput");
-    imageItem.src = imageSrc;
-    chatList.appendChild(imageItem);
-  });
-}
-
-// Вызовите функцию загрузки истории изображений при загрузке страницы
-window.addEventListener('load', function () {
-  loadImageHistoryFromStorage();
-});
-
-fileInput.addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    attachButton.textContent = file.name;
-    // Делаем поле для ввода некликабельным
-    textInput.disabled = true;
-  } else {
-    attachButton.textContent = 'Прикрепить изображение';
-    // Возвращаем поле для ввода к кликабельному состоянию
-    textInput.disabled = false;
+    return botBubbleCounter + 1
   }
-});
 
-  function get_user_text() {
-  $.ajax({
-    type: "POST",
-    url: "{{url_for('get_user_text')}}",
-    data: {"user_text":textInput.value.toLowerCase()}
+  // edit user bubble
+  function editUserBubble(id, {text, image}){
 
-  })
-}
+    if (text && !image){
+      var userBubbleText = document.querySelectorAll(".id-" + id + ".userInput")[0];
+      userBubbleText.children[0].children[0].textContent = text; // replace text
+    }
+    if (image){
+      var userBubbleImage = document.querySelectorAll(".id-" + id + ".userInput")[0];
+      userBubbleImage.children[0].children[0].src = "/static/user_images/" + image;
+    }
+  }
 
-  function get_bot_text() {
-  $.ajax({
-    type: "POST",
-    url: "{{url_for('get_bot_text')}}",
-    data: {"bot_text": $(".bot__output").last().text()}
+// LOCAL STORAGE
 
-  })
-}
+  // save string into local storage
+  function saveToLocal(type, text, image=null){
+    previous = localStorage.getItem(type);
+    if (image){
+      localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
+    }else{
+      localStorage.setItem(type, previous + ";" + "text:" + text);
+    }
+  }
 
-function send_bot_answer() {
-    $.ajax({
-      type: "GET",
-      url: "{{url_for('send_bot_answer')}}",
-      success: function(response) {
-        console.log(response);
-        window.GlobalVar = response;
-      },
-      error: function (error){
-        console.log("Error sending... :(")
-      }
-    })
-}
+  // load from local storage
+  function loadFromLocal(type){
+    return localStorage.getItem(type)
+  }
+
+// REQUESTS
+
+  // send request to server and get response
+  function makeBubbles()
+  {
+    var text = document.querySelector('.chatbox').value;
+
+    // if text is smaller than 2 symbols and there is no image throw alert
+    if (text.trim() <= 2 && !loadImage()){
+      alert("Текст должен содержать больше 1 символа");
+      return
+    }
+    if (loadImage() && text.trim() > 0){
+      alert("Либо текст либо картинка");
+      document.getElementsByClassName("send_img")[0].value = "";
+      document.getElementsByClassName("chatbox")[0].value = "";
+      return
+    }
+
+    var url = '/request';
+
+    // create chatBubble for user, scroll and save to localStorage
+
+    if (loadImage()){
+      var userBubbleId = makeUserBubble(text, 1);
+      scrollToBottom();
+      var waitForImage = new Promise (async (resolve, reject) => {
+        try{
+          imageHash = await getImageHash(loadImage());
+          editUserBubble(id=userBubbleId, {image: imageHash["imageName"]});
+          saveToLocal("user", text, imageHash["imageName"]);
+          document.getElementsByClassName("send_img")[0].value = "";
+          document.getElementsByClassName("attach-button")[0].textContent = "Прикрепить изображение";
+
+        }catch(error){
+          console.log(error);
+        }
+      })
+
+    }else{
+      var userBubbleId = makeUserBubble(text);
+      saveToLocal("user", text);
+    }
+    scrollToBottom();
+
+    // remove text from textbox
+    document.querySelector('.chatbox').value = "";
+
+    var botBubbleId = makeBotBubble("");
+    scrollToBottom();
 
 
+    // get server response
+    var promise = new Promise(async (resolve, reject) => {
+        try {
+          result = await sendRequest(url, text, loadImage());
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+    });
+
+    promise.then((resp) => {
+      // fill the bot bubble and scroll to bottom
+      document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
+      scrollToBottom();
+      saveToLocal("bot", resp["text"], resp["image"]);
+
+    }).catch((error) => {
+      console.error('Async function failed with error:', error);
+    });
+  }
+
+  // function that sends request to server
+  async function sendRequest(url, textData, imageData){
+        // create array with all the data
+        const formData = new FormData();
+        if (imageData){
+          formData.append('image', imageData);
+        }
+        formData.append('text', textData);
+        const response = await fetch(url, {
+        method: 'POST',
+        body: formData,});
+        if (response.ok) {
+          const resp = await response.json();
+          return resp;
+        } else {
+          console.error('Request failed with status:', response.status);
+        }
+  }
+  // function that gets hash of an image
+  async function getImageHash(image){
+    const form = new FormData();
+    form.append('image', image);
+    var response = await fetch("/get_image_hash", {
+      method: "POST",
+      body: form,
+    });
+    if (response.ok){
+      var resp = await response.json();
+      return resp
+    }else{
+      console.error('Request failed with status:', response.status);
+    }
+  }

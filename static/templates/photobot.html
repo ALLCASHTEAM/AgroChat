@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" type="image/svg" href="/static/img/agr.svg">
+  <title>AgroChat | AgroChem</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/static/css/chatbot.css">
+
+<header class="header">
+  <div class="logo-container">
+    <div class="logo">
+      <img class="logo_img" src="/static/img/svg-editor-image%20(1).svg" width="75" height="75" alt="image description">
+    </div>
+  </div>
+  <nav class="tabs">
+    <a href="/" class="tab-active">AgroChat</a>
+    <a href="https://betaren.ru/about/" class="tab">About</a>
+  </nav>
+</header>
+<main class="page__main" xmlns:resize="http://www.w3.org/1999/xhtml">
+  <div class="block--background">
+    <div class="chatbot__overview">
+      <ul class="chatlist" id="chatlist">
+        <li class="bot__output bot__output--standard">Hey, I'm Navvy!</li>
+        <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+        <li class="bot__output bot__output--standard">
+          <span class="bot__output--second-sentence">You can ask me a bunch of things!</span>
+
+          You could also scroll down to see Mees' full portfolio
+        </li>
+      </ul>
+    </div>
+    <div class="chatbox-area">
+      <div id="chatform">
+        <div class="chatbox-submit-container" >
+          <label for="upload" class="attach-button">Attach image</label>
+          <input type="file" class="send_img" id="upload" accept="image/*"/>
+          <textarea placeholder="Input" class="chatbox" id="textInput" name="user_text"  minlength="2"></textarea>
+          <button class="submit-button" type="submit" onclick="makeBubbles()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+<script src="/static/js/chat_bot.js"></script>
+</html>

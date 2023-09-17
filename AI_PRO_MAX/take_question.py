@@ -1,6 +1,6 @@
 import string
 import nltk
-import iterpritator
+from AI_PRO_MAX import iterpritator
 
 def Process_query(text):
     #

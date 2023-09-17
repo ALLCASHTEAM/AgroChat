@@ -1,4 +1,4 @@
-import take_question
+from AI_PRO_MAX import take_question
 import os
 import nltk
 from nltk.stem import SnowballStemmer

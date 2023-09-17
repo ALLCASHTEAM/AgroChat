@@ -1,89 +1,49 @@
-'''
-Роут сайта и его страниц
-Пока на питоне нихуя не обрабатывается
-ибо для этого нужны рабочие Модели ИИ
-'''
-import random
-from flask import Flask, render_template, url_for, redirect, request, flash, session
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-import sys
+from fastapi import FastAPI, Request, Response
+from fastapi.staticfiles import StaticFiles
+from starlette.responses import FileResponse
+import json
+import hashlib
 import os
-######lameshit######
-# Получите текущий каталог (папку) вашего скрипта
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Создайте путь к папке AI_PRO_MAX, предполагая, что она находится в текущем каталоге
-ai_pro_max_dir = os.path.join(current_dir, 'AI_PRO_MAX')
-
-# Добавьте этот путь в sys.path
-sys.path.append(ai_pro_max_dir)
-
-# Импортируйте функцию из скрипта AI_PRO_MAX
+import time
 from AI_PRO_MAX import mainAI
-###################
+
+app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+images_directory = os.path.join(os.getcwd(), "static/user_images")
+app.mount("/static/user_images", StaticFiles(directory=images_directory), name="/static/user_images")
 
 
-app = Flask(__name__)
-app.static_folder = 'static'
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sitedb.db'
-app.debug = True
-db = SQLAlchemy(app)
-app.secret_key = 'fobi_llhuy_zerdo'
+@app.get("/")
+async def read_root():
+    # You can specify the HTML file you want to render here
+    return FileResponse("static/templates/photobot.html")
 
 
+@app.post("/request")
+async def make_response(data: Request):
+    body = await data.form()
+    text = body['text'] if 'text' in body.keys() else None
+    text = mainAI.AI_COMPIL("чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n", text)
+    if 'image' in body.keys():
+        image = body['image']
+        ext = image.filename.split('.')[-1]
+        image = await image.read()
+        hashed_image = hashlib.sha256(image).hexdigest()
+        filename = f'{str(hashed_image)}.{ext}'
+
+        if filename not in os.listdir('static/user_images'):
+            with open(f'static/user_images/{filename}', 'wb') as f:
+                f.write(image)
+    time.sleep(2)
+    return Response(content=json.dumps({'text': text, 'image': None}), media_type="application/json")
 
 
-with app.app_context():
-    db.create_all()
-
-
-
-@app.route('/photobot', methods=['GET','POST'])
-def photobot():
-
-    return render_template("photobot.html")
-
-@app.route('/', methods=['GET','POST'])
-
-@app.route('/about', methods=['GET','POST'])
-def about():
-    if request.method == 'POST':
-        checkbox_value = request.form.get('checkbox')
-        print(checkbox_value)
-        if checkbox_value:
-            return redirect(url_for('/photobot'))
-    return render_template("about.html")
-
-@app.route('/get_user_text', methods=['POST'])
-def get_user_text():
-    if request.method == 'POST':
-        user_query = request.form.get('user_text')
-        print("#####################\n", user_query, "\n##########################################")
-        dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n"
-        result = mainAI.AI_COMPIL(dialog,user_query)
-        print("ОТВЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕЕТ#####################\n", result, "\n##########################################")
-        return ('', 205)
-
-@app.route('/get_bot_text', methods=['POST'])
-def get_bot_text():
-    if request.method == 'POST':
-        print(request.form.get('bot_text'))
-        return ('', 204)
-
-@app.route('/send_bot_answer', methods=['GET'])
-def send_bot_answer():
-    if request.method == 'GET':
-
-        data = f"{random.randrange(1,1000)}"
-        return data
-
-@app.route('/handler_click', methods=['POST'])
-def handler_click():
-    user_text = request.form['user_text']
-    print('КЛИКА КЛИКА ПЕСАААААААААААДО:', user_text)
-    return redirect('/photobot')
-
-if __name__=="__main__":
-    app.run(debug=True)
+@app.post("/get_image_hash")
+async def get_image_hash(data: Request):
+    body = await data.form()
+    ext = body['image'].filename.split('.')[-1]
+    image = await body['image'].read()
+    hashed_image = hashlib.sha256(image).hexdigest()
+    filename = f'{str(hashed_image)}.{ext}'
+    return Response(content=json.dumps({'imageName': filename}), media_type="application/json")

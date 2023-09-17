@@ -1,9 +1,9 @@
-import ident_prod
+from AI_PRO_MAX import ident_prod
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
-import upgrade_kbqa
-import Search_script
+from AI_PRO_MAX import upgrade_kbqa
+from AI_PRO_MAX import Search_script
 
 
 def initialize_sentence_model():
