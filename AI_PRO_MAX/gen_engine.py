@@ -2,7 +2,7 @@ import fire
 
 from llama_cpp import Llama
 
-SYSTEM_PROMPT = "You are an Agrochat, a Russian—speaking automatic assistant. You talk to people and help them. You're name is Agrochat."
+SYSTEM_PROMPT = "You are an Agrochat, a Russian—speaking automatic assistant. You talk to people and help them. You're name is Agrochat. Always answer in Russian."
 SYSTEM_TOKEN = 1788
 USER_TOKEN = 1404
 BOT_TOKEN = 9225
@@ -18,6 +18,7 @@ top_k = 30
 top_p = 0.9
 temperature = 0.2
 repeat_penalty = 1.1
+
 
 def get_message_tokens(model, role, content):
     message_tokens = model.tokenize(content.encode("utf-8"))
@@ -36,7 +37,7 @@ def get_system_tokens(model):
 
 
 def interact(
-        model_path='./model-q8_0.gguf',
+        model_path='./AI_PRO_MAX/model-q8_0.gguf',
         n_ctx=2000,
         top_k=30,
         top_p=0.9,
@@ -55,8 +56,8 @@ def interact(
     model.eval(tokens)
     return model, tokens
 
-def generate(question, tokens, model, context=False):
 
+def generate(question, tokens, model, context=False):
     if context:
         user_message = f"User: Context{context} Question:{question}"
     else:
@@ -71,13 +72,15 @@ def generate(question, tokens, model, context=False):
         temp=temperature,
         repeat_penalty=repeat_penalty
     )
+    answer = ''
     for token in generator:
         token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
+        answer += token_str
         tokens.append(token)
         if token == model.token_eos():
             break
-        print(token_str, end="", flush=True)
-    print()
+    return answer
+
 
 
 if __name__ == "__main__":

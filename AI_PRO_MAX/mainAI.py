@@ -1,5 +1,4 @@
 from AI_PRO_MAX import ident_prod, iterpritator, KBQA, take_question, gen_engine
-import fire
 from llama_cpp import Llama
 
 dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n"
@@ -15,6 +14,6 @@ def AI_COMPIL(dialog, question):
     print("\n\n\nУ нас есть: \n", processed_question)
     print(file_name)
     answer = KBQA.KBQA_search(processed_question, file_name)
-    answer = fire.Fire(gen_engine.generate(question), tokens, model, answer)
+    answer = gen_engine.generate(processed_question, tokens, model, answer)
 
     return answer
