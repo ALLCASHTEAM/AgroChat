@@ -25,5 +25,5 @@ def interpritator_with_history(dialog):
     model, tokenizer = load_interpreter()
     result = generate_intr(model, tokenizer, text)
     print('Текст', text ,'\n Вывод: ', result)
-    return(result)
+    return(result.replace('<extra_id_0>','').strip("</s>"))
 

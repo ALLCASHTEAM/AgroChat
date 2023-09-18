@@ -13,4 +13,4 @@ print("\n\n\nУ нас есть: \n", processed_question)
 print(file_name)
 matches_array = KBQA.KBQA_search(processed_question, file_name)
 
-print("@#!!@#@!#@!##!@#!@",matches_array)
+print("@#!!@#@!#@!##!@#!@", matches_array)

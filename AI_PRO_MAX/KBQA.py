@@ -2,8 +2,7 @@ from AI_PRO_MAX import ident_prod
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
-from AI_PRO_MAX import upgrade_kbqa
-from AI_PRO_MAX import Search_script
+
 
 
 def initialize_sentence_model():
@@ -23,8 +22,7 @@ def find_best_matches(user_query, sentence_model,file_name):
     similarities = util.pytorch_cos_sim(sentence_model.encode(user_query.lower()), sentence_model.encode(list(map(lambda x: x.lower(), lines))))[0]
 
     # Создаем список совпадений и их оценок вместе с исходными индексами строк
-    searcher = Search_script.Search(upgrade_kbqa.cosine_similarity1([user_query], file_name.lower().split(' ')))
-    matches = [(lines[i], similarities[i], i) for i in range(len(lines)) if searcher.search(upgrade_kbqa.word_tokenize1(lines[i].lower().split(" ")))]
+    matches = [(lines[i], similarities[i], i) for i in range(len(lines)) ]
 
     # Сортируем список совпадений по оценкам в убывающем порядке
     matches.sort(key=lambda x: x[1], reverse=True)
@@ -32,8 +30,8 @@ def find_best_matches(user_query, sentence_model,file_name):
     return matches
 
 
-if __name__ == "__main__":
-    user_query = "Преимущества биостим кукуруза?"
+
+
 def KBQA_search(user_query, file_name):
     sentence_model = initialize_sentence_model()
     matches = find_best_matches(user_query, sentence_model, file_name)
@@ -54,17 +52,9 @@ def KBQA_search(user_query, file_name):
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
     print("Вопрос пользователя: ", user_query)
 
-    #print("Подобран похожий вопрос: ", best_result.split(',')[0].strip().replace("('", ""), 'Score:',
-          # best_result.split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
-          #best_result.split(", tensor(")[1].split(")")[0])
-
-    #print("\nТоп 4 варианта по скор: ")
-    #for i in range(1, len(matches)):
-        #if i > 4:
-         #   break
-        # print("Топ ", i, ": ", str(matches[i]).split('|')[0].strip().replace("('", ""), "\nПодобран ответ: ",
-        #       str(matches[i]).split('|')[1].strip().split('\\n')[0].strip(), "\nScore: ",
-        #       str(matches[i]).split("tensor(")[1].split(")")[0])
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
     return (answer)
 
+if __name__ == "__main__":
+    user_query = "Преимущества биостим кукуруза?"
+    KBQA_search(user_query, ident_prod.product_identification(user_query))
