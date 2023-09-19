@@ -4,7 +4,6 @@ import torch
 import os
 
 
-
 def initialize_sentence_model():
     model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
     sentence_model = SentenceTransformer(model_name)
@@ -17,8 +16,12 @@ def find_best_matches(user_query, sentence_model,file_name):
     file_path = os.path.join(project_root, "rofls", f"{file_name}.txt")
 
     with open(file_path, 'r', encoding='utf-8') as file:
-        lines = file.readlines()
-    lines = list(map(lambda x: x.split("|")[0], lines))
+        liness = file.readlines()
+    lines = list(map(lambda x: x.split("|")[0], liness))
+    try:
+        liness = list(map(lambda x: x.split("|")[1], liness))
+    except:
+        liness = None
     similarities = util.pytorch_cos_sim(sentence_model.encode(user_query.lower()), sentence_model.encode(list(map(lambda x: x.lower(), lines))))[0]
 
     # Создаем список совпадений и их оценок вместе с исходными индексами строк
@@ -34,7 +37,7 @@ def find_best_matches(user_query, sentence_model,file_name):
 
 def KBQA_search(user_query, file_name):
     sentence_model = initialize_sentence_model()
-    matches = find_best_matches(user_query, sentence_model, file_name)
+    matches = find_best_matches(user_query, sentence_model, file_name)[0]
     answer = ""
     best_result = str(matches[0]).replace("('", "").split("?")[0]
     #############################################################

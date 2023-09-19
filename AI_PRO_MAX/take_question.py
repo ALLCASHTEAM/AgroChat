@@ -7,7 +7,7 @@ def Process_query(text):
     print("\nscript: take_question.py\n################################# ОБРАБОТКА ЗАПРОСА #################################\n")
     print("Запрос на входе: ",text,"\n")
 
-    dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n" + text
+    dialog = "" + text
 
     question = iterpritator.interpritator_with_history(dialog)
 

@@ -2,7 +2,7 @@ import fire
 
 from llama_cpp import Llama
 
-SYSTEM_PROMPT = "You are an Agrochat, a Russian—speaking automatic assistant. You talk to people and help them. You're name is Agrochat. Always answer in Russian."
+SYSTEM_PROMPT = "You are an Agrochat, a Russian—speaking automatic assistant. You talk to people and help them. You're name is Agrochat. Always answer in Russian. You're company is АгроХим.  "
 SYSTEM_TOKEN = 1788
 USER_TOKEN = 1404
 BOT_TOKEN = 9225
@@ -58,28 +58,29 @@ def interact(
 
 
 def generate(question, tokens, model, context=False):
-    if context:
-        user_message = f"User: Context{context} Question:{question}"
-    else:
-        user_message = f"User: {question}"
-    message_tokens = get_message_tokens(model=model, role="user", content=user_message)
-    role_tokens = [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
-    tokens += message_tokens + role_tokens
-    generator = model.generate(
-        tokens,
-        top_k=top_k,
-        top_p=top_p,
-        temp=temperature,
-        repeat_penalty=repeat_penalty
-    )
-    answer = ''
-    for token in generator:
-        token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
-        answer += token_str
-        tokens.append(token)
-        if token == model.token_eos():
-            break
-    return answer
+    while True:
+        if context:
+            user_message = f"User: Context{context} Question:{question}"
+        else:
+            user_message = f"User: {question}"
+        message_tokens = get_message_tokens(model=model, role="user", content=user_message)
+        role_tokens = [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
+        tokens += message_tokens + role_tokens
+        generator = model.generate(
+            tokens,
+            top_k=top_k,
+            top_p=top_p,
+            temp=temperature,
+            repeat_penalty=repeat_penalty
+        )
+        answer = ''
+        for token in generator:
+            token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
+            answer += token_str
+            tokens.append(token)
+            if token == model.token_eos():
+                break
+        return answer
 
 
 
