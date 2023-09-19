@@ -23,8 +23,9 @@ async def read_root():
 @app.post("/request")
 async def make_response(data: Request):
     body = await data.form()
+    dialog = ""
     text = body['text'] if 'text' in body.keys() else None
-    text = mainAI.AI_COMPIL("чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n", text)
+    text = mainAI.AI_COMPIL(dialog, text)
     if 'image' in body.keys():
         image = body['image']
         ext = image.filename.split('.')[-1]
