@@ -142,6 +142,7 @@
       localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
     }else{
       localStorage.setItem(type, previous + ";" + "text:" + text);
+      console.log(type);
     }
   }
 
