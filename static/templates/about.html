@@ -61,7 +61,17 @@
 
         if (checkbox.checked || savedValue === 'true') {
             localStorage.setItem('checkboxValue', 'true'); // Сохраняем, что пользователь принял соглашение
-            window.location.href = "/photobot"; // Перенаправляем на основную страницу
+
+            fetch('/agreement_accepted', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === "User agreement accepted.") {
+                        window.location.href = "/photobot"; // Перенаправляем на основную страницу
+                    } else {
+                        alert("Произошла ошибка при принятии пользовательского соглашения.");
+                    }
+            });
+
         } else {
             alert("Пожалуйста, прочтите и примите пользовательское соглашение.");
         }
