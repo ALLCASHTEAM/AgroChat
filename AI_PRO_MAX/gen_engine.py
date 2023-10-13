@@ -13,7 +13,7 @@ ROLE_TOKENS = {
     "bot": BOT_TOKEN,
     "system": SYSTEM_TOKEN
 }
-
+model_path = './AI_PRO_MAX/model-q8_0.gguf'
 top_k = 30
 top_p = 0.9
 temperature = 0.2
@@ -36,18 +36,10 @@ def get_system_tokens(model):
     return get_message_tokens(model, **system_message)
 
 
-def interact(
-        model_path='./AI_PRO_MAX/model-q2_K.gguf',
-        n_ctx=2000,
-        top_k=30,
-        top_p=0.9,
-        temperature=0.2,
-        repeat_penalty=1.1,
-
-):
+def interact():
     model = Llama(
         model_path=model_path,
-        n_ctx=n_ctx,
+        n_ctx=2000,
         n_parts=1,
     )
 
@@ -58,11 +50,13 @@ def interact(
 
 
 def generate(question, tokens, model, context=False):
+    print(question, context)
     while True:
         if context:
             user_message = f"User: Context{context} Question:{question}"
         else:
-            user_message = f"User: {question}"
+            print(question)
+            user_message = f"User: Question:{question}"
         message_tokens = get_message_tokens(model=model, role="user", content=user_message)
         role_tokens = [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
         tokens += message_tokens + role_tokens
@@ -77,11 +71,10 @@ def generate(question, tokens, model, context=False):
         for token in generator:
             token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
             answer += token_str
-            tokens.append(token)
             if token == model.token_eos():
                 break
-        return answer
-
+            tokens.append(answer)
+        yield answer
 
 
 if __name__ == "__main__":
