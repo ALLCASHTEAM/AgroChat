@@ -16,6 +16,9 @@ app.mount("/static/user_images", StaticFiles(directory=images_directory), name="
 user_agreed = False
 @app.get("/photobot")
 async def read_root():
+    if not user_agreed:
+        return FileResponse("static/templates/about.html")
+        # You can specify the HTML file you want to render here
     return FileResponse("static/templates/photobot.html")
 
 @app.get("/")
