@@ -37,7 +37,7 @@ def get_system_tokens(model):
 
 
 def interact(
-        model_path='./AI_PRO_MAX/model-q8_0.gguf',
+        model_path='./AI_PRO_MAX/model-q2_K.gguf',
         n_ctx=2000,
         top_k=30,
         top_p=0.9,

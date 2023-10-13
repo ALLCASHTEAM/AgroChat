@@ -106,7 +106,6 @@ body {
     transition: all 400ms ease-in;
   }
   .userInput {
-    text-transform: lowercase;
     align-self: flex-end;
     text-align: left;
     box-shadow: 1px 1px 2px #666;
@@ -124,7 +123,6 @@ body {
     word-wrap: break-word;
   }
   .bot__output {
-    text-transform: lowercase;
     text-align: left;
     align-self: flex-start;
     box-shadow: 1px 1px 2px #666;
