@@ -9,9 +9,9 @@ def Process_query(text):
 
     dialog = "" + text
 
-    question = iterpritator.interpritator_with_history(dialog)
+    processed_question = iterpritator.interpritator_with_history(dialog.replace("<extra_id_0> ",  "").replace("?</s>", ""))
 
-    upd_text = question.lower()
+    upd_text = processed_question.lower()
 
     print("Обработанный запрос: ", upd_text, "\n")
 

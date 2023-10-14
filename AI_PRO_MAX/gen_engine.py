@@ -73,8 +73,8 @@ def generate(question, tokens, model, context=False):
             answer += token_str
             if token == model.token_eos():
                 break
-            tokens.append(answer)
-        yield answer
+            tokens.append(token)
+        return answer
 
 
 if __name__ == "__main__":

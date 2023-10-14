@@ -66,6 +66,6 @@ def product_identification(text):
         print("Товар называется: ", best_product, "\nНазвание файла: ", rel_prods[indx])
 
     print("\n################################ КОНЕЦ ОПРЕДЕЛЕНИЕ ТОВАРА #################################")
-    return rel_prods[indx]
+    return rel_prods[indx], query
 
 #product_identification(text)#тк этот скрипт сам не должен запускаться это оставлю в комменте, потом удалим
