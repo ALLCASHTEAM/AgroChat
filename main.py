@@ -14,11 +14,15 @@ images_directory = os.path.join(os.getcwd(), "static/user_images")
 app.mount("/static/user_images", StaticFiles(directory=images_directory), name="/static/user_images")
 
 user_agreed = False
+
+
 @app.post("/agreement_accepted")
 async def agreement_accepted():
     global user_agreed
     user_agreed = True
     return {"message": "User agreement accepted."}
+
+
 @app.get("/photobot")
 async def read_root():
     if not user_agreed:
@@ -27,14 +31,14 @@ async def read_root():
     else:
         return FileResponse("static/templates/photobot.html")
 
+
 @app.get("/")
 async def read_root():
     if not user_agreed:
         return FileResponse("static/templates/about.html")
     else:
-    # You can specify the HTML file you want to render here
+        # You can specify the HTML file you want to render here
         return FileResponse("static/templates/photobot.html")
-
 
 
 @app.post("/request")
@@ -53,9 +57,8 @@ async def make_response(data: Request):
         if filename not in os.listdir('static/user_images'):
             with open(f'static/user_images/{filename}', 'wb') as f:
                 f.write(image)
-    time.sleep(2)
+    time.sleep(1)
     return Response(content=json.dumps({'text': text, 'image': None}), media_type="application/json")
-
 
 
 @app.post("/get_image_hash")
