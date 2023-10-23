@@ -9,13 +9,17 @@
 
 .top-ico-container {
     height: 39px;
-    width: 100px;
+    width: 200px;
+    position: absolute;
+    top: 10;
+    right: 0;
 }
 
 .menu-container {
     position: relative;
     height: 39px;
     width: 39px;
+    margin-right: 50px;
 }
 
 .question-mark-btn {
@@ -25,6 +29,7 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    
 }
 
 /*Бэк дропдаун - сам ты даун*/
@@ -45,11 +50,13 @@
     border: none;
     padding: 12px 20px;
     font-size: 16px;
-    cursor: pointer
+    cursor: pointer;
 }
+
 
 .menu-container, .darktheme-container {
     display: inline-block;
+    
 }
 
 
@@ -57,6 +64,10 @@
     display: flex;
     align-items: center;
     margin-top: 20px;
+    background-color: var(--secondary-white);
+    width: 80%;
+    margin: 15px auto;
+    border-radius: 20px;
 }
 
 .menu-btn {
@@ -92,17 +103,6 @@
 
 body{
     background-color: black;
-}
-
-textarea{
-    flex: 1;     
-    padding: 10px;     
-    font-size: 16px;     
-    border: 1px solid #ccc;     
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
 }
 
 button{
@@ -155,13 +155,34 @@ input.hover{
 
 .submit-button{
     margin-left: 10px;
+    width: 39px;
+    height: 39px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #4CAF50;
+    background: url("res/send_arrow.svg") no-repeat;
     color: white;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    margin-top: 5px;
+    margin-right: 7px;
 }
 
+.chatbox{
+    padding: 5px 10px 5px 10px;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    border: none;
+    resize: none;
+    background-color: var(--secondary-white);
+    flex: 1;    
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    
+}
