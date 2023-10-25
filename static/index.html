@@ -1,4 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agrohim</title>
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body style="position:relative; top:25px;">
+    <header>
+        <div id="icons">
+            <div id="infoWrapper">
+                <object type="image/svg+xml" data="static/resources/info.svg"></object>
+            </div>
+            <div id="themeWrapper">
+                <object type="image/svg+xml" data="static/resources/theme.svg" id="theme"></object>
+            </div>
+        </div>
+        <div id="dialogueInfoWrapper" style="position:absolute;">
+        	<div id="backToSite">
+        		<object type="image/svg+xml" data="static/resources/backArrow.svg"></object>
+        		<h3>Вернуться на сайт</h3>
+        	</div>
+        	<div id="about">
+        		<object type="image/svg+xml" data="static/resources/aboutIcon.svg"></object>
+        		<h3>О нас</h3>
+        	</div>
+        	<div>
+        		<object type="image/svg+xml" data="static/resources/lock.svg"></object>
+        		<h3>Политика<br>конфиденциальности</h3>
+        	</div>
+        </div>
+    </header>
+    <main id="scroller">
+    	<div class="chatbot__overview" id="chatbotBox">
+      		<ul class="chatlist" id="chatlist">
+        		<li class="bot__output bot__output--standard">Hey, I'm Navvy!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+        		<li class="bot__output bot__output--standard">
+          		<span class="bot__output--second-sentence">You can ask me a bunch of things!</span> You could also scroll down to see Mees' full portfolio
+        		</li>
+      		</ul>
+    	</div>
+    </main>
+    <div id="bodyWrapper">
+        <footer>
+            <div id="inputBar">
+                <textarea placeholder="Напишите запрос" class="chatbox" id="textInput" name="user_text"  minlength="2" style="resize: none;"oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                <div id="sendBtn">
+                	<object type="image/svg+xml" data="static/resources/sendArrow.svg"></object>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+<div class="send_img" style="display: none;"></div>
+<script type="text/javascript">
 
+document.getElementById('infoWrapper').addEventListener('click', function(){
+	let obj = document.getElementById('dialogueInfoWrapper');
+	if (obj.style.visibility == 'visible'){
+		obj.style.visibility = 'hidden';
+	}else{
+		obj.style.visibility = 'visible';
+	}
+});
 
 // ONLOAD AND EVENT TRIGGERS
 
@@ -6,26 +72,30 @@
   window.addEventListener("load", (e) =>{
 
   // check if there's something in localStorage and load it into chat
-    if (loadFromLocal("user").length > 0){
-      userStory = loadFromLocal("user").split(";").slice(1);
-      botStory = loadFromLocal("bot").split(";").slice(1);
+  	try{
+	    if (loadFromLocal("user").length > 0){
+	      userStory = loadFromLocal("user").split(";").slice(1);
+	      botStory = loadFromLocal("bot").split(";").slice(1);
 
-      for (let i = 0; i < userStory.length && i < botStory.length; i++){
-        userData = userStory[i];
-        botData = botStory[i];
+	      for (let i = 0; i < userStory.length && i < botStory.length; i++){
+	        userData = userStory[i];
+	        botData = botStory[i];
 
-        //check if there is image
-        if (userData.split("\\image").length == 2){
-          userDataText = userData.split("\\")[0].split(":").slice(-1);
-          userImageText = userData.split("\\")[1].split(":").slice(-1);
-          makeUserBubble(userDataText, userImageText);
-        }else{
-          makeUserBubble(userData.split(":").slice(-1));
-        }
-        makeBotBubble(botData.split(":").slice(-1));
-      }
-      scrollToBottom();
-    }
+	        // check if there is an image
+	        if (userData.split("\\image").length == 2){
+	          userDataText = userData.split("\\")[0].split(":").slice(-1);
+	          userImageText = userData.split("\\")[1].split(":").slice(-1);
+	          makeUserBubble(userDataText, userImageText);
+	        }else{
+	          makeUserBubble(userData.split(":").slice(-1));
+	        }
+	        makeBotBubble(botData.split(":").slice(-1));
+	      }
+	      scrollToBottom();
+	    }}
+	 catch{
+
+	 }
 
   });
   const fileInput = document.querySelector('.send_img');
@@ -35,10 +105,11 @@
     document.getElementsByClassName("attach-button")[0].textContent = fileInput.files[0].name;
   }));
 // MISC
-
+  // loader
+  var loader = '<svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve"> <circle fill="#fff" stroke="none" cx="6" cy="50" r="6"> <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"/> </circle> <circle fill="#fff" stroke="none" cx="26" cy="50" r="6"> <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2"/> </circle> <circle fill="#fff" stroke="none" cx="46" cy="50" r="6"> <animate attributeName="opacity"dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3"/></circle></svg>';
   // scroll to bottom
   function scrollToBottom() {
-    var chatList = document.querySelector('.chatlist');
+    var chatList = document.querySelector('#scroller');
     chatList.scrollTop = chatList.scrollHeight;
   }
 
@@ -51,8 +122,6 @@
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       makeBubbles();
-
-      scrollToBottom();
     }
     if (event.key === "Enter" && event.shiftKey){
       event.preventDefault();
@@ -65,14 +134,19 @@
 
   // handle image input
   function loadImage(){
-    if (document.getElementsByClassName("send_img")[0].files[0]){
-      var imageObj = document.getElementsByClassName("send_img")[0];
-      document.getElementsByClassName("attach-button").textContent = imageObj.name;
-      return imageObj.files[0]
-    }
-    else{
-      return null
-    }
+  	try{
+	    if (document.getElementsByClassName("send_img")[0].files[0]){
+	      var imageObj = document.getElementsByClassName("send_img")[0];
+	      document.getElementsByClassName("attach-button").textContent = imageObj.name;
+	      return imageObj.files[0]
+	    }
+	    else{
+      		return null
+    	}
+	}catch{
+		return null
+	}
+    
   }
 
 // CHAT BUBBLES
@@ -116,8 +190,8 @@
     chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble', "id-" + (botBubbleCounter + 1));
     chatBubble_bot.innerHTML = text;
     chatList.appendChild(chatBubble_bot);
-    return botBubbleCounter + 1
 
+    return botBubbleCounter + 1
   }
 
   // edit user bubble
@@ -142,7 +216,6 @@
       localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
     }else{
       localStorage.setItem(type, previous + ";" + "text:" + text);
-      console.log(type);
     }
   }
 
@@ -160,11 +233,11 @@
 
     // if text is smaller than 2 symbols and there is no image throw alert
     if (text.trim() <= 2 && !loadImage()){
-      alert("Текст должен содержать больше 2 символов");
+      alert("слишком много сообщений за короткий промежуток времени");
       return
     }
     if (loadImage() && text.trim() > 0){
-      alert("Пожалуйста, либо отправьте текст, либо картинку");
+      alert("текст и картинка не могут быть отправленны одновременно");
       document.getElementsByClassName("send_img")[0].value = "";
       document.getElementsByClassName("chatbox")[0].value = "";
       return
@@ -176,16 +249,11 @@
 
     if (loadImage()){
       var userBubbleId = makeUserBubble(text, 1);
-      scrollToBottom();
       var waitForImage = new Promise (async (resolve, reject) => {
         try{
           imageHash = await getImageHash(loadImage());
           editUserBubble(id=userBubbleId, {image: imageHash["imageName"]});
           saveToLocal("user", text, imageHash["imageName"]);
-          document.getElementsByClassName("send_img")[0].value = "";
-          document.getElementsByClassName("attach-button")[0].textContent = "Прикрепить изображение";
-          document.getElementById('submitButton').disabled = true;
-
         }catch(error){
           console.log(error);
         }
@@ -199,12 +267,9 @@
 
     // remove text from textbox
     document.querySelector('.chatbox').value = "";
-    document.getElementById('submitButton').disabled = true;
-
 
     var botBubbleId = makeBotBubble("");
     scrollToBottom();
-
 
     // get server response
     var promise = new Promise(async (resolve, reject) => {
@@ -220,7 +285,6 @@
       // fill the bot bubble and scroll to bottom
       document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
-      document.getElementById('submitButton').disabled = false;
       saveToLocal("bot", resp["text"], resp["image"]);
 
     }).catch((error) => {
@@ -261,3 +325,7 @@
       console.error('Request failed with status:', response.status);
     }
   }
+
+</script>
+
+</html>
