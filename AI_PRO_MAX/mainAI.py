@@ -8,7 +8,7 @@ def AI_COMPIL(dialog, question):
 
     print("\n\n\nУ нас есть: \n", processed_question)
     print(file_name)
-    answer = gen_engine.generate(processed_question, tokens, model, KBQA.KBQA_search(processed_question, file_name))
+    answer = gen_engine.generate(question, tokens, model, KBQA.KBQA_search(processed_question, file_name))
     answer = answer.replace("Agrochat: ", "").replace("Выход:", '').replace("BioStim Start", "Биостим Старт").replace("BioStim", "Биостим").replace("biostim", "Биостим")
     print(answer)
     with open('tmp.txt', 'w', encoding='utf-8') as tmp_file:

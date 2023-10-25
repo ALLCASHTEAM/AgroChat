@@ -49,11 +49,9 @@ def product_identification(text):
 
     # Вывод результатов поиска
     print("\nscript: ident_prod.py\n################################ ОПРЕДЕЛЕНИЕ ТОВАРА О КОТОРОМ ИДЁТ РЕЧЬ #################################\n","\nЗапрос на входе: ",query)
-    if best_product:
-        pass
-        #print("Товар называется: ",best_product, "\n Название файла: ", rel_prods[indx])
-    else:
+    if not best_product:
         best_product = "profile_facts"
+        #print("Товар называется: ",best_product, "\n Название файла: ", rel_prods[indx])
         #print("No match found.")
 
     # Ищем индекс элемента в массиве

@@ -1,0 +1,4176 @@
+/* Пользовательский путь 1 */
+
+position: relative;
+width: 10230px;
+height: 3209px;
+
+background: #7E7E7E;
+border-radius: 2px;
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 459px;
+top: 406px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 103px;
+height: 1117px;
+left: 0px;
+top: calc(50% - 1117px/2);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 25px;
+top: 46px;
+
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* notification */
+
+position: absolute;
+width: 881px;
+height: 296px;
+left: calc(50% - 881px/2 - 0.5px);
+top: 367px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+backdrop-filter: blur(13px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 20px;
+
+
+/* Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis mus at lectus arcu. Convallis augue vitae sodales justo cras quis egestas odio. Etiam senectus proin pellentesque aliquam integer commodo massa interdum bibendum. Подробнее */
+
+position: absolute;
+width: 656px;
+height: 115px;
+left: calc(50% - 656px/2 + 21.5px);
+top: 61px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+/* main grey */
+color: #626262;
+
+
+
+/* Component 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 253px;
+height: 60px;
+left: calc(50% - 253px/2);
+top: 206px;
+
+/* Main white
+
+Background, usually btn
+*/
+background: #FFFFFF;
+border-radius: 10px;
+
+
+/* Принять */
+
+width: 81px;
+height: 23px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+/* main green */
+color: #4DA8A9;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1620px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1528px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* long */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px 15px;
+gap: 949px;
+
+position: absolute;
+width: 1366.15px;
+height: 80.15px;
+left: 217px;
+top: 987px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* Ellipse 6 */
+
+position: absolute;
+width: 374px;
+height: 374px;
+left: 366px;
+top: 1660px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+background: #4DA8A9;
+
+
+/* Ellipse 7 */
+
+position: absolute;
+width: 374px;
+height: 374px;
+left: 802px;
+top: 1660px;
+
+/* Main white
+
+Background, usually btn
+*/
+background: #FFFFFF;
+
+
+/* Ellipse 8 */
+
+position: absolute;
+width: 374px;
+height: 374px;
+left: 802px;
+top: 2052px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Ellipse 9 */
+
+position: absolute;
+width: 374px;
+height: 374px;
+left: 1674px;
+top: 1660px;
+
+background: #626262;
+
+
+/* Ellipse 10 */
+
+position: absolute;
+width: 374px;
+height: 374px;
+left: 1674px;
+top: 2092px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 2455px;
+top: 406px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 103px;
+height: 1117px;
+left: 0px;
+top: calc(50% - 1117px/2);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 25px;
+top: 46px;
+
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1619px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1527px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* long */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px 15px;
+gap: 949px;
+
+position: absolute;
+width: 1366.15px;
+height: 80.15px;
+left: 217px;
+top: 987px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* chat message  */
+
+position: absolute;
+width: 197px;
+height: 61px;
+left: 287px;
+top: 130px;
+
+background: #4DA8A9;
+border-radius: 40px 40px 40px 1px;
+
+
+/* Typed Content
+
+<p>Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis </p>
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 43px;
+left: 72px;
+top: 56px;
+
+
+
+/* Text */
+
+width: 0px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Typed Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 24px;
+left: 72px;
+top: 48px;
+
+
+
+/* Lorem ipsum dolor sit amet consectetur. Sit nunc tincidunt cursus interdum. Euismod cras duis gravida non sit. Ullamcorper mauris diam massa velit sed. At in ac */
+
+width: 1146px;
+height: 24px;
+
+/* text-md/font-normal */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #303030;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 - 1.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* Ellipse 4 */
+
+position: absolute;
+width: 10px;
+height: 10px;
+left: calc(50% - 10px/2 - 17.5px);
+top: calc(50% - 10px/2 - 0.5px);
+
+background: #FFFFFF;
+
+
+/* Ellipse 5 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 + 13.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* svg-editor-image (1) (1) 1 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 217px;
+top: 141px;
+
+
+
+/* Group */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* canvas_background */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_1 */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_2 */
+
+position: absolute;
+left: 0%;
+right: 52.39%;
+top: 46.78%;
+bottom: 16.67%;
+
+background: #2D656D;
+
+
+/* svg_3 */
+
+position: absolute;
+left: 52.01%;
+right: 0.98%;
+top: 45.81%;
+bottom: 7.65%;
+
+background: #2D656D;
+
+
+/* svg_4 */
+
+position: absolute;
+left: 53.76%;
+right: 7.09%;
+top: 19.73%;
+bottom: 40.71%;
+
+background: #2D656D;
+
+
+/* svg_5 */
+
+position: absolute;
+left: 6.35%;
+right: 54.63%;
+top: 19.74%;
+bottom: 40.11%;
+
+background: #2D656D;
+
+
+/* svg_6 */
+
+position: absolute;
+left: 57.29%;
+right: 2.11%;
+top: 30.14%;
+bottom: 36.44%;
+
+background: #2D656D;
+
+
+/* svg_7 */
+
+position: absolute;
+left: 1.28%;
+right: 58.32%;
+top: 30.07%;
+bottom: 36.34%;
+
+background: #2D656D;
+
+
+/* svg_8 */
+
+position: absolute;
+left: 36.69%;
+right: 52.87%;
+top: 0.02%;
+bottom: 52.39%;
+
+background: #2D656D;
+
+
+/* svg_9 */
+
+position: absolute;
+left: 51.85%;
+right: 37.73%;
+top: 0%;
+bottom: 52.71%;
+
+background: #2D656D;
+
+
+/* svg_10 */
+
+position: absolute;
+left: 65.7%;
+right: 14.34%;
+top: 2.94%;
+bottom: 70.99%;
+
+background: #2D656D;
+
+
+/* svg_11 */
+
+position: absolute;
+left: 13.49%;
+right: 66.54%;
+top: 2.92%;
+bottom: 70.86%;
+
+background: #2D656D;
+
+
+/* svg_12 */
+
+position: absolute;
+left: 19.65%;
+right: 48.41%;
+top: 85.57%;
+bottom: 2.71%;
+
+background: #2D656D;
+
+
+/* svg_13 */
+
+position: absolute;
+left: 54.37%;
+right: 35.08%;
+top: 89.59%;
+bottom: 3.22%;
+
+background: #2D656D;
+
+
+/* svg_14 */
+
+position: absolute;
+left: 65.6%;
+right: 34.28%;
+top: 28.98%;
+bottom: 70.93%;
+
+background: #2D656D;
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 6172px;
+top: 1589px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 103px;
+height: 1117px;
+left: 0px;
+top: calc(50% - 1117px/2);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 25px;
+top: 46px;
+
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1619px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1527px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* long */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px 15px;
+gap: 949px;
+
+position: absolute;
+width: 1366.15px;
+height: 80.15px;
+left: 217px;
+top: 987px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* long */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px 15px;
+gap: 949px;
+
+position: absolute;
+width: 1366.15px;
+height: 80.15px;
+left: 217px;
+top: 987px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* chat message  */
+
+position: absolute;
+width: 197px;
+height: 61px;
+left: 287px;
+top: 130px;
+
+background: #4DA8A9;
+border-radius: 40px 40px 40px 1px;
+
+
+/* Typed Content
+
+<p>Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis </p>
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 43px;
+left: 72px;
+top: 56px;
+
+
+
+/* Text */
+
+width: 0px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Typed Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 24px;
+left: 72px;
+top: 48px;
+
+
+
+/* Lorem ipsum dolor sit amet consectetur. Sit nunc tincidunt cursus interdum. Euismod cras duis gravida non sit. Ullamcorper mauris diam massa velit sed. At in ac */
+
+width: 1146px;
+height: 24px;
+
+/* text-md/font-normal */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #303030;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 - 1.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* Ellipse 4 */
+
+position: absolute;
+width: 10px;
+height: 10px;
+left: calc(50% - 10px/2 - 17.5px);
+top: calc(50% - 10px/2 - 0.5px);
+
+background: #FFFFFF;
+
+
+/* Ellipse 5 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 + 13.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* svg-editor-image (1) (1) 1 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 217px;
+top: 141px;
+
+
+
+/* Group */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* canvas_background */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_1 */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_2 */
+
+position: absolute;
+left: 0%;
+right: 52.39%;
+top: 46.78%;
+bottom: 16.67%;
+
+background: #2D656D;
+
+
+/* svg_3 */
+
+position: absolute;
+left: 52.01%;
+right: 0.98%;
+top: 45.81%;
+bottom: 7.65%;
+
+background: #2D656D;
+
+
+/* svg_4 */
+
+position: absolute;
+left: 53.76%;
+right: 7.09%;
+top: 19.73%;
+bottom: 40.71%;
+
+background: #2D656D;
+
+
+/* svg_5 */
+
+position: absolute;
+left: 6.35%;
+right: 54.63%;
+top: 19.74%;
+bottom: 40.11%;
+
+background: #2D656D;
+
+
+/* svg_6 */
+
+position: absolute;
+left: 57.29%;
+right: 2.11%;
+top: 30.14%;
+bottom: 36.44%;
+
+background: #2D656D;
+
+
+/* svg_7 */
+
+position: absolute;
+left: 1.28%;
+right: 58.32%;
+top: 30.07%;
+bottom: 36.34%;
+
+background: #2D656D;
+
+
+/* svg_8 */
+
+position: absolute;
+left: 36.69%;
+right: 52.87%;
+top: 0.02%;
+bottom: 52.39%;
+
+background: #2D656D;
+
+
+/* svg_9 */
+
+position: absolute;
+left: 51.85%;
+right: 37.73%;
+top: 0%;
+bottom: 52.71%;
+
+background: #2D656D;
+
+
+/* svg_10 */
+
+position: absolute;
+left: 65.7%;
+right: 14.34%;
+top: 2.94%;
+bottom: 70.99%;
+
+background: #2D656D;
+
+
+/* svg_11 */
+
+position: absolute;
+left: 13.49%;
+right: 66.54%;
+top: 2.92%;
+bottom: 70.86%;
+
+background: #2D656D;
+
+
+/* svg_12 */
+
+position: absolute;
+left: 19.65%;
+right: 48.41%;
+top: 85.57%;
+bottom: 2.71%;
+
+background: #2D656D;
+
+
+/* svg_13 */
+
+position: absolute;
+left: 54.37%;
+right: 35.08%;
+top: 89.59%;
+bottom: 3.22%;
+
+background: #2D656D;
+
+
+/* svg_14 */
+
+position: absolute;
+left: 65.6%;
+right: 34.28%;
+top: 28.98%;
+bottom: 70.93%;
+
+background: #2D656D;
+
+
+/* Component 6 */
+
+position: absolute;
+width: 940px;
+height: 104px;
+left: 633px;
+top: 384px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 94.68%;
+right: 0%;
+top: 2.8%;
+bottom: 50.47%;
+
+background: #4DA8A9;
+
+
+/* chat message  */
+
+position: absolute;
+left: 0%;
+right: 7.45%;
+top: 0%;
+bottom: 0%;
+
+background: #F2F2F2;
+border-radius: 60px 1px 60px 60px;
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 2455px;
+top: 1589px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 103px;
+height: 1117px;
+left: -862px;
+top: calc(50% - 1117px/2 - 256px);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 25px;
+top: 46px;
+
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1619px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1527px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* long */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px 15px;
+gap: 949px;
+
+position: absolute;
+width: 1366.15px;
+height: 80.15px;
+left: 217px;
+top: 987px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* chat message  */
+
+position: absolute;
+width: 197px;
+height: 61px;
+left: 287px;
+top: 130px;
+
+background: #4DA8A9;
+border-radius: 40px 40px 40px 1px;
+
+
+/* Typed Content
+
+<p>Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis </p>
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 43px;
+left: 72px;
+top: 56px;
+
+
+
+/* Text */
+
+width: 0px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Typed Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 24px;
+left: 72px;
+top: 48px;
+
+
+
+/* Lorem ipsum dolor sit amet consectetur. Sit nunc tincidunt cursus interdum. Euismod cras duis gravida non sit. Ullamcorper mauris diam massa velit sed. At in ac */
+
+width: 1146px;
+height: 24px;
+
+/* text-md/font-normal */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #303030;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 - 1.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* Ellipse 4 */
+
+position: absolute;
+width: 10px;
+height: 10px;
+left: calc(50% - 10px/2 - 17.5px);
+top: calc(50% - 10px/2 - 0.5px);
+
+background: #FFFFFF;
+
+
+/* Ellipse 5 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 + 13.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* svg-editor-image (1) (1) 1 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 217px;
+top: 141px;
+
+
+
+/* Group */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* canvas_background */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_1 */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_2 */
+
+position: absolute;
+left: 0%;
+right: 52.39%;
+top: 46.78%;
+bottom: 16.67%;
+
+background: #2D656D;
+
+
+/* svg_3 */
+
+position: absolute;
+left: 52.01%;
+right: 0.98%;
+top: 45.81%;
+bottom: 7.65%;
+
+background: #2D656D;
+
+
+/* svg_4 */
+
+position: absolute;
+left: 53.76%;
+right: 7.09%;
+top: 19.73%;
+bottom: 40.71%;
+
+background: #2D656D;
+
+
+/* svg_5 */
+
+position: absolute;
+left: 6.35%;
+right: 54.63%;
+top: 19.74%;
+bottom: 40.11%;
+
+background: #2D656D;
+
+
+/* svg_6 */
+
+position: absolute;
+left: 57.29%;
+right: 2.11%;
+top: 30.14%;
+bottom: 36.44%;
+
+background: #2D656D;
+
+
+/* svg_7 */
+
+position: absolute;
+left: 1.28%;
+right: 58.32%;
+top: 30.07%;
+bottom: 36.34%;
+
+background: #2D656D;
+
+
+/* svg_8 */
+
+position: absolute;
+left: 36.69%;
+right: 52.87%;
+top: 0.02%;
+bottom: 52.39%;
+
+background: #2D656D;
+
+
+/* svg_9 */
+
+position: absolute;
+left: 51.85%;
+right: 37.73%;
+top: 0%;
+bottom: 52.71%;
+
+background: #2D656D;
+
+
+/* svg_10 */
+
+position: absolute;
+left: 65.7%;
+right: 14.34%;
+top: 2.94%;
+bottom: 70.99%;
+
+background: #2D656D;
+
+
+/* svg_11 */
+
+position: absolute;
+left: 13.49%;
+right: 66.54%;
+top: 2.92%;
+bottom: 70.86%;
+
+background: #2D656D;
+
+
+/* svg_12 */
+
+position: absolute;
+left: 19.65%;
+right: 48.41%;
+top: 85.57%;
+bottom: 2.71%;
+
+background: #2D656D;
+
+
+/* svg_13 */
+
+position: absolute;
+left: 54.37%;
+right: 35.08%;
+top: 89.59%;
+bottom: 3.22%;
+
+background: #2D656D;
+
+
+/* svg_14 */
+
+position: absolute;
+left: 65.6%;
+right: 34.28%;
+top: 28.98%;
+bottom: 70.93%;
+
+background: #2D656D;
+
+
+/* Rectangle 11 */
+
+position: absolute;
+width: 240px;
+height: 180px;
+left: 1306px;
+top: 105px;
+
+background: rgba(242, 242, 242, 0.15);
+box-shadow: 1px 1px 4px rgba(126, 163, 164, 0.44);
+filter: blur(1.5px);
+border-radius: 20px 1px 20px 20px;
+
+
+/* Component 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 240px;
+height: 60px;
+left: 1306px;
+top: 105px;
+
+border-radius: 20px 1px 0px 0px;
+
+
+/* Vector (Stroke) */
+
+width: 8.14px;
+height: 15px;
+
+background: #4DA8A9;
+backdrop-filter: blur(25px);
+/* Note: backdrop-filter has minimal browser support */
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Вернуться на сайт */
+
+width: 155px;
+height: 21px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+color: #656565;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Component 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 240px;
+height: 60px;
+left: 1306px;
+top: 165px;
+
+
+
+/* Vector */
+
+width: 15px;
+height: 15px;
+
+border: 1px solid #4DA8A9;
+backdrop-filter: blur(25px);
+/* Note: backdrop-filter has minimal browser support */
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* О нас */
+
+width: 47px;
+height: 21px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+color: #656565;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Component 5 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 240px;
+height: 60px;
+left: 1306px;
+top: 225px;
+
+border-radius: 0px 0px 20px 20px;
+
+
+/* Vector */
+
+width: 11.67px;
+height: 15px;
+
+border: 1px solid #4DA8A9;
+backdrop-filter: blur(25px);
+/* Note: backdrop-filter has minimal browser support */
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Политика конфиденциальности */
+
+width: 198px;
+height: 42px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+
+color: #656565;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 4323px;
+top: 406px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 342px;
+height: 1117px;
+left: 0px;
+top: calc(50% - 1117px/2);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn + */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 216px;
+height: 55px;
+left: 24px;
+top: 48px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* plus-lg */
+
+width: 35px;
+height: 35px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+
+/* Новый чат */
+
+width: 111px;
+height: 26px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 26px;
+/* identical to box height */
+
+/* main grey */
+color: #626262;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 259px;
+top: 48px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1619px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1527px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* short */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px;
+gap: 730px;
+
+position: absolute;
+width: 1147.15px;
+height: 75.15px;
+left: 426px;
+top: 992px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* chat message  */
+
+position: absolute;
+width: 560px;
+height: 160px;
+left: 496px;
+top: 130px;
+
+background: #4DA8A9;
+border-radius: 1px 60px 60px 60px;
+
+
+/* Typed Content
+
+<p>Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis </p>
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 43px;
+left: 72px;
+top: 56px;
+
+
+
+/* Text */
+
+width: 0px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Typed Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 24px;
+left: 72px;
+top: 48px;
+
+
+
+/* Lorem ipsum dolor sit amet consectetur. Sit nunc tincidunt cursus interdum. Euismod cras duis gravida non sit. Ullamcorper mauris diam massa velit sed. At in ac */
+
+width: 1146px;
+height: 24px;
+
+/* text-md/font-normal */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #303030;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* text */
+
+position: absolute;
+width: 474px;
+height: 15px;
+left: calc(50% - 474px/2);
+top: 18px;
+
+
+
+/* Text */
+
+position: absolute;
+width: 474px;
+height: 23px;
+left: 0px;
+top: 0px;
+
+
+
+
+/* svg-editor-image (1) (1) 1 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 426px;
+top: 141px;
+
+
+
+/* Group */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* canvas_background */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_1 */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_2 */
+
+position: absolute;
+left: 0%;
+right: 52.39%;
+top: 46.78%;
+bottom: 16.67%;
+
+background: #2D656D;
+
+
+/* svg_3 */
+
+position: absolute;
+left: 52.01%;
+right: 0.98%;
+top: 45.81%;
+bottom: 7.65%;
+
+background: #2D656D;
+
+
+/* svg_4 */
+
+position: absolute;
+left: 53.76%;
+right: 7.09%;
+top: 19.73%;
+bottom: 40.71%;
+
+background: #2D656D;
+
+
+/* svg_5 */
+
+position: absolute;
+left: 6.35%;
+right: 54.63%;
+top: 19.74%;
+bottom: 40.11%;
+
+background: #2D656D;
+
+
+/* svg_6 */
+
+position: absolute;
+left: 57.29%;
+right: 2.11%;
+top: 30.14%;
+bottom: 36.44%;
+
+background: #2D656D;
+
+
+/* svg_7 */
+
+position: absolute;
+left: 1.28%;
+right: 58.32%;
+top: 30.07%;
+bottom: 36.34%;
+
+background: #2D656D;
+
+
+/* svg_8 */
+
+position: absolute;
+left: 36.69%;
+right: 52.87%;
+top: 0.02%;
+bottom: 52.39%;
+
+background: #2D656D;
+
+
+/* svg_9 */
+
+position: absolute;
+left: 51.85%;
+right: 37.73%;
+top: 0%;
+bottom: 52.71%;
+
+background: #2D656D;
+
+
+/* svg_10 */
+
+position: absolute;
+left: 65.7%;
+right: 14.34%;
+top: 2.94%;
+bottom: 70.99%;
+
+background: #2D656D;
+
+
+/* svg_11 */
+
+position: absolute;
+left: 13.49%;
+right: 66.54%;
+top: 2.92%;
+bottom: 70.86%;
+
+background: #2D656D;
+
+
+/* svg_12 */
+
+position: absolute;
+left: 19.65%;
+right: 48.41%;
+top: 85.57%;
+bottom: 2.71%;
+
+background: #2D656D;
+
+
+/* svg_13 */
+
+position: absolute;
+left: 54.37%;
+right: 35.08%;
+top: 89.59%;
+bottom: 3.22%;
+
+background: #2D656D;
+
+
+/* svg_14 */
+
+position: absolute;
+left: 65.6%;
+right: 34.28%;
+top: 28.98%;
+bottom: 70.93%;
+
+background: #2D656D;
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 6172px;
+top: 406px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 342px;
+height: 1117px;
+left: 0px;
+top: calc(50% - 1117px/2);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn + */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 216px;
+height: 55px;
+left: 24px;
+top: 48px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* plus-lg */
+
+width: 35px;
+height: 35px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+
+/* Новый чат */
+
+width: 111px;
+height: 26px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 26px;
+/* identical to box height */
+
+/* main grey */
+color: #626262;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 259px;
+top: 48px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1619px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1527px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* short */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px;
+gap: 730px;
+
+position: absolute;
+width: 1147.15px;
+height: 75.15px;
+left: 426px;
+top: 992px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* chat message  */
+
+position: absolute;
+width: 560px;
+height: 160px;
+left: 496px;
+top: 130px;
+
+background: #4DA8A9;
+border-radius: 1px 60px 60px 60px;
+
+
+/* Typed Content
+
+<p>Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis </p>
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 43px;
+left: 72px;
+top: 56px;
+
+
+
+/* Text */
+
+width: 0px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Typed Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 24px;
+left: 72px;
+top: 48px;
+
+
+
+/* Lorem ipsum dolor sit amet consectetur. Sit nunc tincidunt cursus interdum. Euismod cras duis gravida non sit. Ullamcorper mauris diam massa velit sed. At in ac */
+
+width: 1146px;
+height: 24px;
+
+/* text-md/font-normal */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #303030;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* text */
+
+position: absolute;
+width: 474px;
+height: 15px;
+left: calc(50% - 474px/2);
+top: 18px;
+
+
+
+/* Text */
+
+position: absolute;
+width: 474px;
+height: 23px;
+left: 0px;
+top: 0px;
+
+
+
+
+/* svg-editor-image (1) (1) 1 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 426px;
+top: 141px;
+
+
+
+/* Group */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* canvas_background */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_1 */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_2 */
+
+position: absolute;
+left: 0%;
+right: 52.39%;
+top: 46.78%;
+bottom: 16.67%;
+
+background: #2D656D;
+
+
+/* svg_3 */
+
+position: absolute;
+left: 52.01%;
+right: 0.98%;
+top: 45.81%;
+bottom: 7.65%;
+
+background: #2D656D;
+
+
+/* svg_4 */
+
+position: absolute;
+left: 53.76%;
+right: 7.09%;
+top: 19.73%;
+bottom: 40.71%;
+
+background: #2D656D;
+
+
+/* svg_5 */
+
+position: absolute;
+left: 6.35%;
+right: 54.63%;
+top: 19.74%;
+bottom: 40.11%;
+
+background: #2D656D;
+
+
+/* svg_6 */
+
+position: absolute;
+left: 57.29%;
+right: 2.11%;
+top: 30.14%;
+bottom: 36.44%;
+
+background: #2D656D;
+
+
+/* svg_7 */
+
+position: absolute;
+left: 1.28%;
+right: 58.32%;
+top: 30.07%;
+bottom: 36.34%;
+
+background: #2D656D;
+
+
+/* svg_8 */
+
+position: absolute;
+left: 36.69%;
+right: 52.87%;
+top: 0.02%;
+bottom: 52.39%;
+
+background: #2D656D;
+
+
+/* svg_9 */
+
+position: absolute;
+left: 51.85%;
+right: 37.73%;
+top: 0%;
+bottom: 52.71%;
+
+background: #2D656D;
+
+
+/* svg_10 */
+
+position: absolute;
+left: 65.7%;
+right: 14.34%;
+top: 2.94%;
+bottom: 70.99%;
+
+background: #2D656D;
+
+
+/* svg_11 */
+
+position: absolute;
+left: 13.49%;
+right: 66.54%;
+top: 2.92%;
+bottom: 70.86%;
+
+background: #2D656D;
+
+
+/* svg_12 */
+
+position: absolute;
+left: 19.65%;
+right: 48.41%;
+top: 85.57%;
+bottom: 2.71%;
+
+background: #2D656D;
+
+
+/* svg_13 */
+
+position: absolute;
+left: 54.37%;
+right: 35.08%;
+top: 89.59%;
+bottom: 3.22%;
+
+background: #2D656D;
+
+
+/* svg_14 */
+
+position: absolute;
+left: 65.6%;
+right: 34.28%;
+top: 28.98%;
+bottom: 70.93%;
+
+background: #2D656D;
+
+
+/* Component 6 */
+
+position: absolute;
+width: 940px;
+height: 104px;
+left: 633px;
+top: 384px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 94.68%;
+right: 0%;
+top: 2.8%;
+bottom: 50.47%;
+
+background: #4DA8A9;
+
+
+/* chat message  */
+
+position: absolute;
+left: 0%;
+right: 7.45%;
+top: 0%;
+bottom: 0%;
+
+background: #F2F2F2;
+border-radius: 60px 1px 60px 60px;
+
+
+/* text2 */
+
+position: absolute;
+width: 800px;
+height: 15px;
+left: 668px;
+top: 421px;
+
+
+
+/* Text */
+
+position: absolute;
+width: 800px;
+height: 23px;
+left: 0px;
+top: 0px;
+
+
+
+
+/* light version */
+
+position: relative;
+width: 1728px;
+height: 1117px;
+left: 4323px;
+top: 1589px;
+
+background: #FFFFFF;
+
+
+/* side bar */
+
+position: absolute;
+width: 342px;
+height: 1117px;
+left: 0px;
+top: calc(50% - 1117px/2);
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+
+
+/* Rectangle 7 */
+
+position: absolute;
+width: 93px;
+height: 989px;
+left: 268px;
+top: calc(50% - 989px/2 + 64px);
+
+background: #F2F2F2;
+filter: blur(10px);
+
+
+/* btn + */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 216px;
+height: 55px;
+left: 24px;
+top: 48px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* plus-lg */
+
+width: 35px;
+height: 35px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 12.5%;
+bottom: 12.5%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+
+/* Новый чат */
+
+width: 111px;
+height: 26px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 26px;
+/* identical to box height */
+
+/* main grey */
+color: #626262;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* btn close\open side bar */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 55px;
+height: 55px;
+left: 259px;
+top: 48px;
+
+/* main green
+
+for press btn\ there active elements
+*/
+border: 2px solid #4DA8A9;
+border-radius: 10px;
+
+
+/* Vector */
+
+width: 35px;
+height: 31px;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 34.13px;
+height: 39px;
+left: 1619px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+border: 3px solid #4DA8A9;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+width: 39px;
+height: 39px;
+left: 1527px;
+top: 52px;
+
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #767676;
+
+
+/* short */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 56px;
+gap: 730px;
+
+position: absolute;
+width: 1147.15px;
+height: 75.15px;
+left: 426px;
+top: 992px;
+
+/* Secondary white
+
+for elements
+*/
+background: #F2F2F2;
+border-radius: 20px;
+
+
+/* Напишите запрос */
+
+width: 250px;
+height: 35px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 35px;
+
+/* Secondary grey */
+color: #767676;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+width: 55.15px;
+height: 55.15px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector (Stroke) */
+
+position: absolute;
+left: 50%;
+right: -20.71%;
+top: 0%;
+bottom: 29.29%;
+
+/* Secondary grey
+
+icons
+*/
+background: #767676;
+transform: rotate(45deg);
+
+
+/* chat message  */
+
+position: absolute;
+width: 197px;
+height: 61px;
+left: 496px;
+top: 130px;
+
+background: #4DA8A9;
+border-radius: 40px 40px 40px 1px;
+
+
+/* Typed Content
+
+<p>Lorem ipsum dolor sit amet consectetur. Vulputate quis maecenas volutpat tellus. Lorem sollicitudin pellentesque egestas nulla mattis </p>
+*/
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 43px;
+left: 72px;
+top: 56px;
+
+
+
+/* Text */
+
+width: 0px;
+height: 23px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Typed Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 0.01px;
+height: 24px;
+left: 72px;
+top: 48px;
+
+
+
+/* Lorem ipsum dolor sit amet consectetur. Sit nunc tincidunt cursus interdum. Euismod cras duis gravida non sit. Ullamcorper mauris diam massa velit sed. At in ac */
+
+width: 1146px;
+height: 24px;
+
+/* text-md/font-normal */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #303030;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 - 1.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* Ellipse 4 */
+
+position: absolute;
+width: 10px;
+height: 10px;
+left: calc(50% - 10px/2 - 17.5px);
+top: calc(50% - 10px/2 - 0.5px);
+
+background: #FFFFFF;
+
+
+/* Ellipse 5 */
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: calc(50% - 8px/2 + 13.5px);
+top: calc(50% - 8px/2 - 0.5px);
+
+background: #D9D9D9;
+
+
+/* svg-editor-image (1) (1) 1 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 426px;
+top: 141px;
+
+
+
+/* Group */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* canvas_background */
+
+position: absolute;
+left: -0.38%;
+right: -0.38%;
+top: -0.38%;
+bottom: -0.38%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_1 */
+
+position: absolute;
+left: 0%;
+right: 0.98%;
+top: 0%;
+bottom: 2.71%;
+
+
+
+/* svg_2 */
+
+position: absolute;
+left: 0%;
+right: 52.39%;
+top: 46.78%;
+bottom: 16.67%;
+
+background: #2D656D;
+
+
+/* svg_3 */
+
+position: absolute;
+left: 52.01%;
+right: 0.98%;
+top: 45.81%;
+bottom: 7.65%;
+
+background: #2D656D;
+
+
+/* svg_4 */
+
+position: absolute;
+left: 53.76%;
+right: 7.09%;
+top: 19.73%;
+bottom: 40.71%;
+
+background: #2D656D;
+
+
+/* svg_5 */
+
+position: absolute;
+left: 6.35%;
+right: 54.63%;
+top: 19.74%;
+bottom: 40.11%;
+
+background: #2D656D;
+
+
+/* svg_6 */
+
+position: absolute;
+left: 57.29%;
+right: 2.11%;
+top: 30.14%;
+bottom: 36.44%;
+
+background: #2D656D;
+
+
+/* svg_7 */
+
+position: absolute;
+left: 1.28%;
+right: 58.32%;
+top: 30.07%;
+bottom: 36.34%;
+
+background: #2D656D;
+
+
+/* svg_8 */
+
+position: absolute;
+left: 36.69%;
+right: 52.87%;
+top: 0.02%;
+bottom: 52.39%;
+
+background: #2D656D;
+
+
+/* svg_9 */
+
+position: absolute;
+left: 51.85%;
+right: 37.73%;
+top: 0%;
+bottom: 52.71%;
+
+background: #2D656D;
+
+
+/* svg_10 */
+
+position: absolute;
+left: 65.7%;
+right: 14.34%;
+top: 2.94%;
+bottom: 70.99%;
+
+background: #2D656D;
+
+
+/* svg_11 */
+
+position: absolute;
+left: 13.49%;
+right: 66.54%;
+top: 2.92%;
+bottom: 70.86%;
+
+background: #2D656D;
+
+
+/* svg_12 */
+
+position: absolute;
+left: 19.65%;
+right: 48.41%;
+top: 85.57%;
+bottom: 2.71%;
+
+background: #2D656D;
+
+
+/* svg_13 */
+
+position: absolute;
+left: 54.37%;
+right: 35.08%;
+top: 89.59%;
+bottom: 3.22%;
+
+background: #2D656D;
+
+
+/* svg_14 */
+
+position: absolute;
+left: 65.6%;
+right: 34.28%;
+top: 28.98%;
+bottom: 70.93%;
+
+background: #2D656D;
+
+
+/* Rectangle 11 */
+
+position: absolute;
+width: 240px;
+height: 180px;
+left: 1307px;
+top: 105px;
+
+background: rgba(242, 242, 242, 0.15);
+box-shadow: 1px 1px 4px rgba(126, 163, 164, 0.44);
+filter: blur(1.5px);
+border-radius: 20px 1px 20px 20px;
+
+
+/* Component 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 240px;
+height: 60px;
+left: 1307px;
+top: 105px;
+
+border-radius: 20px 1px 0px 0px;
+
+
+/* Vector (Stroke) */
+
+width: 8.14px;
+height: 15px;
+
+background: #4DA8A9;
+backdrop-filter: blur(25px);
+/* Note: backdrop-filter has minimal browser support */
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Вернуться на сайт */
+
+width: 155px;
+height: 21px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+color: #656565;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Component 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 240px;
+height: 60px;
+left: 1307px;
+top: 165px;
+
+
+
+/* Vector */
+
+width: 15px;
+height: 15px;
+
+border: 1px solid #4DA8A9;
+backdrop-filter: blur(25px);
+/* Note: backdrop-filter has minimal browser support */
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* О нас */
+
+width: 47px;
+height: 21px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+
+color: #656565;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Component 5 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 240px;
+height: 60px;
+left: 1307px;
+top: 225px;
+
+border-radius: 0px 0px 20px 20px;
+
+
+/* Vector */
+
+width: 11.67px;
+height: 15px;
+
+border: 1px solid #4DA8A9;
+backdrop-filter: blur(25px);
+/* Note: backdrop-filter has minimal browser support */
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Политика конфиденциальности */
+
+width: 198px;
+height: 42px;
+
+/* Text */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 21px;
+
+color: #656565;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* user-2_outline */
+
+position: relative;
+width: 48px;
+height: 48px;
+left: 7131px;
+top: 1596px;
+
