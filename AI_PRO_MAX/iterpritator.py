@@ -1,6 +1,7 @@
 from transformers import T5ForConditionalGeneration, GPT2Tokenizer
 from torch import device
 
+
 def load_interpreter(model_name='Den4ikAI/FRED-T5-Large-interpreter'):
     model_name = 'Den4ikAI/FRED-T5-Large-interpreter'
     tokenizer = GPT2Tokenizer.from_pretrained(model_name, )
