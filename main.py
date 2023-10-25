@@ -13,32 +13,11 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
 app.mount("/static/user_images", StaticFiles(directory=images_directory), name="/static/user_images")
 
-user_agreed = False
-
-
-@app.post("/agreement_accepted")
-async def agreement_accepted():
-    global user_agreed
-    user_agreed = True
-    return {"message": "User agreement accepted."}
-
-
-@app.get("/photobot")
-async def read_root():
-    if not user_agreed:
-        return FileResponse("static/templates/about.html")
-        # You can specify the HTML file you want to render here
-    else:
-        return FileResponse("static/templates/photobot.html")
-
 
 @app.get("/")
 async def read_root():
-    if not user_agreed:
-        return FileResponse("static/templates/about.html")
-    else:
-        # You can specify the HTML file you want to render here
-        return FileResponse("static/templates/photobot.html")
+    # You can specify the HTML file you want to render here
+    return FileResponse("static/index.html")
 
 
 @app.post("/request")
