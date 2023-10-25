@@ -5,29 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agrohim</title>
-    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="static/css/light-styles.css" id="theme-link">
+    <style>
+      .dark-theme{
+        height: 42px;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background: url("static/resources/theme.svg") no-repeat;
+      }
+
+      #info-ico{
+	      width: 40px;
+	      height: 40px;
+      }
+
+      #backToSite, #about, #privacy-policy, #infoWrapper {
+        cursor: pointer;
+      }
+    </style>
 </head>
 <body style="position:relative; top:25px;">
     <header>
         <div id="icons">
             <div id="infoWrapper">
-                <object type="image/svg+xml" data="static/resources/info.svg"></object>
+                <object id="info-ico" type="image/svg+xml" data="static/resources/info.svg" ></object>
             </div>
             <div id="themeWrapper">
-                <object type="image/svg+xml" data="static/resources/theme.svg" id="theme"></object>
+                <button class="dark-theme"></button>
             </div>
         </div>
         <div id="dialogueInfoWrapper" style="position:absolute;">
         	<div id="backToSite">
-        		<object type="image/svg+xml" data="static/resources/backArrow.svg"></object>
+        		<object  type="image/svg+xml" data="static/resources/backArrow.svg"></object>
         		<h3>Вернуться на сайт</h3>
         	</div>
         	<div id="about">
-        		<object type="image/svg+xml" data="static/resources/aboutIcon.svg"></object>
+        		<object  type="image/svg+xml" data="static/resources/aboutIcon.svg"></object>
         		<h3>О нас</h3>
         	</div>
-        	<div>
-        		<object type="image/svg+xml" data="static/resources/lock.svg"></object>
+        	<div id="privacy-policy">
+        		<object  type="image/svg+xml" data="static/resources/lock.svg"></object>
         		<h3>Политика<br>конфиденциальности</h3>
         	</div>
         </div>
@@ -65,6 +84,22 @@ document.getElementById('infoWrapper').addEventListener('click', function(){
 		obj.style.visibility = 'visible';
 	}
 });
+
+document.getElementById('backToSite').addEventListener('click', function(){
+  window.location.href = 'https://betaren.ru/';
+});
+
+document.getElementById('privacy-policy').addEventListener('click', function(){
+  window.location.href = 'https://betaren.ru/';
+});
+
+document.getElementById('about').addEventListener('click', function(){
+  window.location.href = 'https://betaren.ru/about/';
+});
+
+
+
+
 
 // ONLOAD AND EVENT TRIGGERS
 
@@ -326,6 +361,24 @@ document.getElementById('infoWrapper').addEventListener('click', function(){
     }
   }
 
+    // Выбираем кнопку  (переключение темы)
+const btn = document.querySelector(".dark-theme");
+// Выбираем таблицу стилей
+const theme = document.querySelector("#theme-link");
+// Отслеживаем щелчок по кнопке
+btn.addEventListener("click", function() {
+  // Если текущий адрес содержит "light-theme.css"
+  if (theme.getAttribute("href") == "static/css/light-styles.css") {
+    // …то переключаемся на "dark-theme.css"
+    theme.href = "static/css/dark-styles.css";
+    // В противном случае…
+  } else {
+    // …переключаемся на "light-theme.css"
+    theme.href = "static/css/light-styles.css";
+  }
+});
+
 </script>
+
 
 </html>
