@@ -242,7 +242,7 @@ document.getElementById('about').addEventListener('click', function(){
     // Создаем новый элемент li
     var botBubbleCounter = document.getElementsByClassName("bot__output").length + 1; // Увеличиваем счетчик на 1
     var chatBubble_bot = document.createElement('li');
-    chatBubble_bot.classList.add('test-output', 'bot__output', 'bot__output--standard', 'animateBubble', 'id-' + botBubbleCounter);
+    chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble', 'id-' + botBubbleCounter);
 
     // Вам нужно добавить текст в ваш элемент, вместо text
     chatBubble_bot.innerHTML = responce_text;
@@ -359,8 +359,11 @@ document.getElementById('about').addEventListener('click', function(){
 
     // remove text from textbox
     document.querySelector('.chatbox').value = "";
-
+    
+    //var botBubbleId = makeBotBubble("") + 19;
     var botBubbleId = makeBotBubble("") + 19;
+    var botBubbleID = document.getElementsByClassName("userInput").length + 19;
+    console.log(botBubbleID);
     scrollToBottom();
 
     // get server response
@@ -376,7 +379,7 @@ document.getElementById('about').addEventListener('click', function(){
     promise.then((resp) => {
       // fill the bot bubble and scroll to bottom
       replaceBotAnimwithBubble("");
-      document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
+      document.querySelectorAll(".id-" + botBubbleID + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
       saveToLocal("bot", resp["text"], resp["image"]);
 
