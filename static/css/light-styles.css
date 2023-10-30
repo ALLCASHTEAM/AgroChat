@@ -96,7 +96,10 @@ li{
 	color: var(--main-grey);
 	padding: 15px 15px 15px 15px;
 	border-radius: 25px 1px 25px 25px;
-    word-wrap: break-word;
+    margin-left: auto;     
+	margin-right: 10px;
+	word-wrap: break-word;
+
 
 }
 .bot__output{
@@ -169,3 +172,34 @@ footer{
 #scroller::-webkit-scrollbar-track {
   background-color: var(--main-white); /* Цвет трека скроллбара */
 }
+
+.test-output{
+	display: inline-flex;
+	background: #4DA8A9;
+	padding: 15px 20px;
+	border-radius: 1px 25px 25px 25px;
+	margin: 0 auto;
+	margin-left: 0px;
+  }
+  
+  .test-output .dot{
+	height: 10px;
+	width: 10px;
+	opacity: 0.7;
+	border-radius: 50%;
+	background: #ffffff;
+	animation: animateDots 1.8s var(--delay) ease-in-out infinite;
+  }
+  
+  @keyframes animateDots {
+	0%, 44% {
+	  transform: translateY(0px);
+	}
+	28% {
+	  opacity: 0.4;
+	  transform: translateY(-9px);
+	}
+	44%{
+	  opacity: 0.2;
+	}
+  }

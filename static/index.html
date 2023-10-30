@@ -75,6 +75,11 @@
         		<li class="bot__output bot__output--standard">
           		<span class="bot__output--second-sentence">You can ask me a bunch of things!</span> You could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolio
         		</li>
+            <li class="test-output">
+              <div class="dot" style="--delay: 200ms"></div>
+              <div class="dot" style="--delay: 300ms"></div>
+              <div class="dot" style="--delay: 400ms"></div>
+            </li>
       		</ul>
     	</div>
     </main>
@@ -234,13 +239,53 @@ document.getElementById('about').addEventListener('click', function(){
     return chatBubbleCounter + 1
   }
 
+  function replaceBotAnimwithBubble(responce_text){
+
+    // Находим существующий элемент li с классом "test-output"
+    var existingLi = document.querySelector('.test-output');
+
+    // Создаем новый элемент li
+    var botBubbleCounter = document.getElementsByClassName("bot__output").length + 1; // Увеличиваем счетчик на 1
+    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('test-output', 'bot__output', 'bot__output--standard', 'animateBubble', 'id-' + botBubbleCounter);
+
+    // Вам нужно добавить текст в ваш элемент, вместо text
+    chatBubble_bot.innerHTML = responce_text;
+
+    // Заменяем существующий элемент на новый элемент
+    existingLi.parentNode.replaceChild(chatBubble_bot, existingLi);
+  }
+
   // make bot bubble with unique class
   function makeBotBubble(text, image=null){
     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
-    var chatBubble_bot = document.createElement('li');
-    chatBubble_bot.classList.add('bot__output', 'bot__output--standard', 'animateBubble', "id-" + (botBubbleCounter + 1));
-    chatBubble_bot.innerHTML = text;
-    chatList.appendChild(chatBubble_bot);
+    //var chatBubble_bot = document.createElement('li');
+    //chatBubble_bot.classList.add('test-output','bot__output', 'bot__output--standard', 'animateBubble', "id-" + (botBubbleCounter + 1));
+    //chatBubble_bot.innerHTML = text;
+    //chatList.appendChild(chatBubble_bot);
+
+    var li = document.createElement('li');
+    li.className = 'test-output';
+
+    // Создаем три элемента div с классом "dot" и стилем "--delay"
+    var dot1 = document.createElement('div');
+    dot1.className = 'dot';
+    dot1.style.setProperty('--delay', '200ms');
+
+    var dot2 = document.createElement('div');
+    dot2.className = 'dot';
+    dot2.style.setProperty('--delay', '300ms');
+
+    var dot3 = document.createElement('div');
+    dot3.className = 'dot';
+    dot3.style.setProperty('--delay', '400ms');
+
+    // Добавляем элементы div в элемент li
+    li.appendChild(dot1);
+    li.appendChild(dot2);
+    li.appendChild(dot3);
+
+    chatList.appendChild(li);
 
     return botBubbleCounter + 1
   }
@@ -334,6 +379,7 @@ document.getElementById('about').addEventListener('click', function(){
 
     promise.then((resp) => {
       // fill the bot bubble and scroll to bottom
+      replaceBotAnimwithBubble("");
       document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
       saveToLocal("bot", resp["text"], resp["image"]);
