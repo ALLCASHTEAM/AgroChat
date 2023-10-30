@@ -92,6 +92,11 @@
 <div class="send_img" style="display: none;"></div>
 <script type="text/javascript">
 
+var waitingForResponse = false;
+
+
+
+
 document.getElementById('infoWrapper').addEventListener('click', function(){
 	let obj = document.getElementById('dialogueInfoWrapper');
 	if (obj.style.visibility == 'visible'){
@@ -322,6 +327,7 @@ document.getElementById('about').addEventListener('click', function(){
   function makeBubbles()
   {
     var text = document.querySelector('.chatbox').value;
+  	waitingForResponse = true;
 
     // if text is smaller than 2 symbols and there is no image throw alert
     if (text.trim() <= 2 && !loadImage()){
@@ -382,9 +388,12 @@ document.getElementById('about').addEventListener('click', function(){
       document.querySelectorAll(".id-" + botBubbleID + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
       saveToLocal("bot", resp["text"], resp["image"]);
+      waitingForResponse = false;
 
     }).catch((error) => {
       console.error('Async function failed with error:', error);
+      waitingForResponse = false;
+
     });
   }
 
@@ -432,17 +441,59 @@ btn.addEventListener("click", function() {
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
     theme.href = "static/css/dark-styles.css";
+    saveThemeToLocalStorage("dark");
     // В противном случае…
   } else {
     // …переключаемся на "light-theme.css"
     theme.href = "static/css/light-styles.css";
+    saveThemeToLocalStorage("light");
+
   }
 });
 
+const saveThemeToLocalStorage = (themeValue) => {
+  localStorage.setItem("theme", themeValue);
+};
+document.addEventListener("DOMContentLoaded", function() {
+  const savedTheme = localStorage.getItem("theme");
+
+  // Проверяем, есть ли сохраненное значение темы в localStorage
+  if (savedTheme === "dark") {
+    theme.href = "static/css/dark-styles.css";
+  } else {
+    theme.href = "static/css/light-styles.css";
+
+  }
+});
+
+
 const sendButton = document.getElementById('sendBtn');
 sendButton.addEventListener('click', function() {
-    makeBubbles(); // Вызывайте вашу функцию makeBubbles() при нажатии на кнопку
+    if (waitingForResponse) {
+        alert("Пожалуйста, дождитесь ответа.");
+    } else {
+        makeBubbles();
+    }});
+
+textInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    if (waitingForResponse) {
+      alert("Пожалуйста, подождите ответа.");
+    } else {
+      makeBubbles();
+    }
+  }
+  if (event.key === "Enter" && event.shiftKey){
+    event.preventDefault();
+    const start = this.selectionStart;
+    const end = this.selectionEnd;
+    this.value = this.value.substring(0, start) + "\n" + this.value.substring(end);
+    this.selectionStart = this.selectionEnd = start + 1;
+  }
 });
+
+
 </script>
 
 
