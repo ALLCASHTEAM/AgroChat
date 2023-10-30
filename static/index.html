@@ -56,8 +56,24 @@
       		<ul class="chatlist" id="chatlist">
         		<li class="bot__output bot__output--standard">Hey, I'm Navvy!</li>
        			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+                       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+                <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+                <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+                <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+				<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
+       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
         		<li class="bot__output bot__output--standard">
-          		<span class="bot__output--second-sentence">You can ask me a bunch of things!</span> You could also scroll down to see Mees' full portfolio
+          		<span class="bot__output--second-sentence">You can ask me a bunch of things!</span> You could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolio
         		</li>
       		</ul>
     	</div>
@@ -181,7 +197,7 @@ document.getElementById('about').addEventListener('click', function(){
 	}catch{
 		return null
 	}
-    
+
   }
 
 // CHAT BUBBLES
@@ -268,7 +284,7 @@ document.getElementById('about').addEventListener('click', function(){
 
     // if text is smaller than 2 symbols and there is no image throw alert
     if (text.trim() <= 2 && !loadImage()){
-      alert("слишком много сообщений за короткий промежуток времени");
+      alert("Слишком короткое сообщение");
       return
     }
     if (loadImage() && text.trim() > 0){
@@ -378,6 +394,10 @@ btn.addEventListener("click", function() {
   }
 });
 
+const sendButton = document.getElementById('sendBtn');
+sendButton.addEventListener('click', function() {
+    makeBubbles(); // Вызывайте вашу функцию makeBubbles() при нажатии на кнопку
+});
 </script>
 
 

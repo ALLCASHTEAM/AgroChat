@@ -96,15 +96,23 @@ li{
 	color: var(--main-grey);
 	padding: 15px 15px 15px 15px;
 	border-radius: 25px 1px 25px 25px;
-	margin-left: auto;
-	margin-right: 10px;
+    word-wrap: break-word;
+
 }
 .bot__output{
 	background-color: var(--main-green);
 	color: var(--main-white);
 	padding: 15px 15px 15px 15px;
 	border-radius: 1px 25px 25px 25px;
+    word-wrap: break-word;
+
 }
+
+.userInput, .bot__output {
+    max-width: 60%; /* Устанавливаем максимальную ширину сообщений */
+    word-wrap: break-word;
+
+
 #textInput, #textInput:focus{
 	width: calc(85vw - 105px);
 	font-size: 20px;
@@ -143,4 +151,21 @@ footer{
 #info-ico{
 	width: 40px;
 	height: 40px;
+}
+
+#scroller::-webkit-scrollbar-button {
+  display: none;
+}
+
+#scroller::-webkit-scrollbar {
+  width: 10px; /* Ширина скроллбара */
+}
+
+#scroller::-webkit-scrollbar-thumb {
+  background-color: var(--main-green); /* Цвет ползунка скроллбара */
+  border-radius: 5px; /* Скругление углов ползунка скроллбара */
+}
+
+#scroller::-webkit-scrollbar-track {
+  background-color: var(--main-white); /* Цвет трека скроллбара */
 }

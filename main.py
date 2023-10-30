@@ -38,7 +38,7 @@ async def make_response(data: Request):
                 f.write(image)
     time.sleep(1)
     return Response(content=json.dumps({'text': text, 'image': None}), media_type="application/json")
-
+ 
 
 @app.post("/get_image_hash")
 async def get_image_hash(data: Request):
