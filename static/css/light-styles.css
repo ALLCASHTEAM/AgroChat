@@ -111,7 +111,7 @@ li{
 .userInput, .bot__output {
     max-width: 60%; /* Устанавливаем максимальную ширину сообщений */
     word-wrap: break-word;
-
+}
 
 #textInput, #textInput:focus{
 	width: calc(85vw - 105px);

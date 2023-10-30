@@ -26,7 +26,7 @@ async def make_response(data: Request):
     dialog = ""
     text = body['text'] if 'text' in body.keys() else None
     text = mainAI.AI_COMPIL(dialog, text)
-    if 'image' in body.keys():
+    if 'image' in body.keys(): 
         image = body['image']
         ext = image.filename.split('.')[-1]
         image = await image.read()
