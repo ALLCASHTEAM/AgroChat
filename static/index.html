@@ -258,14 +258,15 @@ document.getElementById('about').addEventListener('click', function(){
 
   // make bot bubble with unique class
   function makeBotBubble(text, image=null){
-    var botBubbleCounter = document.getElementsByClassName("bot__output").length;
+    //var botBubbleCounter = document.getElementsByClassName("bot__output").length;
+    var botBubbleCounter = document.getElementsByClassName("test-output").length;
     //var chatBubble_bot = document.createElement('li');
     //chatBubble_bot.classList.add('test-output','bot__output', 'bot__output--standard', 'animateBubble', "id-" + (botBubbleCounter + 1));
     //chatBubble_bot.innerHTML = text;
     //chatList.appendChild(chatBubble_bot);
 
     var li = document.createElement('li');
-    li.className = 'test-output';
+    li.classList.add("test-output", "id-"+(botBubbleCounter + 1));
 
     // Создаем три элемента div с классом "dot" и стилем "--delay"
     var dot1 = document.createElement('div');
