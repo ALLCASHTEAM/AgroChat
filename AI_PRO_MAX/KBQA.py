@@ -1,8 +1,7 @@
-from AI_PRO_MAX import ident_prod
+from AI_PRO_MAX import ident_prod,  realsweg
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
-import realsweg
 
 def initialize_sentence_model():
     model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
@@ -22,9 +21,6 @@ def find_best_matches(user_query, sentence_model):
 
         # Сортируем список совпадений по оценкам в убывающем порядке
         matches.sort(key=lambda x: x[1], reverse=True)
-        for i in matches:
-            print(i)
-
         return matches[0], liness
     except:
         return None
