@@ -54,27 +54,8 @@
     <main id="scroller">
     	<div class="chatbot__overview" id="chatbotBox">
       		<ul class="chatlist" id="chatlist">
-        		<li class="bot__output bot__output--standard">Hey, I'm Navvy!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-                       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-                <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-                <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-                <li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-				<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-       			<li class="bot__output bot__output--standard">I will guide you through Mees' portfolio!</li>
-        		<li class="bot__output bot__output--standard">
-          		<span class="bot__output--second-sentence">You can ask me a bunch of things!</span> You could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolioYou could also scroll down to see Mees' full portfolio
-        		</li>
+        		<li class="bot__output bot__output--standard">Привет, я Aigro, задайте мне свой вопрос!</li>
+       		</li>
       		</ul>
     	</div>
     </main>
@@ -366,9 +347,9 @@ document.getElementById('about').addEventListener('click', function(){
     // remove text from textbox
     document.querySelector('.chatbox').value = "";
     
-    //var botBubbleId = makeBotBubble("") + 19;
-    var botBubbleId = makeBotBubble("") + 19;
-    var botBubbleID = document.getElementsByClassName("userInput").length + 19;
+    //var botBubbleId = makeBotBubble("") + 1;
+    var botBubbleId = makeBotBubble("") + 1;
+    var botBubbleID = document.getElementsByClassName("userInput").length + 1;
     console.log(botBubbleID);
     scrollToBottom();
 
@@ -470,7 +451,7 @@ document.addEventListener("DOMContentLoaded", function() {
 const sendButton = document.getElementById('sendBtn');
 sendButton.addEventListener('click', function() {
     if (waitingForResponse) {
-        alert("Пожалуйста, дождитесь ответа.");
+        return 0
     } else {
         makeBubbles();
     }});
@@ -479,7 +460,7 @@ textInput.addEventListener("keydown", function(event) {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
     if (waitingForResponse) {
-      alert("Пожалуйста, подождите ответа.");
+      return 0
     } else {
       makeBubbles();
     }
