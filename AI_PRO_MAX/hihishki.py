@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 import json
 # Задайте путь к вашей папке
-folder_path = './'
+folder_path = '../rofls/'
 
 # Получите список всех файлов и папок в директории
 files_and_folders = os.listdir(folder_path)
@@ -54,7 +54,7 @@ for file_path in file_paths:
 index_dict = {word: entries for word, entries in index.items()}
 
 # Путь для сохранения индекса в формате JSON
-index_json_path = '../AI_PRO_MAX/index.json'
+index_json_path = 'index.json'
 
 # Сохраняем индекс в JSON файл
 with open(index_json_path, 'w', encoding='utf-8') as f_json:
