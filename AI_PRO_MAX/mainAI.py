@@ -1,14 +1,13 @@
-from AI_PRO_MAX import ident_prod, iterpritator, KBQA, gen_engine
+from AI_PRO_MAX import iterpritator, KBQA, gen_engine, take_question
 
 model, tokens = gen_engine.interact()
 
 
-def AI_COMPIL(dialog, question):
-    file_name, processed_question = ident_prod.product_identification(question)
+def AI_COMPIL(question):
+    processed_question = take_question.Process_query(question)
 
     print("\n\n\nУ нас есть: \n", processed_question)
-    print(file_name)
-    answer = gen_engine.generate(question, tokens, model, KBQA.KBQA_search(processed_question, file_name))
+    answer = gen_engine.generate(question, tokens, model, KBQA.KBQA_search(processed_question))
     answer = answer.replace("Agrochat: ", "").replace("Выход:", '').replace("BioStim Start", "Биостим Старт").replace("BioStim", "Биостим").replace("biostim", "Биостим")
     print(answer)
     with open('tmp.txt', 'w', encoding='utf-8') as tmp_file:

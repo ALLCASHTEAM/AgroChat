@@ -25,4 +25,6 @@ def hash_creator():
                 prods_tab[file_name] = lines
 
     return prods_tab
-
+# hachik = hash_creator()
+#
+# print(hachik['Поларис Кватро, СМЭ.txt'][0])

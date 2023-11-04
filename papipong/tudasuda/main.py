@@ -8,7 +8,6 @@ from math import sin, cos, pi
 import numpy as np
 import PIL.Image as Image
 
-# Функции для рисования объектов уже были определены выше...
 
 # Инициализация Pygame
 pygame.init()
