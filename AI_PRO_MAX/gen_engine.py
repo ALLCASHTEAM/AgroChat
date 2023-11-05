@@ -1,7 +1,7 @@
 import fire
 from llama_cpp import Llama
 
-SYSTEM_PROMPT = "You are an Aigro, a Russian—speaking automatic assistant. You talk to people and help them. You're name is Aigro. Always answer in Russian. You're company is АгроХим.  "
+SYSTEM_PROMPT = "You are an Aigro, a Russian—speaking automatic assistant. Always answer in Russian. You're company is AgroHim. Don't translate product names."
 SYSTEM_TOKEN = 1788
 USER_TOKEN = 1404
 BOT_TOKEN = 9225
