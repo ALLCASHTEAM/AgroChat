@@ -1,7 +1,6 @@
 import fire
 from llama_cpp import Llama
 
-SYSTEM_PROMPT = "You are an Aigro, a Russian—speaking automatic assistant. Always answer in Russian. You're company is AgroHim. Don't translate product names."
 BOT_TOKEN = 9225
 LINEBREAK_TOKEN = 13
 
@@ -10,10 +9,6 @@ ROLE_TOKENS = {
     "bot": 9225,
     "system": 1788
 }
-top_k = 30
-top_p = 0.9
-temperature = 0.2
-repeat_penalty = 1.1
 
 
 def get_message_tokens(model, role, content):
@@ -27,7 +22,7 @@ def get_message_tokens(model, role, content):
 def get_system_tokens(model):
     system_message = {
         "role": "system",
-        "content": SYSTEM_PROMPT
+        "content": "You are an Aigro, a Russian—speaking automatic assistant. Always answer in Russian. You're company is AgroHim. Don't translate product names."
     }
     return get_message_tokens(model, **system_message)
 
@@ -53,10 +48,10 @@ def generate(question, tokens, model, context=False):
     tokens += get_message_tokens(model=model, role="user", content=user_message) + [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
     generator = model.generate(
         tokens,
-        top_k=top_k,
-        top_p=top_p,
-        temp=temperature,
-        repeat_penalty=repeat_penalty
+        top_k=30,
+        top_p=0.9,
+        temp=0.2,
+        repeat_penalty=1.1
     )
     answer = ''
     for token in generator:
