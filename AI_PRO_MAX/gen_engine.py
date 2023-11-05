@@ -49,31 +49,27 @@ def interact():
 
 
 def generate(question, tokens, model, context=False):
-    print(question, context)
-    while True:
-        if context:
-            user_message = f"User: Context{context} Question:{question}"
-        else:
-            print(question)
-            user_message = f"User: Question:{question}"
-        message_tokens = get_message_tokens(model=model, role="user", content=user_message)
-        role_tokens = [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
-        tokens += message_tokens + role_tokens
-        generator = model.generate(
-            tokens,
-            top_k=top_k,
-            top_p=top_p,
-            temp=temperature,
-            repeat_penalty=repeat_penalty
-        )
-        answer = ''
-        for token in generator:
-            token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
-            answer += token_str
-            if token == model.token_eos():
-                break
-            tokens.append(token)
-        return answer
+    if context:
+        user_message = f"User: Context{context} Question:{question}"
+    else:
+        print(question)
+        user_message = f"User: Question:{question}"
+    tokens += get_message_tokens(model=model, role="user", content=user_message) + [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
+    generator = model.generate(
+        tokens,
+        top_k=top_k,
+        top_p=top_p,
+        temp=temperature,
+        repeat_penalty=repeat_penalty
+    )
+    answer = ''
+    for token in generator:
+        token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
+        answer += token_str
+        if token == model.token_eos():
+            break
+        tokens.append(token)
+    return answer
 
 
 if __name__ == "__main__":
