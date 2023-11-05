@@ -1,30 +1,19 @@
-import os
+from pathlib import Path
+
 
 def hash_creator():
     # Путь к рофликам
-    project_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    rofls_directory = os.path.join(project_directory, "rofls")
+    rofls_directory = Path(__file__).resolve().parent.parent / "rofls"
 
-    # проверка правильно ли определился путь(ну на всякий)
-    print(rofls_directory)
-
-
-    # Создание пустого словаря
-    prods_tab= {}
-
-    # Получение списка файлов в папке "rofls"
-    files_in_rofls = os.listdir(rofls_directory)
-
-    for file_name in files_in_rofls:
-        file_path = os.path.join(rofls_directory, file_name)
-        if os.path.isfile(file_path):
-            # Чтение содержания файла построчно
-            with open(file_path, 'r', encoding='utf-8') as file:
-                lines = file.readlines()
-                # Каждая строка файла становится элементом в списке значений словаря
-                prods_tab[file_name] = lines
+    # Создание словаря, ключи которого - имена файлов, а значения - содержимое файлов
+    prods_tab = {
+        file.name: file.read_text(encoding='utf-8').splitlines()
+        for file in rofls_directory.glob('*')
+        if file.is_file()
+    }
 
     return prods_tab
+
 # hachik = hash_creator()
 #
 # print(hachik['Поларис Кватро, СМЭ.txt'][0])

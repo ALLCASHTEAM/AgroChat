@@ -1,17 +1,18 @@
-from AI_PRO_MAX import ident_prod,  realsweg
+from AI_PRO_MAX import ident_prod, realsweg
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
+import time
+
+# record start time
+
 
 def initialize_sentence_model():
-    model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-    sentence_model = SentenceTransformer(model_name, device='cuda')
-    return sentence_model
+    return SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", device='cuda')
 
 
 def find_best_matches(user_query, sentence_model):
-    liness = realsweg.list_return(user_query)
-    liness = list(map(lambda x: x.split("|"), liness))
+    liness = list(map(lambda x: x.split("|"), realsweg.list_return(user_query)))
     lines = list(zip(*liness))[0]
     try:
         similarities = util.pytorch_cos_sim(sentence_model.encode(user_query.lower()),
@@ -28,15 +29,10 @@ def find_best_matches(user_query, sentence_model):
 
 
 def KBQA_search(user_query):
-    sentence_model = initialize_sentence_model()
-    matches, liness = find_best_matches(user_query, sentence_model)
+    matches, liness = find_best_matches(user_query, initialize_sentence_model())
     answer = ""
-    best_result = list(map(lambda x: str(x).replace("('", "").split("?")[0], matches))
-    print(best_result)
     for line in liness:
-        # Проверяем, содержит ли строка первую половину
-        if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), best_result)):
-            # Если да, выводим эту строку
+        if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(lambda x: str(x).replace("('", "").split("?")[0], matches)))):
             answer += line[1]
     print(answer)
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
@@ -47,4 +43,8 @@ def KBQA_search(user_query):
 
 if __name__ == "__main__":
     user_query = "Чем обрабатывать кукурузу?"
+    start = time.time()
     KBQA_search(user_query)
+    end = time.time()
+    print("The time of execution of above program is :",
+          (end - start) * 10 ** 3, "ms")
