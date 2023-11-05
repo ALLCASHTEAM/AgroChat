@@ -2,17 +2,14 @@ import fire
 from llama_cpp import Llama
 
 SYSTEM_PROMPT = "You are an Aigro, a Russian—speaking automatic assistant. Always answer in Russian. You're company is AgroHim. Don't translate product names."
-SYSTEM_TOKEN = 1788
-USER_TOKEN = 1404
 BOT_TOKEN = 9225
 LINEBREAK_TOKEN = 13
 
 ROLE_TOKENS = {
-    "user": USER_TOKEN,
-    "bot": BOT_TOKEN,
-    "system": SYSTEM_TOKEN
+    "user": 1404,
+    "bot": 9225,
+    "system": 1788
 }
-model_path = './AI_PRO_MAX/model-q8_0.gguf'
 top_k = 30
 top_p = 0.9
 temperature = 0.2
@@ -37,13 +34,12 @@ def get_system_tokens(model):
 
 def interact():
     model = Llama(
-        model_path=model_path,
+        model_path='./AI_PRO_MAX/model-q8_0.gguf',
         n_ctx=2000,
         n_parts=1,
     )
 
-    system_tokens = get_system_tokens(model)
-    tokens = system_tokens
+    tokens = get_system_tokens(model)
     model.eval(tokens)
     return model, tokens
 
