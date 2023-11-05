@@ -22,7 +22,7 @@ def find_best_matches(user_query, sentence_model):
 
         # Сортируем список совпадений по оценкам в убывающем порядке
         matches.sort(key=lambda x: x[1], reverse=True)
-        return matches[0], liness
+        return matches[:3], liness
     except:
         return None
 
@@ -30,20 +30,21 @@ def find_best_matches(user_query, sentence_model):
 def KBQA_search(user_query):
     sentence_model = initialize_sentence_model()
     matches, liness = find_best_matches(user_query, sentence_model)
+    answer = ""
     best_result = list(map(lambda x: str(x).replace("('", "").split("?")[0], matches))
-    found_answers = ''
-    for question in best_result:
-        for q, a in liness:
-            if q.strip().lower().replace('?', '') == question.strip().lower():
-                found_answers += f',{a}'
-    found_answers = found_answers[1:]
-    print(found_answers)
+    print(best_result)
+    for line in liness:
+        # Проверяем, содержит ли строка первую половину
+        if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), best_result)):
+            # Если да, выводим эту строку
+            answer += line[1]
+    print(answer)
     print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
     print("Вопрос пользователя: ", user_query)
     print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
-    return (found_answers)
+    return (answer)
 
 
 if __name__ == "__main__":
-    user_query = "Чем обрабатывать сою?"
+    user_query = "Чем обрабатывать кукурузу?"
     KBQA_search(user_query)
