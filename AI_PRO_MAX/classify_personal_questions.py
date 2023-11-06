@@ -14,8 +14,7 @@ def is_personal(question):
     prediction = model.predict(question_vectorized)
     return prediction[0] == 1
 
-def kbqa(question):
-    pass
+
 # Входное предложение
 # input_sentence = "Чем удобрить свеклу?"
 

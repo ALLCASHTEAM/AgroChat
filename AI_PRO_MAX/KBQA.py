@@ -1,7 +1,8 @@
-from AI_PRO_MAX import ident_prod, realsweg
+from AI_PRO_MAX import ident_prod, realsweg, classify_personal_questions
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
+
 
 def initialize_sentence_model():
     return SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", device='cuda')
@@ -25,19 +26,23 @@ def find_best_matches(user_query, sentence_model):
 
 
 def KBQA_search(user_query):
-    matches, liness = find_best_matches(user_query, initialize_sentence_model())
-    answer = ""
-    for line in liness:
-        if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(lambda x: str(x).replace("('", "").split("?")[0], matches)))):
-            answer += line[1]
-    print(answer)
-    print("\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
-    print("Вопрос пользователя: ", user_query)
-    print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
-    return (answer)
+    if not classify_personal_questions:
+        matches, liness = find_best_matches(user_query, initialize_sentence_model())
+        answer = ""
+        for line in liness:
+            if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
+                    lambda x: str(x).replace("('", "").split("?")[0], matches)))):
+                answer += line[1]
+        print(answer)
+        print(
+            "\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
+        print("Вопрос пользователя: ", user_query)
+        print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
+        return (answer)
+    else:
+        return None
 
 
 if __name__ == "__main__":
     user_query = "Чем обрабатывать кукурузу?"
     KBQA_search(user_query)
-
