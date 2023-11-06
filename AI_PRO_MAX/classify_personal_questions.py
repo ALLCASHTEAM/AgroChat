@@ -2,8 +2,8 @@ import joblib
 import sys
 
 # Загрузка модели и векторизатора
-model = joblib.load('logistic_model_personal_questions.pkl')
-vectorizer = joblib.load('tfidf_vectorizer_personal_questions.pkl')
+model = joblib.load('./AI_PRO_MAX/logistic_model_personal_questions.pkl')
+vectorizer = joblib.load('./AI_PRO_MAX/tfidf_vectorizer_personal_questions.pkl')
 
 
 def is_personal(question):
