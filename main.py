@@ -1,11 +1,13 @@
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, BackgroundTasks, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 import json
 import hashlib
 import os
+import aiofiles
 import time
 from AI_PRO_MAX import mainAI
+from hashlib import sha256
 
 app = FastAPI()
 
@@ -21,23 +23,26 @@ async def read_root():
 
 
 @app.post("/request")
-async def make_response(data: Request):
-    body = await data.form()
-    text = body['text'] if 'text' in body.keys() else None
+async def make_response(background_tasks: BackgroundTasks, text: str = Form(...), image: UploadFile = File(None)):
     text = mainAI.AI_COMPIL(text)
-    if 'image' in body.keys():
-        image = body['image']
-        ext = image.filename.split('.')[-1]
-        image = await image.read()
-        hashed_image = hashlib.sha256(image).hexdigest()
-        filename = f'{str(hashed_image)}.{ext}'
 
+    if image:
+        ext = image.filename.split('.')[-1]
+        image_data = await image.read()
+        hashed_image = sha256(image_data).hexdigest()
+        filename = f'{hashed_image}.{ext}'
+
+        file_path = f'static/user_images/{filename}'
         if filename not in os.listdir('static/user_images'):
-            with open(f'static/user_images/{filename}', 'wb') as f:
-                f.write(image)
-    time.sleep(1)
-    return Response(content=json.dumps({'text': text, 'image': None}), media_type="application/json")
- 
+            background_tasks.add_task(save_image, image_data, file_path)
+
+    return {"text": text, "image": None}
+
+
+async def save_image(image_data, file_path):
+    async with aiofiles.open(file_path, 'wb') as f:
+        await f.write(image_data)
+
 
 @app.post("/get_image_hash")
 async def get_image_hash(data: Request):
