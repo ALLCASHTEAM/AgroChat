@@ -2,10 +2,6 @@ from AI_PRO_MAX import ident_prod, realsweg
 from sentence_transformers import SentenceTransformer, util
 import torch
 import os
-import time
-
-# record start time
-
 
 def initialize_sentence_model():
     return SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", device='cuda')
@@ -43,8 +39,5 @@ def KBQA_search(user_query):
 
 if __name__ == "__main__":
     user_query = "Чем обрабатывать кукурузу?"
-    start = time.time()
     KBQA_search(user_query)
-    end = time.time()
-    print("The time of execution of above program is :",
-          (end - start) * 10 ** 3, "ms")
+
