@@ -58,6 +58,11 @@
        		</li>
       		</ul>
     	</div>
+              <div class="modal-content">
+        <h2>Используя данный ресурс вы подтверждаете согласие с <a href="ссылка_на_страницу_с_п одробной_политикой">политикой конфиденциальности</a>.</h2>
+
+        <button id="acceptBtn">Принять</button>
+      </div>
     </main>
     <div id="bodyWrapper">
         <footer>
@@ -474,7 +479,26 @@ textInput.addEventListener("keydown", function(event) {
   }
 });
 
+ document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById("modal");
+    var acceptBtn = document.getElementById("acceptBtn");
 
+    // Проверяем, принял ли пользователь политику конфиденциальности
+    var privacyAccepted = localStorage.getItem("privacyAccepted");
+
+    // Если пользователь не принял политику, показываем модальное окно
+    if (!privacyAccepted) {
+        modal.style.display = "block";
+    }
+
+    // Обработчик для кнопки "Принять"
+    acceptBtn.addEventListener("click", function() {
+        // Сохраняем информацию о принятии политики в localStorage
+        localStorage.setItem("privacyAccepted", "true");
+        // Скрываем модальное окно
+        modal.style.display = "none";
+    });
+});
 </script>
 
 

@@ -169,3 +169,45 @@
 #scroller::-webkit-scrollbar-track {
   background-color: var(--main-black); /* Цвет трека скроллбара */
 }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    font-family: 'Roboto';
+    background-color: var(--secondary-black);
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 60%;
+    width: 100%; /* Ensures the width is always 100% of the parent */
+}
+
+.modal-content a {
+    text-decoration: underline;
+    color: #007bff;
+}
+
+#acceptBtn {
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: 0;
+    background-color: var(--main-green);
+    color: var(--main-black);
+}
