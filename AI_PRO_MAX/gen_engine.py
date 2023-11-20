@@ -1,13 +1,13 @@
 import fire
 from llama_cpp import Llama
 
-BOT_TOKEN = 9225
+BOT_TOKEN = 12435
 LINEBREAK_TOKEN = 13
 
 ROLE_TOKENS = {
-    "user": 1404,
-    "bot": 9225,
-    "system": 1788
+    "user": 2188,
+    "bot": 12435,
+    "system": 1587
 }
 
 

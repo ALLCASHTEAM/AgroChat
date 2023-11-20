@@ -26,7 +26,7 @@ def find_best_matches(user_query, sentence_model):
 
 
 def KBQA_search(user_query):
-    print(classify_personal_questions.is_personal(user_query))
+   
     if not classify_personal_questions.is_personal(user_query):
         matches, liness = find_best_matches(user_query, model)
         try:
