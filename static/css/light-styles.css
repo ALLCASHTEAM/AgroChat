@@ -245,4 +245,5 @@ footer{
     border: 0;
     background-color: var(--main-green);
     color: var(--main-white);
+	cursor: pointer;
 }
