@@ -217,7 +217,7 @@ footer{
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+#modal-content {
     font-family: 'Roboto';
     background-color: #fefefe;
     position: absolute;
@@ -233,7 +233,7 @@ footer{
     width: 100%; /* Ensures the width is always 100% of the parent */
 }
 
-.modal-content a {
+#modal-content a {
     text-decoration: underline;
     color: #007bff;
 }

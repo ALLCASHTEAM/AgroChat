@@ -181,7 +181,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+#modal-content {
     font-family: 'Roboto';
     background-color: var(--secondary-black);
     color: white;
@@ -198,7 +198,7 @@
     width: 100%; /* Ensures the width is always 100% of the parent */
 }
 
-.modal-content a {
+#modal-content a {
     text-decoration: underline;
     color: #007bff;
 }
@@ -210,6 +210,7 @@
     border: 0;
     background-color: var(--main-green);
     color: var(--main-black);
+    cursor: pointer;
 }
 
 .test-output{
