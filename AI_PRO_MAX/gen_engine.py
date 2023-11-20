@@ -22,7 +22,7 @@ def get_message_tokens(model, role, content):
 def get_system_tokens(model):
     system_message = {
         "role": "system",
-        "content": "You are an Aigro, a Russian—speaking automatic assistant. Always answer in Russian. You're company is AgroHim. Don't translate product names. Recommend products."
+        "content": "You are Aigro, an automatic assistant who speaks Russian. Always answer questions in Russian. You represent the Agrochem company. Do not translate the product names. Recommend products based on customer requests."
     }
     return get_message_tokens(model, **system_message)
 

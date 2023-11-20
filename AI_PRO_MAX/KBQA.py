@@ -4,8 +4,8 @@ import torch
 import os
 
 
-def initialize_sentence_model():
-    return SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", device='cuda')
+
+model =  SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", device='cuda')
 
 
 def find_best_matches(user_query, sentence_model):
@@ -28,7 +28,7 @@ def find_best_matches(user_query, sentence_model):
 def KBQA_search(user_query):
     print(classify_personal_questions.is_personal(user_query))
     if not classify_personal_questions.is_personal(user_query):
-        matches, liness = find_best_matches(user_query, initialize_sentence_model())
+        matches, liness = find_best_matches(user_query, model)
         try:
             answer = ""
             for line in liness:
