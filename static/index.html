@@ -58,11 +58,13 @@
        		</li>
       		</ul>
     	</div>
-              <div id="modal-content">
-        <h2>Используя данный ресурс вы подтверждаете согласие с <a href="ссылка_на_страницу_с_п одробной_политикой">политикой конфиденциальности</a>.</h2>
+            <div class="modal" id = "modal">
+                  <div id="modal-content">
+            <h2>Используя данный ресурс вы подтверждаете согласие с <a href="ссылка_на_страницу_с_п одробной_политикой">политикой конфиденциальности</a>.</h2>
 
-        <button id="acceptBtn">Принять</button>
-      </div>
+            <button id="acceptBtn">Принять</button>
+          </div>
+        </div>
     </main>
     <div id="bodyWrapper">
         <footer>
@@ -505,7 +507,7 @@ textInput.addEventListener("keydown", function(event) {
 });
 
  document.addEventListener("DOMContentLoaded", function() {
-    var modal = document.getElementById("modal-content");
+    var modal = document.getElementById("modal");
     var acceptBtn = document.getElementById("acceptBtn");
 
     // Проверяем, принял ли пользователь политику конфиденциальности
