@@ -79,7 +79,7 @@
 <script type="text/javascript">
 
 var waitingForResponse = false;
-let bbc;
+
 
 
 
@@ -241,36 +241,31 @@ document.getElementById('about').addEventListener('click', function(){
 
     // Заменяем существующий элемент на новый элемент
     existingLi.parentNode.replaceChild(chatBubble_bot, existingLi);
-    saveStateToLocalStorage();
-    bbc = botBubbleCounter;
+    //saveStateToLocalStorage();
+    saveHtmlToLocalStorage();
 
   }
-
-
-
-  // Функция для сохранения состояния в локальное хранилище
-function saveStateToLocalStorage() {
-    var existingLiClass = document.querySelector('.bot__output').className;
-    console.log("SaveStateToLocalStorage"+ existingLiClass);
-    localStorage.setItem('botOutputClass', existingLiClass);
+// Save the current HTML code to local storage
+function saveHtmlToLocalStorage() {
+    var htmlCode = document.documentElement.outerHTML;
+    localStorage.setItem('savedHtmlCode', htmlCode);
 }
 
-// Вызывается при загрузке страницы для восстановления состояния из локального хранилища
-function restoreStateFromLocalStorage() {
-    var savedClass = localStorage.getItem('botOutputClass');
-    console.log("saved class: "+ savedClass);
-    if (savedClass) {
-
-        var existingLi = document.querySelector('.test-output');
-        console.log("RestoreStateFromLocalStorage" + existingLi);
-        existingLi.classList = savedClass;
+// Restore the HTML code from local storage
+function restoreHtmlFromLocalStorage() {
+    var savedHtmlCode = localStorage.getItem('savedHtmlCode');
+    if (savedHtmlCode) {
+        document.open();
+        document.write(savedHtmlCode);
+        document.close();
     }
 }
 
-// Вызываем функцию восстановления состояния при загрузке страницы
-document.addEventListener('DOMContentLoaded', function () {
-    restoreStateFromLocalStorage();
-});
+// Save the HTML code when the page is unloaded (e.g., before a refresh or navigation)
+window.addEventListener('beforeunload', saveHtmlToLocalStorage);
+
+// Restore the HTML code when the page is loaded
+document.addEventListener('DOMContentLoaded', restoreHtmlFromLocalStorage);
 
   // make bot bubble with unique class
   function makeBotBubble(text, image=null){
