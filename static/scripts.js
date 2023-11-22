@@ -65,6 +65,8 @@ document.getElementById('about').addEventListener('click', function(){
   });
   let fileInput = document.querySelector('.send_img');
   let chatList = document.querySelector('.chatlist');
+  console.log("старт"+fileInput);
+      console.log("старт"+chatList);
   document.getElementsByClassName("send_img")[0].addEventListener("input", (()=>{
     console.log(document.getElementsByClassName("send_img")[0]);
     document.getElementsByClassName("attach-button")[0].textContent = fileInput.files[0].name;
@@ -177,9 +179,13 @@ function saveHtmlToLocalStorage() {
 function restoreHtmlFromLocalStorage() {
     var savedHtmlCode = localStorage.getItem('savedHtmlCode');
     if (savedHtmlCode) {
+      console.log(fileInput);
+      console.log(chatList);
         document.open();
         document.write(savedHtmlCode);
         document.close();
+        console.log(fileInput);
+      console.log(chatList);
     }
 }
 
