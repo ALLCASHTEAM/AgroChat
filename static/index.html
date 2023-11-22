@@ -79,6 +79,7 @@
 <script type="text/javascript">
 
 var waitingForResponse = false;
+let bbc;
 
 
 
@@ -240,7 +241,36 @@ document.getElementById('about').addEventListener('click', function(){
 
     // Заменяем существующий элемент на новый элемент
     existingLi.parentNode.replaceChild(chatBubble_bot, existingLi);
+    saveStateToLocalStorage();
+    bbc = botBubbleCounter;
+
   }
+
+
+
+  // Функция для сохранения состояния в локальное хранилище
+function saveStateToLocalStorage() {
+    var existingLiClass = document.querySelector('.bot__output').className;
+    console.log("SaveStateToLocalStorage"+ existingLiClass);
+    localStorage.setItem('botOutputClass', existingLiClass);
+}
+
+// Вызывается при загрузке страницы для восстановления состояния из локального хранилища
+function restoreStateFromLocalStorage() {
+    var savedClass = localStorage.getItem('botOutputClass');
+    console.log("saved class: "+ savedClass);
+    if (savedClass) {
+
+        var existingLi = document.querySelector('.test-output');
+        console.log("RestoreStateFromLocalStorage" + existingLi);
+        existingLi.classList = savedClass;
+    }
+}
+
+// Вызываем функцию восстановления состояния при загрузке страницы
+document.addEventListener('DOMContentLoaded', function () {
+    restoreStateFromLocalStorage();
+});
 
   // make bot bubble with unique class
   function makeBotBubble(text, image=null){
