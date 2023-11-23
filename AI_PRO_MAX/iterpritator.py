@@ -2,13 +2,13 @@ from transformers import T5ForConditionalGeneration, GPT2Tokenizer
 from torch import device
 
 
-def load_interpreter(model_name='Den4ikAI/FRED-T5-Large-interpreter'):
-    model_name = 'Den4ikAI/FRED-T5-Large-interpreter'
-    tokenizer = GPT2Tokenizer.from_pretrained(model_name, )
-    model = T5ForConditionalGeneration.from_pretrained(model_name)
-    model.to('cuda')  # cpu-cuda
-    model.eval()
-    return model, tokenizer
+
+model_name = 'Den4ikAI/FRED-T5-Large-interpreter'
+tokenizer = GPT2Tokenizer.from_pretrained(model_name, )
+model = T5ForConditionalGeneration.from_pretrained(model_name)
+model.to('cuda')  # cpu-cuda
+model.eval()
+
 
 
 def load_data():
@@ -19,7 +19,7 @@ def load_data():
     return line
 
 
-# sex = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n-сколько он стоит?"
+
 
 def generate_intr(model, tokenizer, message_text: str):
     t5_input = f'<SC1> {message_text}\n Развернутый ответ:<extra_id_0>#'
@@ -32,7 +32,10 @@ def generate_intr(model, tokenizer, message_text: str):
 
 def interpritator_with_history(dialog):
     text = load_data() + f"-{dialog.lower()}"
-    model, tokenizer = load_interpreter()
     result = generate_intr(model, tokenizer, text)
     print('Текст', text, '\n Вывод: ', result)
     return result
+
+if __name__ == '__main__':
+    sex = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n-сколько он стоит?"
+    print(interpritator_with_history())

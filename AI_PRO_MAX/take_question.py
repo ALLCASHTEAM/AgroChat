@@ -6,7 +6,7 @@ def Process_query(text):
     #
     print("\nscript: take_question.py\n################################# ОБРАБОТКА ЗАПРОСА #################################\n")
     print("Запрос на входе: ",text,"\n")
-    upd_text = iterpritator.interpritator_with_history(text.replace("<extra_id_0> ",  "").replace("?</s>", "")).lower()
+    upd_text = iterpritator.interpritator_with_history(text).replace("<extra_id_0> ",  "").replace("?</s>", "").lower()
 
     print("Обработанный запрос: ", upd_text, "\n")
 
