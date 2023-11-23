@@ -11,7 +11,9 @@ from hashlib import sha256
 
 app = FastAPI()
 with open('tmp.txt', 'w', encoding='utf-8') as f:
-    f.write('')
+    f.write('-')
+    f.write('-')
+    f.write('-')
 app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
 app.mount("/static/user_images", StaticFiles(directory=images_directory), name="/static/user_images")
