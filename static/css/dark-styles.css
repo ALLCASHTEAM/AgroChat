@@ -213,33 +213,34 @@
     cursor: pointer;
 }
 
-.test-output{
-	display: inline-flex;
-	background: var(--main-green);
-	padding: 15px 20px;
-	border-radius: 1px 25px 25px 25px;
-	margin: 0 auto;
-	margin-left: 0px;
-  }
 
-  .test-output .dot{
-	height: 10px;
-	width: 10px;
-	opacity: 0.7;
-	border-radius: 50%;
-	background: #ffffff;
-	animation: animateDots 1.8s var(--delay) ease-in-out infinite;
-  }
+.loader_custom_zalupa{
+  width: 15px;
+  height: 15px;
+  margin: 0px 20px 0px 20px
+}
 
-  @keyframes animateDots {
-	0%, 44% {
-	  transform: translateY(0px);
-	}
-	28% {
-	  opacity: 0.4;
-	  transform: translateY(-9px);
-	}
-	44%{
-	  opacity: 0.2;
-	}
+.loader {
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  background: #FFF;
+  box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: #FFF;
+    box-shadow: -24px 0 #838383, 24px 0 #FFF;
   }
+  66% {
+    background: #838383;
+    box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+  }
+  100% {
+    background: #FFF;
+    box-shadow: -24px 0 #FFF, 24px 0 #838383;
+  }
+}
