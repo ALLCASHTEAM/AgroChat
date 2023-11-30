@@ -14,7 +14,7 @@ w2v_model = KeyedVectors.load_word2vec_format('./AI_PRO_MAX/model.bin', binary=T
 
 
 # Выполним поиск по индексу
-def search_with_w2v_synonyms(question, index, w2v_model, topn=6):
+def search_with_w2v_synonyms(question, index, w2v_model, topn=8):
     results = set()
     for word in re.sub(r'[^\w\s]', '', question.lower()).split():
         # Добавляем слово в поиск
@@ -31,7 +31,7 @@ def search_with_w2v_synonyms(question, index, w2v_model, topn=6):
 
 def list_return(sample_question: str) -> list:
     list = []
-    for i in search_with_w2v_synonyms(sample_question, loaded_index, w2v_model, topn=6):
+    for i in search_with_w2v_synonyms(sample_question, loaded_index, w2v_model, topn=8):
         list.append(rhash[f'{i[0]}.txt'][i[1]])
     return list
 

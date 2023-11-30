@@ -3,16 +3,17 @@ import re
 from collections import defaultdict
 import json
 # Задайте путь к вашей папке
-folder_path = '../rofls/'
+folder_path = './'
 
 # Получите список всех файлов и папок в директории
 files_and_folders = os.listdir(folder_path)
 
 # Отфильтруйте все, что является файлом
 files = [f for f in files_and_folders if os.path.isfile(os.path.join(folder_path, f))]
-print(files[3:])
+
 # Путь к файлам
-file_paths = files[3:]
+file_paths = files[1:]
+file_paths.pop(1)
 
 
 # Функция для чтения и предобработки текста из файла
@@ -54,7 +55,7 @@ for file_path in file_paths:
 index_dict = {word: entries for word, entries in index.items()}
 
 # Путь для сохранения индекса в формате JSON
-index_json_path = 'index.json'
+index_json_path = '../AI_PRO_MAX/index.json'
 
 # Сохраняем индекс в JSON файл
 with open(index_json_path, 'w', encoding='utf-8') as f_json:

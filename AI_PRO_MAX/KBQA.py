@@ -20,7 +20,7 @@ def find_best_matches(user_query, sentence_model):
 
         # Сортируем список совпадений по оценкам в убывающем порядке
         matches.sort(key=lambda x: x[1], reverse=True)
-        return matches[:3], liness
+        return matches[:4], liness
     except:
         return None, None
 
