@@ -11,6 +11,16 @@ ROLE_TOKENS = {
 }
 
 
+def generator_func(generator, model, tokens, answer=''):
+    for token in generator:
+        token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
+        answer += token_str
+        if token == model.token_eos():
+            break
+        tokens.append(token)
+    return answer, tokens
+
+
 def get_message_tokens(model, role, content):
     message_tokens = model.tokenize(content.encode("utf-8"))
     message_tokens.insert(1, ROLE_TOKENS[role])
@@ -45,7 +55,8 @@ def generate(question, tokens, model, context=False):
     else:
         print(question)
         user_message = f"User: Question:{question}"
-    tokens += get_message_tokens(model=model, role="user", content=user_message) + [model.token_bos(), BOT_TOKEN, LINEBREAK_TOKEN]
+    tokens += get_message_tokens(model=model, role="user", content=user_message) + [model.token_bos(), BOT_TOKEN,
+                                                                                    LINEBREAK_TOKEN]
     generator = model.generate(
         tokens,
         top_k=30,
@@ -53,14 +64,20 @@ def generate(question, tokens, model, context=False):
         temp=0.2,
         repeat_penalty=1.1
     )
-    answer = ''
-    for token in generator:
-        token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
-        answer += token_str
-        if token == model.token_eos():
-            break
-        tokens.append(token)
-    return answer
+
+    try:
+        answer, tokens = generator_func(generator, model, tokens)
+        return answer
+    except:
+        generator = model.generate(
+            tokens,
+            top_k=30,
+            top_p=0.9,
+            temp=0.2,
+            repeat_penalty=1.1
+        )
+        answer, tokens = generator_func(generator, model, tokens)
+        return answer
 
 
 if __name__ == "__main__":

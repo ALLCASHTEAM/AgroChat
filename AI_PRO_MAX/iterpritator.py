@@ -1,14 +1,11 @@
 from transformers import T5ForConditionalGeneration, GPT2Tokenizer
 from torch import device
 
-
-
-model_name = 'Den4ikAI/FRED-T5-Large-interpreter'
+model_name = 'Den4ikAI/FRED-T5-XL-interpreter'
 tokenizer = GPT2Tokenizer.from_pretrained(model_name, )
 model = T5ForConditionalGeneration.from_pretrained(model_name)
 model.to('cuda')  # cpu-cuda
 model.eval()
-
 
 
 def load_data():
@@ -17,8 +14,6 @@ def load_data():
     line[-1] = line[-1] + '\n'
     line = '-'.join(line)
     return line
-
-
 
 
 def generate_intr(model, tokenizer, message_text: str):
@@ -35,6 +30,7 @@ def interpritator_with_history(dialog):
     result = generate_intr(model, tokenizer, text)
     print('Текст', text, '\n Вывод: ', result)
     return result
+
 
 if __name__ == '__main__':
     sex = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n-сколько он стоит?"
