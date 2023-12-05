@@ -1,38 +1,24 @@
-import fire
 from llama_cpp import Llama
-
-BOT_TOKEN = 12435
-LINEBREAK_TOKEN = 13
-
-ROLE_TOKENS = {
-    "user": 2188,
-    "bot": 12435,
-    "system": 1587
-}
 
 
 def generator_func(generator, model, tokens, answer=''):
     for token in generator:
-        token_str = model.detokenize([token]).decode("utf-8", errors="ignore")
-        answer += token_str
+        answer += model.detokenize([token]).decode("utf-8", errors="ignore")
         if token == model.token_eos():
             break
         tokens.append(token)
     return answer, tokens
 
 
-def get_message_tokens(model, role, content):
+def get_message_tokens(model, content: str):
     message_tokens = model.tokenize(content.encode("utf-8"))
-    message_tokens.insert(1, ROLE_TOKENS[role])
-    message_tokens.insert(2, LINEBREAK_TOKEN)
     message_tokens.append(model.token_eos())
     return message_tokens
 
 
 def get_system_tokens(model):
     system_message = {
-        "role": "system",
-        "content": "You are Aigro, an automatic assistant who speaks Russian. Always answer questions in Russian. You represent the Agrochem company. Do not translate the product names. Recommend products based on customer requests."
+        "content": "You are Aigro, an automatic assistant who speaks Russian. Always answer questions in Russian. You represent the Agrochem company. Do not translate the product names. Use only those products names that are in the context."
     }
     return get_message_tokens(model, **system_message)
 
@@ -40,8 +26,9 @@ def get_system_tokens(model):
 def interact():
     model = Llama(
         model_path='./AI_PRO_MAX/model-q8_0.gguf',
-        n_ctx=2000,
-        n_parts=1,
+        n_ctx=8192,
+        n_gpu_layers=35,
+
     )
 
     tokens = get_system_tokens(model)
@@ -49,14 +36,12 @@ def interact():
     return model, tokens
 
 
-def generate(question, tokens, model, context=False):
+def generate(question: str, tokens, model, context=False):
     if context:
-        user_message = f"User: Context{context} Question:{question}"
+        user_message = f"Context:{context} GPT4 User:{question}<|end_of_turn|>GPT4 Assistant:"
     else:
-        print(question)
-        user_message = f"User: Question:{question}"
-    tokens += get_message_tokens(model=model, role="user", content=user_message) + [model.token_bos(), BOT_TOKEN,
-                                                                                    LINEBREAK_TOKEN]
+        user_message = f"GPT4 User:{question}<|end_of_turn|>GPT4 Assistant:"
+    tokens += get_message_tokens(model=model, content=user_message)
     generator = model.generate(
         tokens,
         top_k=30,
@@ -69,6 +54,8 @@ def generate(question, tokens, model, context=False):
         answer, tokens = generator_func(generator, model, tokens)
         return answer
     except:
+        print("Очистка контекста")
+        tokens = get_message_tokens(model=model, content=user_message)
         generator = model.generate(
             tokens,
             top_k=30,
@@ -78,8 +65,3 @@ def generate(question, tokens, model, context=False):
         )
         answer, tokens = generator_func(generator, model, tokens)
         return answer
-
-
-if __name__ == "__main__":
-    model, tokens = interact()
-    fire.Fire(generate(input("Question"), tokens, model))

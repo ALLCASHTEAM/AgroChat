@@ -1,11 +1,8 @@
-from AI_PRO_MAX import ident_prod, realsweg, classify_personal_questions
+from AI_PRO_MAX import realsweg, classify_personal_questions
 from sentence_transformers import SentenceTransformer, util
-import torch
-import os
 
 
-
-model =  SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2", device='cuda')
+model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
 
 def find_best_matches(user_query, sentence_model):
@@ -26,8 +23,8 @@ def find_best_matches(user_query, sentence_model):
 
 
 def KBQA_search(user_query):
-   
     if not classify_personal_questions.is_personal(user_query):
+        print("База запущенна")
         matches, liness = find_best_matches(user_query, model)
         try:
             answer = ""
@@ -35,11 +32,9 @@ def KBQA_search(user_query):
                 if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
                         lambda x: str(x).replace("('", "").split("?")[0], matches)))):
                     answer += line[1]
-            print(answer)
-            print(
-                "\nscript: KBQA.py\n################################ ПОИСК ПО БАЗЕ ЗНАНИЙ #################################")
-            print("Вопрос пользователя: ", user_query)
+
             print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
+            print(answer)
             return (answer)
         except:
             return None

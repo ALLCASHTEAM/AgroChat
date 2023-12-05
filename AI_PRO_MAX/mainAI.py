@@ -1,14 +1,15 @@
-from AI_PRO_MAX import iterpritator, KBQA, gen_engine, take_question
+from AI_PRO_MAX import iterpritator, KBQA, gen_engine
 
 model, tokens = gen_engine.interact()
 
 
-def AI_COMPIL(question):
-    processed_question = take_question.Process_query(question)
+def AI_COMPIL(question: str) -> str:
+    print("Вход:", question)
+    processed_question = iterpritator.interpritator_with_history(question).replace("<extra_id_0> ",  "").replace("?</s>", "").lower()
 
-    print("\n\n\nУ нас есть: \n", processed_question)
+    print("\n Интерпретация: ", processed_question)
     answer = gen_engine.generate(question, tokens, model, KBQA.KBQA_search(processed_question))
-    answer = answer.replace("Agrochat: ", "").replace("Выход:", '').replace("BioStim Start", "Биостим Старт").replace("BioStim", "Биостим").replace("biostim", "Биостим").replace("Answer:", "").replace("Agrochem", 'Агрохим')
+    answer = answer.replace("GPT4", "").replace("G", '', 1).replace("Answer:", "").replace("Agrochem", 'Агрохим')
     print(answer)
     with open('tmp.txt', 'w', encoding='utf-8') as tmp_file:
         tmp_file.write(processed_question)

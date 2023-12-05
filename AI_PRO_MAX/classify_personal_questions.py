@@ -1,5 +1,4 @@
 import joblib
-import sys
 
 # Загрузка модели и векторизатора
 model = joblib.load('./AI_PRO_MAX/logistic_model_personal_questions.pkl')
@@ -15,8 +14,5 @@ def is_personal(question):
     return prediction[0] == 1
 
 
-# Входное предложение
 # input_sentence = "Чем удобрить свеклу?"
-
-# Вывод результата
 # print(is_personal(input_sentence))
