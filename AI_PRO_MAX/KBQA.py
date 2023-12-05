@@ -24,7 +24,7 @@ def find_best_matches(user_query, sentence_model):
 
 def KBQA_search(user_query):
     if not classify_personal_questions.is_personal(user_query):
-        print("База запущенна")
+        print("INFO. База запущенна")
         matches, liness = find_best_matches(user_query, model)
         try:
             answer = ""
@@ -33,12 +33,13 @@ def KBQA_search(user_query):
                         lambda x: str(x).replace("('", "").split("?")[0], matches)))):
                     answer += line[1]
 
-            print("\n################################ КОНЕЦ ПОИСКА ПО БАЗЕ ЗНАНИЙ #################################")
-            print(answer)
+            print("INFO. Ответ от базы", answer)
             return (answer)
         except:
+            print("Waring!. Ответ от базы пуст")
             return None
     else:
+        print("INFO. Чит-чат режим (без базы)")
         return None
 
 

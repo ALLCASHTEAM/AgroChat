@@ -10,10 +10,6 @@ rhash = hash_list.hash_creator()
 w2v_model = KeyedVectors.load_word2vec_format('./AI_PRO_MAX/model.bin', binary=True)
 
 
-# Функция для поиска файлов и позиций вопросов по заданному вопросу
-
-
-# Выполним поиск по индексу
 def search_with_w2v_synonyms(question, index, w2v_model, topn=8):
     results = set()
     for word in re.sub(r'[^\w\s]', '', question.lower()).split():

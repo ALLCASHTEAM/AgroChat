@@ -5,7 +5,6 @@ import json
 import hashlib
 import os
 import aiofiles
-import time
 from AI_PRO_MAX import mainAI
 from hashlib import sha256
 
