@@ -10,7 +10,7 @@ def AI_COMPIL(question: str) -> str:
     print("INFO. Интерпретация: ", processed_question)
     answer = gen_engine.generate(question, tokens, model, KBQA.KBQA_search(processed_question))
     tokens = answer[1]
-    answer = answer[0].replace("GPT4", "").replace("GPT:", '', 1).replace("Answer:", "").replace("Agrochem", 'Агрохим')
+    answer = answer[0].replace("GPT4", "").replace("GPT:", '', 1).replace("Answer:", "").replace("Agrochem", 'Агрохим').replace("Context:", "").replace("GPT 4:", "").replace("GPT-4:", "").replace("GPT", "")
     print("INFO. Ответ генератора", answer)
     with open('tmp.txt', 'w', encoding='utf-8') as tmp_file:
         tmp_file.write(processed_question)
