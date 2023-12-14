@@ -14,35 +14,31 @@ def find_best_matches(user_query, sentence_model):
 
         matches = sorted(((lines[i], similarities[i], i) for i in range(len(lines))),
                          key=lambda x: x[1], reverse=True)
-        return matches[:4], liness
+        return matches[:3], liness
     except Exception as e:
         print(f"Ошибка: {e}")
         return None, None
 
 
 def KBQA_search(user_query):
-    if not classify_personal_questions.is_personal(user_query):
-        print("INFO. База запущенна")
-        matches, liness = find_best_matches(user_query, model)
-        if matches is not None:
-            try:
-                answer = ""
-                matched_questions = {x.lower().strip() for x, _, _ in matches}
-                for line in liness:
-                    question = line[0].replace('?', '').lower().strip()
-                    if question in matched_questions:
-                        answer += line[1]
+    print("INFO. База запущенна")
+    matches, liness = find_best_matches(user_query, model)
+    if matches is not None:
+        try:
+            answer = ""
+            matched_questions = {x.lower().strip() for x, _, _ in matches}
+            for line in liness:
+                question = line[0].replace('?', '').lower().strip()
+                if question in matched_questions:
+                    answer += line[1]
 
-                print("INFO. Ответ от базы", answer)
-                return answer
-            except Exception as e:
-                print(f"Waring!. Ответ от базы пуст. Ошибка: {e}")
-                return None
-        else:
-            print("Waring!. Ошибка при поиске совпадений")
+            print("INFO. Ответ от базы", answer)
+            return answer
+        except Exception as e:
+            print(f"Waring!. Ответ от базы пуст. Ошибка: {e}")
             return None
     else:
-        print("INFO. Чит-чат режим (без базы)")
+        print("Waring!. Ошибка при поиске совпадений")
         return None
 
 
