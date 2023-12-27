@@ -13,9 +13,7 @@ document.getElementById('backToSite').addEventListener('click', function(){
   window.location.href = 'https://betaren.ru/';
 });
 
-document.getElementById('privacy-policy').addEventListener('click', function(){
-  window.location.href = 'https://betaren.ru/';
-});
+
 
 document.getElementById('about').addEventListener('click', function(){
   window.location.href = 'https://betaren.ru/about/';
