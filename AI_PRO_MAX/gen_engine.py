@@ -1,60 +1,43 @@
-import logging
 from llama_cpp import Llama
 import torch
-logging.basicConfig(level=logging.INFO, filename="gen_log.log", filemode="w")
-print(torch.cuda.is_available())
-def accumulate_tokens(generator, model):
-    answer = ''
-    tokens = []
-    for token in generator:
-        answer += model.detokenize([token]).decode("utf-8", errors="ignore")
-        tokens.append(token)
-        if token == model.token_eos():
-            break
-    return answer, tokens
-
-
-def get_message_tokens(tokenize_func, token_eos_func, content: str):
-    message_tokens = tokenize_func(content.encode("utf-8"))
-    message_tokens.append(token_eos_func())
-    return message_tokens
-
-
-def get_system_tokens(model):
-    system_message = "System Promt: You are Aigro, an automatic assistant. You represent the Агрохим company.<|end_of_turn|>"
-    return get_message_tokens(model.tokenize, model.token_eos, system_message)
-
 
 def interact():
     model = Llama(
-        model_path='./AI_PRO_MAX/model-q8_0.gguf',
+        model_path='./AI_PRO_MAX/model-q16_0.gguf',
         n_ctx=8192,
-	n_threads=8,
-        n_gpu_layers=-1,
+        n_gpu_layers=35,
+        chat_format="llama-2",
+
     )
-    tokens = get_system_tokens(model)
-    model.eval(tokens)
-    return model, tokens
+
+    return model
 
 
-def generate(question: str, tokens, model, context=False):
-    user_message = f"GPT4 Correct Context:{context} <|end_of_turn|>GPT4 Correct User:{question}<|end_of_turn|>GPT4 Correct Assistant:" if context else f"GPT4 Correct User:{question}<|end_of_turn|>GPT4 Correct Assistant:"
-    tokens += get_message_tokens(model.tokenize, model.token_eos, user_message)
-    generator = model.generate(tokens)
+def generate(question, model, context=False):
 
-    
-    #    return accumulate_tokens(generator, model)
-    # Exception as e:
+    if context:
+        answer = model.create_chat_completion(temperature=0.25, top_p=0.8, top_k=30,
+            messages=[
+                {"role": "system", "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
+                {
+                    "role": "user",
+                    "content": f"Context:{context} GPT4 User:{question}<|end_of_turn|>GPT4 Assistant:"
+                }
+            ]
+        )
+    else:
+        answer = model.create_chat_completion(temperature=0.25, top_p=0.8, top_k=30,
+            messages=[
+                {"role": "system",
+                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly.<|end_of_turn|>"},
+                {
+                    "role": "user",
+                    "content": f"GPT4 User:{question}<|end_of_turn|>GPT4 Assistant:"
+                }
+            ]
+        )
 
-   # logging.error(e)
-   # print(f"ERROR!. Ошибка в генераторе. Очистка контекста и новая попытка.")
-   # tokens = get_message_tokens(model.tokenize, model.token_eos, user_message)
-   # generator = model.generate(token)
-    return accumulate_tokens(generator, model)
+    return answer["choices"][0]["message"]["content"]
 
 
-if __name__ == '__main__':
-    model, tokens = interact()
-    question = "Your question here"
-    answer, _ = generate(question, tokens, model)
-    print(answer)
+
