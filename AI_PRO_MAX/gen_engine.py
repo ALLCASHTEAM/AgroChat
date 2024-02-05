@@ -5,7 +5,7 @@ def interact():
     model = Llama(
         model_path='./AI_PRO_MAX/model-q16_0.gguf',
         n_ctx=8192,
-        n_gpu_layers=35,
+        n_gpu_layers=33,
         chat_format="llama-2",
 
     )

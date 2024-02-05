@@ -1,7 +1,7 @@
 from AI_PRO_MAX import realsweg
 from sentence_transformers import SentenceTransformer, util
 
-model = SentenceTransformer('intfloat/multilingual-e5-large')
+model = SentenceTransformer('hivaze/ru-e5-large')
 
 
 def find_best_matches(user_query, sentence_model):
