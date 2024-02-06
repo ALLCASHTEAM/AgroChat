@@ -314,7 +314,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
   }
 });
-
+var sendBtn = document.getElementById('sendBtn');
+sendBtn.addEventListener("click", function() {
+      event.preventDefault();
+      makeBubbles();
+});
 document.addEventListener("DOMContentLoaded", function() {
     var modal = document.getElementById("modal");
     var acceptBtn = document.getElementById("acceptBtn");
