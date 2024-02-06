@@ -315,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 var sendBtn = document.getElementById('sendBtn');
-sendBtn.addEventListener("click", function() {
+sendBtn.addEventListener("click", function(event) {
       event.preventDefault();
       makeBubbles();
 });
