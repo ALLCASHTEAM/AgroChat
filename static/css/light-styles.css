@@ -76,6 +76,13 @@ object{
     gap: 15px;
     padding: 10px 25px 10px 20px;
 }
+  #privacy-policy a {
+    color: var(--secondary-grey);
+    text-decoration: none;
+}
+#privacy-policy {
+    cursor: pointer;
+}
 main{
 	max-height:75%;
 	overflow:auto;
