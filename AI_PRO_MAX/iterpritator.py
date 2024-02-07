@@ -2,7 +2,6 @@ from transformers import T5ForConditionalGeneration, GPT2Tokenizer
 
 tokenizer = GPT2Tokenizer.from_pretrained('Den4ikAI/FRED-T5-Large-interpreter')
 model = T5ForConditionalGeneration.from_pretrained('Den4ikAI/FRED-T5-Large-interpreter')
-model.eval()
 
 
 def generate_intr(model, tokenizer, message_text: str) -> str:
