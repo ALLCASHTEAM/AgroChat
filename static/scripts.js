@@ -25,8 +25,8 @@ document.getElementById('about').addEventListener('click', function(){
 
   // check if there's something in localStorage and load it into chat
     if (loadFromLocal("user").length > 0){
-      userStory = loadFromLocal("user").split(";").slice(1);
-      botStory = loadFromLocal("bot").split(";").slice(1);
+      userStory = String(loadFromLocal("user")).split(";").slice(1);
+      botStory = String(loadFromLocal("bot")).split(";").slice(1);
 
       for (let i = 0; i < userStory.length && i < botStory.length; i++){
         userData = userStory[i];
