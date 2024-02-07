@@ -21,7 +21,7 @@ def generate(question, model, context=False):
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
                 {
                     "role": "user",
-                    "content": f"Context:{context} GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"Context:{context} GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
         else:
@@ -30,15 +30,15 @@ def generate(question, model, context=False):
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
                 {
                     "role": "user",
-                    "content": f"GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 },
                 {
                     "role": "assistant",
-                    "content": f"GPT4 Assistant:{question[1]}<|end_of_turn|>"
+                    "content": f"GPT4 Assistant:{question[1].replace('text:', '')}<|end_of_turn|>"
                 },
                 {
                     "role": "user",
-                    "content": f"Context:{context} GPT4 User:{question[2]}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"Context:{context} GPT4 User:{question[2].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
     else:
@@ -48,7 +48,7 @@ def generate(question, model, context=False):
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
                 {
                     "role": "user",
-                    "content": f"GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
         else:
@@ -57,15 +57,15 @@ def generate(question, model, context=False):
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
                 {
                     "role": "user",
-                    "content": f"GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 },
                 {
                     "role": "assistant",
-                    "content": f"GPT4 Assistant:{question[1]}<|end_of_turn|>"
+                    "content": f"GPT4 Assistant:{question[1].replace('text:', '')}<|end_of_turn|>"
                 },
                 {
                     "role": "user",
-                    "content": f"GPT4 User:{question[2]}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"GPT4 User:{question[2].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
     answer = model.create_chat_completion(temperature=0.25, top_p=0.8, top_k=30, messages=messages)

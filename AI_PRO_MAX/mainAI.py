@@ -10,5 +10,5 @@ def AI_COMPIL(dialog: list[str]) -> str:
     answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
     print("INFO: Ответ генератора", answer)
     answer = answer.replace("GPT4", "").replace("GPT:", '', 1).replace("Answer:", "").replace("Agrochem", 'Агрохим').replace("Context:", "").replace("GPT 4:", "").replace("GPT-4:", "").replace("GPT", "").replace("G", "").replace("GPT4 Correct Assistant:", "").replace("Correct", "").replace("<|end_of_turn|>", "")
-    answer = answer.replace("[/INST]", "").replace("[/SYS]", "").replace("ГПТ4 Asistant:", '').replace("Asistant:", '')
+    answer = answer.replace("[/INST]", "").replace("[/SYS]", "").replace("ГПТ4 Asistant:", '').replace("Asistant:", '').replace('text:', '')
     return answer
