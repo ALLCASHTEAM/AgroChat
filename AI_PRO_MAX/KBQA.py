@@ -1,4 +1,4 @@
-from AI_PRO_MAX import realsweg
+from AI_PRO_MAX import realsweg, classify_personal_questions
 from sentence_transformers import SentenceTransformer, util
 
 model = SentenceTransformer('hivaze/ru-e5-large')
@@ -26,26 +26,29 @@ def find_best_matches(user_query, sentence_model):
 
 
 def KBQA_search(user_query):
-    print("INFO. База запущенна")
-    matches, liness = find_best_matches(user_query, model)
-    if matches is not None:
-        try:
-            answer = ""
-            for line in liness:
-                if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
-                        lambda x: str(x).replace("('", "").split("?")[0], matches)))):
-                    answer += line[0].replace('?', '').lower().strip()
-                    answer += line[1]
+    print("INFO: База запущенна")
+    if not classify_personal_questions.is_personal(user_query):
+        matches, liness = find_best_matches(user_query, model)
+        if matches is not None:
+            try:
+                answer = ""
+                for line in liness:
+                    if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
+                            lambda x: str(x).replace("('", "").split("?")[0], matches)))):
+                        answer += line[0].replace('?', '').lower().strip()
+                        answer += line[1]
 
-            print("INFO. Ответ от базы", answer)
-            return answer
-        except Exception as e:
-            print(f"Waring. Ответ от базы пуст. Ошибка: {e}")
+                print("INFO: Ответ от базы", answer)
+                return answer
+            except Exception as e:
+                print(f"Waring: Ответ от базы пуст. Ошибка: {e}")
+                return None
+        else:
+            print("Waring: Ошибка при поиске совпадений")
             return None
     else:
-        print("Waring. Ошибка при поиске совпадений")
+        print("INFO: Чит-чат режим (без базы)")
         return None
-
 
 if __name__ == "__main__":
     user_query = "Чем обрабатывать кукурузу?"

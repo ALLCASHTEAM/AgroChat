@@ -12,48 +12,59 @@ def interact():
 
     return model
 
-
 def generate(question, model, context=False):
 
     if context:
-        answer = model.create_chat_completion(temperature=0.25, top_p=0.8, top_k=30,
+        if len(question) == 1:
             messages=[
                 {"role": "system", "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
                 {
                     "role": "user",
-                    "content": f"Context:{context} GPT4 User:{question}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"Context:{context} GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
-        )
-    else:
-        answer = model.create_chat_completion(temperature=0.25, top_p=0.8, top_k=30,
+        else:
             messages=[
-                {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly.<|end_of_turn|>"},
+                {"role": "system", "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
                 {
                     "role": "user",
-                    "content": f"GPT4 User:{question}<|end_of_turn|>GPT4 Assistant:"
+                    "content": f"GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"GPT4 Assistant:{question[1]}<|end_of_turn|>"
+                },
+                {
+                    "role": "user",
+                    "content": f"Context:{context} GPT4 User:{question[2]}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
-        )
-    user_req = ["user", question, answer["promt_tokens"]]
-    assistant_req = ["assistant", answer["choices"][0]["message"]["content"], answer["completion_tokens"]]
-    print(user_req, '\n')
-    print(assistant_req, '\n')
-    dialog_history = []  # !!!#
-    # Указываем максимальное количество токенов на историю
-    # Дальнейший дрочreqs_sum = user_req[2] + assistant_req[2]
-    sum_third_column = sum(int(row[2]) for row in dialog_history if isinstance(row[2], (int, float)))
-    # Чистка истории диалога что бы новые смски вмещалисьwhile reqs_sum + sum_third_column >= max_tokens:
-    dialog_history.pop(0)
-    sum_third_column = sum(int(row[2]) for row in dialog_history if isinstance(row[2], (int, float)))
-
-    # добавление после всего говна в историю
-    dialog_history.append(user_req)
-    dialog_history.append(assistant_req)
-    #
-    # Сохранение истории диалога в локал стораге#!!!
-#
+    else:
+        if len(question) == 1:
+            messages=[
+                {"role": "system", "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
+                {
+                    "role": "user",
+                    "content": f"GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                }
+            ]
+        else:
+            messages=[
+                {"role": "system", "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
+                {
+                    "role": "user",
+                    "content": f"GPT4 User:{question[0]}<|end_of_turn|>GPT4 Assistant:"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"GPT4 Assistant:{question[1]}<|end_of_turn|>"
+                },
+                {
+                    "role": "user",
+                    "content": f"GPT4 User:{question[2]}<|end_of_turn|>GPT4 Assistant:"
+                }
+            ]
+    answer = model.create_chat_completion(temperature=0.25, top_p=0.8, top_k=30, messages=messages)
     return answer["choices"][0]["message"]["content"]
 
 

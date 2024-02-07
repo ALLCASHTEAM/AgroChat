@@ -5,11 +5,6 @@ model = T5ForConditionalGeneration.from_pretrained('Den4ikAI/FRED-T5-Large-inter
 model.eval()
 
 
-def load_data() -> str:
-    with open('tmp.txt', 'r', encoding='utf-8') as f:
-        return '-'.join(f.readlines())
-
-
 def generate_intr(model, tokenizer, message_text: str) -> str:
     t5_input = f'<SC1> {message_text}\n Развернутый ответ:<extra_id_0>#'
     input_ids = tokenizer(t5_input, return_tensors='pt').input_ids
@@ -18,8 +13,8 @@ def generate_intr(model, tokenizer, message_text: str) -> str:
     return tokenizer.decode(out_ids[0][1:])
 
 
-def interpretator_with_history(dialog: str) -> str:
-    text = load_data() + f"-{dialog.lower()}"
+def interpretator_with_history(dialog: list[str]) -> str:
+    text = '-'+("\n- ".join(dialog))
     return generate_intr(model, tokenizer, text)
 
 

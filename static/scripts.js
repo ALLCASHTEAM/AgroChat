@@ -172,7 +172,18 @@ document.getElementById('about').addEventListener('click', function(){
 
   // load from local storage
   function loadFromLocal(type){
-    return localStorage.getItem(type)
+    let storedItems = localStorage.getItem(type);
+    if (!storedItems) {
+        return []; // Возвращает пустой массив, если данных нет
+    }
+    return storedItems.split(";").map(item => {
+        // Предполагаем, что каждый элемент может быть простым текстом или JSON-строкой
+        try {
+            return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
+        } catch(e) {
+            return item; // Возвращаем как есть, если это простой текст
+        }
+    });
   }
 
 // REQUESTS
@@ -248,22 +259,38 @@ document.getElementById('about').addEventListener('click', function(){
 
   // function that sends request to server
   async function sendRequest(url, textData, imageData){
-        // create array with all the data
-        const formData = new FormData();
-        if (imageData){
-          formData.append('image', imageData);
-        }
-        formData.append('text', textData);
-        const response = await fetch(url, {
+    // Retrieve all user messages from local storage
+    let allUserMessages = loadFromLocal('user'); // Assuming this returns an array of all user messages
+    let allBotMessages = loadFromLocal('bot'); // Assuming this returns an array of all bot messages
+
+    // Select the last three messages of each
+    let lastThreeUserMessages = allUserMessages.slice(-2);
+    let lastThreeBotMessages = allBotMessages.slice(-1);
+
+    // Package these last three messages in a format suitable for your server endpoint
+    let dataToSend = {
+        userMessages: lastThreeUserMessages,
+        botMessages: lastThreeBotMessages
+    };
+
+    // Example: Sending data to the server using fetch API
+    const response = await fetch(url,{
         method: 'POST',
-        body: formData,});
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(
+            dataToSend),
+    });
         if (response.ok) {
           const resp = await response.json();
           return resp;
         } else {
           console.error('Request failed with status:', response.status);
-        }
-  }
+    }
+}
+  
   // function that gets hash of an image
   async function getImageHash(image){
     const form = new FormData();
@@ -342,3 +369,5 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
     });
 });
+// Function to send the last three messages to the server
+

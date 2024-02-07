@@ -1,6 +1,8 @@
-from fastapi import FastAPI, Request, Response, BackgroundTasks, UploadFile, File, Form
+from fastapi import FastAPI, Request, Response, BackgroundTasks, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
+from pydantic import BaseModel
+from typing import List, Optional
 import json
 import hashlib
 import os
@@ -9,8 +11,6 @@ from AI_PRO_MAX import mainAI
 from hashlib import sha256
 
 app = FastAPI()
-with open('tmp.txt', 'w', encoding='utf-8') as f:
-    f.write('-')
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
@@ -23,19 +23,34 @@ async def read_root():
     return FileResponse("static/index.html")
 
 
+class RequestData(BaseModel):
+    userMessages: List[Optional[str]]
+    botMessages: List[Optional[str]]
+
+
+
 @app.post("/request")
-async def make_response(background_tasks: BackgroundTasks, text: str = Form(...), image: UploadFile = File(None)):
-    text = mainAI.AI_COMPIL(text)
+async def make_response(request_data: RequestData):
+    userMessages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg is not None]
+    botMessages = [msg for msg in request_data.botMessages if msg is not None]
+    data_for_ai = []
+    if userMessages:
+        data_for_ai.append(userMessages[0])  # Всегда добавляем первое сообщение пользователя, если оно есть
+    if botMessages:
+        data_for_ai.append(botMessages[0])  # Добавляем первое сообщение бота, если оно есть
+    if len(userMessages) > 1:
+        data_for_ai.append(userMessages[1])  # Добавляем второе сообщение пользователя, если оно есть
+    text = mainAI.AI_COMPIL(data_for_ai)
 
-    if image:
-        ext = image.filename.split('.')[-1]
-        image_data = await image.read()
-        hashed_image = sha256(image_data).hexdigest()
-        filename = f'{hashed_image}.{ext}'
-
-        file_path = f'static/user_images/{filename}'
-        if filename not in os.listdir('static/user_images'):
-            background_tasks.add_task(save_image, image_data, file_path)
+    # if request_data.image:
+    #     ext = image.filename.split('.')[-1]
+    #     image_data = await image.read()
+    #     hashed_image = sha256(image_data).hexdigest()
+    #     filename = f'{hashed_image}.{ext}'
+    #
+    #     file_path = f'static/user_images/{filename}'
+    #     if filename not in os.listdir('static/user_images'):
+    #         background_tasks.add_task(save_image, image_data, file_path)
 
     return {"text": text, "image": None}
 
