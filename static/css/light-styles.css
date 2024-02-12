@@ -255,3 +255,11 @@ footer{
     box-shadow: -24px 0 #FFF, 24px 0 #838383;
   }
 }
+      .dark-theme{
+        height: 42px;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background: url("static/img/sun.svg") no-repeat;
+      }
