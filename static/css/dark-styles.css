@@ -260,3 +260,10 @@
         cursor: pointer;
         background: url("../resources/sun.svg") no-repeat;
       }
+
+
+          @media only screen and (max-width: 600px) {
+        footer {
+            padding-bottom: 10%; /* Увеличиваем пустое пространство на мобильных устройствах */
+        }
+    }

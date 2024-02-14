@@ -141,7 +141,7 @@ li{
 	align-items: center;
     justify-content: center;
 	background-color: var(--secondary-white);
-	padding: 15px 15px 15px 15px;
+	padding: 15px;
 	border-radius: 10px;
 }
 footer{
@@ -263,3 +263,9 @@ footer{
         cursor: pointer;
         background: url("../resources/theme.svg") no-repeat;
       }
+
+          @media only screen and (max-width: 600px) {
+        footer {
+            padding-bottom: 10%; /* Увеличиваем пустое пространство на мобильных устройствах */
+        }
+    }
