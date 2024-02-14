@@ -261,5 +261,5 @@ footer{
         padding: 12px 20px;
         font-size: 16px;
         cursor: pointer;
-        background: url("static/img/sun.svg") no-repeat;
+        background: url("../resources/theme.svg") no-repeat;
       }
