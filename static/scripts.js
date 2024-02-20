@@ -24,9 +24,9 @@ document.getElementById('about').addEventListener('click', function(){
   window.addEventListener("load", (e) =>{
 
   // check if there's something in localStorage and load it into chat
-    if (loadFromLocal("user").length > 0){
-      userStory = String(loadFromLocal("user")).split(";text:").slice(1);
-      botStory = String(loadFromLocal("bot")).split(";text:").slice(1);
+    if (loadFromLocale("user").length > 0){
+      userStory = String(loadFromLocale("user")).split(";text:").slice(1);
+      botStory = String(loadFromLocale("bot")).split(";text:").slice(1);
 
       for (let i = 0; i < userStory.length && i < botStory.length; i++){
         userData = userStory[i];
@@ -185,6 +185,11 @@ document.getElementById('about').addEventListener('click', function(){
         }
     });
   }
+
+  //Grisha's ultra fix after Vlad's destroying everything
+  function loadFromLocale(type){
+    return localStorage.getItem(type);
+    }
 
 // REQUESTS
 
