@@ -114,13 +114,16 @@ li{
 	color: var(--main-white);
 	padding: 15px 15px 15px 15px;
 	border-radius: 1px 25px 25px 25px;
-    word-wrap: break-word;
+
+    white-space: pre-line;
 
 }
 
 .userInput, .bot__output {
     max-width: 70%; /* Устанавливаем максимальную ширину сообщений */
     word-wrap: break-word;
+
+    white-space: pre-line;
 }
 
 #textInput, #textInput:focus{
