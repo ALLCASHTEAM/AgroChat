@@ -253,6 +253,7 @@
 
 #textInput::-webkit-scrollbar {
   width: 4px; /* Ширина скроллбара */
+  left: 0px;
 }
 
 #textInput::-webkit-scrollbar-thumb {

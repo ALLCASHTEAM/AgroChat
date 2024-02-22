@@ -134,8 +134,7 @@ li{
 	background-color: var(--secondary-white);
 	color: var(--secondary-grey);
     max-height: 10vh;
-      
-  overflow:auto;
+    overflow:auto;
 }
 #sendBtn object{
 	height: 30px;
@@ -170,16 +169,15 @@ footer{
 
 #scroller::-webkit-scrollbar-button {
   display: none;
-  left:0;
 }
 
 #scroller::-webkit-scrollbar {
-  width: 4px; /* Ширина скроллбара */
+  width: 10px; /* Ширина скроллбара */
 }
 
 #scroller::-webkit-scrollbar-thumb {
   background-color: var(--main-green); /* Цвет ползунка скроллбара */
-  border-radius: 1px; /* Скругление углов ползунка скроллбара */
+  border-radius: 5px; /* Скругление углов ползунка скроллбара */
 }
 
 #scroller::-webkit-scrollbar-track {
@@ -253,11 +251,13 @@ footer{
 
 #textInput::-webkit-scrollbar {
   width: 4px; /* Ширина скроллбара */
+  left: 0px;
+
 }
 
 #textInput::-webkit-scrollbar-thumb {
   background-color: var(--main-green); /* Цвет ползунка скроллбара */
-  border-radius: 5px; /* Скругление углов ползунка скроллбара */
+  border-radius: 1px; /* Скругление углов ползунка скроллбара */
 }
 
 #textInput::-webkit-scrollbar-track {
