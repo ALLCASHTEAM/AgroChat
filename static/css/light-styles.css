@@ -122,7 +122,6 @@ li{
 .userInput, .bot__output {
     max-width: 70%; /* Устанавливаем максимальную ширину сообщений */
     word-wrap: break-word;
-
     white-space: pre-line;
 }
 
@@ -134,7 +133,7 @@ li{
 	height: 20px;
 	background-color: var(--secondary-white);
 	color: var(--secondary-grey);
-  max-height: 10vh;
+    max-height: 10vh;
       
   overflow:auto;
 }
@@ -171,15 +170,16 @@ footer{
 
 #scroller::-webkit-scrollbar-button {
   display: none;
+  left:0;
 }
 
 #scroller::-webkit-scrollbar {
-  width: 10px; /* Ширина скроллбара */
+  width: 4px; /* Ширина скроллбара */
 }
 
 #scroller::-webkit-scrollbar-thumb {
   background-color: var(--main-green); /* Цвет ползунка скроллбара */
-  border-radius: 5px; /* Скругление углов ползунка скроллбара */
+  border-radius: 1px; /* Скругление углов ползунка скроллбара */
 }
 
 #scroller::-webkit-scrollbar-track {
