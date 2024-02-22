@@ -1,12 +1,11 @@
-from AI_PRO_MAX import realsweg, classify_personal_questions
+from AI_PRO_MAX import classify_personal_questions
 from sentence_transformers import SentenceTransformer, util
-
-model = SentenceTransformer('hivaze/ru-e5-large')
+from AI_PRO_MAX.faiss_py import model, list_return
 
 
 def find_best_matches(user_query, sentence_model):
     try:
-        liness = list(map(lambda x: x.split("|"), realsweg.list_return(user_query)))
+        liness = list_return(user_query)
         lines = list(zip(*liness))[0]
         user_query_prefixed = "query: " + user_query.lower()
 
@@ -20,7 +19,7 @@ def find_best_matches(user_query, sentence_model):
 
         # Сортировка списка совпадений по оценкам в убывающем порядке
         matches.sort(key=lambda x: x[1], reverse=True)
-        return matches[:4], liness
+        return matches[:8], liness
     except:
         return None, None
 
@@ -35,8 +34,7 @@ def KBQA_search(user_query):
                 for line in liness:
                     if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
                             lambda x: str(x).replace("('", "").split("?")[0], matches)))):
-                        answer += line[0].replace('?', '').lower().strip()
-                        answer += line[1]
+                        answer += line[0].replace('?', '').lower().strip() + " - " + line[1]
 
                 print("INFO: Ответ от базы", answer)
                 return answer
@@ -49,6 +47,7 @@ def KBQA_search(user_query):
     else:
         print("INFO: Чит-чат режим (без базы)")
         return None
+
 
 if __name__ == "__main__":
     user_query = "Чем обрабатывать кукурузу?"

@@ -5,7 +5,7 @@ def interact():
     model = Llama(
         model_path='./AI_PRO_MAX/model-q16_0.gguf',
         n_ctx=8192,
-        n_gpu_layers=33,
+        n_gpu_layers=-1,
         chat_format="llama-2",
 
     )
@@ -15,10 +15,10 @@ def interact():
 
 def generate(question, model, context=False):
     if context:
-        if len(question) == 1:
+        if len(question) == 1 or len(question) == 2:
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
+                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Use context to answer the question. <|end_of_turn|>"},
                 {
                     "role": "user",
                     "content": f"Context:{context} GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
@@ -27,7 +27,7 @@ def generate(question, model, context=False):
         else:
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},
+                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Use context to answer the question <|end_of_turn|>"},
                 {
                     "role": "user",
                     "content": f"GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
@@ -42,7 +42,7 @@ def generate(question, model, context=False):
                 }
             ]
     else:
-        if len(question) == 1:
+        if len(question) == 1 or len(question) == 2:
             messages = [
                 {"role": "system",
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly. <|end_of_turn|>"},

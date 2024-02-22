@@ -85,9 +85,10 @@
     cursor: pointer;
 }
   main{
-      max-height:75%;
+      max-height:60%;
       overflow:auto;
       width: calc(85vw - 55px);
+      
   }
   ul{
       display: flex;
@@ -131,6 +132,9 @@
       height: 20px;
       background-color: var(--secondary-black);
       color: var(--secondary-grey);
+      max-height: 10vh;
+      direction:ltr;
+      overflow:auto;
   }
   #sendBtn object{
       height: 30px;
@@ -154,6 +158,7 @@
       display: flex;
       justify-content: center;
       flex-direction: row;
+      margin-top: auto;
   }
   
   .dark-theme{
@@ -239,6 +244,23 @@
   box-shadow: -24px 0 #FFF, 24px 0 #FFF;
   box-sizing: border-box;
   animation: shadowPulse 2s linear infinite;
+}
+
+#textInput::-webkit-scrollbar-button {
+  display: none;
+}
+
+#textInput::-webkit-scrollbar {
+  width: 4px; /* Ширина скроллбара */
+}
+
+#textInput::-webkit-scrollbar-thumb {
+  background-color: var(--main-green); /* Цвет ползунка скроллбара */
+  border-radius: 4px; /* Скругление углов ползунка скроллбара */
+}
+
+#textInput::-webkit-scrollbar-track {
+  background-color: var(--main-white); /* Цвет трека скроллбара */
 }
 
 @keyframes shadowPulse {
