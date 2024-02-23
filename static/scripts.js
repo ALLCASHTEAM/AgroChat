@@ -200,10 +200,20 @@ document.getElementById('about').addEventListener('click', function(){
     console.log(text.length);
     // if text is smaller than 2 symbols and there is no image throw alert
     // if (text.trim() <= 2 && !loadImage()) !!!
+    const disallowedChars = /[{}[\]<>\\|\/#~*]/;
+    if(disallowedChars.test(text)) {
+      alert("В сообщении используются запрещенные символы!");
+    return 
+    }
     if (text.trim().length <= 2){
       alert("Слишком короткое сообщение!");
       return
     }
+    if (text.trim().length > 1000) {
+      alert("Слишком длинное сообщение");
+    return  
+    }
+
     // if loadImage() && !!!!!!
     //  if (text.trim().length > 0){
     //    alert("сука тока либо текст либо картинка");
