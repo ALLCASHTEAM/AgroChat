@@ -1,13 +1,13 @@
 import re
 import json
 from gensim.models import Word2Vec, KeyedVectors
-from AI_PRO_MAX import hash_list
+import hash_list
 
-with open('./AI_PRO_MAX/index.json', 'r', encoding='utf-8') as f_json:
+with open('./index.json', 'r', encoding='utf-8') as f_json:
     loaded_index = json.load(f_json)
 rhash = hash_list.hash_creator()
 
-w2v_model = KeyedVectors.load_word2vec_format('./AI_PRO_MAX/model.bin', binary=True)
+w2v_model = KeyedVectors.load_word2vec_format('./model.bin', binary=True)
 
 
 def search_with_w2v_synonyms(question, index, w2v_model, topn=10):

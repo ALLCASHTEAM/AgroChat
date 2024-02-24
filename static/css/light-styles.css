@@ -84,7 +84,7 @@ object{
     cursor: pointer;
 }
 main{
-	max-height:75%;
+	max-height:60%;
 	overflow:auto;
 	width: calc(85vw - 55px);
 }
@@ -122,7 +122,6 @@ li{
 .userInput, .bot__output {
     max-width: 70%; /* Устанавливаем максимальную ширину сообщений */
     word-wrap: break-word;
-
     white-space: pre-line;
 }
 
@@ -134,6 +133,8 @@ li{
 	height: 20px;
 	background-color: var(--secondary-white);
 	color: var(--secondary-grey);
+    max-height: 10vh;
+    overflow:auto;
 }
 #sendBtn object{
 	height: 30px;
@@ -242,6 +243,25 @@ footer{
   box-shadow: -24px 0 #FFF, 24px 0 #FFF;
   box-sizing: border-box;
   animation: shadowPulse 1s linear infinite;
+}
+
+#textInput::-webkit-scrollbar-button {
+  display: none;
+}
+
+#textInput::-webkit-scrollbar {
+  width: 4px; /* Ширина скроллбара */
+  left: 0px;
+
+}
+
+#textInput::-webkit-scrollbar-thumb {
+  background-color: var(--main-green); /* Цвет ползунка скроллбара */
+  border-radius: 1px; /* Скругление углов ползунка скроллбара */
+}
+
+#textInput::-webkit-scrollbar-track {
+  background-color: var(--main-white); /* Цвет трека скроллбара */
 }
 
 @keyframes shadowPulse {

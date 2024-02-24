@@ -31,14 +31,19 @@ class RequestData(BaseModel):
 
 @app.post("/request")
 async def make_response(request_data: RequestData):
-    user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg is not None]
-    bot_messages = [msg for msg in request_data.botMessages if msg is not None]
-    data_for_ai = [user_messages[0]]  # Всегда добавляем первое сообщение пользователя, если оно есть
+    user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
+    bot_messages = [msg for msg in request_data.botMessages if msg]
+
+    # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
+    data_for_ai = [user_messages[0]] if user_messages else []
     if bot_messages:
-        data_for_ai.append(bot_messages[0])  # Добавляем первое сообщение бота, если оно есть
+        data_for_ai.append(bot_messages[0])
     if len(user_messages) > 1:
-        data_for_ai.append(user_messages[1])  # Добавляем второе сообщение пользователя, если оно есть
+        data_for_ai.append(user_messages[1])
+
     text = mainAI.AI_COMPIL(data_for_ai)
+
+    return {"text": text, "image": None}
 
     # if request_data.image:
     #     ext = image.filename.split('.')[-1]
@@ -50,7 +55,7 @@ async def make_response(request_data: RequestData):
     #     if filename not in os.listdir('static/user_images'):
     #         background_tasks.add_task(save_image, image_data, file_path)
 
-    return {"text": text, "image": None}
+
 
 
 async def save_image(image_data, file_path):
