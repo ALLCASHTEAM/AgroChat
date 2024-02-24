@@ -271,3 +271,16 @@
             padding-bottom: 21%; /* Увеличиваем пустое пространство на мобильных устройствах */
         }
     }
+
+/*24.02 круг для анимки*/
+#circle {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    transition: width 0.5s ease-out, height 0.5s ease-out, top 0.5s ease-out, left 0.5s ease-out;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Чтобы круг был под кнопкой */
+    pointer-events: none; /* Чтобы круг не мешал взаимодействию с кнопкой */
+}

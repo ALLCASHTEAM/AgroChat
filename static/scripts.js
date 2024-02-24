@@ -314,10 +314,23 @@ document.getElementById('about').addEventListener('click', function(){
 
     // Выбираем кнопку  (переключение темы)
 const btn = document.querySelector(".dark-theme");
+
+//круг для анимки 24.02
+const circle = document.getElementById('circle');
+
 // Выбираем таблицу стилей
 const theme = document.querySelector("#theme-link");
 // Отслеживаем щелчок по кнопке
 btn.addEventListener("click", function() {
+    //всё для анимки 24.02
+    const btnRect = btn.getBoundingClientRect();
+    const size = Math.max(btnRect.width, btnRect.height);
+
+    circle.style.width = `${size * 3}px`; // Расширяем круг в 3 раза
+    circle.style.height = `${size * 3}px`; // Расширяем круг в 3 раза
+    circle.style.top = `${btnRect.top + window.scrollY - size}px`;
+    circle.style.left = `${btnRect.left + window.scrollX - size}px`;
+    //конец анимки
   // Если текущий адрес содержит "light-theme.css"
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
@@ -376,3 +389,28 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 // Function to send the last three messages to the server
 
+// try animation to theme switch
+
+/*const btn = document.querySelector('.dark-theme');
+const circle = document.getElementById('circle');
+
+btn.addEventListener("click", function() {
+    const btnRect = btn.getBoundingClientRect();
+    const size = Math.max(btnRect.width, btnRect.height);
+
+    circle.style.width = `${size * 3}px`; // Расширяем круг в 3 раза
+    circle.style.height = `${size * 3}px`; // Расширяем круг в 3 раза
+    circle.style.top = `${btnRect.top + window.scrollY - size}px`;
+    circle.style.left = `${btnRect.left + window.scrollX - size}px`;
+
+    setTimeout(() => {
+        // Ваш существующий код смены темы
+        if (theme.getAttribute("href") == "static/css/light-styles.css") {
+            theme.href = "static/css/dark-styles.css";
+            saveThemeToLocalStorage("dark");
+        } else {
+            theme.href = "static/css/light-styles.css";
+            saveThemeToLocalStorage("light");
+        }
+    }, 500); // Ждем 500 миллисекунд (время анимации) перед сменой темы
+});*/
