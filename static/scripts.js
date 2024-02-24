@@ -340,8 +340,9 @@ btn.addEventListener("click", function() {
     circle.style.height = `${size * 3}px`; // Расширяем круг в 3 раза
     circle.style.top = `${btnRect.top + window.scrollY - size}px`;
     circle.style.left = `${btnRect.left + window.scrollX - size}px`;
-    //конец анимки
+    //конец анимки setTimeout убрать если сломается
   // Если текущий адрес содержит "light-theme.css"
+  setTimeout(() => {
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
     theme.href = "static/css/dark-styles.css";
@@ -353,6 +354,7 @@ btn.addEventListener("click", function() {
     saveThemeToLocalStorage("light");
 
   }
+  }, 1000);
 });
 
 const saveThemeToLocalStorage = (themeValue) => {
