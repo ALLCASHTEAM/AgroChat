@@ -127,27 +127,27 @@ document.getElementById('about').addEventListener('click', function(){
   }
 
   // make bot bubble with unique class
-  function makeBotBubble(text, image=null){
-    if (text.length == 0){//26.02
+    function makeBotBubble(text, image=null){
+    if (text.length == 0){
       var botBubbleCounter = document.getElementsByClassName("bot__output").length-1;
       var chatBubble_bot = document.createElement('li');
-      chatBubble_bot.classList.add('bot__output'/*, 'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
+      chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
       chatList.appendChild(chatBubble_bot);
-    }else{ //26.02
-      var botBubbleCounter = document.getElementsByClassName("bot__output").length;
-      var chatBubble_bot = document.createElement('li');
-      chatBubble_bot.classList.add('bot__output' /*,'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
-      chatBubble_bot.innerHTML = text;
-      chatList.appendChild(chatBubble_bot);
-    }
-    var textDiv = document.createElement('div');
+    } else {
+     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
+    var chatBubble_bot = document.createElement('li');
+    var container = document.createElement('div'); // Create a container for text
+    var textDiv = document.createElement('div'); // Create a div for the text
+    chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
     textDiv.textContent = text;
-    container.appendChild(textDiv);
-    chatBubble_bot.appendChild(container);
+    container.appendChild(textDiv); // Append the text div to the container
+    chatBubble_bot.appendChild(container); // Append the container to the chat bubble
+    chatList.appendChild(chatBubble_bot);
+    }
 
     scrollToBottom();
-    return botBubbleCounter + 1
+    return botBubbleCounter + 1;
   }
 
   // edit user bubble
