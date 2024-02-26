@@ -127,7 +127,9 @@ document.getElementById('about').addEventListener('click', function(){
   }
 
   // make bot bubble with unique class
-    function makeBotBubble(text, image=null){
+  // make bot bubble with unique class
+// make bot bubble with unique class
+  function makeBotBubble(text, image=null){
     if (text.length == 0){
       var botBubbleCounter = document.getElementsByClassName("bot__output").length-1;
       var chatBubble_bot = document.createElement('li');
@@ -139,13 +141,14 @@ document.getElementById('about').addEventListener('click', function(){
     var chatBubble_bot = document.createElement('li');
     var container = document.createElement('div'); // Create a container for text
     var textDiv = document.createElement('div'); // Create a div for the text
-
-    var mark_like = document.createElement('button');
-    var mark_dislike = document.createElement('button');
+    
+    var mark_like = document.createElement('div');
+    var mark_dislike = document.createElement('div');
     mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
     mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
     container.appendChild(mark_like);
     container.appendChild(mark_dislike);
+    
     chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
     textDiv.textContent = text;
     container.appendChild(textDiv); // Append the text div to the container
@@ -157,18 +160,6 @@ document.getElementById('about').addEventListener('click', function(){
     return botBubbleCounter + 1;
   }
 
-  // edit user bubble
-  function editUserBubble(id, {text, image}){
-
-    if (text && !image){
-      var userBubbleText = document.querySelectorAll(".id-" + id + ".userInput")[0];
-      userBubbleText.children[0].children[0].textContent = text; // replace text
-    }
-    if (image){
-      var userBubbleImage = document.querySelectorAll(".id-" + id + ".userInput")[0];
-      userBubbleImage.children[0].children[0].src = "/static/user_images/" + image;
-    }
-  }
 
 // LOCAL STORAGE
 
@@ -337,10 +328,14 @@ document.getElementById('about').addEventListener('click', function(){
     // Выбираем кнопку  (переключение темы)
 const btn = document.querySelector(".dark-theme");
 
+//круг для анимки 24.02
+const circle = document.getElementById('circle');
+
 // Выбираем таблицу стилей
 const theme = document.querySelector("#theme-link");
 // Отслеживаем щелчок по кнопке
 btn.addEventListener("click", function() {
+    
   // Если текущий адрес содержит "light-theme.css"
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
@@ -397,4 +392,3 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
     });
 });
-
