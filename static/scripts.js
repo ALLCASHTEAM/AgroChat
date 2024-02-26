@@ -137,8 +137,15 @@ document.getElementById('about').addEventListener('click', function(){
     }else{ //26.02
       var botBubbleCounter = document.getElementsByClassName("bot__output").length;
       var chatBubble_bot = document.createElement('li');
-      chatBubble_bot.classList.add('bot__output'/*, 'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
+      var mark_like = document.createElement('button');
+      var mark_disslike = document.createElement('button');
+      /*var REgenerate = document.createElement('button'); - создание кнопки повторной генерации ответа */
+      mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
+      mark_disslike.classList.add('disslike', "id-" + (botBubbleCounter + 1));
+      chatBubble_bot.classList.add('bot__output', /*'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.innerHTML = text;
+      chatBubble_bot.appendChild(mark_like);
+      chatBubble_bot.appendChild(mark_disslike);
       chatList.appendChild(chatBubble_bot);
     }
     scrollToBottom();
