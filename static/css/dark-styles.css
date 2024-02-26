@@ -153,12 +153,12 @@
 	height: 40px;
 }
 
-  footer{
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      margin-top: auto;
-  }
+footer{
+  display: flex;
+  justify-content: center;
+    flex-direction: column; /* Изменено с row на column */
+    align-items: center;
+}
   
   .dark-theme{
 	height: 42px;
@@ -292,8 +292,31 @@
 
           @media only screen and (max-width: 600px) {
         footer {
-            padding-bottom: 21%; /* Увеличиваем пустое пространство на мобильных устройствах */
+            padding-bottom: 7%; /* Увеличиваем пустое пространство на мобильных устройствах */
+        }
+        main{
+          max-height:55%;
+          overflow:auto;
+          width: calc(85vw - 55px);
         }
     }
 
-
+/*24.02 круг для анимки*/
+#circle {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    transition: width 0.5s ease-out, height 0.5s ease-out, top 0.5s ease-out, left 0.5s ease-out;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Чтобы круг был под кнопкой */
+    pointer-events: none; /* Чтобы круг не мешал взаимодействию с кнопкой */
+}
+.disclaimer {
+    color: var(--main-grey); /* Цвет текста */
+    margin-top: 10px; /* Отступ сверху */
+    font-size: 14px; /* Размер шрифта */
+    align-items: center;
+    text-align: center;
+}

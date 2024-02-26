@@ -134,7 +134,7 @@ document.getElementById('about').addEventListener('click', function(){
       chatBubble_bot.classList.add('bot__output'/*, 'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
       chatList.appendChild(chatBubble_bot);
-    }else{//26.02
+    }else{ //26.02
       var botBubbleCounter = document.getElementsByClassName("bot__output").length;
       var chatBubble_bot = document.createElement('li');
       chatBubble_bot.classList.add('bot__output'/*, 'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
@@ -332,8 +332,17 @@ const circle = document.getElementById('circle');
 const theme = document.querySelector("#theme-link");
 // Отслеживаем щелчок по кнопке
 btn.addEventListener("click", function() {
+    //всё для анимки 24.02
+    const btnRect = btn.getBoundingClientRect();
+    const size = Math.max(btnRect.width, btnRect.height);
 
+    circle.style.width = `${size * 3}px`; // Расширяем круг в 3 раза
+    circle.style.height = `${size * 3}px`; // Расширяем круг в 3 раза
+    circle.style.top = `${btnRect.top + window.scrollY - size}px`;
+    circle.style.left = `${btnRect.left + window.scrollX - size}px`;
+    //конец анимки setTimeout убрать если сломается
   // Если текущий адрес содержит "light-theme.css"
+  setTimeout(() => {
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
     theme.href = "static/css/dark-styles.css";
@@ -345,7 +354,7 @@ btn.addEventListener("click", function() {
     saveThemeToLocalStorage("light");
 
   }
-
+  }, 1000);
 });
 
 const saveThemeToLocalStorage = (themeValue) => {
