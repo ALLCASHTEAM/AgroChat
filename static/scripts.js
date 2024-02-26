@@ -137,7 +137,7 @@ document.getElementById('about').addEventListener('click', function(){
     }else{ //26.02
       var botBubbleCounter = document.getElementsByClassName("bot__output").length;
       var chatBubble_bot = document.createElement('li');
-      chatBubble_bot.classList.add('bot__output', /*'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
+      chatBubble_bot.classList.add('bot__output' /*,'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.innerHTML = text;
       chatList.appendChild(chatBubble_bot);
     }
