@@ -137,17 +137,15 @@ document.getElementById('about').addEventListener('click', function(){
     }else{ //26.02
       var botBubbleCounter = document.getElementsByClassName("bot__output").length;
       var chatBubble_bot = document.createElement('li');
-      var mark_like = document.createElement('button');
-      var mark_dislike = document.createElement('button');
-      /*var REgenerate = document.createElement('button'); - создание кнопки повторной генерации ответа */
-      mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
-      mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.classList.add('bot__output', /*'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.innerHTML = text;
-      parentElement.insertBefore(mark_like, chatBubble_bot.nextSibling);
-      parentElement.insertBefore(mark_dislike, chatBubble_bot.nextSibling);
       chatList.appendChild(chatBubble_bot);
     }
+    var textDiv = document.createElement('div');
+    textDiv.textContent = text;
+    container.appendChild(textDiv);
+    chatBubble_bot.appendChild(container);
+
     scrollToBottom();
     return botBubbleCounter + 1
   }

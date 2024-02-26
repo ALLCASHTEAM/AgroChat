@@ -124,25 +124,7 @@
     white-space: pre-line;
 
 }
-.like, .dislike {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    width: 40px; /* Ширина кнопок */
-    height: 40px; /* Высота кнопок */
-    background-repeat: no-repeat; /* Предотвращает повторение изображения */
-    background-position: center; /* Выравнивание изображения по центру */
-    border: none;
-    cursor: pointer;
-}
 
-.like {
-    background-image: url('static/resources/like_on.svg'); /* Путь к SVG изображению лайка */
-}
-
-.dislike {
-    background-image: url('static/resources/dislike_off.svg'); /* Путь к SVG изображению дизлайка */
-}
 
   #textInput, #textInput:focus{
       width: calc(85vw - 105px);
