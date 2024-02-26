@@ -322,3 +322,22 @@ footer{
     align-items: center;
     text-align: center;
 }
+.like, .dislike {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    width: 24px; /* Ширина кнопок */
+    height: 24px; /* Высота кнопок */
+    background-repeat: no-repeat; /* Предотвращает повторение изображения */
+    background-position: center; /* Выравнивание изображения по центру */
+    border: none;
+    cursor: pointer;
+}
+
+.like {
+    background-image: url('static/resources/like_on.svg'); /* Путь к SVG изображению лайка */
+}
+
+.dislike {
+    background-image: url('static/resources/dislike_off.svg'); /* Путь к SVG изображению дизлайка */
+}

@@ -139,6 +139,13 @@ document.getElementById('about').addEventListener('click', function(){
     var chatBubble_bot = document.createElement('li');
     var container = document.createElement('div'); // Create a container for text
     var textDiv = document.createElement('div'); // Create a div for the text
+
+    var mark_like = document.createElement('button');
+    var mark_dislike = document.createElement('button');
+    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
+    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
+    container.appendChild(mark_like);
+    container.appendChild(mark_dislike);
     chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
     textDiv.textContent = text;
     container.appendChild(textDiv); // Append the text div to the container
