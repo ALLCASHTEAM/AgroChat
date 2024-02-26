@@ -144,8 +144,8 @@ document.getElementById('about').addEventListener('click', function(){
       mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.classList.add('bot__output', /*'bot__output--standard'*/, 'animateBubble', "id-" + (botBubbleCounter + 1));
       chatBubble_bot.innerHTML = text;
-      chatBubble_bot.appendChild(mark_like);
-      chatBubble_bot.appendChild(mark_dislike);
+      document.getElementById("bodyWrapper").appendChild(mark_like);
+      document.getElementById("bodyWrapper").appendChild(mark_dislike);
       chatList.appendChild(chatBubble_bot);
     }
     scrollToBottom();
