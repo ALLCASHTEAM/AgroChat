@@ -164,6 +164,18 @@ document.getElementById('about').addEventListener('click', function(){
     return botBubbleCounter + 1;
   }
 
+  // edit user bubble
+  function editUserBubble(id, {text, image}){
+
+    if (text && !image){
+      var userBubbleText = document.querySelectorAll(".id-" + id + ".userInput")[0];
+      userBubbleText.children[0].children[0].textContent = text; // replace text
+    }
+    if (image){
+      var userBubbleImage = document.querySelectorAll(".id-" + id + ".userInput")[0];
+      userBubbleImage.children[0].children[0].src = "/static/user_images/" + image;
+    }
+  }
 
 // LOCAL STORAGE
 
