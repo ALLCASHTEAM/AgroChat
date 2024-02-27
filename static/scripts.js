@@ -144,14 +144,18 @@ document.getElementById('about').addEventListener('click', function(){
     
     var mark_like = document.createElement('div');
     var mark_dislike = document.createElement('div');
+
+    textDiv.textContent = text;
+    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+    container.classList.add('animateBubble', "id-" + (botBubbleCounter + 1));
+    container.appendChild(textDiv); // Append the text div to the containers
+
     mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
     mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
     container.appendChild(mark_like);
     container.appendChild(mark_dislike);
     
-    chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
-    textDiv.textContent = text;
-    container.appendChild(textDiv); // Append the text div to the container
+//    chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
     chatBubble_bot.appendChild(container); // Append the container to the chat bubble
     chatList.appendChild(chatBubble_bot);
     }

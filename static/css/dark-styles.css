@@ -125,9 +125,12 @@
 
 }
 .like, .dislike {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+    /*position: absolute;
+    margin-bottom: -10px;*/
+    z-index: 2;
+    margin-left: 10px;
+    margin-top: 5px;
+    display: inline-block;
     width: 24px; /* Ширина кнопок */
     height: 24px; /* Высота кнопок */
     background-repeat: no-repeat; /* Предотвращает повторение изображения */
@@ -338,4 +341,8 @@ footer{
     font-size: 14px; /* Размер шрифта */
     align-items: center;
     text-align: center;
+}
+
+li {
+    position: relative;
 }
