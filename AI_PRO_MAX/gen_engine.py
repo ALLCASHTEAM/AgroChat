@@ -18,7 +18,7 @@ def generate(question, model, context=False):
         if len(question) == 1 or len(question) == 2:
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Use context to answer the question. <|end_of_turn|>"},
+                 "content": "Ты Аигро ассистент по агрохимической продукции. Тебя разработали в компании Агрохим. Используя контекст ответь на вопрос. <|end_of_turn|>"},
                 {
                     "role": "user",
                     "content": f"Context:{context} GPT4 User:{question[0].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"

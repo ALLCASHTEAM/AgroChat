@@ -28,7 +28,7 @@ def find_best_matches(user_query: str, sentence_model) -> Tuple[List[Tuple[str, 
 
 def KBQA_search(user_query: str) -> Optional[str]:
     print("INFO: База запущенна")
-    if not classify_personal_questions.is_personal(user_query):
+    if not classify_personal_questions.is_personal(user_query) or user_query == "привет":
         matches, liness = find_best_matches(user_query, model)
         if matches:
             try:

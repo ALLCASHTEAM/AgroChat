@@ -14,8 +14,7 @@ def read_and_preprocess_data(folder_path):
 
 
 def vectorize_questions(questions):
-    # Добавьте здесь вашу логику предварительной обработки, если это необходимо
-    return model.encode(questions, batch_size=64)  # Предполагается, что модель поддерживает пакетную обработку
+    return model.encode(questions)
 
 
 def create_faiss_index(vectors):

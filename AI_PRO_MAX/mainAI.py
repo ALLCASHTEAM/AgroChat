@@ -8,16 +8,17 @@ model = gen_engine.interact()
 
 def AI_COMPIL(dialog: list[str]) -> str:
     print("INFO: Вход:", dialog)
-    processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("?</s>", "").lower()
+    processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("</s>", "").lower()
     print("INFO: Интерпретация: ", processed_question)
     answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
     print("INFO: Ответ генератора", answer)
 
     replacements = [
-        ("[\\[A-Z]+]", ""), ("GPT4", ""), ("GPT:", ""), ("Answer:", ""),
+        ("[\\[A-Z]+]", ""), ("GPT4", ""),  ("Answer:", ""),
         ("Agrochem", 'Агрохим'), ("Context:", ""), ("GPT 4:", ""), ("GPT-4:", ""),
         ("GPT", ""), ("G", ""), ("GPT4 Correct Assistant:", ""), ("Correct", ""),
-        ("<[^>]+>", ""), ("ГПТ4 Asistant:", ''), ("Asistant:", ''), ('text:', '')
+        ("<[^>]+>", ""), ("ГПТ4 Asistant:", ''), ("Asistant:", ''), ('text:', ''),
+        ('GPT-4', "Аигро"),("GPT:", ""), ("OpenAI", "Агрохим")
     ]
     for old, new in replacements:
         answer = re.sub(old, new, answer)
