@@ -422,20 +422,58 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Функция для обработки клика на элементах like и dislike
+// Объект для отслеживания состояния кнопок
+var buttonState = JSON.parse(localStorage.getItem('LSD_marks')) || {};
+
 function handleClick(event) {
     var target = event.target;
     // Проверяем, был ли клик на элементе с классом like или dislike
     if (target.classList.contains('like') || target.classList.contains('dislike')) {
         // Получаем id элемента
         var id = target.closest('.animateBubble').classList[1].split('-')[1];
-
         // Получаем название элемента (like или dislike)
         var name = target.classList.contains('like') ? 'like' : 'dislike';
         // Выводим id и название в консоль
         console.log("ID:", id, "Название:", name);
+
+        // Получаем путь к активному изображению
+        var activeImagePath = name === 'like' ? 'static/resources/like_on.svg' : 'static/resources/disslike_on.svg';
+
+        // Проверяем текущее состояние кнопки
+        if (!buttonState[id]) {
+            // Если кнопка еще не нажата, устанавливаем активное изображение
+            target.style.backgroundImage = 'url(' + activeImagePath + ')';
+            // Обновляем состояние кнопки
+            buttonState[id] = name;
+        } else {
+            // Если кнопка уже была нажата
+            if (buttonState[id] === name) {
+                // Если текущее состояние совпадает с предыдущим, меняем на изображение по умолчанию
+                var defaultImagePath = name === 'like' ? 'static/resources/like_off.svg' : 'static/resources/disslike_off.svg';
+                target.style.backgroundImage = 'url(' + defaultImagePath + ')';
+                // Сбрасываем состояние кнопки
+                delete buttonState[id];
+            } else {
+                // Если текущее состояние отличается от предыдущего, меняем на активное изображение
+                target.style.backgroundImage = 'url(' + activeImagePath + ')';
+                // Обновляем состояние кнопки
+                buttonState[id] = name;
+                // Если противоположная кнопка активирована, отключаем ее
+                var oppositeButton = name === 'like' ? '.dislike' : '.like';
+                var oppositeTarget = target.closest('.animateBubble').querySelector(oppositeButton);
+                oppositeTarget.style.backgroundImage = 'url(' + (name === 'like' ? 'static/resources/disslike_off.svg' : 'static/resources/like_off.svg') + ')';
+                // Обновляем состояние противоположной кнопки
+                buttonState[id] = name;
+            }
+        }
+
+        // Сохраняем buttonState в localStorage
+        localStorage.setItem('LSD_marks', JSON.stringify(buttonState));
     }
+
+    // Выводим текущее состояние объекта buttonState в консоль
+    console.log("buttonState:", buttonState);
 }
 
 // Добавляем обработчик клика на список, используя делегирование событий
-document.getElementById('chatlist').addEventListener('click', handleClick);
+document.body.addEventListener('click', handleClick);
