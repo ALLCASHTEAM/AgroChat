@@ -10,7 +10,7 @@ import aiofiles
 from AI_PRO_MAX import mainAI
 from hashlib import sha256
 
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
