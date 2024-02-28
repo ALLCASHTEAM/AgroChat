@@ -376,3 +376,8 @@ footer{
 li {
     position: relative;
 }
+
+#clearChat object{
+      width: 26px;
+      height: 26px;
+  }

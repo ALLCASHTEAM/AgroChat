@@ -74,6 +74,7 @@
       width: 20px;
       height: 20px;
   }
+
   #dialogueInfoWrapper div{
       display: flex;
       flex-direction: row;
@@ -379,3 +380,7 @@ footer{
 li {
     position: relative;
 }
+#clearChat object{
+      width: 26px;
+      height: 26px;
+  }
