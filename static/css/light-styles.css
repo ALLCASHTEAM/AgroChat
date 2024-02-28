@@ -151,7 +151,7 @@ li{
 }
 
 .like {
-    background-image: url('../resources/like_on.svg'); /* Путь к SVG изображению лайка */
+    background-image: url('../resources/like_off.svg'); /* Путь к SVG изображению лайка */
 }
 
 .dislike {
