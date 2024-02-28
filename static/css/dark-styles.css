@@ -108,22 +108,33 @@
       margin-left: auto;
       margin-right: 10px;
   }
-  .bot__output{
-      background-color: var(--main-green);
-      color: var(--main-black);
-      padding: 15px 15px 15px 15px;
-      border-radius: 1px 25px 25px 25px;
 
-      white-space: pre-line;
-  }
+.bot__output{
+	background-color: var(--main-green);
+	color: var(--main-white);
+	padding: 15px 15px 15px 15px;
+	border-radius: 1px 25px 25px 25px;
 
-  .userInput, .bot__output {
-    max-width: 70%; /* Устанавливаем максимальную ширину сообщений */
-    word-wrap: break-word;
-
-    white-space: pre-line;
+  white-space: pre-line;
 
 }
+
+.bot__output1{
+	background-color: var(--main-green);
+	color: var(--main-white);
+	padding: 15px 15px 15px 15px;
+	border-radius: 1px 25px 25px 25px;
+
+  white-space: pre-line;
+
+}
+
+.userInput, .bot__output, .bot__output1 {
+    max-width: 70%; /* Устанавливаем максимальную ширину сообщений */
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
 .like, .dislike {
     /*position: absolute;
     margin-bottom: -10px;*/
@@ -140,7 +151,7 @@
 }
 
 .like {
-    background-image: url('../resources/like_on.svg'); /* Путь к SVG изображению лайка */
+    background-image: url('../resources/like_off.svg'); /* Путь к SVG изображению лайка */
 }
 
 .dislike {

@@ -22,7 +22,6 @@ document.getElementById('about').addEventListener('click', function(){
 
   // handle onload actions
   window.addEventListener("load", (e) =>{
-
   // check if there's something in localStorage and load it into chat
     if (loadFromLocale("user").length > 0){
       userStory = String(loadFromLocale("user")).split(";text:").slice(1);
@@ -115,10 +114,8 @@ document.getElementById('about').addEventListener('click', function(){
     textDiv.textContent = text;
     container.appendChild(textDiv);
 
-    // Append the container to the chat bubble
     chatBubble.appendChild(container);
 
-    // Append the chat bubble to the chat list (assuming you have a chatList defined)
     chatList.appendChild(chatBubble);
 
     scrollToBottom();
@@ -126,36 +123,63 @@ document.getElementById('about').addEventListener('click', function(){
     return chatBubbleCounter + 1
   }
 
+    // make bot bubble with unique class
+   // make bot bubble with unique class
   // make bot bubble with unique class
-  // make bot bubble with unique class
-// make bot bubble with unique class
   function makeBotBubble(text, image=null){
+
+    var botBubbleCounter = document.getElementsByClassName("bot__output").length;
     if (text.length == 0){
-      var botBubbleCounter = document.getElementsByClassName("bot__output").length-1;
       var chatBubble_bot = document.createElement('li');
-      chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
-      chatBubble_bot.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
-      chatList.appendChild(chatBubble_bot);
-    } else {
-     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
-    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
+
     var container = document.createElement('div'); // Create a container for text
+    //хуй тебе, а не класс, глупый контейнер
+
     var textDiv = document.createElement('div'); // Create a div for the text
-    
+    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+
     var mark_like = document.createElement('div');
+    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
+
     var mark_dislike = document.createElement('div');
+    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
+
+
+    textDiv.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
+    container.appendChild(textDiv); // Append the text div to the containers
+    container.appendChild(mark_dislike);
+    container.appendChild(mark_like);
+    chatBubble_bot.appendChild(container); // Append the container to the chat bubble
+    chatList.appendChild(chatBubble_bot);
+
+    chatList.appendChild(chatBubble_bot);
+    console.log("иф сработал как надо")
+    } else {
+    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
+
+    var container = document.createElement('div'); // Create a container for text
+    //хуй тебе, а не класс, глупый контейнер
+
+    var textDiv = document.createElement('div'); // Create a div for the text
+    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+
+    var mark_like = document.createElement('div');
+    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
+
+    var mark_dislike = document.createElement('div');
+    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
+    console.log("задумка бобра");
+    console.log(text);
+
+
+
 
     textDiv.textContent = text;
-    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
-    container.classList.add('animateBubble', "id-" + (botBubbleCounter + 1));
     container.appendChild(textDiv); // Append the text div to the containers
-
-    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
-    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
-    container.appendChild(mark_like);
     container.appendChild(mark_dislike);
-    
-//    chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+    container.appendChild(mark_like);
     chatBubble_bot.appendChild(container); // Append the container to the chat bubble
     chatList.appendChild(chatBubble_bot);
     }
@@ -164,18 +188,6 @@ document.getElementById('about').addEventListener('click', function(){
     return botBubbleCounter + 1;
   }
 
-  // edit user bubble
-  function editUserBubble(id, {text, image}){
-
-    if (text && !image){
-      var userBubbleText = document.querySelectorAll(".id-" + id + ".userInput")[0];
-      userBubbleText.children[0].children[0].textContent = text; // replace text
-    }
-    if (image){
-      var userBubbleImage = document.querySelectorAll(".id-" + id + ".userInput")[0];
-      userBubbleImage.children[0].children[0].src = "/static/user_images/" + image;
-    }
-  }
 
 // LOCAL STORAGE
 
@@ -222,7 +234,7 @@ document.getElementById('about').addEventListener('click', function(){
     const disallowedChars = /[{}[\]<>\\|\/#~*]/;
     if(disallowedChars.test(text)) {
       alert("В сообщении используются запрещенные символы!");
-    return 
+    return
     }
     if (text.trim().length <= 2){
       alert("Слишком короткое сообщение!");
@@ -230,7 +242,7 @@ document.getElementById('about').addEventListener('click', function(){
     }
     if (text.trim().length > 1000) {
       alert("Слишком длинное сообщение");
-    return  
+    return
     }
 
     // if loadImage() && !!!!!!
@@ -284,6 +296,7 @@ document.getElementById('about').addEventListener('click', function(){
       // fill the bot bubble and scroll to bottom
       document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
+      console.log("степа тупень");
       saveToLocal("bot", resp["text"], resp["image"]);
 
     }).catch((error) => {
@@ -324,7 +337,7 @@ document.getElementById('about').addEventListener('click', function(){
           console.error('Request failed with status:', response.status);
     }
 }
-  
+
   // function that gets hash of an image
   async function getImageHash(image){
     const form = new FormData();
@@ -351,7 +364,7 @@ const circle = document.getElementById('circle');
 const theme = document.querySelector("#theme-link");
 // Отслеживаем щелчок по кнопке
 btn.addEventListener("click", function() {
-    
+
   // Если текущий адрес содержит "light-theme.css"
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
@@ -408,3 +421,72 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
     });
 });
+
+// Объект для отслеживания состояния кнопок
+var buttonState = JSON.parse(localStorage.getItem('LSD_marks')) || {};
+
+function handleClick(event) {
+    var target = event.target;
+    // Проверяем, был ли клик на элементе с классом like или dislike
+    if (target.classList.contains('like') || target.classList.contains('dislike')) {
+        // Получаем id элемента
+        var id = target.closest('.animateBubble').classList[1].split('-')[1];
+        // Получаем название элемента (like или dislike)
+        var name = target.classList.contains('like') ? 'like' : 'dislike';
+        // Выводим id и название в консоль
+        console.log("ID:", id, "Название:", name);
+
+        // Получаем путь к активному изображению
+        var activeImagePath = name === 'like' ? 'static/resources/like_on.svg' : 'static/resources/disslike_on.svg';
+
+        // Проверяем текущее состояние кнопки
+        if (!buttonState[id]) {
+            // Если кнопка еще не нажата, устанавливаем активное изображение
+            target.style.backgroundImage = 'url(' + activeImagePath + ')';
+            // Обновляем состояние кнопки
+            buttonState[id] = name;
+        } else {
+            // Если кнопка уже была нажата
+            if (buttonState[id] === name) {
+                // Если текущее состояние совпадает с предыдущим, меняем на изображение по умолчанию
+                var defaultImagePath = name === 'like' ? 'static/resources/like_off.svg' : 'static/resources/disslike_off.svg';
+                target.style.backgroundImage = 'url(' + defaultImagePath + ')';
+                // Сбрасываем состояние кнопки
+                delete buttonState[id];
+            } else {
+                // Если текущее состояние отличается от предыдущего, меняем на активное изображение
+                target.style.backgroundImage = 'url(' + activeImagePath + ')';
+                // Обновляем состояние кнопки
+                buttonState[id] = name;
+                // Если противоположная кнопка активирована, отключаем ее
+                var oppositeButton = name === 'like' ? '.dislike' : '.like';
+                var oppositeTarget = target.closest('.animateBubble').querySelector(oppositeButton);
+                oppositeTarget.style.backgroundImage = 'url(' + (name === 'like' ? 'static/resources/disslike_off.svg' : 'static/resources/like_off.svg') + ')';
+                // Обновляем состояние противоположной кнопки
+                buttonState[id] = name;
+            }
+        }
+
+        // Сохраняем buttonState в localStorage
+        localStorage.setItem('LSD_marks', JSON.stringify(buttonState));
+    }
+
+    // Выводим текущее состояние объекта buttonState в консоль
+    console.log("buttonState:", buttonState);
+}
+
+// Восстановление состояния кнопок при загрузке страницы
+window.addEventListener('load', function() {
+    for (var id in buttonState) {
+        var name = buttonState[id];
+        var target = document.querySelector('.id-' + id + ' .' + name);
+        if (target) {
+            var activeImagePath = name === 'like' ? 'static/resources/like_on.svg' : 'static/resources/disslike_on.svg';
+            target.style.backgroundImage = 'url(' + activeImagePath + ')';
+        }
+    }
+});
+
+// Добавляем обработчик клика на список, используя делегирование событий
+document.body.addEventListener('click', handleClick);
+
