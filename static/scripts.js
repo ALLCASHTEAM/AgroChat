@@ -475,5 +475,18 @@ function handleClick(event) {
     console.log("buttonState:", buttonState);
 }
 
+// Восстановление состояния кнопок при загрузке страницы
+window.addEventListener('load', function() {
+    for (var id in buttonState) {
+        var name = buttonState[id];
+        var target = document.querySelector('.id-' + id + ' .' + name);
+        if (target) {
+            var activeImagePath = name === 'like' ? 'static/resources/like_on.svg' : 'static/resources/disslike_on.svg';
+            target.style.backgroundImage = 'url(' + activeImagePath + ')';
+        }
+    }
+});
+
 // Добавляем обработчик клика на список, используя делегирование событий
 document.body.addEventListener('click', handleClick);
+
