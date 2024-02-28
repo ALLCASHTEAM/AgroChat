@@ -337,7 +337,7 @@ document.getElementById('about').addEventListener('click', function(){
           console.error('Request failed with status:', response.status);
     }
 }
-  
+
   // function that gets hash of an image
   async function getImageHash(image){
     const form = new FormData();
@@ -364,7 +364,7 @@ const circle = document.getElementById('circle');
 const theme = document.querySelector("#theme-link");
 // Отслеживаем щелчок по кнопке
 btn.addEventListener("click", function() {
-    
+
   // Если текущий адрес содержит "light-theme.css"
   if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
@@ -421,3 +421,21 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
     });
 });
+
+// Функция для обработки клика на элементах like и dislike
+function handleClick(event) {
+    var target = event.target;
+    // Проверяем, был ли клик на элементе с классом like или dislike
+    if (target.classList.contains('like') || target.classList.contains('dislike')) {
+        // Получаем id элемента
+        var id = target.closest('.animateBubble').classList[1].split('-')[1];
+
+        // Получаем название элемента (like или dislike)
+        var name = target.classList.contains('like') ? 'like' : 'dislike';
+        // Выводим id и название в консоль
+        console.log("ID:", id, "Название:", name);
+    }
+}
+
+// Добавляем обработчик клика на список, используя делегирование событий
+document.getElementById('chatlist').addEventListener('click', handleClick);
