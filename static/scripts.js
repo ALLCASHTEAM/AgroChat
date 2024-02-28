@@ -22,7 +22,6 @@ document.getElementById('about').addEventListener('click', function(){
 
   // handle onload actions
   window.addEventListener("load", (e) =>{
-
   // check if there's something in localStorage and load it into chat
     if (loadFromLocale("user").length > 0){
       userStory = String(loadFromLocale("user")).split(";text:").slice(1);
@@ -115,10 +114,8 @@ document.getElementById('about').addEventListener('click', function(){
     textDiv.textContent = text;
     container.appendChild(textDiv);
 
-    // Append the container to the chat bubble
     chatBubble.appendChild(container);
 
-    // Append the chat bubble to the chat list (assuming you have a chatList defined)
     chatList.appendChild(chatBubble);
 
     scrollToBottom();
@@ -126,36 +123,63 @@ document.getElementById('about').addEventListener('click', function(){
     return chatBubbleCounter + 1
   }
 
+    // make bot bubble with unique class
+   // make bot bubble with unique class
   // make bot bubble with unique class
-  // make bot bubble with unique class
-// make bot bubble with unique class
   function makeBotBubble(text, image=null){
+
+    var botBubbleCounter = document.getElementsByClassName("bot__output").length;
     if (text.length == 0){
-      var botBubbleCounter = document.getElementsByClassName("bot__output").length-1;
       var chatBubble_bot = document.createElement('li');
-      chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
-      chatBubble_bot.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
-      chatList.appendChild(chatBubble_bot);
-    } else {
-     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
-    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
+
     var container = document.createElement('div'); // Create a container for text
+    //хуй тебе, а не класс, глупый контейнер
+
     var textDiv = document.createElement('div'); // Create a div for the text
-    
+    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+
     var mark_like = document.createElement('div');
+    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
+
     var mark_dislike = document.createElement('div');
+    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
+
+
+    textDiv.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
+    container.appendChild(textDiv); // Append the text div to the containers
+    container.appendChild(mark_dislike);
+    container.appendChild(mark_like);
+    chatBubble_bot.appendChild(container); // Append the container to the chat bubble
+    chatList.appendChild(chatBubble_bot);
+
+    chatList.appendChild(chatBubble_bot);
+    console.log("иф сработал как надо")
+    } else {
+    var chatBubble_bot = document.createElement('li');
+    chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
+
+    var container = document.createElement('div'); // Create a container for text
+    //хуй тебе, а не класс, глупый контейнер
+
+    var textDiv = document.createElement('div'); // Create a div for the text
+    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+
+    var mark_like = document.createElement('div');
+    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
+
+    var mark_dislike = document.createElement('div');
+    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
+    console.log("задумка бобра");
+    console.log(text);
+
+
+
 
     textDiv.textContent = text;
-    textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
-    container.classList.add('animateBubble', "id-" + (botBubbleCounter + 1));
     container.appendChild(textDiv); // Append the text div to the containers
-
-    mark_like.classList.add('like', "id-" + (botBubbleCounter + 1));
-    mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
-    container.appendChild(mark_like);
     container.appendChild(mark_dislike);
-    
-//    chatBubble_bot.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
+    container.appendChild(mark_like);
     chatBubble_bot.appendChild(container); // Append the container to the chat bubble
     chatList.appendChild(chatBubble_bot);
     }
@@ -164,18 +188,6 @@ document.getElementById('about').addEventListener('click', function(){
     return botBubbleCounter + 1;
   }
 
-  // edit user bubble
-  function editUserBubble(id, {text, image}){
-
-    if (text && !image){
-      var userBubbleText = document.querySelectorAll(".id-" + id + ".userInput")[0];
-      userBubbleText.children[0].children[0].textContent = text; // replace text
-    }
-    if (image){
-      var userBubbleImage = document.querySelectorAll(".id-" + id + ".userInput")[0];
-      userBubbleImage.children[0].children[0].src = "/static/user_images/" + image;
-    }
-  }
 
 // LOCAL STORAGE
 
@@ -222,7 +234,7 @@ document.getElementById('about').addEventListener('click', function(){
     const disallowedChars = /[{}[\]<>\\|\/#~*]/;
     if(disallowedChars.test(text)) {
       alert("В сообщении используются запрещенные символы!");
-    return 
+    return
     }
     if (text.trim().length <= 2){
       alert("Слишком короткое сообщение!");
@@ -230,7 +242,7 @@ document.getElementById('about').addEventListener('click', function(){
     }
     if (text.trim().length > 1000) {
       alert("Слишком длинное сообщение");
-    return  
+    return
     }
 
     // if loadImage() && !!!!!!
@@ -284,6 +296,7 @@ document.getElementById('about').addEventListener('click', function(){
       // fill the bot bubble and scroll to bottom
       document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
+      console.log("степа тупень");
       saveToLocal("bot", resp["text"], resp["image"]);
 
     }).catch((error) => {
