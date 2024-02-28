@@ -1,10 +1,10 @@
 from AI_PRO_MAX import classify_personal_questions
 from AI_PRO_MAX.faiss_py import model, list_return
 from sentence_transformers import SentenceTransformer, util
-from typing import List, Tuple, Optional
 
 
-def find_best_matches(user_query: str, sentence_model) -> Tuple[List[Tuple[str, float, int]], Optional[List]]:
+
+def find_best_matches(user_query, sentence_model):
     try:
         liness = list_return(user_query)
         lines = [line[0].lower() for line in liness]
@@ -21,12 +21,11 @@ def find_best_matches(user_query: str, sentence_model) -> Tuple[List[Tuple[str, 
         matches.sort(key=lambda x: x[1], reverse=True)
 
         return matches[:8], liness
-    except Exception as e:
-        print(f"Error: {e}")
+    except:
         return None, None
 
 
-def KBQA_search(user_query: str) -> Optional[str]:
+def KBQA_search(user_query: str):
     print("INFO: База запущенна")
     if not classify_personal_questions.is_personal(user_query) or user_query == "привет":
         matches, liness = find_best_matches(user_query, model)

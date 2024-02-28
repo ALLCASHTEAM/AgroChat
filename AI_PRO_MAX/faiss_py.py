@@ -24,7 +24,7 @@ def create_faiss_index(vectors):
     return index
 
 
-def search(query, index, questions_answers, top_k=30):
+def search(query, index, questions_answers, top_k=20):
     query_vector = vectorize_questions([query])[0].astype('float32')
     distances, indices = index.search(np.array([query_vector]), top_k)
     return [[questions_answers[i][0], questions_answers[i][1]] for i in indices[0]]
