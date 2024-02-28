@@ -130,7 +130,7 @@ document.getElementById('about').addEventListener('click', function(){
 
     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
     if (text.length == 0){
-      var chatBubble_bot = document.createElement('li');
+    var chatBubble_bot = document.createElement('li');
     chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
 
     var container = document.createElement('div'); // Create a container for text
@@ -145,11 +145,14 @@ document.getElementById('about').addEventListener('click', function(){
     var mark_dislike = document.createElement('div');
     mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
 
+    var regenerate = document.createElement('div');//29.02
+    regenerate.classList.add('regenerate', "id-" + (botBubbleCounter + 1));//29.02
 
     textDiv.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
     container.appendChild(textDiv); // Append the text div to the containers
     container.appendChild(mark_dislike);
     container.appendChild(mark_like);
+    container.appendChild(regenerate);//29.02
     chatBubble_bot.appendChild(container); // Append the container to the chat bubble
     chatList.appendChild(chatBubble_bot);
 
@@ -170,9 +173,9 @@ document.getElementById('about').addEventListener('click', function(){
 
     var mark_dislike = document.createElement('div');
     mark_dislike.classList.add('dislike', "id-" + (botBubbleCounter + 1));
-    console.log("задумка бобра");
-    console.log(text);
 
+    var regenerate = document.createElement('div');//29.02
+    regenerate.classList.add('regenerate', "id-" + (botBubbleCounter + 1));//29.02
 
 
 
@@ -180,6 +183,7 @@ document.getElementById('about').addEventListener('click', function(){
     container.appendChild(textDiv); // Append the text div to the containers
     container.appendChild(mark_dislike);
     container.appendChild(mark_like);
+    container.appendChild(regenerate);//29.02
     chatBubble_bot.appendChild(container); // Append the container to the chat bubble
     chatList.appendChild(chatBubble_bot);
     }
@@ -490,3 +494,21 @@ window.addEventListener('load', function() {
 // Добавляем обработчик клика на список, используя делегирование событий
 document.body.addEventListener('click', handleClick);
 
+//удаление чата 29.02
+
+// Добавляем обработчик клика на список, используя делегирование событий
+document.body.addEventListener('click', handleClick);
+
+// Функция для обработки клика на кнопке "Очистить чат"
+function handleClick(event) {
+    // Проверяем, был ли клик на кнопке "Очистить чат"
+    if (event.target.id === 'clearChatButton') {
+        console.log("ччаатт очищен");
+        // Удаление данных из Local Storage под ключами user, bot и LSD_marks
+        localStorage.removeItem('user');
+        localStorage.removeItem('bot');
+        localStorage.removeItem('LSD_marks');
+        // После удаления данных перезагружаем страницу
+        location.reload();
+    }
+}

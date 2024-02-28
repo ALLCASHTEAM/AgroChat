@@ -45,6 +45,10 @@
       flex-wrap: nowrap;
       gap: 30px;
   }
+  #clearChat{
+    color: #8b0000;
+    cursor: pointer;
+  }
   h3{
       color: var(--secondary-grey);
       font-weight: normal;
@@ -65,7 +69,7 @@
       border-radius: 20px 1px 20px 20px;
       gap: 10px;
   }
-  
+
   #dialogueInfoWrapper object{
       width: 20px;
       height: 20px;
@@ -88,7 +92,7 @@
       max-height:60%;
       overflow:auto;
       width: calc(85vw - 55px);
-      
+
   }
   ul{
       display: flex;
@@ -157,6 +161,24 @@
 .dislike {
     background-image: url('../resources/disslike_off.svg'); /* Путь к SVG изображению дизлайка */
 }
+
+.regenerate {
+    /*position: absolute;
+    margin-bottom: -10px;*/
+    z-index: 2;
+    margin-left: 10px;
+    margin-top: 5px;
+    display: inline-block;
+    width: 24px; /* Ширина кнопок */
+    height: 24px; /* Высота кнопок */
+    background-repeat: no-repeat; /* Предотвращает повторение изображения */
+    background-position: center; /* Выравнивание изображения по центру */
+    border: none;
+    cursor: pointer;
+    background-image: url('../resources/REgen.svg'); /* Путь к SVG изображению дизлайка */
+
+}
+
   #textInput, #textInput:focus{
       width: calc(85vw - 105px);
       font-size: 20px;
