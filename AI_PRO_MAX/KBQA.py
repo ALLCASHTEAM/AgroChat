@@ -17,7 +17,9 @@ def find_best_matches(user_query, sentence_model):
         similarities = util.pytorch_cos_sim(user_query_encoded, lines_encoded)[0]
 
         # Создание списка совпадений и их оценок вместе с исходными индексами строк
-        matches = [(lines[i], similarities[i].item(), i) for i in range(len(lines))]
+        matches = [(lines[i], similarities[i], i) for i in range(len(lines))]
+
+        # Сортировка списка совпадений по оценкам в убывающем порядке
         matches.sort(key=lambda x: x[1], reverse=True)
 
         return matches[:8], liness
@@ -27,14 +29,15 @@ def find_best_matches(user_query, sentence_model):
 
 def KBQA_search(user_query: str):
     print("INFO: База запущенна")
-    if not classify_personal_questions.is_personal(user_query) or user_query == "привет":
+    if  user_query.strip() == "привет":
         matches, liness = find_best_matches(user_query, model)
         if matches:
             try:
-                # Предварительное создание списка уникальных ключевых фраз из matches
-                match_phrases = {match[0].replace('?', '').strip() for match in matches}
-                answer = " ".join([f"{line[0].replace('?', '').strip()} - {line[1]}"
-                                   for line in liness if line[0].replace('?', '').lower().strip() in match_phrases])
+                answer = ""
+                for line in liness:
+                    if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
+                            lambda x: str(x).replace("('", "").split("?")[0], matches)))):
+                        answer += line[0].replace('?', '').lower().strip() + " - " + line[1]
 
                 if answer:
                     print("INFO: Ответ от базы", answer)
