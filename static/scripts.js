@@ -495,20 +495,3 @@ window.addEventListener('load', function() {
 document.body.addEventListener('click', handleClick);
 
 //удаление чата 29.02
-
-// Добавляем обработчик клика на список, используя делегирование событий
-document.body.addEventListener('click', handleClick);
-
-// Функция для обработки клика на кнопке "Очистить чат"
-function handleClick(event) {
-    // Проверяем, был ли клик на кнопке "Очистить чат"
-    if (event.target.id === 'clearChatButton') {
-        console.log("ччаатт очищен");
-        // Удаление данных из Local Storage под ключами user, bot и LSD_marks
-        localStorage.removeItem('user');
-        localStorage.removeItem('bot');
-        localStorage.removeItem('LSD_marks');
-        // После удаления данных перезагружаем страницу
-        location.reload();
-    }
-}

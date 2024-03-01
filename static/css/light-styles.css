@@ -67,6 +67,8 @@ object{
     box-shadow: 1px 1px 4px rgba(126, 163, 164, 0.4);
     border-radius: 20px 1px 20px 20px;
     gap: 10px;
+    position: relative;/* 01.03 */
+    z-index: 1; /* 01.03 */
 }
 
 #dialogueInfoWrapper object{
@@ -91,6 +93,8 @@ main{
 	max-height:60%;
 	overflow:auto;
 	width: calc(85vw - 55px);
+  position: relative;/* 01.03 */
+  z-index: 0; /* 01.03 */
 }
 ul{
 	display: flex;
