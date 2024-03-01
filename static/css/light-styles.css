@@ -90,7 +90,7 @@ object{
     cursor: pointer;
 }
 main{
-  position: relative;/* 01.03 */
+  /*position: relative; 01.03 */
   z-index: 1; /* 01.03 */
 	max-height:60%;
 	overflow:auto;
