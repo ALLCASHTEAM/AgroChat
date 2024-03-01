@@ -4,8 +4,10 @@ from llama_cpp import Llama
 def interact():
     model = Llama(
         model_path='./AI_PRO_MAX/model-q16_0.gguf',
-        n_ctx=0,
+        n_ctx=8192,
         n_gpu_layers=-1,
+        chat_format="llama-2"
+
     )
 
     return model
@@ -66,5 +68,6 @@ def generate(question, model, context=False):
                     "content": f"GPT4 User:{question[2].replace('text:', '')}<|end_of_turn|>GPT4 Assistant:"
                 }
             ]
-    answer = model.create_chat_completion(temperature=0.3, top_p=0.8, top_k=35, messages=messages, max_tokens=3500)
+    answer = model.create_chat_completion(temperature=0.3, top_p=0.8, top_k=35, messages=messages,)
+    print(answer)
     return answer["choices"][0]["message"]["content"]
