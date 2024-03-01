@@ -68,7 +68,7 @@ object{
     border-radius: 20px 1px 20px 20px;
     gap: 10px;
     position: relative;/* 01.03 */
-    z-index: 1; /* 01.03 */
+    z-index: 2; /* 01.03 */
 }
 
 #dialogueInfoWrapper object{
@@ -90,11 +90,11 @@ object{
     cursor: pointer;
 }
 main{
+  position: relative;/* 01.03 */
+  z-index: 1; /* 01.03 */
 	max-height:60%;
 	overflow:auto;
 	width: calc(85vw - 55px);
-  position: relative;/* 01.03 */
-  z-index: 0; /* 01.03 */
 }
 ul{
 	display: flex;

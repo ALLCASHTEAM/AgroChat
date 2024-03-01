@@ -495,3 +495,21 @@ window.addEventListener('load', function() {
 document.body.addEventListener('click', handleClick);
 
 //удаление чата 29.02
+//удаление чата 29.02
+//хуйня
+//удаление чата 01.03
+document.addEventListener('DOMContentLoaded', function() {
+    // Находим элемент "Очистить чат"
+    var clearChatButton = document.getElementById('clearChatButton');
+
+    // Добавляем обработчик события клика на кнопку "Очистить чат"
+    clearChatButton.addEventListener('click', function() {
+        // Удаляем данные из локального хранилища
+        localStorage.removeItem('user');
+        localStorage.removeItem('bot');
+        localStorage.removeItem('LSD_marks');
+
+        // Обновляем страницу
+        location.reload();
+    });
+});
