@@ -1,0 +1,218 @@
+
+        SqlConnection sqlConnection = new SqlConnection("server=LAPTOP-FKK9AVMR;Trusted_Connection=Yes;DataBase=zapravOCHKA;");
+
+подключение к SQLite но если поменять server=... на айпи то подключится к нему
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ <TextBox x:Name="password_box" HorizontalAlignment="Left" Margin="324,240,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Width="172" RenderTransformOrigin="0.392,-0.415" Height="35" FontSize="18" GotFocus="password_box_GotFocus" LostFocus="password_box_LostFocus"/>
+ <Button x:Name="LogIn"  Content="Войти" HorizontalAlignment="Left" Margin="367,355,0,0" VerticalAlignment="Top" Height="28" Width="86" Click="LogIn_Click"/>
+
+Поле для ввода и кнопка 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+private void new_driver_Click(object sender, RoutedEventArgs e)
+{
+    Window3 window3 = new Window3();
+    window3.Show();
+    this.Close();
+}
+
+переход на другое окно
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+sqlConnection.Open();
+string query = "SELECT rateID as 'Номер топлива', TypeOfFuel as 'Тип топлива', cost AS 'Цена' FROM FuelRate";
+using (SqlCommand command = new SqlCommand(query, sqlConnection))
+{
+    dataAdapter = new SqlDataAdapter(command);
+    dataTable = new DataTable();
+    dataAdapter.Fill(dataTable);
+
+    gridik.ItemsSource = dataTable.DefaultView;
+}
+
+sqlConnection.Close();
+
+
+вывод данных в data grid под названием gridik из бд SQLite, но вроде так же и SQL Server 
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Перенос данных между окнами
+1. прописываем паблик переменную в app.xaml.cs
+	public static int accountId;
+2. Задаем переменной значение
+	App.accountId = userId;
+3. Получаем значение
+	User_id = App.accountId;
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ try
+ {
+     string query = "SELECT TOP 1 user_id, login, isAdmin FROM Users WHERE login = @Username AND password = @Password";
+     using (SqlCommand command = new SqlCommand(query, sqlConnection))
+     {
+         sqlConnection.Open();
+
+         // Параметризованный запрос для предотвращения SQL-инъекций
+         command.Parameters.AddWithValue("@Username", login_box.Text);
+         command.Parameters.AddWithValue("@Password", password_box.Text);
+
+         SqlDataReader reader = command.ExecuteReader();
+
+         if (reader.HasRows)
+         {
+             reader.Read(); // Переход к первой (и единственной) строке результата
+
+             int userId = reader.GetInt32(reader.GetOrdinal("user_id"));
+             string userName = reader.GetString(reader.GetOrdinal("login"));
+             bool isAdmin = reader.GetBoolean(reader.GetOrdinal("isAdmin"));
+
+             //MessageBox.Show($"Вход успешен! ID: {userId}, Username: {userName}, isAdmin: {isAdmin}");
+
+             App.accountId = userId;
+
+             // Добавьте код для перехода к другому окну или выполнения других действий после успешного входа.
+             if (isAdmin)
+             {
+                //zagruzka admin okna
+             }
+             else
+             {
+                 Window1 window1 = new Window1();
+                 window1.Show();
+                 this.Close();
+             }
+         }
+         else
+         {
+             MessageBox.Show("Неверное имя пользователя или пароль");
+         }
+     }
+ }
+ catch (Exception ex)
+ {
+     MessageBox.Show($"Ошибка: {ex.Message}");
+ }
+ finally
+ {
+     sqlConnection.Close();
+ }
+
+реализация входа через БД если будет соответсвующая таблица
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<TextBox x:Name="type_box"  IsReadOnly="True" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Тип топлива" VerticalAlignment="Top" Width="172" RenderTransformOrigin="0.392,-0.415" Height="35"  FontSize="18" LostFocus="type_box_LostFocus" GotFocus="type_box_GotFocus" Margin="0,116,0,0"/>
+<Button x:Name="dropdown" Content="V" HorizontalAlignment="Left" Margin="485,116,0,0" VerticalAlignment="Top" Height="35" Width="34" Click="dropdown_Click"/>
+<Button x:Name="dt" Content="ДТ" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Height="35" Width="173" Click="dt_Click" Visibility="Collapsed"/>
+<Button x:Name="b98" Content="98" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Height="35" Width="173" Click="b98_Click" Visibility="Collapsed"/>
+<Button x:Name="b95" Content="95" HorizontalAlignment="Center" Margin="0,214,0,0" VerticalAlignment="Top" Height="35" Width="173" Click="b95_Click" Visibility="Collapsed"/>
+<Button x:Name="b92" Content="92" HorizontalAlignment="Center" Margin="0,248,0,0" VerticalAlignment="Top" Height="35" Width="173" Click="b92_Click" Visibility="Collapsed"/>
+<Button x:Name="b80" Content="80" HorizontalAlignment="Center" Margin="0,184,0,0" VerticalAlignment="Top" Height="35" Width="173" Click="b80_Click" Visibility="Collapsed"/>
+
+
+bool visible = false;
+private void dropdown_Click(object sender, RoutedEventArgs e)
+{
+    
+    if (visible)
+    {
+        dt.Visibility = Visibility.Collapsed;
+        b98.Visibility = Visibility.Collapsed;
+        b95.Visibility = Visibility.Collapsed;
+        b92.Visibility = Visibility.Collapsed;
+        b80.Visibility = Visibility.Collapsed;
+        visible = false;
+    }
+    else
+    {
+        dt.Visibility = Visibility.Visible;
+        b98.Visibility = Visibility.Visible;
+        b95.Visibility = Visibility.Visible;
+        b92.Visibility = Visibility.Visible;
+        b80.Visibility = Visibility.Visible;
+        visible = true;
+    }
+}
+
+private void dt_Click(object sender, RoutedEventArgs e)
+{
+    type_box.Text = "ДТ";
+}
+
+private void b80_Click(object sender, RoutedEventArgs e)
+{
+    type_box.Text = "АИ-80";
+}
+
+private void b95_Click(object sender, RoutedEventArgs e)
+{
+    type_box.Text = "АИ-95";
+}
+
+private void b92_Click(object sender, RoutedEventArgs e)
+{
+    type_box.Text = "АИ-92";
+}
+
+private void b98_Click(object sender, RoutedEventArgs e)
+{
+    type_box.Text = "АИ-98";
+}
+
+
+Дроп-даун меню
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+if (name_box.Text != "ФИО" && stage_box.Text != "Стаж")
+{
+    String[] words = name_box.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+    try
+    {
+        sqlConnection.Open();
+
+        // Параметризованный запрос для предотвращения SQL-инъекций
+        string query = "INSERT INTO Drivers (name, familia, otchestvo, staj, user_id) VALUES (@name, @familia, @otchestvo, @staj, @user_id)";
+
+        using (SqlCommand command = new SqlCommand(query, sqlConnection))
+        {
+            command.Parameters.AddWithValue("@name", words[0]);
+            command.Parameters.AddWithValue("@familia", words[1]);
+            command.Parameters.AddWithValue("@otchestvo", words[2]);
+            command.Parameters.AddWithValue("@staj", stage_box.Text);
+            command.Parameters.AddWithValue("@user_id", App.accountId);
+
+            command.ExecuteNonQuery();
+
+            MessageBox.Show("Авто успешно добавлено!");
+        }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show($"Ошибка: {ex.Message}");
+    }
+    finally
+    {
+        name_box.Text = "ФИО";
+        stage_box.Text = "Стаж";
+        sqlConnection.Close();
+    }
+
+}
+else
+{
+    MessageBox.Show("Вы ввели не все данные");
+}
+
+Добавление записи в бд и очистка
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
