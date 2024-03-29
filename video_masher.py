@@ -1,5 +1,5 @@
 import cv2
-
+import numpy as np
 # Загрузка каскада Хаара для обнаружения глаз
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 
@@ -17,9 +17,42 @@ def detect_eyes(frame):
         eyes_coords.append((ex + ew // 2, ey + eh // 2))
 
     return eyes_coords
+def fisheye(frame, center_x, center_y, radius, strength=0.001):
+    height, width = frame.shape[:2]
 
+    # Create a grid of coordinates
+    X, Y = np.meshgrid(np.arange(width), np.arange(height))
+
+    # Calculate distances from center
+    distance_from_center = np.sqrt((X - center_x) ** 2 + (Y - center_y) ** 2)
+
+    # Apply distortion only within the circular area
+    within_circle = distance_from_center <= radius
+
+    # Normalize coordinates to range [-1, 1] within circular area
+    X_normalized = ((X[within_circle] - center_x) / radius)
+    Y_normalized = ((Y[within_circle] - center_y) / radius)
+
+    # Calculate radial distance from center within circular area
+    r = np.sqrt(X_normalized ** 2 + Y_normalized ** 2)
+
+    # Apply modified fisheye distortion equation
+    r = np.clip(r, 0, 1)  # Clip the radial distance to [0, 1]
+    r = r * (1 + (strength + 1) * r ** 2)
+
+    # Map distorted coordinates back to frame coordinates within circular area
+    X_distorted = (center_x + X_normalized * r * radius).astype(np.int32)
+    Y_distorted = (center_y + Y_normalized * r * radius).astype(np.int32)
+
+    # Copy original frame to keep the parts outside the circular area unchanged
+    distorted_frame = np.copy(frame)
+
+    # Update distorted circular area in the frame
+    distorted_frame[within_circle] = frame[Y_distorted, X_distorted]
+
+    return distorted_frame
 # Загрузка видео
-video_capture = cv2.VideoCapture('C:\\Users\\User\\Downloads\\VideoForTune.mp4')
+video_capture = cv2.VideoCapture('IMG_3408.mp4')
 
 while True:
     # Чтение кадра из видео
@@ -30,13 +63,13 @@ while True:
 
     # Обнаружение глаз на кадре
     eyes_coords = detect_eyes(frame)
-
+    print(eyes_coords)
     # Отображение кругов вокруг обнаруженных глаз
-    for (x, y) in eyes_coords:
-        cv2.circle(frame, (x, y), 30, (0, 255, 0), 2)
+    #for (x, y) in eyes_coords:
+        #cv2.circle(frame, (x, y), 30, (0, 255, 0), 2)
 
     # Отображение обработанного кадра
-    cv2.imshow('Video', frame)
+    cv2.imshow('Video', fisheye(frame, eyes_coords[0][0], eyes_coords[0][1], 30, strength=0.1))
 
     # Выход из цикла при нажатии на клавишу 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
