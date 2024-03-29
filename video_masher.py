@@ -67,9 +67,15 @@ while True:
     # Отображение кругов вокруг обнаруженных глаз
     #for (x, y) in eyes_coords:
         #cv2.circle(frame, (x, y), 30, (0, 255, 0), 2)
-
+    try:
+        for i in range(len(eyes_coords)):
+            frame = fisheye(frame, eyes_coords[i][0], eyes_coords[i][1], 30, strength=0.3)
+    except Exception:
+        pass
     # Отображение обработанного кадра
-    cv2.imshow('Video', fisheye(frame, eyes_coords[0][0], eyes_coords[0][1], 30, strength=0.1))
+
+    cv2.imshow('Video', frame)
+
 
     # Выход из цикла при нажатии на клавишу 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
