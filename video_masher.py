@@ -1,34 +1,22 @@
 import cv2
 
-# Загрузка каскада Хаара для обнаружения лиц и глаз
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+# Загрузка каскада Хаара для обнаружения глаз
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 
-# Функция для обнаружения и возвращения координат лица и глаз
-def detect_face_and_eyes(frame):
-    # Поиск лиц на кадре
+# Функция для обнаружения и возвращения координат глаз
+def detect_eyes(frame):
+    # Поиск глаз на кадре
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    eyes = eye_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
-    # Список для хранения координат лиц и глаз
-    face_and_eyes_coords = []
+    # Список для хранения координат глаз
+    eyes_coords = []
 
-    # Находим глаза на каждом обнаруженном лице
-    for (x, y, w, h) in faces:
-        # Добавляем координаты лица в список
-        face_and_eyes_coords.append((x, y, x + w, y + h))
+    # Добавляем координаты глаз в список
+    for (ex, ey, ew, eh) in eyes:
+        eyes_coords.append((ex + ew // 2, ey + eh // 2))
 
-        # Определение области интереса для лица
-        roi_gray = gray[y:y+h, x:x+w]
-        roi_color = frame[y:y+h, x:x+w]
-
-        # Поиск глаз на лице
-        eyes = eye_cascade.detectMultiScale(roi_gray)
-        for (ex, ey, ew, eh) in eyes:
-            # Добавляем координаты глаза в список
-            face_and_eyes_coords.append((x + ex, y + ey, x + ex + ew, y + ey + eh))
-
-    return face_and_eyes_coords
+    return eyes_coords
 
 # Загрузка видео
 video_capture = cv2.VideoCapture('C:\\Users\\User\\Downloads\\VideoForTune.mp4')
@@ -40,12 +28,12 @@ while True:
     if not ret:
         break
 
-    # Обнаружение лиц и глаз на кадре
-    face_and_eyes_coords = detect_face_and_eyes(frame)
+    # Обнаружение глаз на кадре
+    eyes_coords = detect_eyes(frame)
 
-    # Отображение прямоугольников вокруг обнаруженных лиц и глаз
-    for (x1, y1, x2, y2) in face_and_eyes_coords:
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+    # Отображение кругов вокруг обнаруженных глаз
+    for (x, y) in eyes_coords:
+        cv2.circle(frame, (x, y), 30, (0, 255, 0), 2)
 
     # Отображение обработанного кадра
     cv2.imshow('Video', frame)
