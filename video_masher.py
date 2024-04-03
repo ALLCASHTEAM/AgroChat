@@ -1,5 +1,8 @@
 import cv2
 import numpy as np
+from moviepy.editor import VideoFileClip, concatenate_videoclips
+
+
 # Загрузка каскада Хаара для обнаружения глаз
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
 
@@ -52,7 +55,13 @@ def fisheye(frame, center_x, center_y, radius, strength=0.001):
 
     return distorted_frame
 # Загрузка видео
-video_capture = cv2.VideoCapture('IMG_3408.mp4')
+filename = 'IMG_3409.mp4'
+video_capture = cv2.VideoCapture(filename)
+out = cv2.VideoWriter(f'mute{filename}', cv2.VideoWriter_fourcc(*'mp4v'), 30, (1920, 1080))
+video_clip = VideoFileClip(filename)
+#аудиодорожку воруем
+audio_clip = video_clip.audio
+
 
 while True:
     # Чтение кадра из видео
@@ -69,12 +78,13 @@ while True:
         #cv2.circle(frame, (x, y), 30, (0, 255, 0), 2)
     try:
         for i in range(len(eyes_coords)):
-            frame = fisheye(frame, eyes_coords[i][0], eyes_coords[i][1], 30, strength=0.3)
+            frame = fisheye(frame, eyes_coords[i][0], eyes_coords[i][1], 30, strength=0.8)
     except Exception:
         pass
     # Отображение обработанного кадра
 
     cv2.imshow('Video', frame)
+    out.write(frame)
 
 
     # Выход из цикла при нажатии на клавишу 'q'
@@ -84,3 +94,16 @@ while True:
 # Очистка ресурсов
 video_capture.release()
 cv2.destroyAllWindows()
+out.release()
+
+# к которому дорожку делаем
+video_clip2 = VideoFileClip(f"mute{filename}")
+
+# Добавляем аудиодорожку к другому видео
+video_clip_with_audio = video_clip2.set_audio(audio_clip)
+
+# Сохраняем новое видео с аудиодорожкой
+video_clip_with_audio.write_videofile(f"sound_{filename}", codec='libx264')
+video_clip.reader.close()
+audio_clip.reader.close_proc()
+video_clip2.reader.close()
