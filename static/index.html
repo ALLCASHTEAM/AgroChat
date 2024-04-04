@@ -81,9 +81,9 @@
     <div id="bodyWrapper">
         <footer>
             <div id="inputBar">
-             <textarea placeholder="Напишите запрос" class="chatbox" id="textInput" name="user_text"  minlength="2" style="resize: none;"oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
-                <!--   <textarea placeholder="Напишите запрос" class="chatbox" id="textInput" name="user_text" minlength="2" style="resize: none; height: 25px; width: 70vw;"></textarea>Grisha's fix-->
-
+                <label for="upload" class="attach-button">Attach image</label>
+                <input type="file" class="send_img" id="upload" accept="image/*"/>
+                <textarea placeholder="Напишите запрос" class="chatbox" id="textInput" name="user_text"  minlength="2" style="resize: none;"oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                 <div id="sendBtn">
                 	 <object type="image/svg+xml" data="static/resources/sendArrow.svg"></object>
                 </div>
