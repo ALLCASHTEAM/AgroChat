@@ -79,16 +79,16 @@ document.getElementById('about').addEventListener('click', function(){
   });
 
   // handle image input
-    function loadImage(){
-      if (document.getElementsByClassName("send_img")[0].files[0]){
-        var imageObj = document.getElementsByClassName("send_img")[0];
-        document.getElementsByClassName("attach-button").textContent = imageObj.name;
-        return imageObj.files[0]
-      }
-      else{
-        return null
-      }
-    }
+  //  function loadImage(){
+  //    if (document.getElementsByClassName("send_img")[0].files[0]){
+  //      var imageObj = document.getElementsByClassName("send_img")[0];
+  //      document.getElementsByClassName("attach-button").textContent = imageObj.name;
+  //      return imageObj.files[0]
+  //    }
+  //    else{
+  //      return null
+  //    }
+  //  }
 
 // CHAT BUBBLES
 
@@ -105,7 +105,7 @@ document.getElementById('about').addEventListener('click', function(){
       var imageDiv = document.createElement('img');
       imageDiv.src = "/static/user_images/" + image;
       // Set the image width to 100%
-      imageDiv.style.width = '90%';
+      imageDiv.style.width = '300px';
       container.appendChild(imageDiv);
     }
 
@@ -234,10 +234,7 @@ document.getElementById('about').addEventListener('click', function(){
     var text = document.querySelector('.chatbox').value;
     console.log(text.length);
     // if text is smaller than 2 symbols and there is no image throw alert
-    if (text.trim() <= 2 && !loadImage()){
-      alert("Слишком короткое сообщение или не выбрано изображение!");
-      return
-    }
+    // if (text.trim() <= 2 && !loadImage()) !!!
     const disallowedChars = /[{}[\]<>\\|\/#~*]/;
     if(disallowedChars.test(text)) {
       alert("В сообщении используются запрещенные символы!");
@@ -252,12 +249,13 @@ document.getElementById('about').addEventListener('click', function(){
     return
     }
 
-     if loadImage() && (text.trim().length > 0){
-        alert("сука тока либо текст либо картинка");
-        document.getElementsByClassName("send_img")[0].value = "";
-        document.getElementsByClassName("chatbox")[0].value = "";
-        return
-      }
+    // if loadImage() && !!!!!!
+    //  if (text.trim().length > 0){
+    //    alert("сука тока либо текст либо картинка");
+    //    document.getElementsByClassName("send_img")[0].value = "";
+    //    document.getElementsByClassName("chatbox")[0].value = "";
+    //    return
+    //  }
 
     var url = '/request';
 
@@ -284,14 +282,14 @@ document.getElementById('about').addEventListener('click', function(){
 
     // remove text from textbox
     document.querySelector('.chatbox').value = "";
-    document.getElementsByClassName("send_img")[0].value = ""; // Добавлено для сброса выбора файла после отправки
+
     var botBubbleId = makeBotBubble("");
 
     // get server response
     var promise = new Promise(async (resolve, reject) => {
         try {
           //result = await sendRequest(url, text, loadImage());!!!
-          result = await sendRequest(url, text, loadImage());
+          result = await sendRequest(url, text);
           resolve(result);
         } catch (error) {
           reject(error);
@@ -302,6 +300,7 @@ document.getElementById('about').addEventListener('click', function(){
       // fill the bot bubble and scroll to bottom
       document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
       scrollToBottom();
+      console.log("степа тупень");
       saveToLocal("bot", resp["text"], resp["image"]);
 
     }).catch((error) => {
@@ -497,6 +496,7 @@ document.body.addEventListener('click', handleClick);
 
 //удаление чата 29.02
 //удаление чата 29.02
+//хуйня
 //удаление чата 01.03
 document.addEventListener('DOMContentLoaded', function() {
     // Находим элемент "Очистить чат"
