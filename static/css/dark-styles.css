@@ -28,7 +28,7 @@
   }
   header{
       display: flex;
-      justify-content: flex-end;		
+      justify-content: flex-end;
       width: 100%;
   }
   object{
@@ -184,7 +184,7 @@
 }
 
   #textInput, #textInput:focus{
-      width: calc(85vw - 105px);
+      width: calc(65vw - 105px);
       font-size: 20px;
       outline: none;
       border:none;
@@ -218,7 +218,7 @@ footer{
     flex-direction: column; /* Изменено с row на column */
     align-items: center;
 }
-  
+
   .dark-theme{
 	height: 42px;
     border: none;
@@ -387,3 +387,30 @@ li {
       width: 26px;
       height: 26px;
   }
+
+  #upload {
+    display: none; /* Скрыть стандартный input type="file" */
+}
+
+
+.attach-button {
+    display: inline-block; /* Делаем элемент строчно-блочным для применения размеров */
+    max-width: 17%; /* Максимальная ширина кнопки */
+    overflow: hidden; /* Скрываем текст, выходящий за пределы кнопки */
+    text-overflow: ellipsis; /* Добавляем многоточие, если текст не помещается */
+    white-space: nowrap; /* Запрещаем тексту переноситься на новую строку */
+    background-color: var(--main-green); /* Цвет фона */
+    color: var(--main-white); /* Цвет текста */
+    padding: 10px 20px; /* Паддинги */
+    border-radius: 5px; /* Скругление углов */
+    cursor: pointer; /* Курсор в виде указателя */
+    font-size: 16px; /* Размер шрифта */
+    margin-right: 10px; /* Отступ справа, чтобы отделить от textInput */
+}
+
+
+#inputBar {
+    align-items: center; /* Центрировать содержимое по вертикали */
+    display: flex; /* Использовать flexbox для содержимого */
+    justify-content: center; /* Центрировать содержимое по горизонтали */
+}

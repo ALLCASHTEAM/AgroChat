@@ -103,7 +103,7 @@ document.getElementById('about').addEventListener('click', function(){
     // Append the image if there is one
     if (image) {
       var imageDiv = document.createElement('img');
-      imageDiv.src = "/static/user_images/" + image;
+      imageDiv.src = "/user_images/" + image;
       // Set the image width to 100%
       imageDiv.style.width = '90%';
       container.appendChild(imageDiv);
@@ -231,6 +231,8 @@ document.getElementById('about').addEventListener('click', function(){
   // send request to server and get response
   function makeBubbles()
   {
+      const disallowedChars = /[{}[\]<>\\|\/#~*]/;
+
     var text = document.querySelector('.chatbox').value;
     console.log(text.length);
     // if text is smaller than 2 symbols and there is no image throw alert
@@ -238,36 +240,32 @@ document.getElementById('about').addEventListener('click', function(){
       alert("Слишком короткое сообщение или не выбрано изображение!");
       return
     }
-    const disallowedChars = /[{}[\]<>\\|\/#~*]/;
-    if(disallowedChars.test(text)) {
+    else if(disallowedChars.test(text)) {
       alert("В сообщении используются запрещенные символы!");
     return
     }
-    if (text.trim().length <= 2){
-      alert("Слишком короткое сообщение!");
-      return
-    }
-    if (text.trim().length > 1000) {
+    else if (text.trim().length > 1000) {
       alert("Слишком длинное сообщение");
     return
     }
 
-     if loadImage() && (text.trim().length > 0){
+     else if (loadImage() && (text.trim().length > 0)){
         alert("сука тока либо текст либо картинка");
         document.getElementsByClassName("send_img")[0].value = "";
         document.getElementsByClassName("chatbox")[0].value = "";
+        document.querySelector('.send_img').value = "";
+        document.querySelector('.attach-button').textContent = "Выберите изображение";
+
         return
       }
 
     var url = '/request';
 
     // create chatBubble for user, scroll and save to localStorage
-    // if (loadImage()) !!!
-    if (false){
+    if (loadImage()) {
       var userBubbleId = makeUserBubble(text, 1);
       var waitForImage = new Promise (async (resolve, reject) => {
         try{
-        //imageHash = await getImageHash(loadImage());
           imageHash = await getImageHash(loadImage());
           editUserBubble(id=userBubbleId, {image: imageHash["imageName"]});
           saveToLocal("user", text, imageHash["imageName"]);
@@ -284,7 +282,11 @@ document.getElementById('about').addEventListener('click', function(){
 
     // remove text from textbox
     document.querySelector('.chatbox').value = "";
-    document.getElementsByClassName("send_img")[0].value = ""; // Добавлено для сброса выбора файла после отправки
+    document.getElementsByClassName("send_img")[0].value = "";
+    document.querySelector('.send_img').value = "";
+    document.querySelector('.attach-button').textContent = "Выберите изображение";
+
+// Добавлено для сброса выбора файла после отправки
     var botBubbleId = makeBotBubble("");
 
     // get server response
@@ -371,14 +373,14 @@ const theme = document.querySelector("#theme-link");
 btn.addEventListener("click", function() {
 
   // Если текущий адрес содержит "light-theme.css"
-  if (theme.getAttribute("href") == "static/css/light-styles.css") {
+  if (theme.getAttribute("href") == "css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
-    theme.href = "static/css/dark-styles.css";
+    theme.href = "css/dark-styles.css";
     saveThemeToLocalStorage("dark");
     // В противном случае…
   } else {
     // …переключаемся на "light-theme.css"
-    theme.href = "static/css/light-styles.css";
+    theme.href = "css/light-styles.css";
     saveThemeToLocalStorage("light");
 
   }
@@ -392,9 +394,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Проверяем, есть ли сохраненное значение темы в localStorage
   if (savedTheme === "dark") {
-    theme.href = "static/css/dark-styles.css";
+    theme.href = "css/dark-styles.css";
   } else {
-    theme.href = "static/css/light-styles.css";
+    theme.href = "css/light-styles.css";
 
   }
 });
@@ -495,8 +497,7 @@ window.addEventListener('load', function() {
 // Добавляем обработчик клика на список, используя делегирование событий
 document.body.addEventListener('click', handleClick);
 
-//удаление чата 29.02
-//удаление чата 29.02
+
 //удаление чата 01.03
 document.addEventListener('DOMContentLoaded', function() {
     // Находим элемент "Очистить чат"
@@ -513,3 +514,8 @@ document.addEventListener('DOMContentLoaded', function() {
         location.reload();
     });
 });
+
+document.getElementById('upload').onchange = function() {
+    var fileName = this.files[0].name; // Получить имя файла
+    document.querySelector('.attach-button').textContent = fileName; // Изменить текст на label
+};
