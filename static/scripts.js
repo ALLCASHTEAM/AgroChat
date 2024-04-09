@@ -380,7 +380,7 @@ btn.addEventListener("click", function() {
     // В противном случае…
   } else {
     // …переключаемся на "light-theme.css"
-    theme.href = "css/light-styles.css";
+    theme.href = "static/css/light-styles.css";
     saveThemeToLocalStorage("light");
 
   }
@@ -394,9 +394,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Проверяем, есть ли сохраненное значение темы в localStorage
   if (savedTheme === "dark") {
-    theme.href = "css/dark-styles.css";
+    theme.href = "static/css/dark-styles.css";
   } else {
-    theme.href = "css/light-styles.css";
+    theme.href = "static/css/light-styles.css";
 
   }
 });
