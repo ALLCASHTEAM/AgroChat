@@ -34,7 +34,7 @@ document.getElementById('about').addEventListener('click', function(){
         //check if there is image
         if (userData.split("\\image").length == 2){
           userDataText = userData.split("\\")[0].split(":").slice(-1);
-          userImageText = userData.split("\\")[1].split(":").slice(-1);
+          mageText = userData.split("\\")[1].split(":").slice(-1);
           makeUserBubble(userDataText, userImageText);
         }else{
           makeUserBubble(userData.split(":").slice(-1));
@@ -103,7 +103,7 @@ document.getElementById('about').addEventListener('click', function(){
     // Append the image if there is one
     if (image) {
       var imageDiv = document.createElement('img');
-      imageDiv.src = "/user_images/" + image;
+      imageDiv.src = "/static/user_images/" + image;
       // Set the image width to 100%
       imageDiv.style.width = '90%';
       container.appendChild(imageDiv);
@@ -373,9 +373,9 @@ const theme = document.querySelector("#theme-link");
 btn.addEventListener("click", function() {
 
   // Если текущий адрес содержит "light-theme.css"
-  if (theme.getAttribute("href") == "css/light-styles.css") {
+  if (theme.getAttribute("href") == "static/css/light-styles.css") {
     // …то переключаемся на "dark-theme.css"
-    theme.href = "css/dark-styles.css";
+    theme.href = "static/css/dark-styles.css";
     saveThemeToLocalStorage("dark");
     // В противном случае…
   } else {
