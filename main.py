@@ -7,6 +7,7 @@ import json
 import hashlib
 import os
 import aiofiles
+import uvicorn
 from AI_PRO_MAX import mainAI
 from hashlib import sha256
 
@@ -31,6 +32,15 @@ class RequestData(BaseModel):
 
 @app.post("/request")
 async def make_response(request_data: RequestData):
+    # if request_data.image:
+    #     ext = image.filename.split('.')[-1]
+    #     image_data = await image.read()
+    #     hashed_image = sha256(image_data).hexdigest()
+    #     filename = f'{hashed_image}.{ext}'
+    #
+    #     file_path = f'static/user_images/{filename}'
+    #     if filename not in os.listdir('static/user_images'):
+    #         background_tasks.add_task(save_image, image_data, file_path)
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
 
@@ -71,3 +81,8 @@ async def get_image_hash(data: Request):
     hashed_image = hashlib.sha256(image).hexdigest()
     filename = f'{str(hashed_image)}.{ext}'
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
+
+if __name__ == "__main__":
+    config = uvicorn.Config("main:app", reload=True, host="0.0.0.0", port=81, log_level="info")
+    server = uvicorn.Server(config)
+    server.run()
