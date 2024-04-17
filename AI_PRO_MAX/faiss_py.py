@@ -4,7 +4,7 @@ import faiss
 import numpy as np
 from pathlib import Path
 
-model = SentenceTransformer('hivaze/ru-e5-large')
+model = SentenceTransformer('intfloat/multilingual-e5-large')
 
 
 def read_and_preprocess_data(folder_path):
@@ -36,6 +36,6 @@ def list_return(user_query) -> list:
 
 folder_path = Path(__file__).resolve().parent.parent / "rofls"
 questions_answers = read_and_preprocess_data(folder_path)
-questions = [qa[1] for qa in questions_answers]
+questions = [qa[0] for qa in questions_answers]
 vectors = vectorize_questions(questions)
 index = create_faiss_index(np.array(vectors).astype('float32'))

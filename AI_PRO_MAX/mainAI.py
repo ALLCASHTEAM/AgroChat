@@ -14,7 +14,7 @@ def AI_COMPIL(dialog: list[str]) -> str:
     print("INFO: Ответ генератора", answer)
 
     replacements = [
-        ("[\\[A-Z]+]", ""), ("GPT4", ""),  ("Answer:", ""),
+        ("[\\[A-Z]+]", ""), ("GPT4", ""),  ("GPT-3 ", ""), ("Answer:", ""), ("<https://betaren.ru>", "https://betaren.ru"),
         ("Agrochem", 'Агрохим'), ("Context:", ""), ("GPT 4:", ""), ("GPT-4:", ""),
         ("GPT", ""), ("G", ""), ("GPT4 Correct Assistant:", ""), ("Correct", ""),
         ("<[^>]+>", ""), ("ГПТ4 Asistant:", ''), ("Asistant:", ''), ('text:', ''),
@@ -33,3 +33,4 @@ def AI_COMPIL(dialog: list[str]) -> str:
             "Мне бы хотелось лучше понять ваш запрос. Можете ли вы переформулировать или задать дополнительный вопрос?"
         ]
         return random.choice(default_messages)
+

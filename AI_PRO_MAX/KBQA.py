@@ -1,8 +1,8 @@
 from AI_PRO_MAX import classify_personal_questions
-from AI_PRO_MAX.faiss_py import model, list_return
+from AI_PRO_MAX.faiss_py import list_return
 from sentence_transformers import SentenceTransformer, util
 
-
+model = SentenceTransformer('intfloat/multilingual-e5-large')
 
 def find_best_matches(user_query, sentence_model):
     try:
@@ -23,37 +23,35 @@ def find_best_matches(user_query, sentence_model):
         matches.sort(key=lambda x: x[1], reverse=True)
 
         return matches[:8], liness
-    except:
+    except Exception as e:
+        print(e)
         return None, None
 
 
 def KBQA_search(user_query: str):
     print("INFO: База запущенна")
-    if  user_query.strip() == "привет":
-        matches, liness = find_best_matches(user_query, model)
-        if matches:
-            try:
-                answer = ""
-                for line in liness:
-                    if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
-                            lambda x: str(x).replace("('", "").split("?")[0], matches)))):
-                        answer += line[0].replace('?', '').lower().strip() + " - " + line[1]
+    matches, liness = find_best_matches(user_query, model)
+    if matches:
+        try:
+            answer = ""
+            for line in liness:
+                if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
+                        lambda x: str(x).replace("('", "").split("?")[0], matches)))):
+                    answer += line[0].replace('?', '').lower().strip() + " - " + line[1].lower().strip() + ", "
 
-                if answer:
-                    print("INFO: Ответ от базы", answer)
-                    return answer
-                else:
-                    print("Warning: Нет подходящих ответов.")
-                    return None
-            except Exception as e:
-                print(f"Warning: Ответ от базы пуст. Ошибка: {e}")
+            if answer:
+                print("INFO: Ответ от базы", answer)
+                return answer.lower()
+            else:
+                print("Warning: Нет подходящих ответов.")
                 return None
-        else:
-            print("Warning: Ошибка при поиске совпадений")
+        except Exception as e:
+            print(f"Warning: Ответ от базы пуст. Ошибка: {e}")
             return None
     else:
-        print("INFO: Чит-чат режим (без базы)")
+        print("Warning: Ошибка при поиске совпадений")
         return None
+
 
 if __name__ == "__main__":
     user_query = "Чем обрабатывать кукурузу?"
