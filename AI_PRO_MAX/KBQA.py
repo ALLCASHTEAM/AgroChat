@@ -1,8 +1,6 @@
-from AI_PRO_MAX import classify_personal_questions
-from AI_PRO_MAX.faiss_py import list_return
+from faiss_py import list_return, model
 from sentence_transformers import SentenceTransformer, util
 
-model = SentenceTransformer('intfloat/multilingual-e5-large')
 
 def find_best_matches(user_query, sentence_model):
     try:
@@ -12,7 +10,7 @@ def find_best_matches(user_query, sentence_model):
 
         # Предварительное кодирование запроса пользователя и текстов для сравнения
         user_query_encoded = sentence_model.encode(user_query_prefixed)
-        lines_encoded = sentence_model.encode(["passage: " + line for line in lines])
+        lines_encoded = sentence_model.encode(["passage: " + line for line in lines], normalize_embeddings=True)
 
         similarities = util.pytorch_cos_sim(user_query_encoded, lines_encoded)[0]
 
@@ -37,11 +35,14 @@ def KBQA_search(user_query: str):
             for line in liness:
                 if line[0].replace('?', '').lower().strip() in list(map(lambda x: x.lower().strip(), list(map(
                         lambda x: str(x).replace("('", "").split("?")[0], matches)))):
-                    answer += line[0].replace('?', '').lower().strip() + " - " + line[1].lower().strip() + ", "
-
-            if answer:
+                    answer += line[0].replace('?', '').lower().strip() + " - " + line[1].lower().strip() + " "
+            print(answer.count("."))
+            if answer.count(".") > 1:
                 print("INFO: Ответ от базы", answer)
                 return answer.lower()
+            elif answer.count(".") < 2:
+                print("INFO: Малый ответ. Не отправляется в контекст.")
+                return None
             else:
                 print("Warning: Нет подходящих ответов.")
                 return None
@@ -54,5 +55,5 @@ def KBQA_search(user_query: str):
 
 
 if __name__ == "__main__":
-    user_query = "Чем обрабатывать кукурузу?"
+    user_query = "Привет "
     KBQA_search(user_query)
