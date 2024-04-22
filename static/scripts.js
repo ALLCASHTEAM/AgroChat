@@ -37,9 +37,9 @@ document.getElementById('about').addEventListener('click', function(){
           mageText = userData.split("\\")[1].split(":").slice(-1);
           makeUserBubble(userDataText, userImageText);
         }else{
-          makeUserBubble(userData.split(":").slice(-1));
+          makeUserBubble(userData);
         }
-        makeBotBubble(botData.split(":").slice(-1));
+        makeBotBubble(botData);
       }
       scrollToBottom();
     }
