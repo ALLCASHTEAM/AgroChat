@@ -27,22 +27,14 @@ async def read_root():
 class RequestData(BaseModel):
     userMessages: List[Optional[str]]
     botMessages: List[Optional[str]]
+    image: List[Optional[str]]
 
 
-
-@app.post("/request")
 async def make_response(request_data: RequestData):
-    # if request_data.image:
-    #     ext = image.filename.split('.')[-1]
-    #     image_data = await image.read()
-    #     hashed_image = sha256(image_data).hexdigest()
-    #     filename = f'{hashed_image}.{ext}'
-    #
-    #     file_path = f'static/user_images/{filename}'
-    #     if filename not in os.listdir('static/user_images'):
-    #         background_tasks.add_task(save_image, image_data, file_path)
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
+
+    print(request_data.image)  # request_data.image - хеш каритинки ну и плюс название файла
 
     # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
     data_for_ai = [user_messages[0]] if user_messages else []
@@ -50,20 +42,11 @@ async def make_response(request_data: RequestData):
         data_for_ai.append(bot_messages[0])
     if len(user_messages) > 1:
         data_for_ai.append(user_messages[1])
-
-    text = mainAI.AI_COMPIL(data_for_ai)
-
+    # text = mainAI.AI_COMPIL(data_for_ai)
+    # TODO: сделать так, чтобы кода кентуха отсылал картинку, она рендерилась так сразу, как получился хеш, а не ждать ответа от модели
+    text = 'nehye'
+    # image: None - лютый костыль, мне страшно удалять и тестить, может что-то сломается, а может нет
     return {"text": text, "image": None}
-
-    # if request_data.image:
-    #     ext = image.filename.split('.')[-1]
-    #     image_data = await image.read()
-    #     hashed_image = sha256(image_data).hexdigest()
-    #     filename = f'{hashed_image}.{ext}'
-    #
-    #     file_path = f'static/user_images/{filename}'
-    #     if filename not in os.listdir('static/user_images'):
-    #         background_tasks.add_task(save_image, image_data, file_path)
 
 
 
@@ -80,6 +63,10 @@ async def get_image_hash(data: Request):
     image = await body['image'].read()
     hashed_image = hashlib.sha256(image).hexdigest()
     filename = f'{str(hashed_image)}.{ext}'
+
+    if filename not in os.listdir('static/user_images'):
+        await save_image(image, f'static/user_images/{filename}')
+
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
 
 if __name__ == "__main__":
