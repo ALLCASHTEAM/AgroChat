@@ -29,7 +29,6 @@ class RequestData(BaseModel):
     botMessages: List[Optional[str]]
     image: List[Optional[str]]
 
-
 async def make_response(request_data: RequestData):
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
@@ -42,12 +41,11 @@ async def make_response(request_data: RequestData):
         data_for_ai.append(bot_messages[0])
     if len(user_messages) > 1:
         data_for_ai.append(user_messages[1])
-    # text = mainAI.AI_COMPIL(data_for_ai)
+    text = mainAI.AI_COMPIL(data_for_ai)
     # TODO: сделать так, чтобы кода кентуха отсылал картинку, она рендерилась так сразу, как получился хеш, а не ждать ответа от модели
-    text = 'nehye'
+    # text = 'nehye'
     # image: None - лютый костыль, мне страшно удалять и тестить, может что-то сломается, а может нет
     return {"text": text, "image": None}
-
 
 
 
