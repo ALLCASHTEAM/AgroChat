@@ -17,13 +17,9 @@ def vectorize_questions(questions):
     return model.encode(questions, normalize_embeddings=True)
 
 
-def create_faiss_index(vectors, nlist=150):
+def create_faiss_index(vectors):
     dimension = vectors.shape[1]
-    quantizer = faiss.IndexFlatL2(dimension)  # the quantizer
-    index = faiss.IndexIVFFlat(quantizer, dimension, nlist, faiss.METRIC_L2)
-    assert not index.is_trained
-    index.train(vectors)
-    assert index.is_trained
+    index = faiss.IndexFlatL2(dimension)
     index.add(vectors)
     return index
 

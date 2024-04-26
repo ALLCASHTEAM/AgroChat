@@ -35,7 +35,7 @@ async def make_response(request_data: RequestData):
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
 
-    if request_data.image:
+    if request_data.image[0]:
         print(request_data.image)
         result = photogomo.main(f"static/user_images/{request_data.image[0]}")
         text = mainAI.AI_COMPIL(result, imageFlag=True)
