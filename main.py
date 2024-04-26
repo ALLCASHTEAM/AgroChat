@@ -8,7 +8,7 @@ import hashlib
 import os
 import aiofiles
 import uvicorn
-from AI_PRO_MAX import mainAI
+from AI_PRO_MAX import mainAI, photogomo
 from hashlib import sha256
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
@@ -29,24 +29,28 @@ class RequestData(BaseModel):
     botMessages: List[Optional[str]]
     image: List[Optional[str]]
 
+
+@app.post("/request")
 async def make_response(request_data: RequestData):
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
 
-    print(request_data.image)  # request_data.image - хеш каритинки ну и плюс название файла
-
+    if request_data.image:
+        print(request_data.image)
+        result = photogomo.main(f"static/user_images/{request_data.image[0]}")
+        print(result)
+        text = mainAI.AI_COMPIL(result[0], imageFlag=True)
+        return {"text": text, "image": None}
+    # request_data.image - хеш каритинки ну и плюс название файла
+    else:
     # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
-    data_for_ai = [user_messages[0]] if user_messages else []
-    if bot_messages:
-        data_for_ai.append(bot_messages[0])
-    if len(user_messages) > 1:
-        data_for_ai.append(user_messages[1])
-    text = mainAI.AI_COMPIL(data_for_ai)
-    # TODO: сделать так, чтобы кода кентуха отсылал картинку, она рендерилась так сразу, как получился хеш, а не ждать ответа от модели
-    # text = 'nehye'
-    # image: None - лютый костыль, мне страшно удалять и тестить, может что-то сломается, а может нет
-    return {"text": text, "image": None}
-
+        data_for_ai = [user_messages[0]] if user_messages else []
+        if bot_messages:
+            data_for_ai.append(bot_messages[0])
+        if len(user_messages) > 1:
+            data_for_ai.append(user_messages[1])
+        text = mainAI.AI_COMPIL(data_for_ai)
+        return {"text": text, "image": None}
 
 
 async def save_image(image_data, file_path):
@@ -64,8 +68,8 @@ async def get_image_hash(data: Request):
 
     if filename not in os.listdir('static/user_images'):
         await save_image(image, f'static/user_images/{filename}')
-
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
+
 
 if __name__ == "__main__":
     config = uvicorn.Config("main:app", reload=True, host="0.0.0.0", port=81, log_level="info")

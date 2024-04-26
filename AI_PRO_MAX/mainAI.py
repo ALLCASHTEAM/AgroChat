@@ -6,12 +6,16 @@ import re
 model = gen_engine.interact()
 
 
-def AI_COMPIL(dialog: list[str]) -> str:
+def AI_COMPIL(dialog: list[str], imageFlag=False) -> str:
     print("INFO: Вход:", dialog)
-    processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("</s>", "").lower()
-    print("INFO: Интерпретация: ", processed_question)
-    answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
-    print("INFO: Ответ генератора", answer)
+    if imageFlag:
+        answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(dialog))
+        print("INFO: Ответ генератора", answer)
+    else:
+        processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("</s>", "").lower()
+        print("INFO: Интерпретация: ", processed_question)
+        answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
+        print("INFO: Ответ генератора", answer)
 
     replacements = [
         ("[\\[A-Z]+]", ""), ("GPT4", ""),  ("GPT-3 ", ""), ("Answer:", ""), ("<https://betaren.ru>", "https://betaren.ru"),
