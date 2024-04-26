@@ -14,6 +14,11 @@ data_transform = transforms.Compose([
 ])
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+# Фиксация случайных состояний для воспроизводимости
+torch.manual_seed(42)
+if torch.cuda.is_available():
+    torch.cuda.manual_seed_all(42)
+
 
 def image_process(image_path):
     image = (Image.open(image_path)).convert('RGB')
@@ -38,23 +43,24 @@ def model_init(num_classes: int, model_path: str, device: str):
 
 
 def predict(model, image, classes):
-    model.eval()
     with torch.no_grad():
-        output = model(image)
-        probabilities = torch.nn.functional.softmax(output, dim=1)
-        max_prob, preds = torch.max(probabilities, dim=1)
-        predicted_class = classes[str(preds.item())]
-        return predicted_class, max_prob.item()
+        output = model(image).to(device)
+        tmp = torch.max(output, dim=1)[1]
+        tmp = tmp.item()
+        print_res = classes[str(tmp)]
+        return print_res
+
+
+model = model_init(120, "AI_PRO_MAX/ResNet_101-ImageNet-model-99.pth", device)
+model.eval()
 
 
 def main(image_path):
-    model = model_init(120, "AI_PRO_MAX/ResNet_101-ImageNet-model-99.pth", device)
     classes = load_classes(json_path)
     image = image_process(image_path)
-    prediction, probability = predict(model, image, classes)
-    return [prediction, probability]
+    return predict(model, image, classes)
 
 
 if __name__ == "__main__":
-    result, probability = main(image_path="opisanie-boleznej-tomatov-65.jpg")
-    print(f"Predicted Class: {result}, Probability: {probability:.2f}")
+    result = main(image_path="opisanie-boleznej-tomatov-65.jpg")
+    print(result)

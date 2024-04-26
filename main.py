@@ -38,8 +38,7 @@ async def make_response(request_data: RequestData):
     if request_data.image:
         print(request_data.image)
         result = photogomo.main(f"static/user_images/{request_data.image[0]}")
-        print(result)
-        text = mainAI.AI_COMPIL(result[0], imageFlag=True)
+        text = mainAI.AI_COMPIL(result, imageFlag=True)
         return {"text": text, "image": None}
     # request_data.image - хеш каритинки ну и плюс название файла
     else:
