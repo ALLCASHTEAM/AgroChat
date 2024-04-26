@@ -33,7 +33,8 @@ window.addEventListener("load", (e) => {
             //check if there is image
             if (userData.split("\\image:").length > 1) {
                 imageName = userData.split("\\image:")[1];
-                makeUserBubble(null, imageName);
+                let imagePath = `/static/user_images/${imageName}`;
+                makeUserBubble(null, imagePath);
             } else {
                 makeUserBubble(userData);
             }
