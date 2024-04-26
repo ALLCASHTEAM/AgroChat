@@ -70,7 +70,22 @@ async def get_image_hash(data: Request):
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
 
 
+def test():
+    print(mainAI.AI_COMPIL("Чем мне удобрить свеклу?"))
+    print(mainAI.AI_COMPIL("Чем мне удобрить кукурузу?"))
+    print(mainAI.AI_COMPIL("Чем мне удобрить карточку?"))
+    print(mainAI.AI_COMPIL("Что такое биостим старт?"))
+    print(mainAI.AI_COMPIL("Привет"))
+    print(mainAI.AI_COMPIL("Кто ты?"))
+    print(mainAI.AI_COMPIL("Чем ризоформ соя отличается от биостим рост?"))
+    print(mainAI.AI_COMPIL("Как мне бороться с гниением картофеля?"))
+
+
 if __name__ == "__main__":
-    config = uvicorn.Config("main:app", reload=True, host="0.0.0.0", port=81, log_level="info")
-    server = uvicorn.Server(config)
-    server.run()
+    TEST = False
+    if TEST:
+        test()
+    else:
+        config = uvicorn.Config("main:app", reload=True, host="0.0.0.0", port=81, log_level="info")
+        server = uvicorn.Server(config)
+        server.run()
