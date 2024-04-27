@@ -35,7 +35,15 @@ async def make_response(request_data: RequestData):
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
 
-    if request_data.image[0]:
+    if 'regenerate' in request_data.flags:
+        # Логика перегенерации ответа
+        last_response = bot_messages[-1] if bot_messages else None
+        if last_response:
+            regenerated_response = mainAI.regenerate(last_responses)
+            return {"text": regenerated_response, "image": None}
+        else:
+            return {"text": "Ошибка: Нет последнего сообщения для перегенерации.", "image": None}
+    elif request_data.image[0]:
         print(request_data.image)
         result = photogomo.main(f"static/user_images/{request_data.image[0]}")
         text = mainAI.AI_COMPIL(result, imageFlag=True)

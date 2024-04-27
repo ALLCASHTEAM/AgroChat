@@ -134,6 +134,12 @@ function makeBotBubble(text, image = null) {
 
     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
     if (text.length == 0) {
+        // Удаляем существующую кнопку регенерации, если она есть
+        var existingRegenerateButton = document.querySelector('.regenerate');
+        if (existingRegenerateButton) {
+            existingRegenerateButton.remove();
+        }
+
         var chatBubble_bot = document.createElement('li');
         chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
 
@@ -195,6 +201,48 @@ function makeBotBubble(text, image = null) {
     scrollToBottom();
     return botBubbleCounter + 1;
 }
+
+// REGENERATE DEGENERATE ON STEPAN SAPSAN
+function regenerateLastResponse() {
+    const lastBotMessage = getFromLocal('bot').slice(-1)[0];
+    if (lastBotMessage) {
+        sendRequestWithRegenerateFlag(lastBotMessage);
+    } else {
+        alert("Нет последнего сообщения для перегенерации.");
+    }
+}
+
+async function sendRequestWithRegenerateFlag(lastMessage) {
+    const url = '/request';
+    const dataToSend = {
+        userMessages: [],
+        botMessages: [lastMessage],
+        flags: ['regenerate']
+    };
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend)
+    });
+
+    if (response.ok) {
+        const resp = await response.json();
+        updateBotBubble(resp.text);
+    } else {
+        console.error('Request failed:', response.statusText);
+    }
+}
+
+function updateBotBubble(text) {
+    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
+    if (lastBotBubble) {
+        lastBotBubble.textContent = text;
+    }
+}
+
 
 
 // LOCAL STORAGE
@@ -324,7 +372,7 @@ async function sendRequest(url, textData, imageData) {
 
     // Select the last three messages of each
     let lastThreeUserMessages = allUserMessages.slice(-2);
-    let lastThreeBotMessages = allBotMessages.slice(-1);
+    let lastThreeBotMessages = allBotMessages.slice(-2);
 
     // Package these last three messages in a format suitable for your server endpoint
     let dataToSend = {
