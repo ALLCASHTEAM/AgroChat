@@ -2,6 +2,15 @@ from llama_cpp import Llama
 
 
 def interact():
+    """
+    Функция инициализации модели
+
+    model_path - путь к файлу модели
+    n_ctx - размер контекста модели (должно писаться в конфигах модели)
+    n_gpu_layers - кол-во слоев на gpu (-1 значит грузить все)
+    chat_format - формат чата
+    :return model:
+    """
     model = Llama(
         model_path='./AI_PRO_MAX/model-q16_0.gguf',
         n_ctx=8192,
@@ -15,7 +24,9 @@ def interact():
 
 def generate(question, model, context=False):
     if context:
+        # КОНТЕКСТ
         if len(question) == 1 or len(question) == 2:
+            # ЕСЛИ ПЕРВОЕ СООБЩЕНИЕ
             messages = [
                 {"role": "system",
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Use context if you need it. Use context to answer the question.<|end_of_turn|>"},
@@ -25,6 +36,7 @@ def generate(question, model, context=False):
                 }
             ]
         else:
+            # ЕСЛИ УЖЕ ЕСТЬ ДИАЛОГ
             messages = [
                 {"role": "system",
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company.Use context to answer the question .Use context if you need it.<|end_of_turn|>"},
@@ -42,7 +54,9 @@ def generate(question, model, context=False):
                 }
             ]
     else:
+        # КОНТЕКСТА НЕТ
         if len(question) == 1 or len(question) == 2:
+            # ЕСЛИ ПЕРВОЕ СООБЩЕНИЕ
             messages = [
                 {"role": "system",
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly.<|end_of_turn|>"},
@@ -52,6 +66,7 @@ def generate(question, model, context=False):
                 }
             ]
         else:
+            # ЕСЛИ УЖЕ ЕСТЬ ДИАЛОГ
             messages = [
                 {"role": "system",
                  "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly.<|end_of_turn|>"},

@@ -28,6 +28,7 @@ class RequestData(BaseModel):
     userMessages: List[Optional[str]]
     botMessages: List[Optional[str]]
     image: List[Optional[str]]
+    flags: List[Optional[str]]
 
 
 @app.post("/request")
@@ -39,24 +40,24 @@ async def make_response(request_data: RequestData):
         # Логика перегенерации ответа
         last_response = bot_messages[-1] if bot_messages else None
         if last_response:
-            regenerated_response = mainAI.regenerate(last_responses)
+            regenerated_response = mainAI.ai_main(last_response, regenerate_flag=True)
             return {"text": regenerated_response, "image": None}
         else:
             return {"text": "Ошибка: Нет последнего сообщения для перегенерации.", "image": None}
     elif request_data.image[0]:
         print(request_data.image)
         result = photogomo.main(f"static/user_images/{request_data.image[0]}")
-        text = mainAI.AI_COMPIL(result, imageFlag=True)
+        text = mainAI.ai_main(result, image_flag=True)
         return {"text": text, "image": None}
     # request_data.image - хеш каритинки ну и плюс название файла
     else:
-    # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
+        # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
         data_for_ai = [user_messages[0]] if user_messages else []
         if bot_messages:
             data_for_ai.append(bot_messages[0])
         if len(user_messages) > 1:
             data_for_ai.append(user_messages[1])
-        text = mainAI.AI_COMPIL(data_for_ai)
+        text = mainAI.ai_main(data_for_ai)
         return {"text": text, "image": None}
 
 
@@ -79,14 +80,14 @@ async def get_image_hash(data: Request):
 
 
 def test():
-    print(mainAI.AI_COMPIL("Чем мне удобрить свеклу?"))
-    print(mainAI.AI_COMPIL("Чем мне удобрить кукурузу?"))
-    print(mainAI.AI_COMPIL("Чем мне удобрить карточку?"))
-    print(mainAI.AI_COMPIL("Что такое биостим старт?"))
-    print(mainAI.AI_COMPIL("Привет"))
-    print(mainAI.AI_COMPIL("Кто ты?"))
-    print(mainAI.AI_COMPIL("Чем ризоформ соя отличается от биостим рост?"))
-    print(mainAI.AI_COMPIL("Как мне бороться с гниением картофеля?"))
+    print(mainAI.ai_main("Чем мне удобрить свеклу?"))
+    print(mainAI.ai_main("Чем мне удобрить кукурузу?"))
+    print(mainAI.ai_main("Чем мне удобрить карточку?"))
+    print(mainAI.ai_main("Что такое биостим старт?"))
+    print(mainAI.ai_main("Привет"))
+    print(mainAI.ai_main("Кто ты?"))
+    print(mainAI.ai_main("Чем ризоформ соя отличается от биостим рост?"))
+    print(mainAI.ai_main("Как мне бороться с гниением картофеля?"))
 
 
 if __name__ == "__main__":

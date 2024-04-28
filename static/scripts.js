@@ -217,6 +217,7 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     const dataToSend = {
         userMessages: [],
         botMessages: [lastMessage],
+        image: [],
         flags: ['regenerate']
     };
     const response = await fetch(url, {
