@@ -379,7 +379,8 @@ async function sendRequest(url, textData, imageData) {
     let dataToSend = {
         userMessages: lastThreeUserMessages,
         botMessages: lastThreeBotMessages,
-        image: [imageData]
+        image: [imageData],
+        flags: []
     };
     console.log(imageData);
     // Example: Sending data to the server using fetch API

@@ -2,17 +2,8 @@ from llama_cpp import Llama
 
 
 def interact():
-    """
-    Функция инициализации модели
-
-    model_path - путь к файлу модели
-    n_ctx - размер контекста модели (должно писаться в конфигах модели)
-    n_gpu_layers - кол-во слоев на gpu (-1 значит грузить все)
-    chat_format - формат чата
-    :return model:
-    """
     model = Llama(
-        model_path='./AI_PRO_MAX/star2.016b.gguf',
+        model_path='./AI_PRO_MAX/main_model.gguf',
         n_ctx=8192,
         n_gpu_layers=-1,
         chat_format="llama-2"
