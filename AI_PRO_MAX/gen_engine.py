@@ -12,7 +12,7 @@ def interact():
     :return model:
     """
     model = Llama(
-        model_path='./AI_PRO_MAX/model-q16_0.gguf',
+        model_path='./AI_PRO_MAX/star2.016b.gguf',
         n_ctx=8192,
         n_gpu_layers=-1,
         chat_format="llama-2"
