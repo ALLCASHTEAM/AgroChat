@@ -38,6 +38,7 @@ async def make_response(request_data: RequestData):
 
     if 'regenerate' in request_data.flags:
         # Логика перегенерации ответа
+        print("РЕГЕНЕРУЕМСТВИВЕМ ЗАНИМАЕМСТСЯ")
         last_response = bot_messages[-1] if bot_messages else None
         if last_response:
             regenerated_response = mainAI.ai_main(last_response, regenerate_flag=True)
