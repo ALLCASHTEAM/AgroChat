@@ -13,15 +13,16 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
         answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(dialog))
         print("INFO: Ответ генератора", answer)
     if regenerate_flag:
+
         # Если реген
         if not dialog:
             return "Ошибка: Нет данных для регенерации."
-        modified_dialog = dialog + [f"Неправильный ответ: {dialog[-1]}"] if dialog else dialog
+        modified_dialog = dialog
         processed_question = interpretator_with_history(modified_dialog).replace("<extra_id_0> ", "").replace("</s>",
-                                                                                                             "").lower()
+                                                                                                              "").lower()
         print("INFO: Интерпретация: ", processed_question)
         answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
-        print("INFO: Ответ генератора", answer)
+        print("INFO: Ответ генератора", answer, "\n ОАОАОА \n REGENERATION POWER!!!")
     else:
         # Дефолт
         processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("</s>", "").lower()
@@ -30,11 +31,12 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
         print("INFO: Ответ генератора", answer)
 
     replacements = [
-        ("[\\[A-Z]+]", ""), ("GPT4", ""),  ("GPT-3 ", ""), ("Answer:", ""), ("<https://betaren.ru>", "https://betaren.ru"),
+        ("[\\[A-Z]+]", ""), ("GPT4", ""), ("GPT-3 ", ""), ("Answer:", ""),
+        ("<https://betaren.ru>", "https://betaren.ru"),
         ("Agrochem", 'Агрохим'), ("Context:", ""), ("GPT 4:", ""), ("GPT-4:", ""),
         ("GPT", ""), ("G", ""), ("GPT4 Correct Assistant:", ""), ("Correct", ""),
         ("<[^>]+>", ""), ("ГПТ4 Asistant:", ''), ("Asistant:", ''), ('text:', ''),
-        ('GPT-4', "Аигро"),("GPT:", ""), ("OpenAI", "Агрохим")
+        ('GPT-4', "Аигро"), ("GPT:", ""), ("OpenAI", "Агрохим")
     ]
     for old, new in replacements:
         answer = re.sub(old, new, answer)

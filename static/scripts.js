@@ -47,7 +47,6 @@ window.addEventListener("load", (e) => {
 const fileInput = document.querySelector('.send_img');
 const chatList = document.querySelector('.chatlist');
 document.getElementsByClassName("send_img")[0].addEventListener("input", (() => {
-    console.log(document.getElementsByClassName("send_img")[0]);
     document.getElementsByClassName("attach-button")[0].textContent = fileInput.files[0].name;
 }));
 // MISC
@@ -167,7 +166,6 @@ function makeBotBubble(text, image = null) {
         chatList.appendChild(chatBubble_bot);
 
         chatList.appendChild(chatBubble_bot);
-        console.log("иф сработал как надо")
     } else {
         var chatBubble_bot = document.createElement('li');
         chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
@@ -204,7 +202,8 @@ function makeBotBubble(text, image = null) {
 
 // REGENERATE DEGENERATE ON STEPAN SAPSAN
 function regenerateLastResponse() {
-    const lastBotMessage = getFromLocal('bot').slice(-1)[0];
+    console.log("регенерируем");
+    const lastBotMessage = loadFromLocal('bot').slice(-1)[0];
     if (lastBotMessage) {
         sendRequestWithRegenerateFlag(lastBotMessage);
     } else {
@@ -214,23 +213,27 @@ function regenerateLastResponse() {
 
 async function sendRequestWithRegenerateFlag(lastMessage) {
     const url = '/request';
-    const dataToSend = {
-        userMessages: [],
-        botMessages: [lastMessage],
+    lastTwouser = loadFromLocal('user').slice(-2);
+    lastTwobot = loadFromLocal('bot').slice(-2);
+    let dataToSend = {
+        userMessages: lastTwouser,
+        botMessages: lastTwobot,
         image: [],
         flags: ['regenerate']
     };
+    console.log(dataToSend);
     const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataToSend)
+        body: JSON.stringify(dataToSend),
     });
 
     if (response.ok) {
         const resp = await response.json();
+        console.log(resp);
         updateBotBubble(resp.text);
     } else {
         console.error('Request failed:', response.statusText);
@@ -238,7 +241,9 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
 }
 
 function updateBotBubble(text) {
+    console.log(text);
     const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
+    console.log(lastBotBubble.textContent);
     if (lastBotBubble) {
         lastBotBubble.textContent = text;
     }
@@ -287,7 +292,6 @@ function makeBubbles() {
     const disallowedChars = /[{}[\]<>\\|\/#~*]/;
 
     var text = document.querySelector('.chatbox').value;
-    console.log(text.length);
     // if text is smaller than 2 symbols and there is no image throw alert
     if (text.trim() <= 2 && !loadImage()) {
         alert("Слишком короткое сообщение или не выбрано изображение!");
@@ -318,20 +322,16 @@ function makeBubbles() {
         try {
             if (loadImage()) {
                 var userBubbleId = makeUserBubble(text, 1);
-                console.log(userBubbleId);
                 var imageHash = await getImageHash(loadImage());
                 saveToLocal("user", text, imageHash);
-                console.log("IMAGE HASH RESOLVED, IT'S: " + imageHash);
 
                 var result = await sendRequest(url, text, imageHash);
-                console.log("PROMISE CREATED IN IF");
                 resolve(result);
                 editUserBubble(userBubbleId.toString(), imageHash);
 
             } else {
                 var userBubbleId = makeUserBubble(text);
                 saveToLocal("user", text);
-                console.log("PROMISE CREATED IN ELSE");
                 var result = await sendRequest(url, text);
                 resolve(result);
             }
@@ -341,7 +341,6 @@ function makeBubbles() {
     });
 
     promise.then((resp) => {
-        console.log("PROMISE THEN");
         // fill the bot bubble and scroll to bottom
         document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
         scrollToBottom();
@@ -366,7 +365,6 @@ function makeBubbles() {
 
 // function that sends request to server
 async function sendRequest(url, textData, imageData) {
-    console.log("REQUEST SENT");
     // Retrieve all user messages from local storage
     let allUserMessages = loadFromLocal('user'); // Assuming this returns an array of all user messages
     let allBotMessages = loadFromLocal('bot'); // Assuming this returns an array of all bot messages
@@ -382,7 +380,6 @@ async function sendRequest(url, textData, imageData) {
         image: [imageData],
         flags: []
     };
-    console.log(imageData);
     // Example: Sending data to the server using fetch API
     const response = await fetch(url, {
         method: 'POST',
@@ -403,7 +400,6 @@ async function sendRequest(url, textData, imageData) {
 
 // function that gets hash of an image
 async function getImageHash(image) {
-    console.log("IMAGE: " + image);
     const form = new FormData();
     form.append('image', image);
     var response = await fetch("/get_image_hash", {
@@ -471,7 +467,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Если пользователь не принял политику, показываем модальное окно
     if (privacyAccepted !== "true") {
         modal.style.display = "block";
-        console.log("NOT TRUE");
     } else {
         modal.style.display = "none";
     }
@@ -480,7 +475,6 @@ document.addEventListener("DOMContentLoaded", function() {
     acceptBtn.addEventListener("click", function() {
         // Сохраняем информацию о принятии политики в localStorage
         localStorage.setItem("privacyAccepted", "true");
-        console.log("Privacy accepted");
         // Скрываем модальное окно
         modal.style.display = "none";
     });
@@ -498,7 +492,6 @@ function handleClick(event) {
         // Получаем название элемента (like или dislike)
         var name = target.classList.contains('like') ? 'like' : 'dislike';
         // Выводим id и название в консоль
-        console.log("ID:", id, "Название:", name);
 
         // Получаем путь к активному изображению
         var activeImagePath = name === 'like' ? 'static/resources/like_on.svg' : 'static/resources/disslike_on.svg';
@@ -534,9 +527,9 @@ function handleClick(event) {
         // Сохраняем buttonState в localStorage
         localStorage.setItem('LSD_marks', JSON.stringify(buttonState));
     }
-
-    // Выводим текущее состояние объекта buttonState в консоль
-    console.log("buttonState:", buttonState);
+    if(target.classList.contains('regenerate')){
+        regenerateLastResponse();
+    }
 }
 
 // Восстановление состояния кнопок при загрузке страницы
