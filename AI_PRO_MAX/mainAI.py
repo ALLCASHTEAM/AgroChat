@@ -16,8 +16,7 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
         # Если реген
         if not dialog:
             return "Ошибка: Нет данных для регенерации."
-        modified_dialog = dialog + [f"Неправильный ответ: {dialog[-1]}"] if dialog else dialog
-        processed_question = interpretator_with_history(modified_dialog).replace("<extra_id_0> ", "").replace("</s>",
+        processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("</s>",
                                                                                                              "").lower()
         print("INFO: Интерпретация: ", processed_question)
         answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
@@ -34,7 +33,7 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
         ("Agrochem", 'Агрохим'), ("Context:", ""), ("GPT 4:", ""), ("GPT-4:", ""),
         ("GPT", ""), ("G", ""), ("GPT4 Correct Assistant:", ""), ("Correct", ""),
         ("<[^>]+>", ""), ("ГПТ4 Asistant:", ''), ("Asistant:", ''), ('text:', ''),
-        ('GPT-4', "Аигро"),("GPT:", ""), ("OpenAI", "Агрохим")
+        ('GPT-4', "Аигро"),("GPT:", ""), ("OpenAI", "Агрохим"), ("[/", '')
     ]
     for old, new in replacements:
         answer = re.sub(old, new, answer)
