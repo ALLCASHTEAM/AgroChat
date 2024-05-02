@@ -202,12 +202,9 @@ function makeBotBubble(text, image = null) {
 // Функция регенерации запроса
 // Гриша пидорас чтоб тебя сбил поезд
 function regenerateLastResponse() {
-    console.log("регенерируем");
     const botOutputs = document.querySelectorAll('.bot__output');
     const lastBotBubble = botOutputs[botOutputs.length - 1];
 
-    console.log(lastBotBubble);
-    console.log(lastBotBubble.innerHTML);
     console.log(lastBotBubble.textContent);
 
     if (lastBotBubble) {
@@ -220,16 +217,15 @@ function regenerateLastResponse() {
         lastBotBubble.appendChild(loader);
 
         // Продолжение с вызовом функции, которая отправляет запрос на регенерацию
-        const lastBotBubble = loadFromLocal('bot').slice(-1)[0];
-        if (lastBotBubble) {
-            sendRequestWithRegenerateFlag(lastBotBubble);
+        const lastBotMessage = loadFromLocal('bot').slice(-1)[0];
+        if (lastBotMessage) {
+            sendRequestWithRegenerateFlag(lastBotMessage);
         } else {
             alert("Нет последнего сообщения для регенерации.");
             loader.remove();
         }
     }
 }
-
 
 async function sendRequestWithRegenerateFlag(lastMessage) {
     const url = '/request';
@@ -263,9 +259,9 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
 
 function updateBotBubble(text) {
     console.log(text);
-    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
+    const botOutputs = document.querySelectorAll('.bot__output');
+    const lastBotBubble = botOutputs[botOutputs.length - 1];
     console.log(lastBotBubble.innerHTML);
-    console.log(lastBotBubble.textContent);
 
     if (lastBotBubble) {
         lastBotBubble.innerHTML = text;
