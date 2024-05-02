@@ -261,8 +261,10 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
 
 function updateBotBubble(text) {
     console.log(text);
-    const lastBotBubble = document.querySelector('.bot__output:last-child');
+    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
     console.log(lastBotBubble.innerHTML);
+    console.log(lastBotBubble.textContent);
+
     if (lastBotBubble) {
         lastBotBubble.innerHTML = text;
         const loader = lastBotBubble.querySelector('.loader');
