@@ -171,7 +171,6 @@ function makeBotBubble(text, image = null) {
         chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
 
         var container = document.createElement('div'); // Create a container for text
-        //хуй тебе, а не класс, глупый контейнер
 
         var textDiv = document.createElement('div'); // Create a div for the text
         textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
@@ -204,8 +203,9 @@ function makeBotBubble(text, image = null) {
 // Гриша пидорас чтоб тебя сбил поезд
 function regenerateLastResponse() {
     console.log("регенерируем");
+    const botOutputs = document.querySelectorAll('.bot__output');
+    const lastBotBubble = botOutputs[botOutputs.length - 1];
 
-const lastBotBubble = document.querySelector('.bot__output:last-of-type');
     console.log(lastBotBubble);
     console.log(lastBotBubble.innerHTML);
     console.log(lastBotBubble.textContent);
