@@ -81,14 +81,15 @@ async def get_image_hash(data: Request):
 
 
 def test():
-    print(mainAI.ai_main("Чем мне удобрить свеклу?"))
-    print(mainAI.ai_main("Чем мне удобрить кукурузу?"))
-    print(mainAI.ai_main("Чем мне удобрить карточку?"))
-    print(mainAI.ai_main("Что такое биостим старт?"))
-    print(mainAI.ai_main("Привет"))
-    print(mainAI.ai_main("Кто ты?"))
-    print(mainAI.ai_main("Чем ризоформ соя отличается от биостим рост?"))
-    print(mainAI.ai_main("Как мне бороться с гниением картофеля?"))
+    with open("LOG.txt", 'w', encoding='utf-8') as f:
+        f.write(mainAI.ai_main(["Чем мне удобрить свеклу?"]))
+        f.write(mainAI.ai_main(["Чем мне удобрить кукурузу?"]))
+        f.write(mainAI.ai_main(["Чем мне удобрить карточку?"]))
+        f.write(mainAI.ai_main(["Что такое биостим старт?"]))
+        f.write(mainAI.ai_main(["Привет"]))
+        f.write(mainAI.ai_main(["Кто ты?"]))
+        f.write(mainAI.ai_main(["Чем ризоформ соя отличается от биостим рост?"]))
+        f.write(mainAI.ai_main(["Как мне бороться с гниением картофеля?"]))
 
 
 if __name__ == "__main__":
