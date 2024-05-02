@@ -204,10 +204,13 @@ function makeBotBubble(text, image = null) {
 // Гриша пидорас чтоб тебя сбил поезд
 function regenerateLastResponse() {
     console.log("регенерируем");
-    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
+
+    const lastBotBubble = document.querySelector('.bot__output:last-child'); // Исправленный селектор для поиска последнего бабла бота
+    console.log(lastBotBubble);
+
     if (lastBotBubble) {
         // Удаление существующего текста
-        lastBotBubble.textContent = '';
+        lastBotBubble.innerHTML = '';
 
         // Создание и добавление элемента анимации загрузки
         const loader = document.createElement('span');
@@ -258,10 +261,10 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
 
 function updateBotBubble(text) {
     console.log(text);
-    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
-    console.log(lastBotBubble.textContent);
+    const lastBotBubble = document.querySelector('.bot__output:last-child');
+    console.log(lastBotBubble.innerHTML);
     if (lastBotBubble) {
-        lastBotBubble.textContent = text;
+        lastBotBubble.innerHTML = text;
         const loader = lastBotBubble.querySelector('.loader');
         if (loader) {
             loader.remove(); // Удаление анимации загрузки
