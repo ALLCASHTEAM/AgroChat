@@ -321,7 +321,7 @@ function makeBubbles() {
         alert("Слишком длинное сообщение");
         return
     } else if (loadImage() && (text.trim().length > 0)) {
-        alert("сука тока либо текст либо картинка");
+        alert("Пожалуйста выберите или картинку или текст");
         document.getElementsByClassName("send_img")[0].value = "";
         document.getElementsByClassName("chatbox")[0].value = "";
         document.querySelector('.send_img').value = "";
