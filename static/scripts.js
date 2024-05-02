@@ -205,11 +205,11 @@ function makeBotBubble(text, image = null) {
 function regenerateLastResponse() {
     console.log("регенерируем");
 
-    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;; // Исправленный селектор для поиска последнего бабла бота
+const lastBotBubble = document.querySelector('.bot__output:last-of-type');
     console.log(lastBotBubble);
     console.log(lastBotBubble.innerHTML);
     console.log(lastBotBubble.textContent);
-    
+
     if (lastBotBubble) {
         // Удаление существующего текста
         lastBotBubble.innerHTML = '';
