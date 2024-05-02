@@ -38,8 +38,7 @@ async def make_response(request_data: RequestData):
 
     if 'regenerate' in request_data.flags:
         # Логика перегенерации ответа
-        print("РЕГЕНЕРУЕМСТВИВЕМ ЗАНИМАЕМСТСЯ")
-        last_response = bot_messages[-1] if bot_messages else None
+        last_response = [bot_messages[-1].replace("text:", "")] if bot_messages else None
         if last_response:
             regenerated_response = mainAI.ai_main(last_response, regenerate_flag=True)
             return {"text": regenerated_response, "image": None}
@@ -90,6 +89,7 @@ def test():
         f.write(mainAI.ai_main(["Кто ты?"]))
         f.write(mainAI.ai_main(["Чем ризоформ соя отличается от биостим рост?"]))
         f.write(mainAI.ai_main(["Как мне бороться с гниением картофеля?"]))
+        f.write(mainAI.ai_main(["ОАОАОАОА"]))
 
 
 if __name__ == "__main__":
