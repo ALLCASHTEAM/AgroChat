@@ -143,7 +143,7 @@ function makeBotBubble(text, image = null) {
         chatBubble_bot.classList.add('animateBubble', "id-" + (botBubbleCounter + 1)); //28.02 если эта строка(157) есть, то лайк/дизлайк идёт поверх бабла, а если её нет, то бот отвечает на прошлое сообщение)
 
         var container = document.createElement('div'); // Create a container for text
-        //хуй тебе, а не класс, глупый контейнер
+
 
         var textDiv = document.createElement('div'); // Create a div for the text
         textDiv.classList.add('bot__output', 'animateBubble', "id-" + (botBubbleCounter + 1));
@@ -191,7 +191,7 @@ function makeBotBubble(text, image = null) {
         container.appendChild(textDiv); // Append the text div to the containers
         container.appendChild(mark_dislike);
         container.appendChild(mark_like);
-        container.appendChild(regenerate); //29.02
+        container.appendChild(regenerate); //29.02 гриша умер от спида
         chatBubble_bot.appendChild(container); // Append the container to the chat bubble
         chatList.appendChild(chatBubble_bot);
     }
@@ -200,16 +200,31 @@ function makeBotBubble(text, image = null) {
     return botBubbleCounter + 1;
 }
 
-// REGENERATE DEGENERATE ON STEPAN SAPSAN
+// Функция регенерации запроса
+// Гриша пидорас чтоб тебя сбил поезд
 function regenerateLastResponse() {
     console.log("регенерируем");
-    const lastBotMessage = loadFromLocal('bot').slice(-1)[0];
+    const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
     if (lastBotMessage) {
-        sendRequestWithRegenerateFlag(lastBotMessage);
-    } else {
-        alert("Нет последнего сообщения для перегенерации.");
+        // Удаление существующего текста
+        lastBotBubble.textContent = '';
+
+        // Создание и добавление элемента анимации загрузки
+        const loader = document.createElement('span');
+        loader.className = 'loader loader_custom_zalupa';
+        lastBotBubble.appendChild(loader);
+
+        // Продолжение с вызовом функции, которая отправляет запрос на регенерацию
+        const lastBotMessage = loadFromLocal('bot').slice(-1)[0];
+        if (lastBotMessage) {
+            sendRequestWithRegenerateFlag(lastBotMessage);
+        } else {
+            alert("Нет последнего сообщения для регенерации.");
+            loader.remove();
+        }
     }
 }
+
 
 async function sendRequestWithRegenerateFlag(lastMessage) {
     const url = '/request';
@@ -240,19 +255,22 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     }
 }
 
+
 function updateBotBubble(text) {
     console.log(text);
     const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
     console.log(lastBotBubble.textContent);
     if (lastBotBubble) {
         lastBotBubble.textContent = text;
+        const loader = lastBotBubble.querySelector('.loader');
+        if (loader) {
+            loader.remove(); // Удаление анимации загрузки
+        }
     }
 }
 
 
-
 // LOCAL STORAGE
-
 // save string into local storage
 function saveToLocal(type, text, image = null) {
     previous = localStorage.getItem(type);
