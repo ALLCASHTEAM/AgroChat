@@ -205,7 +205,7 @@ function makeBotBubble(text, image = null) {
 function regenerateLastResponse() {
     console.log("регенерируем");
     const lastBotBubble = document.querySelector('.bot__output').lastElementChild;
-    if (lastBotMessage) {
+    if (lastBotBubble) {
         // Удаление существующего текста
         lastBotBubble.textContent = '';
 
@@ -215,9 +215,9 @@ function regenerateLastResponse() {
         lastBotBubble.appendChild(loader);
 
         // Продолжение с вызовом функции, которая отправляет запрос на регенерацию
-        const lastBotMessage = loadFromLocal('bot').slice(-1)[0];
-        if (lastBotMessage) {
-            sendRequestWithRegenerateFlag(lastBotMessage);
+        const lastBotBubble = loadFromLocal('bot').slice(-1)[0];
+        if (lastBotBubble) {
+            sendRequestWithRegenerateFlag(lastBotBubble);
         } else {
             alert("Нет последнего сообщения для регенерации.");
             loader.remove();
