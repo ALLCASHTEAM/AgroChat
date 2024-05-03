@@ -7,7 +7,8 @@ def interact():
         n_ctx=8192,
         n_gpu_layers=-1,
         verbose=True,
-        seed=1
+        seed=1,
+        chat_format="llama-3",
     )
     return model
 
@@ -19,7 +20,7 @@ def generate(question, model, context=False):
             # ЕСЛИ ПЕРВОЕ СООБЩЕНИЕ
             messages = [
                 {"role": "system",
-                 "content": "Ты Aigro, автоматический помощник от компании щелково агрохим. Используй контекст для ответа на вопросы."},
+                 "content": "Ты Aigro, автоматический помощник от компании Щелково Агрохим. Используй контекст для ответа на вопросы."},
                 {
                     "role": "context",
                     "content": f"Используй этот контекст для ответа{context.replace(';','')}"
@@ -33,18 +34,18 @@ def generate(question, model, context=False):
             # ЕСЛИ УЖЕ ЕСТЬ ДИАЛОГ
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Use context to answer the question .Use context if you need it.<|end_of_turn|>"},
+                 "content": "Ты Aigro, автоматический помощник от компании Щелково Агрохим. Используй контекст для ответа на вопросы"},
                 {
                     "role": "user",
-                    "content": f"GPT4 Correct User: {question[0].replace('text:', '')}<|end_of_turn|>"
+                    "content": f"{question[0].replace('text:', '')}"
                 },
                 {
                     "role": "assistant",
-                    "content": f"GPT4 Correct Assistant: {question[1].replace('text:', '')}<|end_of_turn|>"
+                    "content": f"{question[1].replace('text:', '')}"
                 },
                 {
                     "role": "user",
-                    "content": f"Context: {context.replace(';','')} GPT4 Correct User: {question[2].replace('text:', '')}<|end_of_turn|>GPT4 Correct Assistant:"
+                    "content": f"Context: {context.replace(';','')} Question: {question[2].replace('text:', '')}"
                 }
             ]
     else:
@@ -53,30 +54,30 @@ def generate(question, model, context=False):
             # ЕСЛИ ПЕРВОЕ СООБЩЕНИЕ
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly.<|end_of_turn|>"},
+                 "content": "Ты Aigro, автоматический помощник от компании Щелково Агрохим. Отвечай на вопрос подробно."},
                 {
                     "role": "user",
-                    "content": f"GPT4 Correct User: {question[0].replace('text:', '')}<|end_of_turn|>GPT4 Correct Assistant:"
+                    "content": f"{question[0].replace('text:', '')}"
                 }
             ]
         else:
             # ЕСЛИ УЖЕ ЕСТЬ ДИАЛОГ
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Answer me briefly.<|end_of_turn|>"},
+                 "content": "Ты Aigro, автоматический помощник от компании Щелково Агрохим. Отвечай на вопрос подробно."},
                 {
                     "role": "user",
-                    "content": f"GPT4 Correct User: {question[0].replace('text:', '')}<|end_of_turn|>"
+                    "content": f"{question[0].replace('text:', '')}"
                 },
                 {
                     "role": "assistant",
-                    "content": f"GPT4 Assistant: {question[1].replace('text:', '')}<|end_of_turn|>"
+                    "content": f"{question[1].replace('text:', '')}"
                 },
                 {
                     "role": "user",
-                    "content": f"GPT4 Correct User: {question[2].replace('text:', '')}<|end_of_turn|>GPT4 Correct Assistant:"
+                    "content": f"{question[2].replace('text:', '')}"
                 }
             ]
-    answer = model.create_chat_completion(temperature=1, top_p=0.99, top_k=50, messages=messages)
+    answer = model.create_chat_completion(temperature=0.7, top_p=0.7, top_k=30, messages=messages)
     print(answer)
     return answer["choices"][0]["message"]["content"]

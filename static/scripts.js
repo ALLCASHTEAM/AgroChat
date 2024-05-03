@@ -234,7 +234,7 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     let dataToSend = {
         userMessages: lastTwouser,
         botMessages: lastTwobot,
-        image: [],
+        image: [None],
         flags: ['regenerate']
     };
     console.log(dataToSend);
