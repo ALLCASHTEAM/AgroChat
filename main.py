@@ -17,6 +17,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
 app.mount("/static/user_images", StaticFiles(directory=images_directory), name="/static/user_images")
 
+tmp = "\\image:"
 
 @app.get("/")
 async def read_root():
@@ -36,20 +37,18 @@ async def make_response(request_data: RequestData):
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
 
-    if 'regenerate' in request_data.flags:
-        # Логика перегенерации ответа
-        print("РЕГЕНЕРУЕМСТВИВЕМ ЗАНИМАЕМСТСЯ")
-        last_response = bot_messages[-1] if bot_messages else None
-        if last_response:
-            regenerated_response = mainAI.ai_main(last_response, regenerate_flag=True)
-            return {"text": regenerated_response, "image": None}
-        else:
-            return {"text": "Ошибка: Нет последнего сообщения для перегенерации.", "image": None}
-    elif request_data.image[0]:
+    if request_data.image[0]:
         print(request_data.image)
         result = photogomo.main(f"static/user_images/{request_data.image[0]}")
         text = mainAI.ai_main(result, image_flag=True)
         return {"text": text, "image": None}
+
+    for i in user_messages:
+        if "\\image:" in i:
+            result = photogomo.main(f"static/user_images/{i.replace(tmp, '')}")
+            text = mainAI.ai_main(result, image_flag=True)
+            return {"text": text, "image": None}
+
     # request_data.image - хеш каритинки ну и плюс название файла
     else:
         # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
@@ -58,7 +57,10 @@ async def make_response(request_data: RequestData):
             data_for_ai.append(bot_messages[0])
         if len(user_messages) > 1:
             data_for_ai.append(user_messages[1])
-        text = mainAI.ai_main(data_for_ai)
+        if 'regenerate' in request_data.flags:
+            text = mainAI.ai_main(data_for_ai, regenerate_flag=True)
+        else:
+            text = mainAI.ai_main(data_for_ai)
         return {"text": text, "image": None}
 
 
@@ -82,7 +84,7 @@ async def get_image_hash(data: Request):
 
 def test():
     with open("LOG.txt", 'w', encoding='utf-8') as f:
-        f.write(mainAI.ai_main(["Чем мне удобрить свеклу?"]))
+        f.write(mainAI.ai_main(["Чем мне удобрить свеклу"]))
         f.write(mainAI.ai_main(["Чем мне удобрить кукурузу?"]))
         f.write(mainAI.ai_main(["Чем мне удобрить карточку?"]))
         f.write(mainAI.ai_main(["Что такое биостим старт?"]))
@@ -90,6 +92,7 @@ def test():
         f.write(mainAI.ai_main(["Кто ты?"]))
         f.write(mainAI.ai_main(["Чем ризоформ соя отличается от биостим рост?"]))
         f.write(mainAI.ai_main(["Как мне бороться с гниением картофеля?"]))
+        f.write(mainAI.ai_main(["ОАОАОАОА"]))
 
 
 if __name__ == "__main__":
