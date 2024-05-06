@@ -48,6 +48,7 @@ def predict(model, image, classes):
         tmp = torch.max(output, dim=1)[1]
         tmp = tmp.item()
         print_res = classes[str(tmp)]
+        print(print_res)
         return print_res
 
 

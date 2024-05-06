@@ -81,7 +81,7 @@ async def get_image_hash(data: Request):
 
 def test():
     with open("LOG.txt", 'w', encoding='utf-8') as f:
-        f.write(mainAI.ai_main(["Чем мне удобрить свеклу?"]))
+        f.write(mainAI.ai_main(["Чем мне удобрить свеклу"]))
         f.write(mainAI.ai_main(["Чем мне удобрить кукурузу?"]))
         f.write(mainAI.ai_main(["Чем мне удобрить карточку?"]))
         f.write(mainAI.ai_main(["Что такое биостим старт?"]))

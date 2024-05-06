@@ -3,11 +3,10 @@ from llama_cpp import Llama
 
 def interact():
     model = Llama(
-        model_path='./AI_PRO_MAX/main_model.gguf',
+        model_path='./AI_PRO_MAX/model-f16.gguf',
         n_ctx=8192,
         n_gpu_layers=-1,
         verbose=True,
-        chat_handler=None,
         seed=1
     )
     return model
@@ -20,10 +19,14 @@ def generate(question, model, context=False):
             # ЕСЛИ ПЕРВОЕ СООБЩЕНИЕ
             messages = [
                 {"role": "system",
-                 "content": "You are Aigro, an automatic assistant. You represent the Agrochem company. Use context to answer the question.<|end_of_turn|>"},
+                 "content": "Ты Aigro, автоматический помощник от компании щелково агрохим. Используй контекст для ответа на вопросы."},
+                {
+                    "role": "context",
+                    "content": f"Используй этот контекст для ответа{context.replace(';','')}"
+                },
                 {
                     "role": "user",
-                    "content": f"Context: {context.replace(';','')} GPT4 Correct User: {question[0].replace('text:', '')}<|end_of_turn|>GPT4 Correct Assistant:"
+                    "content": f"{question[0].replace('text:', '')}"
                 }
             ]
         else:
@@ -74,6 +77,6 @@ def generate(question, model, context=False):
                     "content": f"GPT4 Correct User: {question[2].replace('text:', '')}<|end_of_turn|>GPT4 Correct Assistant:"
                 }
             ]
-    answer = model.create_chat_completion(temperature=0.1, top_p=0.85, top_k=30, messages=messages)
+    answer = model.create_chat_completion(temperature=1, top_p=0.99, top_k=50, messages=messages)
     print(answer)
     return answer["choices"][0]["message"]["content"]
