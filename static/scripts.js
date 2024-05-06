@@ -132,6 +132,8 @@ function makeUserBubble(text, image = null) {
 function makeBotBubble(text, image = null) {
 
     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
+    let formattedMessage = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
     if (text.length == 0) {
         // Удаляем существующую кнопку регенерации, если она есть
         var existingRegenerateButton = document.querySelector('.regenerate');
