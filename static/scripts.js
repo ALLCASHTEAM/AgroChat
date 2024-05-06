@@ -234,7 +234,7 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     let dataToSend = {
         userMessages: lastTwouser,
         botMessages: lastTwobot,
-        image: [],
+        image: [None],
         flags: ['regenerate']
     };
     console.log(dataToSend);
@@ -265,6 +265,7 @@ function updateBotBubble(text) {
 
     if (lastBotBubble) {
         lastBotBubble.innerHTML = text;
+        resaveBotMessages(text);
         const loader = lastBotBubble.querySelector('.loader');
         if (loader) {
             loader.remove(); // Удаление анимации загрузки
@@ -275,6 +276,22 @@ function updateBotBubble(text) {
 
 // LOCAL STORAGE
 // save string into local storage
+
+function resaveBotMessages(text){
+    // Получаем сообщения бота из локального хранилища
+    let botMessages = JSON.parse(localStorage.getItem('bot')) || [];
+
+    // Если есть хотя бы одно сообщение бота, удаляем последнее
+    if (botMessages.length > 0) {
+        botMessages.pop(); // Удаляем последнее сообщение
+    }
+    // Добавляем новое сообщение бота в конец массива
+    botMessages.push(message);
+    // Сохраняем обновленный массив сообщений бота в локальном хранилище
+    localStorage.setItem('botMessages', JSON.stringify(botMessages));
+}
+
+
 function saveToLocal(type, text, image = null) {
     previous = localStorage.getItem(type);
     if (image) {
@@ -550,6 +567,7 @@ function handleClick(event) {
     }
     if(target.classList.contains('regenerate')){
         regenerateLastResponse();
+
     }
 }
 
