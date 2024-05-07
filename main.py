@@ -15,7 +15,7 @@ app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
-app.mount("/static/user_images", StaticFiles(directory=images_directory), name="/static/user_images")
+app.mount("/user_images", StaticFiles(directory=images_directory), name="/user_images")
 
 tmp = "\\image:"
 

@@ -188,7 +188,7 @@ function makeBotBubble(text, image = null) {
 
 
 
-        textDiv.textContent = text;
+        textDiv.textContent = formattedMessage;
         container.appendChild(textDiv); // Append the text div to the containers
         container.appendChild(mark_dislike);
         container.appendChild(mark_like);
