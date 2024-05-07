@@ -132,7 +132,6 @@ function makeUserBubble(text, image = null) {
 function makeBotBubble(text, image = null) {
 
     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
-    let formattedMessage = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
     if (text.length == 0) {
         // Удаляем существующую кнопку регенерации, если она есть
@@ -158,6 +157,7 @@ function makeBotBubble(text, image = null) {
 
         var regenerate = document.createElement('div'); //29.02
         regenerate.classList.add('regenerate', "id-" + (botBubbleCounter + 1)); //29.02
+
 
         textDiv.innerHTML = '<span class="loader loader_custom_zalupa" ></span>';
         container.appendChild(textDiv); // Append the text div to the containers
@@ -187,7 +187,7 @@ function makeBotBubble(text, image = null) {
         regenerate.classList.add('regenerate', "id-" + (botBubbleCounter + 1)); //29.02
 
 
-
+        let formattedMessage = formatBoldText(text)
         textDiv.textContent = formattedMessage;
         container.appendChild(textDiv); // Append the text div to the containers
         container.appendChild(mark_dislike);
@@ -229,6 +229,19 @@ function regenerateLastResponse() {
     }
 }
 
+function formatBoldText(text) {
+    // Используем регулярное выражение для поиска текста в двойных звездочках
+    function formatBoldText(text) {
+    // Проверяем, есть ли звездочки в тексте
+    if (text.includes('**')) {
+        // Если есть, заменяем ** на <strong> и </strong> для выделения жирным шрифтом
+        return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    } else {
+        // Если звездочек нет, возвращаем исходный текст без изменений
+        return text;
+    }
+}
+
 async function sendRequestWithRegenerateFlag(lastMessage) {
     const url = '/request';
     lastTwouser = loadFromLocal('user').slice(-2);
@@ -236,7 +249,7 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     let dataToSend = {
         userMessages: lastTwouser,
         botMessages: lastTwobot,
-        image: [None],
+        image: [null],
         flags: ['regenerate']
     };
     console.log(dataToSend);
