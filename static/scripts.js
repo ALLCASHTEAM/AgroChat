@@ -309,28 +309,29 @@ function resaveBotMessages(text){
 
 
 function saveToLocal(type, text, image = null) {
-    let items = JSON.parse(localStorage.getItem(type)) || [];
-    let newItem = { text: text };
+    previous = localStorage.getItem(type);
     if (image) {
-        newItem.image = image;
+        localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
+    } else {
+        localStorage.setItem(type, previous + ";" + "text:" + text);
     }
-    items.push(newItem);
-    localStorage.setItem(type, JSON.stringify(items));
 }
-
 
 // load from local storage
 function loadFromLocal(type) {
     let storedItems = localStorage.getItem(type);
-    return safelyParseJSON(storedItems) || [];
-}
 
-function safelyParseJSON(json) {
-    try {
-        return JSON.parse(json);
-    } catch (e) {
-        return null;
+    if (!storedItems) {
+        return []; // Возвращает пустой массив, если данных нет
     }
+    return storedItems.split(";").map(item => {
+        // Предполагаем, что каждый элемент может быть простым текстом или JSON-строкой
+        try {
+            return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
+        } catch (e) {
+            return item; // Возвращаем как есть, если это простой текст
+        }
+    });
 }
 
 //Grisha's ultra fix after Vlad's destroying everything
