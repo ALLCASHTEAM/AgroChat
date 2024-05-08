@@ -241,6 +241,7 @@ function formatBoldText(text) {
         return text;
     }
 }
+}
 
 async function sendRequestWithRegenerateFlag(lastMessage) {
     const url = '/request';
@@ -249,7 +250,7 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     let dataToSend = {
         userMessages: lastTwouser,
         botMessages: lastTwobot,
-        image: [none],
+        image: [null],
         flags: ['regenerate']
     };
     console.log(dataToSend);
@@ -623,4 +624,3 @@ document.getElementById('upload').onchange = function() {
     var fileName = this.files[0].name; // Получить имя файла
     document.querySelector('.attach-button').textContent = fileName; // Изменить текст на label
 };
-
