@@ -304,34 +304,33 @@ function resaveBotMessages(text){
     // Добавляем новое сообщение бота в конец массива
     botMessages.push(text);
     // Сохраняем обновленный массив сообщений бота в локальном хранилище
-    localStorage.setItem('botMessages', JSON.stringify(botMessages));
+    localStorage.setItem('bot', JSON.stringify(botMessages));
 }
 
 
 function saveToLocal(type, text, image = null) {
-    previous = localStorage.getItem(type);
+    let items = JSON.parse(localStorage.getItem(type)) || [];
+    let newItem = { text: text };
     if (image) {
-        localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
-    } else {
-        localStorage.setItem(type, previous + ";" + "text:" + text);
+        newItem.image = image;
     }
+    items.push(newItem);
+    localStorage.setItem(type, JSON.stringify(items));
 }
+
 
 // load from local storage
 function loadFromLocal(type) {
     let storedItems = localStorage.getItem(type);
+    return safelyParseJSON(storedItems) || [];
+}
 
-    if (!storedItems) {
-        return []; // Возвращает пустой массив, если данных нет
+function safelyParseJSON(json) {
+    try {
+        return JSON.parse(json);
+    } catch (e) {
+        return null;
     }
-    return storedItems.split(";").map(item => {
-        // Предполагаем, что каждый элемент может быть простым текстом или JSON-строкой
-        try {
-            return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
-        } catch (e) {
-            return item; // Возвращаем как есть, если это простой текст
-        }
-    });
 }
 
 //Grisha's ultra fix after Vlad's destroying everything
