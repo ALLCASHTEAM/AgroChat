@@ -234,8 +234,8 @@ function formatBoldText(text) {
     function formatBoldText(text) {
     // Проверяем, есть ли звездочки в тексте
     if (text.includes('**')) {
-        // Если есть, заменяем ** на <strong> и </strong> для выделения жирным шрифтом
-        return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Если есть, заменяем ** на <strong> и </strong> для выделения жирным шрифтом (по итогу поставил тег <b>, но разницы особой нет)
+        return text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
     } else {
         // Если звездочек нет, возвращаем исходный текст без изменений
         return text;
@@ -249,7 +249,7 @@ async function sendRequestWithRegenerateFlag(lastMessage) {
     let dataToSend = {
         userMessages: lastTwouser,
         botMessages: lastTwobot,
-        image: [null],
+        image: [none],
         flags: ['regenerate']
     };
     console.log(dataToSend);
