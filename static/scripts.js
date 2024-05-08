@@ -299,7 +299,8 @@ function resaveBotMessages(text, image = null) {
     let messagesArray = botMessages.split(';'); // Разделяем сохранённые данные на массив
 
     // Удаляем последний элемент массива, если он существует
-    if (messagesArray.length > 0 && messagesArray[0] !== '') {
+    if (messagesArray.length > 0) {
+        console.log("Last bot message before removal:", messagesArray[messagesArray.length - 1]);
         messagesArray.pop();
     }
     // Формируем новый элемент
