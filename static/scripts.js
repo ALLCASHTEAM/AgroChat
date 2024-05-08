@@ -240,7 +240,7 @@ function formatBoldText(text) {
         // Если звездочек нет, возвращаем исходный текст без изменений
         return text;
     }
-}
+    }
 }
 
 async function sendRequestWithRegenerateFlag(lastMessage) {
@@ -302,7 +302,7 @@ function resaveBotMessages(text){
         botMessages.pop(); // Удаляем последнее сообщение
     }
     // Добавляем новое сообщение бота в конец массива
-    botMessages.push(message);
+    botMessages.push(text);
     // Сохраняем обновленный массив сообщений бота в локальном хранилище
     localStorage.setItem('botMessages', JSON.stringify(botMessages));
 }
