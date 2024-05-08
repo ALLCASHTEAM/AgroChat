@@ -292,45 +292,46 @@ function updateBotBubble(text) {
 
 // LOCAL STORAGE
 // save string into local storage
-
-function resaveBotMessages(text){
-    // Получаем сообщения бота из локального хранилища
-    let botMessages = JSON.parse(localStorage.getItem('bot')) || [];
-
-    // Если есть хотя бы одно сообщение бота, удаляем последнее
-    if (botMessages.length > 0) {
-        botMessages.pop(); // Удаляем последнее сообщение
+function resaveBotMessages(text, image = null) {
+    let botMessages = localStorage.getItem('bot') || '';
+    // Преобразуем сохранённые данные в массив элементов
+    let messagesArray = botMessages.split('&');
+    // Удаляем последний элемент массива, если он существует
+    if (messagesArray.length > 0 && messagesArray[0] !== '') {
+        messagesArray.pop();
     }
-    // Добавляем новое сообщение бота в конец массива
-    botMessages.push(text);
-    // Сохраняем обновленный массив сообщений бота в локальном хранилище
-    localStorage.setItem('bot', JSON.stringify(botMessages));
+    // Формируем новый элемент
+    let newItem = "text:" + text;
+    if (image) {
+        newItem += "\\image:" + image;
+    }
+    // Добавляем новый элемент в конец массива
+    messagesArray.push(newItem);
+    // Преобразуем массив обратно в строку с разделителем '&' и сохраняем в localStorage
+    localStorage.setItem('bot', messagesArray.join('&'));
 }
 
-
 function saveToLocal(type, text, image = null) {
-    previous = localStorage.getItem(type);
+    let previous = localStorage.getItem(type) || '';
+    let newItem = "text:" + text;
     if (image) {
-        localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
-    } else {
-        localStorage.setItem(type, previous + ";" + "text:" + text);
+        newItem += "\\image:" + image;
     }
+    localStorage.setItem(type, previous + (previous ? '&' : '') + newItem);
 }
 
 // load from local storage
 function loadFromLocal(type) {
     let storedItems = localStorage.getItem(type);
-
     if (!storedItems) {
         return []; // Возвращает пустой массив, если данных нет
     }
-    return storedItems.split(";").map(item => {
-        // Предполагаем, что каждый элемент может быть простым текстом или JSON-строкой
-        try {
-            return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
-        } catch (e) {
-            return item; // Возвращаем как есть, если это простой текст
+    return storedItems.split("&").map(item => {
+        if (item.includes("\\image:")) {
+            let [text, image] = item.split("\\image:");
+            return { text: text.replace("text:", ""), image: image };
         }
+        return { text: item.replace("text:", "") };
     });
 }
 
@@ -340,7 +341,6 @@ function loadFromLocale(type) {
 }
 
 // REQUESTS
-
 // send request to server and get response
 function makeBubbles() {
     const disallowedChars = /[{}[\]<>\\|\/#~*]/;
