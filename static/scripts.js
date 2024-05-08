@@ -292,10 +292,12 @@ function updateBotBubble(text) {
 
 // LOCAL STORAGE
 // save string into local storage
+
 function resaveBotMessages(text, image = null) {
+    // Получаем текущие сохранённые сообщения
     let botMessages = localStorage.getItem('bot') || '';
-    // Преобразуем сохранённые данные в массив элементов
-    let messagesArray = botMessages.split('&');
+    let messagesArray = botMessages.split(';'); // Разделяем сохранённые данные на массив
+
     // Удаляем последний элемент массива, если он существует
     if (messagesArray.length > 0 && messagesArray[0] !== '') {
         messagesArray.pop();
@@ -303,35 +305,39 @@ function resaveBotMessages(text, image = null) {
     // Формируем новый элемент
     let newItem = "text:" + text;
     if (image) {
-        newItem += "\\image:" + image;
+        newItem += "\\image:" + image; // Добавляем информацию об изображении, если оно есть
     }
     // Добавляем новый элемент в конец массива
     messagesArray.push(newItem);
-    // Преобразуем массив обратно в строку с разделителем '&' и сохраняем в localStorage
-    localStorage.setItem('bot', messagesArray.join('&'));
+    // Преобразуем массив обратно в строку с разделителем ';' и сохраняем в localStorage
+    localStorage.setItem('bot', messagesArray.join(';'));
 }
 
 function saveToLocal(type, text, image = null) {
     let previous = localStorage.getItem(type) || '';
     let newItem = "text:" + text;
+
     if (image) {
-        newItem += "\\image:" + image;
+        localStorage.setItem(type, previous + ";" + "text:" + text + "\\image:" + image);
+    } else {
+        localStorage.setItem(type, previous + ";" + "text:" + text);
     }
-    localStorage.setItem(type, previous + (previous ? '&' : '') + newItem);
 }
 
 // load from local storage
 function loadFromLocal(type) {
     let storedItems = localStorage.getItem(type);
+
     if (!storedItems) {
         return []; // Возвращает пустой массив, если данных нет
     }
-    return storedItems.split("&").map(item => {
-        if (item.includes("\\image:")) {
-            let [text, image] = item.split("\\image:");
-            return { text: text.replace("text:", ""), image: image };
+    return storedItems.split(";").map(item => {
+        // Предполагаем, что каждый элемент может быть простым текстом или JSON-строкой
+        try {
+            return JSON.parse(item); // Пытаемся разобрать каждый элемент как JSON
+        } catch (e) {
+            return item; // Возвращаем как есть, если это простой текст
         }
-        return { text: item.replace("text:", "") };
     });
 }
 
@@ -341,6 +347,7 @@ function loadFromLocale(type) {
 }
 
 // REQUESTS
+
 // send request to server and get response
 function makeBubbles() {
     const disallowedChars = /[{}[\]<>\\|\/#~*]/;
