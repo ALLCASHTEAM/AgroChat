@@ -188,7 +188,7 @@ function makeBotBubble(text, image = null) {
 
 
         let formattedMessage = formatBoldText(text)
-        textDiv.textContent = formattedMessage;
+        textDiv.textContent = text;
         container.appendChild(textDiv); // Append the text div to the containers
         container.appendChild(mark_dislike);
         container.appendChild(mark_like);
@@ -231,7 +231,6 @@ function regenerateLastResponse() {
 
 function formatBoldText(text) {
     // Используем регулярное выражение для поиска текста в двойных звездочках
-    function formatBoldText(text) {
     // Проверяем, есть ли звездочки в тексте
     if (text.includes('**')) {
         // Если есть, заменяем ** на <strong> и </strong> для выделения жирным шрифтом (по итогу поставил тег <b>, но разницы особой нет)
@@ -239,7 +238,6 @@ function formatBoldText(text) {
     } else {
         // Если звездочек нет, возвращаем исходный текст без изменений
         return text;
-    }
     }
 }
 
