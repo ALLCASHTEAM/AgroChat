@@ -33,7 +33,7 @@ window.addEventListener("load", (e) => {
             //check if there is image
             if (userData.split("\\image:").length > 1) {
                 imageName = userData.split("\\image:")[1];
-                let imagePath = `/static/user_images/${imageName}`;
+                let imagePath = `${imageName}`;
                 makeUserBubble(null, imagePath);
             } else {
                 makeUserBubble(userData);
@@ -383,11 +383,12 @@ function makeBubbles() {
             if (loadImage()) {
                 var userBubbleId = makeUserBubble(text, 1);
                 var imageHash = await getImageHash(loadImage());
+                editUserBubble(userBubbleId.toString(), imageHash);
                 saveToLocal("user", text, imageHash);
+
 
                 var result = await sendRequest(url, text, imageHash);
                 resolve(result);
-                editUserBubble(userBubbleId.toString(), imageHash);
 
             } else {
                 var userBubbleId = makeUserBubble(text);
@@ -468,6 +469,7 @@ async function getImageHash(image) {
     });
     if (response.ok) {
         var resp = await response.json();
+        console.log('Response: ', image)
         return resp["imageName"]
     } else {
         console.error('Request failed with status:', response.status);

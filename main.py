@@ -23,7 +23,7 @@ logging.basicConfig(filename='request_logs.log', level=logging.INFO, format='%(a
 tmp = "\\image:"
 
 
-@app.get("/nice%20ports%2C/Tri%6Eity.txt%2ebak")
+@app.get("/nice%20ports%2C/Trinity.txt.bak")
 async def handle_special_request():
     return Response(content="<html><body><p>Иди нахуй</p></body></html>", media_type="text/html", status_code=200)
 
@@ -46,7 +46,7 @@ async def make_response(request: Request, request_data: RequestData):
     # Extract client IP address from the request
     client_host = request.client.host
 
-    logging.info(f"Request received from IP: {client_host}, {RequestData}")
+    logging.info(f"Request received from IP: {client_host}, {request_data}")
 
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
