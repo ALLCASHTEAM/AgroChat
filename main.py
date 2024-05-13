@@ -23,17 +23,9 @@ logging.basicConfig(filename='request_logs.log', level=logging.INFO, format='%(a
 tmp = "\\image:"
 
 
-async def get_timezone(ip_address):
-    try:
-        # Replace 'your_access_key' with your actual API key for ipapi.co or similar service
-        url = f"https://ipapi.co/{ip_address}/json/"
-        async with httpx.AsyncClient() as client:
-            response = await client.get(url)
-        data = response.json()
-        return data.get("timezone", "Unknown timezone")
-    except Exception as e:
-        logging.error(f"Failed to get timezone for IP {ip_address}: {e}")
-        return "Unknown timezone"
+@app.get("/nice%20ports%2C/Tri%6Eity.txt%2ebak")
+async def handle_special_request():
+    return Response(content="<html><body><p>Иди нахуй</p></body></html>", media_type="text/html", status_code=200)
 
 
 @app.get("/")
@@ -53,8 +45,8 @@ class RequestData(BaseModel):
 async def make_response(request: Request, request_data: RequestData):
     # Extract client IP address from the request
     client_host = request.client.host
-    timezone = await get_timezone(client_host)
-    logging.info(f"Request received from IP: {client_host} | Timezone: {timezone}")
+
+    logging.info(f"Request received from IP: {client_host}, {RequestData}")
 
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
@@ -63,12 +55,14 @@ async def make_response(request: Request, request_data: RequestData):
         print(request_data.image)
         result = photogomo.main(f"static/user_images/{request_data.image[0]}")
         text = mainAI.ai_main(result, image_flag=True)
+        logging.info(f"Request received from IP: {client_host}, Return {text}")
         return {"text": text, "image": None}
 
     for i in user_messages:
         if "\\image:" in i:
             result = photogomo.main(f"static/user_images/{i.replace(tmp, '')}")
             text = mainAI.ai_main(result, image_flag=True)
+            logging.info(f"Request received from IP: {client_host}, Return {text}")
             return {"text": text, "image": None}
 
     else:
@@ -81,6 +75,7 @@ async def make_response(request: Request, request_data: RequestData):
             text = mainAI.ai_main(data_for_ai, regenerate_flag=True)
         else:
             text = mainAI.ai_main(data_for_ai)
+        logging.info(f"Request received from IP: {client_host}, Return {text}")
         return {"text": text, "image": None}
 
 
@@ -100,11 +95,6 @@ async def get_image_hash(data: Request):
     if filename not in os.listdir('static/user_images'):
         await save_image(image, f'static/user_images/{filename}')
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
-
-
-@app.get("/nice%20ports%2C/Tri%6Eity.txt%2ebak")
-async def handle_special_request():
-    return Response(content="<html><body><p>Иди нахуй</p></body></html>", media_type="text/html", status_code=200)
 
 
 def test():
