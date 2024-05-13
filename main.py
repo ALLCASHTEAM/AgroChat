@@ -102,6 +102,11 @@ async def get_image_hash(data: Request):
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
 
 
+@app.get("/nice%20ports%2C/Tri%6Eity.txt%2ebak")
+async def handle_special_request():
+    return Response(content="<html><body><p>Иди нахуй</p></body></html>", media_type="text/html", status_code=200)
+
+
 def test():
     with open("LOG.txt", 'w', encoding='utf-8') as f:
         f.write(mainAI.ai_main(["Чем мне удобрить свеклу"]))
