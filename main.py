@@ -1,9 +1,12 @@
+import logging
+from datetime import datetime
 from fastapi import FastAPI, Request, Response, BackgroundTasks, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional
 import json
+import httpx
 import hashlib
 import os
 import aiofiles
@@ -16,8 +19,22 @@ app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 images_directory = os.path.join(os.getcwd(), "static/user_images")
 app.mount("/user_images", StaticFiles(directory=images_directory), name="/user_images")
-
+logging.basicConfig(filename='request_logs.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 tmp = "\\image:"
+
+
+async def get_timezone(ip_address):
+    try:
+        # Replace 'your_access_key' with your actual API key for ipapi.co or similar service
+        url = f"https://ipapi.co/{ip_address}/json/"
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url)
+        data = response.json()
+        return data.get("timezone", "Unknown timezone")
+    except Exception as e:
+        logging.error(f"Failed to get timezone for IP {ip_address}: {e}")
+        return "Unknown timezone"
+
 
 @app.get("/")
 async def read_root():
@@ -33,7 +50,12 @@ class RequestData(BaseModel):
 
 
 @app.post("/request")
-async def make_response(request_data: RequestData):
+async def make_response(request: Request, request_data: RequestData):
+    # Extract client IP address from the request
+    client_host = request.client.host
+    timezone = await get_timezone(client_host)
+    logging.info(f"Request received from IP: {client_host} | Timezone: {timezone}")
+
     user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
     bot_messages = [msg for msg in request_data.botMessages if msg]
 
@@ -49,9 +71,7 @@ async def make_response(request_data: RequestData):
             text = mainAI.ai_main(result, image_flag=True)
             return {"text": text, "image": None}
 
-    # request_data.image - хеш каритинки ну и плюс название файла
     else:
-        # Формируем data_for_ai, добавляя первое сообщение пользователя и бота, а также второе сообщение пользователя, если оно есть
         data_for_ai = [user_messages[0]] if user_messages else []
         if bot_messages:
             data_for_ai.append(bot_messages[0])
