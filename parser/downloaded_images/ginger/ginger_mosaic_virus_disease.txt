@@ -1,0 +1,14 @@
+
+
+
+
+Spraying insecticides such as malathion or dimethoate to control the thrips vectors that transmit the virus1 2. Alternatively, spraying mineral oil or neem oil to reduce the virus transmission by thrips3.
+Removing and destroying the infected plants and plant debris to prevent the spread of the virus1 2. Avoiding mechanical sap-inoculation by using clean tools and gloves when handling the plants2.
+Using natural enemies such as predatory mites or lacewings to reduce the population of thrips vectors3.
+Using virus-free seed rhizomes and certified planting material1 2. Practicing crop rotation and intercropping with non-host plants to reduce the virus inoculum and vector population2 3.
+["Mosaic or mottled pattern of light and dark green patches on the leaves1 2.", "Chlorosis or yellowing of the leaves along the veins or margins1 2.", "Necrotic spots or streaks on the leaves or stems1 2.", "Stunting or dwarfing of the plants and reduced rhizome yield1 2."]
+["The presence of thrips vectors on the leaves or flowers that carry the virus particles1 2.", "The detection of virus particles or antigens by serological or molecular techniques such as ELISA, PCR, or RT-PCR from infected plant samples1 2."]
+The resistance of the phytopathogenic fungus of the disease is not clear, but it may involve the production of antiviral proteins that inhibit the virus replication or movement1. The type and level of resistance agent are not known. 
+A quick test method for the phytopathogenic fungus of the disease is not available, but it may be possible to use molecular techniques such as PCR or RT-PCR to detect the virus RNA from infected fungal samples1. 
+The mechanism of phytopathogenic infestation of the disease is not well understood, but it may involve the uptake of the virus particles by the fungus through wounds or natural openings and the systemic infection of the fungal hyphae1. The type and number of pathogenic effectors are not known, but they may include viral proteins that interfere with the fungal metabolism or defense1. The differences in infestation of different plants are not clear, but they may depend on the host susceptibility and environmental factors2. 
+The potential targets of the phytopathogenic bacteria of the disease are not well identified, but they may include the chloroplasts which are responsible for photosynthesis in the plant cells2. Knockout lethal genes are not known. 

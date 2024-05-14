@@ -1,0 +1,14 @@
+Radish is a horticultural crop that belongs to the Brassica family1 2. It is grown for its swollen tap roots which can be globular, tapering, or cylindrical1. Fertilizer damage to radish is not a disease caused by a pathogen, but a physiological disorder that results from excessive or imbalanced nutrient application3. Too much fertilizer can lead to leaf burn, as the nutrients in the fertilizer can be too strong for the radish leaves. This can cause the leaves to turn yellow or brown, and can eventually kill the plant3. Too little fertilizer can mean that the radishes don't get the nutrients they need to grow properly3.
+The period of disease onset for fertilizer damage depends on the timing and amount of fertilizer application. Generally, symptoms of leaf burn can appear within a few days after excessive fertilizer application3. Symptoms of nutrient deficiency can appear gradually over time as the plants grow3.
+The environmental conditions required for fertilizer damage are mainly related to soil fertility and moisture. Radishes prefer fertile, well drained, deep, sandy soils rich in organic matter for best growth4. They also need regular and uniform irrigation to ensure good growth4. Moisture fluctuations can cause root cracking, slow leaf development, and contribute to bitter roots4. Radishes also grow best when temperatures do not exceed 80В°F4. High temperatures can trigger flower stalk development and cause bitterness and root hollowness4.
+Not found
+Not found
+Physical measures include removing any affected plants or parts of plants that show symptoms of leaf burn or nutrient deficiency1. This can prevent further damage and reduce the risk of secondary infections by pathogens1. Chemical control is not recommended for fertilizer damage, as it can worsen the problem or harm the plants1. Biological control is not applicable for fertilizer damage, as there is no pathogen involved in this disorder.
+Not found
+Agricultural measures include applying the appropriate amount and type of fertilizer according to soil test results and radish requirements2. Radishes need a balanced fertilizer with low nitrogen and high phosphorus and potassium, such as 16-20-0 or 10-10-102. Too much nitrogen can cause excessive leaf growth and poor root development2. Fertilizer should be mixed into the top 2 to 4 inches of soil before planting, and a side dressing of nitrogen-rich fertilizer can be applied 3 to 4 weeks after emergence to boost foliage growth2.
+["Fertilizer damage to radish are mainly changes in color and shape of the leaves and roots.", "Too much fertilizer can cause leaf burn, which is characterized by yellowing or browning of the leaf margins or tips, curling or wilting of the leaves, and stunted growth1.", "Too little fertilizer can cause nutrient deficiency, which is characterized by pale green or yellow leaves, purple veins, small or misshapen roots, and reduced yield1."]
+[]
+Not found
+Not found
+Not found
+Not found

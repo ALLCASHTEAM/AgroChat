@@ -1,0 +1,13 @@
+Cabbage is a type of horticultural crop1, which means it is grown for its edible parts such as leaves, stems, flowers, or roots. Magnesium deficiency is a type of physiological disease2, which means it is caused by a lack of an essential nutrient or an imbalance of nutrients in the plant, rather than by a pathogen such as a fungus, bacterium, virus, or oomycete.
+Since magnesium deficiency is not caused by a pathogen, there is no mode of reproduction of the pathogenic fungus for this disease. Since magnesium deficiency is not caused by a pathogen, there is no epidemiological pattern or mode of transmission for this disease. However, some factors that can increase the risk of magnesium deficiency in cabbage include sandy soils, acidic soils, potassium rich soils, soils receiving high potash applications, cold wet periods3.
+The period of disease onset for magnesium deficiency in cabbage depends on the severity of the nutrient deficiency and the environmental conditions. Symptoms usually start on older leaves and progress to younger leaves as the deficiency worsens1. The environmental conditions required for magnesium deficiency in cabbage are those that limit the availability or uptake of magnesium by the plant. These include low soil pH, high soil calcium or potassium levels, drought stress, root damage2.
+Since magnesium deficiency is not caused by a pathogen, there is no overwintering method for this disease. However, magnesium deficiency can persist or recur in successive crops if the underlying soil or nutritional problems are not corrected2.
+Chemical control involves applying magnesium fertilizers such as Epsom salts (magnesium sulfate)1 2 either as a side dressing or through the drip system.
+
+
+Agricultural control involves improving the soil conditions that affect magnesium availability or uptake, such as liming acidic soils, reducing potassium or calcium applications, avoiding drought stress, and preventing root damage2 3.
+["Interveinal chlorosis means that the regions between the leaf veins turn yellow-green, orange, or red, while the veins remain green or white. Leaf curling means that the interveinal zones curl up.", "These symptoms usually start on older leaves and progress to younger leaves as the deficiency worsens1."]
+[]
+
+
+
