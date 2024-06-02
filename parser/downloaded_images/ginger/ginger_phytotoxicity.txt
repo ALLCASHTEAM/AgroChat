@@ -1,14 +1,14 @@
-Ginger is a horticultural crop that is cultivated for its aromatic rhizomes1 2. Ginger drug damage is not a disease caused by a pathogen, but a physiological disorder caused by the excessive use of chemicals such as herbicides, fungicides, or insecticides on ginger plants3 4.
-The mode of reproduction of the pathogenic fungus of this disease is not applicable, as there is no fungus involved in this disorder. The epidemiological pattern and mode of transmission of this disease are not applicable, as there is no infection involved in this disorder.
-The period of disease onset for this disease is variable, depending on the type and amount of chemicals used and the stage of plant growth3 4. The environmental conditions required for the disease are not specific, as any chemical that can harm the ginger plants can cause this disorder3 4.
-The overwintering method of this disease is not applicable, as there is no pathogen involved in this disorder.
-Aoiding the excessive use of chemicals such as herbicides, fungicides, or insecticides on ginger plants1 2. Following the label instructions and recommended doses of the chemicals1 2. Using organic or natural alternatives to chemicals whenever possible3.
-Removing and disposing of the damaged plants and plant parts to prevent further harm1 2. Washing the plants with water to remove any chemical residues1 2.
-Not applicable, as there is no pathogen involved in this disorder.
-Using healthy and certified planting material1 2. Practicing crop rotation and intercropping with other plants to reduce the chemical stress on ginger plants1 2.
-["Chlorosis or yellowing of the leaves and stems1 2.", "Necrosis or browning of the leaf margins and tips1 2.", "Curling or wilting of the leaves and stems1 2.", "Stunting or dwarfing of the plants and reduced rhizome yield1 2."]
-["The presence of chemical residues or burns on the plant surfaces1 2.", "The detection of chemical traces or metabolites by analytical techniques such as chromatography or spectrometry from plant samples4."]
-The resistance of the phytopathogenic fungus of the disease is not clear, as there is no fungus involved in this disorder. Ginger drug disease is not a disease caused by a pathogen, but a physiological disorder caused by the excessive use of chemicals such as herbicides, fungicides, or insecticides on ginger plants1 2. 
-A quick test method for the phytopathogenic fungus of the disease is not applicable, as there is no fungus involved in this disorder. 
-The mechanism of phytopathogenic infestation of the disease is not applicable, as there is no infection involved in this disorder. 
-The potential targets of the phytopathogenic bacteria of the disease are not applicable, as there is no bacteria involved in this disorder. 
+Имбирь - это садовая культура, которую выращивают из-за его ароматических корневищ1 2. Лекарственное поражение имбиря - это не заболевание, вызываемое патогеном, а физиологическое расстройство, вызванное чрезмерным использованием химических веществ, таких как гербициды, фунгициды или инсектициды, на растениях имбиря34.
+Способ размножения патогенного грибка, вызывающего это заболевание, неприменим, поскольку этот грибок не связан с этим заболеванием. Эпидемиологическая картина и способ передачи этого заболевания неприменимы, поскольку при этом заболевании нет инфекции.
+Период возникновения этого заболевания варьируется в зависимости от типа и количества используемых химикатов и стадии роста растений3.4. Условия окружающей среды, необходимые для развития этого заболевания, не являются специфическими, поскольку любое химическое вещество, которое может нанести вред растениям имбиря, может вызвать это заболевание3.4.
+Метод зимовки при этом заболевании неприменим, так как нет возбудителя, вызывающего это заболевание.
+Избегайте чрезмерного использования химических веществ, таких как гербициды, фунгициды или инсектициды, на растениях имбиря1. 2. Следуйте инструкциям на этикетке и рекомендуемым дозам химических веществ1.2. По возможности используйте органические или натуральные альтернативы химическим веществам3.
+Удаление и утилизация поврежденных растений и их частей для предотвращения дальнейшего вреда1 2. Промывание растений водой для удаления остатков химикатов 1 2.
+Не применимо, поскольку это заболевание не связано с патогеном.
+Использование здорового и сертифицированного посадочного материала1 2. Соблюдение севооборота и скрещивание с другими растениями для снижения химического воздействия на растения имбиря12.
+["Хлороз или пожелтение листьев и стеблей12.", "Некроз или потемнение краев и кончиков листов12.", "Скручивание или увядание листьев и стеблей12.", "Задержка роста или карликовость растений и снижение урожайности корневищ12."]
+["Наличие остатков химических веществ или ожогов на поверхности растений12.", "Обнаружение следов химических веществ или метаболитов с помощью аналитических методов, таких как хроматография или спектрометрия, в образцах растений4."]
+Устойчивость фитопатогенного гриба к этому заболеванию неясна, так как грибок, вызывающий это заболевание, отсутствует. Лекарственная болезнь имбиря - это не заболевание, вызываемое патогеном, а физиологическое расстройство, вызванное чрезмерным использованием химических веществ, таких как гербициды, фунгициды или инсектициды, на растениях имбиря12. 
+Метод экспресс-тестирования на фитопатогенный гриб, вызывающий это заболевание, неприменим, так как нет грибка, вызывающего это заболевание. 
+Механизм фитопатогенной инвазии, вызывающей это заболевание, неприменим, так как нет инфекции, вызывающей это заболевание. 
+Потенциальные мишени фитопатогенных бактерий, вызывающих это заболевание, неприменимы, поскольку бактерии, вызывающие это заболевание, отсутствуют.

@@ -1,13 +1,10 @@
-Radish is a horticultural crop that belongs to the family Brassicaceae and is grown for its slightly spicy, crunchy taproot1. Radish crinkle virus disease is a viral disease caused by Radish crinkle virus (RCV), which belongs to the genus Carmovirus and the family Tombusviridae2.
-The pathogenic fungus of this disease is not applicable, since it is a viral disease and not a fungal disease. The epidemiological pattern and mode of transmission of this disease are airborne and insectborne. RCV can be transmitted by mechanical inoculation, by seed, and by aphids in a non-persistent manner2.
-The period of disease onset for this disease is within 7 days after inoculation with RCV2. The environmental conditions required for the disease are high temperature and low humidity. RCV infection is more severe at 25В°C than at 15В°C or 35В°C, and more severe at 40% relative humidity than at 80% relative humidity2.
-The overwintering method of this disease is seed transmission. RCV can be transmitted through radish seeds at a rate of 0.1-0.5%2.
-Use certified virus-free seeds or treat seeds with hot water (50В°C for 25 minutes) to eliminate seed-borne infection1.
-Avoid planting radish near other crops that are hosts of RCV, such as cucurbits, brassicas, and weeds1.
-Remove and destroy infected plants and crop residues to reduce sources of inoculum2 1.
-Control aphid vectors by using yellow sticky traps, reflective mulches, intercropping with repellent plants, or applying insecticides2 1.
-["This disease is interveinal chlorosis, yellowing, and drying of lower leaves on radish plants1.", "The symptoms are more severe at high temperature and low humidity conditions1."]
-["This disease is the presence of virus particles in the infected plant tissues, which can be detected by electron microscopy, serological tests, or molecular techniques1.", "The virus particles are rod-shaped and about 30 nm in diameter and 300 nm in length1."]
-
-
-
+Редис - это садовая культура, относящаяся к семейству капустных (Brassicaceae), которую выращивают из-за ее слегка пряного, хрустящего стержневого корня1. Вирусная болезнь редьки - это вирусное заболевание, вызываемое вирусом редьки (RCV), который относится к роду Carmovirus и семейству Tombusviridae2.
+Патогенный гриб, вызывающий это заболевание, неприменим, поскольку это вирусное заболевание, а не грибковое. Эпидемиологическая картина и способ передачи этого заболевания - воздушно-капельный и через насекомых. RCV может передаваться при механической инокуляции, через семена и непостоянным образом от тли2.
+Период начала заболевания при этом заболевании наступает в течение 7 дней после прививки RCV2. Условия окружающей среды, необходимые для развития заболевания, - это высокая температура и низкая влажность. Инфекция RCV протекает тяжелее при температуре 25°C, чем при температуре 15°C или 35°C, и тяжелее при относительной влажности воздуха 40%, чем при относительной влажности воздуха 80%2.
+Способ перезимовки этого заболевания - передача через семена. RCV может передаваться через семена редиса в количестве 0,1-0,5%2.
+Используйте сертифицированные семена, не содержащие вирусов, или обработайте семена горячей водой (50°C в течение 25 минут), чтобы исключить заражение семенами 1.
+Избегайте посадки редиса рядом с другими культурами, которые являются переносчиками RCV, такими как тыквенные, капустные и сорняки.
+Удаляйте и уничтожайте зараженные растения и пожнивные остатки, чтобы уменьшить количество источников заражения.
+Боритесь с переносчиками тли с помощью желтых липких ловушек, светоотражающей мульчи, подкормок репеллентными растениями или применения инсектицидов21.
+["Это заболевание проявляется хлорозом межжелудочков, пожелтением и высыханием нижних листьев на растениях редиса1.", "Симптомы усиливаются при высокой температуре и низкой влажности1."]
+["Это заболевание характеризуется наличием вирусных частиц в тканях зараженного растения, которые могут быть обнаружены с помощью электронной микроскопии, серологических тестов или молекулярных методов1.", "Вирусные частицы имеют форму палочки и около 30 нм в диаметре и 300 нм в длину".]

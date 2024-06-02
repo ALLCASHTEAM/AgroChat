@@ -1,14 +1,10 @@
-
-
-
-
-Spraying insecticides such as malathion or dimethoate to control the thrips vectors that transmit the virus1 2. Alternatively, spraying mineral oil or neem oil to reduce the virus transmission by thrips3.
-Removing and destroying the infected plants and plant debris to prevent the spread of the virus1 2. Avoiding mechanical sap-inoculation by using clean tools and gloves when handling the plants2.
-Using natural enemies such as predatory mites or lacewings to reduce the population of thrips vectors3.
-Using virus-free seed rhizomes and certified planting material1 2. Practicing crop rotation and intercropping with non-host plants to reduce the virus inoculum and vector population2 3.
-["Mosaic or mottled pattern of light and dark green patches on the leaves1 2.", "Chlorosis or yellowing of the leaves along the veins or margins1 2.", "Necrotic spots or streaks on the leaves or stems1 2.", "Stunting or dwarfing of the plants and reduced rhizome yield1 2."]
-["The presence of thrips vectors on the leaves or flowers that carry the virus particles1 2.", "The detection of virus particles or antigens by serological or molecular techniques such as ELISA, PCR, or RT-PCR from infected plant samples1 2."]
-The resistance of the phytopathogenic fungus of the disease is not clear, but it may involve the production of antiviral proteins that inhibit the virus replication or movement1. The type and level of resistance agent are not known. 
-A quick test method for the phytopathogenic fungus of the disease is not available, but it may be possible to use molecular techniques such as PCR or RT-PCR to detect the virus RNA from infected fungal samples1. 
-The mechanism of phytopathogenic infestation of the disease is not well understood, but it may involve the uptake of the virus particles by the fungus through wounds or natural openings and the systemic infection of the fungal hyphae1. The type and number of pathogenic effectors are not known, but they may include viral proteins that interfere with the fungal metabolism or defense1. The differences in infestation of different plants are not clear, but they may depend on the host susceptibility and environmental factors2. 
-The potential targets of the phytopathogenic bacteria of the disease are not well identified, but they may include the chloroplasts which are responsible for photosynthesis in the plant cells2. Knockout lethal genes are not known. 
+Опрыскивание инсектицидами, такими как малатион или диметоат, для борьбы с трипсами-переносчиками вируса1 2. В качестве альтернативы, опрыскивание минеральным маслом или маслом нима для снижения передачи вируса трипсами 3.
+Удаляйте и уничтожайте зараженные растения и растительный мусор, чтобы предотвратить распространение вируса1 2. Избегайте механического заражения соком, используя чистые инструменты и перчатки при работе с растениями2.
+Использование естественных врагов, таких как хищные клещи или златоглазки, для сокращения популяции переносчиков трипса3.
+Использование безвирусных корневищ семян и сертифицированного посадочного материала1 2. Соблюдение севооборота и скрещивание культур с растениями, не являющимися хозяевами, для уменьшения распространения вируса и популяции переносчиков2 3.
+["Мозаичный или пятнистый рисунок из светло- и темно-зеленых пятен на листьях"12.", "Хлороз или пожелтение листьев по жилкам или краям"12.", "Некротические пятна или полосы на листьях или стеблях"12.", "Задержка роста или карликовость растений и снижение урожайности корневищ"1 2."]
+["Наличие переносчиков трипса на листьях или цветках, которые несут вирусные частицы12.", "Обнаружение вирусных частиц или антигенов серологическими или молекулярными методами, такими как ИФА, ПЦР или ОТ-ПЦР в образцах инфицированных растений12."]
+Устойчивость фитопатогенного гриба к этому заболеванию неясна, но она может быть связана с выработкой противовирусных белков, которые подавляют репликацию или передвижение вируса1. Тип и уровень устойчивости возбудителя неизвестны. 
+Быстрый метод определения фитопатогенного гриба, вызывающего это заболевание, недоступен, но, возможно, можно использовать молекулярные методы, такие как ПЦР или ОТ-ПЦР для выявления вирусной РНК в образцах инфицированных грибков1. 
+Механизм фитопатогенного заражения этой болезнью до конца не изучен, но он может быть связан с поглощением грибком вирусных частиц через раны или естественные отверстия и системным заражением грибковых гиф1. Тип и количество патогенных возбудителей неизвестны, но они могут включать вирусные белки, которые нарушают метаболизм или защиту грибов. Различия в зараженности различных растений неясны, но они могут зависеть от восприимчивости хозяина и факторов окружающей среды2. 
+Потенциальные мишени фитопатогенных бактерий, вызывающих это заболевание, точно не определены, но они могут включать хлоропласты, которые отвечают за фотосинтез в клетках растений2. Гены, вызывающие летальный исход, неизвестны.
