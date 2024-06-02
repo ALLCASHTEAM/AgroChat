@@ -23,11 +23,6 @@ logging.basicConfig(filename='request_logs.log', level=logging.INFO, format='%(a
 tmp = "\\image:"
 
 
-@app.get("/nice%20ports%2C/Trinity.txt.bak")
-async def handle_special_request():
-    return Response(content="<html><body><p>Иди нахуй</p></body></html>", media_type="text/html", status_code=200)
-
-
 @app.get("/")
 async def read_root():
     # You can specify the HTML file you want to render here
