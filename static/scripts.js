@@ -276,7 +276,7 @@ function updateBotBubble(text) {
     console.log(lastBotBubble.innerHTML);
 
     if (lastBotBubble) {
-        lastBotBubble.innerHTML = text;
+        lastBotBubble.innerHTML = formatText(text);
         resaveBotMessages(text);
         const loader = lastBotBubble.querySelector('.loader');
         if (loader) {
@@ -401,7 +401,7 @@ function makeBubbles() {
 
     promise.then((resp) => {
         // fill the bot bubble and scroll to bottom
-        document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = resp["text"];
+        document.querySelectorAll(".id-" + botBubbleId + ".bot__output")[0].innerHTML = formatText(resp["text"]);
         scrollToBottom();
         saveToLocal("bot", resp["text"], resp["image"]);
 

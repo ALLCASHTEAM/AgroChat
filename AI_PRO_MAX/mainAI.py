@@ -11,7 +11,7 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
 
     if image_flag:
         # Если изображение
-        answer = gen_engine.generate([dialog[1]], model, KBQA.KBQA_search(dialog[1]) + dialog[0])
+        answer = gen_engine.generate([dialog[1]], model, dialog[0])
         print("INFO: Ответ генератора", answer)
 
     elif regenerate_flag:
