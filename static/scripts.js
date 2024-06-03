@@ -130,7 +130,6 @@ function makeUserBubble(text, image = null) {
 // make bot bubble with unique class
 // make bot bubble with unique class
 function makeBotBubble(text, image = null) {
-
     var botBubbleCounter = document.getElementsByClassName("bot__output").length;
 
     if (text.length == 0) {
@@ -186,13 +185,12 @@ function makeBotBubble(text, image = null) {
         var regenerate = document.createElement('div'); //29.02
         regenerate.classList.add('regenerate', "id-" + (botBubbleCounter + 1)); //29.02
 
-
-        let formattedMessage = formatBoldText(text)
-        textDiv.textContent = text;
+        let formattedMessage = formatText(text);
+        textDiv.innerHTML = formattedMessage;
         container.appendChild(textDiv); // Append the text div to the containers
         container.appendChild(mark_dislike);
         container.appendChild(mark_like);
-        container.appendChild(regenerate); //29.02 гриша умер от спида
+        container.appendChild(regenerate); //29.02
         chatBubble_bot.appendChild(container); // Append the container to the chat bubble
         chatList.appendChild(chatBubble_bot);
     }
@@ -200,6 +198,17 @@ function makeBotBubble(text, image = null) {
     scrollToBottom();
     return botBubbleCounter + 1;
 }
+
+function formatText(text) {
+    // Форматирование жирного текста
+    let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+    // Форматирование заголовков
+    formattedText = formattedText.replace(/^### (.*$)/gim, '<h6>$1</h6>');
+
+    return formattedText;
+}
+
 
 // Функция регенерации запроса
 // Гриша пидорас чтоб тебя сбил поезд
@@ -229,17 +238,6 @@ function regenerateLastResponse() {
     }
 }
 
-function formatBoldText(text) {
-    // Используем регулярное выражение для поиска текста в двойных звездочках
-    // Проверяем, есть ли звездочки в тексте
-    if (text.includes('**')) {
-        // Если есть, заменяем ** на <strong> и </strong> для выделения жирным шрифтом (по итогу поставил тег <b>, но разницы особой нет)
-        return text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-    } else {
-        // Если звездочек нет, возвращаем исходный текст без изменений
-        return text;
-    }
-}
 
 async function sendRequestWithRegenerateFlag(lastMessage) {
     const url = '/request';

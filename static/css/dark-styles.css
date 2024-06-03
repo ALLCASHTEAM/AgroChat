@@ -401,3 +401,8 @@ li {
     display: flex; /* Использовать flexbox для содержимого */
     justify-content: center; /* Центрировать содержимое по горизонтали */
 }
+h6 {
+      font-weight: normal;
+      font-size: 18px;
+      font-size: 1.5em; /* Установите желаемый размер шрифта */
+}
