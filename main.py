@@ -89,11 +89,10 @@ async def get_image_hash(data: Request):
         await save_image(image, f'static/user_images/{filename}')
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
 
+
 @app.get("/get_image_class")
 async def get_image_class():
-
-
-
+    pass
 
 
 def test():
