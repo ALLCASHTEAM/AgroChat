@@ -48,9 +48,10 @@ def predict(model, image, classes):
         output = model(image).to(device)
         tmp = torch.max(output, dim=1)[1]
         tmp = tmp.item()
-        eng_results = classes[str(tmp)]
-        print(eng_results)
-        return eng_results
+        print_res = classes[0][str(tmp)]
+        eng_results = classes[1][str(tmp)]
+        print(print_res)
+        return [print_res, eng_results]
 
 
 model = model_init(120, "AI_PRO_MAX/ResNet_101-ImageNet-model-99.pth", device)
@@ -58,9 +59,10 @@ model.eval()
 
 
 def main(image_path):
+    classes = load_classes(json_path)
     eng_classes = load_classes(eng_json_path)
     image = image_process(image_path)
-    return predict(model, image, eng_classes)
+    return predict(model, image, [classes, eng_classes])
 
 
 if __name__ == "__main__":

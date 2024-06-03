@@ -47,8 +47,8 @@ async def make_response(request: Request, request_data: RequestData):
     if request_data.image[0]:
         print(request_data.image)
         result_name = photogomo.main(f"static/user_images/{request_data.image[0]}")
-        result = imagekbqa.main(result_name)
-        text = mainAI.ai_main([result, result_name], image_flag=True)
+        result = imagekbqa.main(result_name[1])
+        text = mainAI.ai_main([result, result_name[0]], image_flag=True)
         logging.info(f"Request received from IP: {client_host}, Return {text}")
         return {"text": text, "image": None}
 
