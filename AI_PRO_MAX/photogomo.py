@@ -5,6 +5,7 @@ from torchvision import transforms
 from PIL import Image
 
 json_path = 'AI_PRO_MAX/ind2name.json'
+eng_json_path = 'AI_PRO_MAX/ind2nameEng.json'
 
 data_transform = transforms.Compose([
     transforms.Resize(256),
@@ -47,9 +48,9 @@ def predict(model, image, classes):
         output = model(image).to(device)
         tmp = torch.max(output, dim=1)[1]
         tmp = tmp.item()
-        print_res = classes[str(tmp)]
-        print(print_res)
-        return print_res
+        eng_results = classes[str(tmp)]
+        print(eng_results)
+        return eng_results
 
 
 model = model_init(120, "AI_PRO_MAX/ResNet_101-ImageNet-model-99.pth", device)
@@ -57,9 +58,9 @@ model.eval()
 
 
 def main(image_path):
-    classes = load_classes(json_path)
+    eng_classes = load_classes(eng_json_path)
     image = image_process(image_path)
-    return predict(model, image, classes)
+    return predict(model, image, eng_classes)
 
 
 if __name__ == "__main__":

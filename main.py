@@ -11,7 +11,7 @@ import hashlib
 import os
 import aiofiles
 import uvicorn
-from AI_PRO_MAX import mainAI, photogomo
+from AI_PRO_MAX import mainAI, photogomo, imagekbqa
 from hashlib import sha256
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
@@ -25,7 +25,6 @@ tmp = "\\image:"
 
 @app.get("/")
 async def read_root():
-    # You can specify the HTML file you want to render here
     return FileResponse("static/index.html")
 
 
@@ -38,7 +37,6 @@ class RequestData(BaseModel):
 
 @app.post("/request")
 async def make_response(request: Request, request_data: RequestData):
-    # Extract client IP address from the request
     client_host = request.client.host
 
     logging.info(f"Request received from IP: {client_host}, {request_data}")
@@ -48,7 +46,7 @@ async def make_response(request: Request, request_data: RequestData):
 
     if request_data.image[0]:
         print(request_data.image)
-        result = photogomo.main(f"static/user_images/{request_data.image[0]}")
+        result = imagekbqa.main(photogomo.main(f"static/user_images/{request_data.image[0]}"))
         text = mainAI.ai_main(result, image_flag=True)
         logging.info(f"Request received from IP: {client_host}, Return {text}")
         return {"text": text, "image": None}
@@ -90,6 +88,12 @@ async def get_image_hash(data: Request):
     if filename not in os.listdir('static/user_images'):
         await save_image(image, f'static/user_images/{filename}')
     return Response(content=json.dumps({'imageName': filename}), media_type="application/json")
+
+@app.get("/get_image_class")
+async def get_image_class():
+
+
+
 
 
 def test():
