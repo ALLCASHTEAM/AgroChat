@@ -18,3 +18,4 @@ def write_product_info():
 
 if __name__ == '__main__':
     write_product_info()
+

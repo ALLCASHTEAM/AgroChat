@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import os
 import requests
 
+
 service = Service(executable_path='chromedriver.exe')
 options = webdriver.ChromeOptions()
 

@@ -12,6 +12,7 @@ def interact():
     return model
 
 
+
 def generate(question, model, context=False):
     if context:
         # КОНТЕКСТ

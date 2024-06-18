@@ -2,6 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
+
 for id in range(1, 1000):
     try:
         url = f"https://plantpad.samlab.cn/api/disease/findById/{id}"

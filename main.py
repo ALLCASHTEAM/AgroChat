@@ -96,6 +96,7 @@ async def get_image_class():
     pass
 
 
+
 def test():
     with open("LOG.txt", 'w', encoding='utf-8') as f:
         f.write(mainAI.ai_main(["Чем мне удобрить свеклу"]))

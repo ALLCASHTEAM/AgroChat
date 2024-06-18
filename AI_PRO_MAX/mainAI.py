@@ -52,3 +52,4 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
             "Мне бы хотелось лучше понять ваш запрос. Можете ли вы переформулировать или задать дополнительный вопрос?"
         ]
         return random.choice(default_messages)
+

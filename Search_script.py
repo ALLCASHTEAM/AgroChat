@@ -27,6 +27,7 @@ class Search:
         Принемает сроку сообщения
         Возвращает set с массивом, в массиве строки
         """
+
         context_product = []
         for item in self.text_to_lemma(massage):
             if self.value_mass.__contains__(item):

@@ -12,6 +12,7 @@ def hash_creator():
         if file.is_file()
     }
 
+
     return prods_tab
 
 # hachik = hash_creator()

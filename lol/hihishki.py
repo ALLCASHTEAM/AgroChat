@@ -29,6 +29,7 @@ def preprocess_text(file_path):
         return qna_pairs
 
 
+
 # Индекс для хранения ключевых слов и связанных с ними файлов и позиций вопросов
 index = defaultdict(list)
 

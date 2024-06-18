@@ -20,3 +20,4 @@ def interpretator_with_history(dialog: list[str]) -> str:
 if __name__ == '__main__':
     dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n-сколько он стоит?"
     print(interpretator_with_history(dialog))
+

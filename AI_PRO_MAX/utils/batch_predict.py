@@ -8,6 +8,7 @@ from torchvision import transforms
 from model import resnet101
 
 
+
 def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 

@@ -4,6 +4,7 @@ import faiss
 import numpy as np
 from pathlib import Path
 
+
 model = SentenceTransformer('intfloat/multilingual-e5-large')
 
 

@@ -2,6 +2,7 @@ import os
 import re
 
 
+
 def clean_text(text):
     # Регулярное выражение для поиска всех вариантов тегов <em> и </em>
     em_pattern = re.compile(r"<\s*/?\s*em\s*/?\s*>", re.IGNORECASE)

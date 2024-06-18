@@ -28,6 +28,7 @@ def find_best_matches(user_query, sentence_model):
         return None, None
 
 
+
 def KBQA_search(user_query: str):
     print("INFO: База запущенна")
     matches, liness = find_best_matches(user_query, model)

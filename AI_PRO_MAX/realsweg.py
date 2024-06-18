@@ -25,6 +25,7 @@ def search_with_w2v_synonyms(question, index, w2v_model, topn=10):
     return results
 
 
+
 def list_return(sample_question: str) -> list:
     list = []
     for i in search_with_w2v_synonyms(sample_question, loaded_index, w2v_model, topn=10):

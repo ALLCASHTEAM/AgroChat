@@ -50,6 +50,7 @@ for file_path in file_paths:
 
 
 
+
 # Конвертируем defaultdict в обычный словарь для сериализации
 index_dict = {word: entries for word, entries in index.items()}
 

@@ -15,3 +15,4 @@ def main(result: str):
 
 if __name__ == '__main__':
     print(main("tomato_late_blight"))
+

@@ -606,6 +606,7 @@ window.addEventListener('load', function() {
 document.body.addEventListener('click', handleClick);
 
 
+
 //удаление чата 01.03
 document.addEventListener('DOMContentLoaded', function() {
     // Находим элемент "Очистить чат"

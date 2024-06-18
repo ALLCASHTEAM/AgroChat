@@ -14,6 +14,7 @@ embeddings1 = model.encode(text1, convert_to_tensor=True)
 matches = []
 
 
+
 with open("C://Users//Ирина//Documents//GitHub//AgroChat//rofls//Биостим Кукуруза.txt", 'r', encoding='utf-8') as file:
     lines = file.readlines()
     for line in lines:
