@@ -1,6 +1,6 @@
 import os
 
-folder_path = './rofls'  # Путь к вашей папке
+folder_path = './rofls'  # Путь к нашей папке
 
 # Получаем список файлов в папке "rofls"
 files = os.listdir(folder_path)

@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from moviepy.editor import VideoFileClip, concatenate_videoclips
-
+#Удалить когда откроем в паблик репу, если захочется дальше компьютер вижен поизучать, перенесите в другую репу
 
 # Загрузка каскада Хаара для обнаружения глаз
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')

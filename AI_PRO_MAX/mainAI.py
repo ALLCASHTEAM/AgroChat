@@ -42,7 +42,7 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
     for old, new in replacements:
         answer = re.sub(old, new, answer)
     answer.replace("*", "")
-    # Выбор случайного сообщения, если ответ пуст
+    # Выбор случайного сообщения из заготовок, если ответ пуст
     if len(answer.strip()) > 0:
         return answer.strip()
     else:

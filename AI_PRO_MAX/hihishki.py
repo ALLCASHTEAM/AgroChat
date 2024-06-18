@@ -2,13 +2,13 @@ import os
 import re
 from collections import defaultdict
 import json
-# Задайте путь к вашей папке
+# Задайте путь к нашей папке
 folder_path = '../rofls/'
 
-# Получите список всех файлов и папок в директории
+# Получение списка всех файлов и папок в директории
 files_and_folders = os.listdir(folder_path)
 
-# Отфильтруйте все, что является файлом
+# Фильтр все, что является файлом
 files = [f for f in files_and_folders if os.path.isfile(os.path.join(folder_path, f))]
 print(files[3:])
 # Путь к файлам
@@ -56,6 +56,6 @@ index_dict = {word: entries for word, entries in index.items()}
 # Путь для сохранения индекса в формате JSON
 index_json_path = 'index.json'
 
-# Сохраняем индекс в JSON файл
+# Сохраняем в JSON файл
 with open(index_json_path, 'w', encoding='utf-8') as f_json:
     json.dump(index_dict, f_json, ensure_ascii=False, indent=4)

@@ -211,7 +211,6 @@ function formatText(text) {
 
 
 // Функция регенерации запроса
-// Гриша пидорас чтоб тебя сбил поезд
 function regenerateLastResponse() {
     const botOutputs = document.querySelectorAll('.bot__output');
     const lastBotBubble = botOutputs[botOutputs.length - 1];
@@ -373,8 +372,6 @@ function makeBubbles() {
     var url = '/request';
 
     // get server response
-    // ебаные промисы сука как же я их рот ебал
-    // витоге код с запросам к серверу перенесен в промис, чтобы они друг за другом ебланились
 
     var promise = new Promise(async (resolve, reject) => {
         try {
