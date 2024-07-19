@@ -22,17 +22,25 @@
     <title>Aigro</title>
     <link rel="stylesheet" href="static/css/light-styles.css" id="theme-link">
     <style>
+        #info-ico{
+	        width: 40px;
+	        height: 40px;
+        }
 
+        #backToSite, #about, #privacy-policy, #infoWrapper {
+            cursor: pointer;
+        }
 
-      #info-ico{
-	      width: 40px;
-	      height: 40px;
-      }
-
-
-      #backToSite, #about, #privacy-policy, #infoWrapper {
-        cursor: pointer;
-      }
+        #randomDrugButton {
+            background-color: var(--main-green);
+            color: var(--main-white);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body style="position:relative; top:25px;">
@@ -47,56 +55,52 @@
         </div>
         <div id="dialogueInfoWrapper" style="position:absolute;">
         	<div id="backToSite">
-        		<object  type="image/svg+xml" data="static/resources/backArrow.svg"></object>
+        		<object type="image/svg+xml" data="static/resources/backArrow.svg"></object>
         		<h3>Вернуться на сайт</h3>
         	</div>
         	<div id="about">
-        		<object  type="image/svg+xml" data="static/resources/aboutIcon.svg"></object>
+        		<object type="image/svg+xml" data="static/resources/aboutIcon.svg"></object>
         		<h3>О нас</h3>
         	</div>
         	<div id="privacy-policy">
-        		<object  type="image/svg+xml" data="static/resources/lock.svg"></object>
+        		<object type="image/svg+xml" data="static/resources/lock.svg"></object>
         		<h3><a href="static/resources/Privacy_agreement.pdf" target="_blank"> Политика <br>конфиденциальности</a></h3>
         	</div>
-             <!-- Новая кнопка для очистки чата -->
-          <div id="clearChat">
-            <object type="image/svg+xml" data="static/resources/trashbin.svg"></object>
-            <h3 style="color: #8b0000" id="clearChatButton">Очистить чат</h3>
-          </div>
+            <!-- Новая кнопка для очистки чата -->
+            <div id="clearChat">
+                <object type="image/svg+xml" data="static/resources/trashbin.svg"></object>
+                <h3 style="color: #8b0000" id="clearChatButton">Очистить чат</h3>
+            </div>
         </div>
     </header>
     <main id="scroller">
     	<div class="chatbot__overview" id="chatbotBox">
       		<ul class="chatlist" id="chatlist">
         		<li class="bot__output1 bot__output--standard">Привет, я Aigro, задайте мне свой вопрос!</li>
-       		</li>
-      		</ul>
+       		</ul>
     	</div>
-            <div class="modal" id = "modal">
-                  <div id="modal-content">
-            <h2>Используя данный ресурс вы подтверждаете согласие с <a href="static/resources/Privacy_agreement.pdf" target="_blank">политикой конфиденциальности</a>.</h2>
-
-            <button id="acceptBtn">Принять</button>
-          </div>
+        <div class="modal" id="modal">
+            <div id="modal-content">
+                <h2>Используя данный ресурс вы подтверждаете согласие с <a href="static/resources/Privacy_agreement.pdf" target="_blank">политикой конфиденциальности</a>.</h2>
+                <button id="acceptBtn">Принять</button>
+            </div>
         </div>
     </main>
     <div id="bodyWrapper">
         <footer>
             <div id="inputBar">
+                <button id="randomDrugButton">Случайный препарат</button>
                 <label for="upload" class="attach-button">Выберите изображение</label>
                 <input type="file" class="send_img" id="upload" accept="image/*"/>
-                <textarea placeholder="Напишите запрос" class="chatbox" id="textInput" name="user_text"  minlength="2" style="resize: none;"oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                <textarea placeholder="Напишите запрос" class="chatbox" id="textInput" name="user_text" minlength="2" style="resize: none;" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                 <div id="sendBtn">
-                	 <object type="image/svg+xml" data="static/resources/sendArrow.svg"></object>
+                    <object type="image/svg+xml" data="static/resources/sendArrow.svg"></object>
                 </div>
             </div>
-            <div class="disclaimer"><span>Aigro может ошибаться. Проверяйте важную информацию.<br> Aigro v2.1</span></div> <!-- Добавленная надпись -->
+            <div class="disclaimer"><span>Aigro может ошибаться. Проверяйте важную информацию.<br> Aigro v2.1</span></div>
         </footer>
     </div>
 </body>
 <div class="send_img" style="display: none;"></div>
-<script src="static/scripts.js">
-</script>
-
-
+<script src="static/scripts.js"></script>
 </html>
