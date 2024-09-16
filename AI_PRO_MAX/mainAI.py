@@ -1,9 +1,10 @@
-from AI_PRO_MAX import KBQA, gen_engine
+from AI_PRO_MAX import gen_engine
+
+model = gen_engine.interact()
+from AI_PRO_MAX import KBQA
 from AI_PRO_MAX.iterpritator import interpretator_with_history
 import random
 import re
-
-model = gen_engine.interact()
 
 
 def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
@@ -19,16 +20,17 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
         if not dialog:
             return "Ошибка: Нет данных для регенерации."
         modified_dialog = dialog
-        processed_question = interpretator_with_history(modified_dialog).replace("<extra_id_0> ", "").replace("</s>", "").lower()
+        processed_question = interpretator_with_history(modified_dialog).replace("<extra_id_0> ", "").replace("</s>",
+                                                                                                              "").lower()
         print("INFO: Интерпретация: ", processed_question)
-        answer = gen_engine.generate(dialog, model,  KBQA.KBQA_search(processed_question))
+        answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
         print("INFO: Ответ генератора", answer, "\n ОАОАОА \n REGENERATION POWER!!!")
 
     else:
         # Дефолт
         processed_question = interpretator_with_history(dialog).replace("<extra_id_0> ", "").replace("</s>", "").lower()
         print("INFO: Интерпретация: ", processed_question)
-        answer = gen_engine.generate(dialog, model,  KBQA.KBQA_search(processed_question))
+        answer = gen_engine.generate(dialog, model, KBQA.KBQA_search(processed_question))
         print("INFO: Ответ генератора", answer)
 
     replacements = [
@@ -52,4 +54,3 @@ def ai_main(dialog: list[str], image_flag=False, regenerate_flag=False) -> str:
             "Мне бы хотелось лучше понять ваш запрос. Можете ли вы переформулировать или задать дополнительный вопрос?"
         ]
         return random.choice(default_messages)
-

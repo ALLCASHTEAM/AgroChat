@@ -23,7 +23,7 @@ def generate(question, model, context=False):
                  "content": "Ты Aigro, автоматический помощник от компании Щелково Агрохим. Используй контекст для ответа на вопросы. Отвечай на вопрос подробно."},
                 {
                     "role": "context",
-                    "content": f"Используй этот контекст для ответа{context.replace(';','')}"
+                    "content": f"Используй этот контекст для ответа {context.replace(';','')}"
                 },
                 {
                     "role": "user",
@@ -35,6 +35,10 @@ def generate(question, model, context=False):
             messages = [
                 {"role": "system",
                  "content": "Ты Aigro, автоматический помощник от компании Щелково Агрохим. Используй контекст для ответа на вопросы. Отвечай на вопрос подробно."},
+                {
+                    "role": "context",
+                    "content": f"Используй этот контекст для ответа {context.replace(';', '')}"
+                },
                 {
                     "role": "user",
                     "content": f"{question[0].replace('text:', '')}"

@@ -13,7 +13,7 @@ data_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize([0.416, 0.468, 0.355], [0.210, 0.206, 0.213])
 ])
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 # Фиксация случайных состояний для воспроизводимости
 torch.manual_seed(42)
