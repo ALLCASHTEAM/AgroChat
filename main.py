@@ -1,5 +1,7 @@
 import logging
 from datetime import datetime
+from http.client import HTTPException
+
 from fastapi import FastAPI, Request, Response, BackgroundTasks, UploadFile, File
 from fastapi.staticfiles import StaticFiles
 from starlette.responses import FileResponse
@@ -29,10 +31,14 @@ async def read_root():
 
 
 class RequestData(BaseModel):
-    userMessages: List[Optional[str]]
-    botMessages: List[Optional[str]]
-    image: List[Optional[str]]
-    flags: List[Optional[str]]
+    userMessages: List[Optional[str]] = []
+    botMessages: List[Optional[str]] = []
+    image: List[Optional[str]] = []
+    flags: List[Optional[str]] = []
+
+
+def extract_text(message: str, prefix: str) -> str:
+    return message.split(prefix, 1)[-1].strip() if prefix in message else message.strip()
 
 
 @app.post("/request")
@@ -41,8 +47,10 @@ async def make_response(request: Request, request_data: RequestData):
 
     logging.info(f"Request received from IP: {client_host}, {request_data}")
 
-    user_messages = [msg.split("text:", 1)[-1] for msg in request_data.userMessages if msg]
-    bot_messages = [msg for msg in request_data.botMessages if msg]
+    user_messages = [
+        extract_text(msg, "text:") for msg in request_data.userMessages if msg
+    ]
+    bot_messages = [msg.strip() for msg in request_data.botMessages if msg]
 
     if request_data.image[0]:
         print(request_data.image)
@@ -74,8 +82,13 @@ async def make_response(request: Request, request_data: RequestData):
 
 
 async def save_image(image_data, file_path):
-    async with aiofiles.open(file_path, 'wb') as f:
-        await f.write(image_data)
+    try:
+        async with aiofiles.open(file_path, 'wb') as f:
+            await f.write(image_data)
+        logging.info(f"Image saved to {file_path}")
+    except Exception as e:
+        logging.error(f"Failed to save image to {file_path}: {e}")
+        raise HTTPException()
 
 
 @app.post("/get_image_hash")
@@ -94,7 +107,6 @@ async def get_image_hash(data: Request):
 @app.get("/get_image_class")
 async def get_image_class():
     pass
-
 
 
 def test():

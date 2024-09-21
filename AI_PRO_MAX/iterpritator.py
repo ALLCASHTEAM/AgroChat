@@ -13,11 +13,13 @@ def generate_intr(model, tokenizer, message_text: str) -> str:
 
 
 def interpretator_with_history(dialog: list[str]) -> str:
+    print(dialog)
     text = '-'+("\n- ".join(dialog))
+    print(text)
     return generate_intr(model, tokenizer, text)
 
 
 if __name__ == '__main__':
-    dialog = "-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n-сколько он стоит?"
+    dialog = ["-чем полить кукурузу?\n-Биостим кукуруза подойдет для полива кукурузы\n-сколько он стоит?"]
     print(interpretator_with_history(dialog))
 

@@ -33,7 +33,6 @@ def load_classes(path: str):
         return json.load(f)
 
 
-
 def model_init(num_classes: int, model_path: str, device: str):
     model = resnet101(num_classes=num_classes).to(device)
     model_dict = model.state_dict()
